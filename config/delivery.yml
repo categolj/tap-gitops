@@ -24,7 +24,7 @@ spec:
           spring-boot-convention/service-intent-postgres
         developer.conventions/target-containers: workload
         kubectl.kubernetes.io/last-applied-configuration: |
-          {"apiVersion":"carto.run/v1alpha1","kind":"Workload","metadata":{"annotations":{},"labels":{"app.kubernetes.io/part-of":"blog-api","apps.tanzu.vmware.com/workload-type":"web"},"name":"blog-api","namespace":"tmaki"},"spec":{"params":[{"name":"annotations","value":{"autoscaling.knative.dev/minScale":"1"}},{"name":"gitops_branch","value":"blog-api"},{"name":"gitops_commit_message","value":"Bump"},{"name":"gitops_repository","value":"ssh://git@github.com/categolj/tap-gitops.git"},{"name":"gitops_user_email","value":"makingx+bot@gmail.com"},{"name":"gitops_user_name","value":"making-bot"},{"name":"gitops_ssh_secret","value":"git-ssh"}],"source":{"git":{"ref":{"branch":"rsocket"},"url":"https://github.com/categolj/blog-api"}}}}
+          {"apiVersion":"carto.run/v1alpha1","kind":"Workload","metadata":{"annotations":{},"labels":{"app.kubernetes.io/part-of":"blog-api","apps.tanzu.vmware.com/workload-type":"web"},"name":"blog-api","namespace":"tmaki"},"spec":{"env":[{"name":"JAVA_TOOL_OPTIONS","value":"-XX:ReservedCodeCacheSize=32M -Xss512k -Duser.timezone=Asia/Tokyo -Duser.language=ja -Duser.country=JP -Dfile.encoding=UTF-8"},{"name":"BPL_JVM_THREAD_COUNT","value":"28"}],"params":[{"name":"annotations","value":{"autoscaling.knative.dev/minScale":"1"}},{"name":"gitops_branch","value":"blog-api"},{"name":"gitops_commit_message","value":"Bump"},{"name":"gitops_repository","value":"ssh://git@github.com/categolj/tap-gitops.git"},{"name":"gitops_user_email","value":"makingx+bot@gmail.com"},{"name":"gitops_user_name","value":"making-bot"},{"name":"gitops_ssh_secret","value":"git-ssh"}],"resources":{"limits":{"memory":"256Mi"},"requests":{"memory":"256Mi"}},"source":{"git":{"ref":{"branch":"rsocket"},"url":"https://github.com/categolj/blog-api"}}}}
         services.conventions.apps.tanzu.vmware.com/postgres: r2dbc-postgresql/0.8.12.RELEASE
       labels:
         app.kubernetes.io/component: run
@@ -40,13 +40,19 @@ spec:
       containers:
       - env:
         - name: JAVA_TOOL_OPTIONS
-          value: -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.server.port="8080" -Dserver.port="8080"
+          value: -XX:ReservedCodeCacheSize=32M -Xss512k -Dfile.encoding="UTF-8" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.server.port="8080" -Dserver.port="8080" -Duser.country="JP" -Duser.language="ja" -Duser.timezone="Asia/Tokyo"
+        - name: BPL_JVM_THREAD_COUNT
+          value: "28"
         image: harbor.dhaka.cf-app.com/dhaka/supply-chain/blog-api-tmaki@sha256:1f5bf4c8f4b629279b4fce35e9d86124ed7421400e9ffa43baa3df3a53a8adb2
         name: workload
         ports:
         - containerPort: 8080
           protocol: TCP
-        resources: {}
+        resources:
+          limits:
+            memory: 256Mi
+          requests:
+            memory: 256Mi
         securityContext:
           runAsUser: 1000
       serviceAccountName: default
