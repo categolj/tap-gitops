@@ -11,6 +11,7 @@ spec:
   template:
     metadata:
       annotations:
+        autoscaling.knative.dev/minScale: "1"
         boot.spring.io/actuator: http://:8080/actuator
         boot.spring.io/version: 2.6.6
         conventions.apps.tanzu.vmware.com/applied-conventions: |-
@@ -22,6 +23,8 @@ spec:
           spring-boot-convention/spring-boot-actuator
           spring-boot-convention/service-intent-postgres
         developer.conventions/target-containers: workload
+        kubectl.kubernetes.io/last-applied-configuration: |
+          {"apiVersion":"carto.run/v1alpha1","kind":"Workload","metadata":{"annotations":{},"labels":{"app.kubernetes.io/part-of":"blog-api","apps.tanzu.vmware.com/workload-type":"web"},"name":"blog-api","namespace":"tmaki"},"spec":{"params":[{"name":"annotations","value":{"autoscaling.knative.dev/minScale":"1"}},{"name":"gitops_branch","value":"blog-api"},{"name":"gitops_commit_message","value":"Bump"},{"name":"gitops_repository","value":"git@github.com:categolj/tap-gitops.git"},{"name":"gitops_user_email","value":"makingx+bot@gmail.com"},{"name":"gitops_user_name","value":"making-bot"},{"name":"gitops_ssh_secret","value":"git-ssh"}],"source":{"git":{"ref":{"branch":"rsocket"},"url":"https://github.com/categolj/blog-api"}}}}
         services.conventions.apps.tanzu.vmware.com/postgres: r2dbc-postgresql/0.8.12.RELEASE
       labels:
         app.kubernetes.io/component: run
@@ -38,7 +41,7 @@ spec:
       - env:
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.server.port="8080" -Dserver.port="8080"
-        image: harbor.dhaka.cf-app.com/dhaka/supply-chain/blog-api-tmaki@sha256:2fa4e7e7892814f6f9d2c3aa578b79e13b2c82e4ab62a5acdb32993cad802795
+        image: harbor.dhaka.cf-app.com/dhaka/supply-chain/blog-api-tmaki@sha256:a77e53cf3f23bfd0d2ed35c68a34f1bf16201d298b070ee7549ebc95ce73327c
         name: workload
         ports:
         - containerPort: 8080
