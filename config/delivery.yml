@@ -41,7 +41,7 @@ spec:
       - env:
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.server.port="8080" -Dserver.port="8080"
-        image: harbor.dhaka.cf-app.com/dhaka/supply-chain/blog-api-tmaki@sha256:a77e53cf3f23bfd0d2ed35c68a34f1bf16201d298b070ee7549ebc95ce73327c
+        image: harbor.dhaka.cf-app.com/dhaka/supply-chain/blog-api-tmaki@sha256:1f5bf4c8f4b629279b4fce35e9d86124ed7421400e9ffa43baa3df3a53a8adb2
         name: workload
         ports:
         - containerPort: 8080
