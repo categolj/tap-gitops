@@ -5,7 +5,7 @@ metadata:
   labels:
     app.kubernetes.io/part-of: blog-api
     apps.tanzu.vmware.com/workload-type: web
-    kapp.k14s.io/app: "1649092898759506905"
+    kapp.k14s.io/app: "1649171778946676454"
     kapp.k14s.io/association: v1.8ec1d6927e5b9b8fda6d4e3e51de4c3c
     app.kubernetes.io/component: run
     carto.run/workload-name: blog-api
@@ -25,9 +25,11 @@ spec:
           spring-boot-convention/spring-boot-actuator
           spring-boot-convention/service-intent-postgres
         developer.conventions/target-containers: workload
+        kapp.k14s.io/change-rule.delete: delete before deleting git-ssh
+        kapp.k14s.io/change-rule.upsert: upsert after upserting git-ssh
         kapp.k14s.io/identity: v1;tmaki/carto.run/Workload/blog-api;carto.run/v1alpha1
-        kapp.k14s.io/original: '{"apiVersion":"carto.run/v1alpha1","kind":"Workload","metadata":{"labels":{"app.kubernetes.io/part-of":"blog-api","apps.tanzu.vmware.com/workload-type":"web","kapp.k14s.io/app":"1649092898759506905","kapp.k14s.io/association":"v1.8ec1d6927e5b9b8fda6d4e3e51de4c3c"},"name":"blog-api","namespace":"tmaki"},"spec":{"env":[{"name":"JAVA_TOOL_OPTIONS","value":"-XX:ReservedCodeCacheSize=32M -Xss512k -Duser.timezone=Asia/Tokyo -Duser.language=ja -Duser.country=JP -Dfile.encoding=UTF-8"},{"name":"BPL_JVM_THREAD_COUNT","value":"28"}],"params":[{"name":"annotations","value":{"autoscaling.knative.dev/minScale":"1"}},{"name":"gitops_branch","value":"blog-api"},{"name":"gitops_commit_message","value":"Bump"},{"name":"gitops_repository","value":"ssh://git@github.com/categolj/tap-gitops.git"},{"name":"gitops_user_email","value":"makingx+bot@gmail.com"},{"name":"gitops_user_name","value":"making-bot"},{"name":"gitops_ssh_secret","value":"git-ssh"}],"resources":{"limits":{"memory":"256Mi"},"requests":{"memory":"256Mi"}},"source":{"git":{"ref":{"branch":"rsocket"},"url":"https://github.com/categolj/blog-api"}}}}'
-        kapp.k14s.io/original-diff-md5: c6e94dc94aed3401b5d0f26ed6c0bff3
+        kapp.k14s.io/original: '{"apiVersion":"carto.run/v1alpha1","kind":"Workload","metadata":{"annotations":{"kapp.k14s.io/change-rule.delete":"delete before deleting git-ssh","kapp.k14s.io/change-rule.upsert":"upsert after upserting git-ssh"},"labels":{"app.kubernetes.io/part-of":"blog-api","apps.tanzu.vmware.com/workload-type":"web","kapp.k14s.io/app":"1649171778946676454","kapp.k14s.io/association":"v1.8ec1d6927e5b9b8fda6d4e3e51de4c3c"},"name":"blog-api","namespace":"tmaki"},"spec":{"env":[{"name":"JAVA_TOOL_OPTIONS","value":"-XX:ReservedCodeCacheSize=32M -Xss512k -Duser.timezone=Asia/Tokyo -Duser.language=ja -Duser.country=JP -Dfile.encoding=UTF-8"},{"name":"BPL_JVM_THREAD_COUNT","value":"28"}],"params":[{"name":"annotations","value":{"autoscaling.knative.dev/minScale":"1"}},{"name":"gitops_branch","value":"blog-api"},{"name":"gitops_commit_message","value":"Bump"},{"name":"gitops_repository","value":"ssh://git@github.com/categolj/tap-gitops.git"},{"name":"gitops_user_email","value":"makingx+bot@gmail.com"},{"name":"gitops_user_name","value":"making-bot"},{"name":"gitops_ssh_secret","value":"git-ssh"}],"resources":{"limits":{"memory":"256Mi"},"requests":{"memory":"256Mi"}},"source":{"git":{"ref":{"branch":"rsocket"},"url":"https://github.com/categolj/blog-api"}}}}'
+        kapp.k14s.io/original-diff-md5: 58e0494c51d30eb3494f7c9198986bb9
         services.conventions.apps.tanzu.vmware.com/postgres: r2dbc-postgresql/0.8.12.RELEASE
       labels:
         app.kubernetes.io/component: run
@@ -35,7 +37,7 @@ spec:
         apps.tanzu.vmware.com/workload-type: web
         carto.run/workload-name: blog-api
         conventions.apps.tanzu.vmware.com/framework: spring-boot
-        kapp.k14s.io/app: "1649092898759506905"
+        kapp.k14s.io/app: "1649171778946676454"
         kapp.k14s.io/association: v1.8ec1d6927e5b9b8fda6d4e3e51de4c3c
         services.conventions.apps.tanzu.vmware.com/postgres: workload
         tanzu.app.live.view: "true"
@@ -48,7 +50,7 @@ spec:
           value: -XX:ReservedCodeCacheSize=32M -Xss512k -Dfile.encoding="UTF-8" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.server.port="8080" -Dserver.port="8080" -Duser.country="JP" -Duser.language="ja" -Duser.timezone="Asia/Tokyo"
         - name: BPL_JVM_THREAD_COUNT
           value: "28"
-        image: harbor.dhaka.cf-app.com/dhaka/supply-chain/blog-api-tmaki@sha256:502252bc04cb109de813c7158fce9c80e3116389793a7dd2d1bb41336ae90a8a
+        image: harbor.dhaka.cf-app.com/dhaka/supply-chain/blog-api-tmaki@sha256:35926a85c41e3cfef9fd61a44379fa4db70cb9e102106ab3e9688bb6ffb6e2de
         name: workload
         ports:
         - containerPort: 8080
