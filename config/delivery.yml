@@ -49,7 +49,7 @@ spec:
           value: "28"
         - name: SPRING_PROFILES_ACTIVE
           value: kubernetes
-        image: harbor.dhaka.cf-app.com/dhaka/supply-chain/blog-frontend-tmaki@sha256:07bd7b8c10858eaadd306f268432b6ec3bfc9d88eacf12305e2517ca8cad897f
+        image: harbor.dhaka.cf-app.com/dhaka/supply-chain/blog-frontend-tmaki@sha256:20db0c486a168780f9f689802dfe31e848d01890294b70a8e691162a797f8d80
         name: workload
         ports:
         - containerPort: 8080
