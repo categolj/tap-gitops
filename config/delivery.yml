@@ -1,0 +1,67 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: blog-frontend
+  labels:
+    app.kubernetes.io/part-of: blog-frontend
+    apps.tanzu.vmware.com/workload-type: web
+    kapp.k14s.io/app: "1649223172819760649"
+    kapp.k14s.io/association: v1.c25338f1443c6e0658f7178c7dd4955b
+    app.kubernetes.io/component: run
+    carto.run/workload-name: blog-frontend
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/minScale: "1"
+        boot.spring.io/actuator: http://:8080/actuator
+        boot.spring.io/version: 2.6.6
+        conventions.apps.tanzu.vmware.com/applied-conventions: |-
+          appliveview-sample/app-live-view-connector
+          appliveview-sample/app-live-view-appflavours
+          appliveview-sample/app-live-view-systemproperties
+          spring-boot-convention/spring-boot
+          spring-boot-convention/spring-boot-web
+          spring-boot-convention/spring-boot-actuator
+        developer.conventions/target-containers: workload
+        kapp.k14s.io/change-rule.delete: delete before deleting git-ssh
+        kapp.k14s.io/change-rule.upsert: upsert after upserting git-ssh
+        kapp.k14s.io/identity: v1;tmaki/carto.run/Workload/blog-frontend;carto.run/v1alpha1
+        kapp.k14s.io/original: '{"apiVersion":"carto.run/v1alpha1","kind":"Workload","metadata":{"annotations":{"kapp.k14s.io/change-rule.delete":"delete before deleting git-ssh","kapp.k14s.io/change-rule.upsert":"upsert after upserting git-ssh"},"labels":{"app.kubernetes.io/part-of":"blog-frontend","apps.tanzu.vmware.com/workload-type":"web","kapp.k14s.io/app":"1649223172819760649","kapp.k14s.io/association":"v1.c25338f1443c6e0658f7178c7dd4955b"},"name":"blog-frontend","namespace":"tmaki"},"spec":{"build":{"env":[{"name":"BP_MAVEN_BUILT_ARTIFACT","value":"blog-frontend-server/target/*.jar"}]},"env":[{"name":"JAVA_TOOL_OPTIONS","value":"-XX:ReservedCodeCacheSize=32M -Xss512k -Duser.timezone=Asia/Tokyo -Duser.language=ja -Duser.country=JP -Dfile.encoding=UTF-8"},{"name":"BPL_JVM_THREAD_COUNT","value":"28"},{"name":"SPRING_PROFILES_ACTIVE","value":"kubernetes"},{"name":"SPRING_CONFIG_IMPORT","value":"configtree:/bindings/"}],"params":[{"name":"annotations","value":{"autoscaling.knative.dev/minScale":"1"}},{"name":"gitops_branch","value":"blog-frontend"},{"name":"gitops_commit_message","value":"Bump"},{"name":"gitops_repository","value":"ssh://git@github.com/categolj/tap-gitops.git"},{"name":"gitops_user_email","value":"makingx+bot@gmail.com"},{"name":"gitops_user_name","value":"making-bot"},{"name":"gitops_ssh_secret","value":"git-ssh"}],"resources":{"limits":{"memory":"256Mi"},"requests":{"memory":"256Mi"}},"source":{"git":{"ref":{"branch":"master"},"url":"https://github.com/categolj/blog-frontend"}}}}'
+        kapp.k14s.io/original-diff-md5: 58e0494c51d30eb3494f7c9198986bb9
+      labels:
+        app.kubernetes.io/component: run
+        app.kubernetes.io/part-of: blog-frontend
+        apps.tanzu.vmware.com/workload-type: web
+        carto.run/workload-name: blog-frontend
+        conventions.apps.tanzu.vmware.com/framework: spring-boot
+        kapp.k14s.io/app: "1649223172819760649"
+        kapp.k14s.io/association: v1.c25338f1443c6e0658f7178c7dd4955b
+        tanzu.app.live.view: "true"
+        tanzu.app.live.view.application.flavours: spring-boot
+        tanzu.app.live.view.application.name: blog-frontend-server
+    spec:
+      containers:
+      - env:
+        - name: JAVA_TOOL_OPTIONS
+          value: -XX:ReservedCodeCacheSize=32M -Xss512k -Dfile.encoding="UTF-8" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.server.port="8080" -Dserver.port="8080" -Duser.country="JP" -Duser.language="ja" -Duser.timezone="Asia/Tokyo"
+        - name: BPL_JVM_THREAD_COUNT
+          value: "28"
+        - name: SPRING_PROFILES_ACTIVE
+          value: kubernetes
+        - name: SPRING_CONFIG_IMPORT
+          value: configtree:/bindings/
+        image: harbor.dhaka.cf-app.com/dhaka/supply-chain/blog-frontend-tmaki@sha256:08c94428533d2171e84a23f27a6ac129a172686e9577280a25a3ac9a3bf9e8bf
+        name: workload
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        resources:
+          limits:
+            memory: 256Mi
+          requests:
+            memory: 256Mi
+        securityContext:
+          runAsUser: 1000
+      serviceAccountName: default
+
