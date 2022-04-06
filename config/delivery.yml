@@ -60,7 +60,7 @@ spec:
           value: ${blog-config.github-access-token}
         - name: BLOG_GITHUB_WEBHOOK_SECRET
           value: ${blog-config.github-webhook-secret}
-        image: harbor.dhaka.cf-app.com/dhaka/supply-chain/blog-api-tmaki@sha256:35926a85c41e3cfef9fd61a44379fa4db70cb9e102106ab3e9688bb6ffb6e2de
+        image: harbor.dhaka.cf-app.com/dhaka/supply-chain/blog-api-tmaki@sha256:8ff0600168b30a9b50813839a72d52d755663e61dd9105f63c873fe768cd164d
         name: workload
         ports:
         - containerPort: 8080
