@@ -28,7 +28,7 @@ spec:
         kapp.k14s.io/change-rule.delete: delete before deleting git-ssh
         kapp.k14s.io/change-rule.upsert: upsert after upserting git-ssh
         kapp.k14s.io/identity: v1;tmaki/carto.run/Workload/blog-api;carto.run/v1alpha1
-        kapp.k14s.io/original: '{"apiVersion":"carto.run/v1alpha1","kind":"Workload","metadata":{"annotations":{"kapp.k14s.io/change-rule.delete":"delete before deleting git-ssh","kapp.k14s.io/change-rule.upsert":"upsert after upserting git-ssh"},"labels":{"app.kubernetes.io/part-of":"blog-api","apps.tanzu.vmware.com/workload-type":"web","kapp.k14s.io/app":"1649171778946676454","kapp.k14s.io/association":"v1.8ec1d6927e5b9b8fda6d4e3e51de4c3c"},"name":"blog-api","namespace":"tmaki"},"spec":{"env":[{"name":"JAVA_TOOL_OPTIONS","value":"-XX:ReservedCodeCacheSize=32M -Xss512k -Duser.timezone=Asia/Tokyo -Duser.language=ja -Duser.country=JP -Dfile.encoding=UTF-8"},{"name":"BPL_JVM_THREAD_COUNT","value":"28"},{"name":"SPRING_RSOCKET_SERVER_FRAGMENTSIZE","value":"16MB"},{"name":"SPRING_PROFILES_ACTIVE","value":"kubernetes"},{"name":"SPRING_CONFIG_IMPORT","value":"configtree:/bindings/"},{"name":"BLOG_GITHUB_ACCESS_TOKEN","value":"${blog-config.github-access-token}"},{"name":"BLOG_GITHUB_WEBHOOK_SECRET","value":"${blog-config.github-webhook-secret}"}],"params":[{"name":"annotations","value":{"autoscaling.knative.dev/minScale":"1"}},{"name":"gitops_branch","value":"blog-api"},{"name":"gitops_commit_message","value":"Bump"},{"name":"gitops_repository","value":"ssh://git@github.com/categolj/tap-gitops.git"},{"name":"gitops_user_email","value":"makingx+bot@gmail.com"},{"name":"gitops_user_name","value":"making-bot"},{"name":"gitops_ssh_secret","value":"git-ssh"}],"resources":{"limits":{"memory":"256Mi"},"requests":{"memory":"256Mi"}},"serviceClaims":[{"name":"blog-db","ref":{"apiVersion":"v1","kind":"Secret","name":"blog-db"}},{"name":"blog-config","ref":{"apiVersion":"v1","kind":"Secret","name":"blog-config"}}],"source":{"git":{"ref":{"branch":"rsocket"},"url":"https://github.com/categolj/blog-api"}}}}'
+        kapp.k14s.io/original: '{"apiVersion":"carto.run/v1alpha1","kind":"Workload","metadata":{"annotations":{"kapp.k14s.io/change-rule.delete":"delete before deleting git-ssh","kapp.k14s.io/change-rule.upsert":"upsert after upserting git-ssh"},"labels":{"app.kubernetes.io/part-of":"blog-api","apps.tanzu.vmware.com/workload-type":"web","kapp.k14s.io/app":"1649171778946676454","kapp.k14s.io/association":"v1.8ec1d6927e5b9b8fda6d4e3e51de4c3c"},"name":"blog-api","namespace":"tmaki"},"spec":{"env":[{"name":"JAVA_TOOL_OPTIONS","value":"-XX:ReservedCodeCacheSize=32M -Xss512k -Duser.timezone=Asia/Tokyo -Duser.language=ja -Duser.country=JP -Dfile.encoding=UTF-8"},{"name":"BPL_JVM_THREAD_COUNT","value":"28"},{"name":"SPRING_RSOCKET_SERVER_FRAGMENTSIZE","value":"16MB"},{"name":"SPRING_PROFILES_ACTIVE","value":"kubernetes"},{"name":"BLOG_GITHUB_ACCESS_TOKEN","value":"${k8s.bindings.blog-config.github-access-token}"},{"name":"BLOG_GITHUB_WEBHOOK_SECRET","value":"${k8s.bindings.blog-config.github-webhook-secret}"}],"params":[{"name":"annotations","value":{"autoscaling.knative.dev/minScale":"1"}},{"name":"gitops_branch","value":"blog-api"},{"name":"gitops_commit_message","value":"Bump"},{"name":"gitops_repository","value":"ssh://git@github.com/categolj/tap-gitops.git"},{"name":"gitops_user_email","value":"makingx+bot@gmail.com"},{"name":"gitops_user_name","value":"making-bot"},{"name":"gitops_ssh_secret","value":"git-ssh"}],"resources":{"limits":{"memory":"256Mi"},"requests":{"memory":"256Mi"}},"serviceClaims":[{"name":"blog-db","ref":{"apiVersion":"v1","kind":"Secret","name":"blog-db"}},{"name":"blog-config","ref":{"apiVersion":"v1","kind":"Secret","name":"blog-config"}}],"source":{"git":{"ref":{"branch":"rsocket"},"url":"https://github.com/categolj/blog-api"}}}}'
         kapp.k14s.io/original-diff-md5: 58e0494c51d30eb3494f7c9198986bb9
         services.conventions.apps.tanzu.vmware.com/postgres: r2dbc-postgresql/0.8.12.RELEASE
       labels:
@@ -54,12 +54,10 @@ spec:
           value: 16MB
         - name: SPRING_PROFILES_ACTIVE
           value: kubernetes
-        - name: SPRING_CONFIG_IMPORT
-          value: configtree:/bindings/
         - name: BLOG_GITHUB_ACCESS_TOKEN
-          value: ${blog-config.github-access-token}
+          value: ${k8s.bindings.blog-config.github-access-token}
         - name: BLOG_GITHUB_WEBHOOK_SECRET
-          value: ${blog-config.github-webhook-secret}
+          value: ${k8s.bindings.blog-config.github-webhook-secret}
         image: harbor.dhaka.cf-app.com/dhaka/supply-chain/blog-api-tmaki@sha256:8ff0600168b30a9b50813839a72d52d755663e61dd9105f63c873fe768cd164d
         name: workload
         ports:
