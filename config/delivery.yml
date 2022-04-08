@@ -7,6 +7,7 @@ metadata:
     apps.tanzu.vmware.com/workload-type: web
     kapp.k14s.io/app: "1649223172819760649"
     kapp.k14s.io/association: v1.c25338f1443c6e0658f7178c7dd4955b
+    networking.knative.dev/visibility: cluster-local
     app.kubernetes.io/component: run
     carto.run/workload-name: blog-frontend
 spec:
