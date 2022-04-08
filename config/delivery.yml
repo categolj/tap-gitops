@@ -86,7 +86,7 @@ spec:
           value: ${java.vm.version} / ${java.vm.name}
         - name: INFO_JAVA_VENDOR
           value: ${java.vm.vendor}
-        image: harbor.dhaka.cf-app.com/dhaka/supply-chain/note-tmaki@sha256:e45297a3164fe5c680837701a72f274daf50315aeb99e05f979a74ae68d069b7
+        image: harbor.dhaka.cf-app.com/dhaka/supply-chain/note-tmaki@sha256:3645bd1bea3e4bdca0a672c57e97fa363f39b439794c353b690f18a81d212d1b
         name: workload
         ports:
         - containerPort: 8080
