@@ -64,7 +64,7 @@ spec:
           value: "false"
         - name: MANAGEMENT_ENDPOINT_THREADDUMP_ENABLED
           value: "false"
-        image: harbor.dhaka.cf-app.com/dhaka/supply-chain/blog-api-tmaki@sha256:056eb0f8f0e5c5c202940628d0c349433be63d381e8848a0b6330b602877fdb1
+        image: harbor.dhaka.cf-app.com/dhaka/supply-chain/blog-api-tmaki@sha256:73298e159ab81fdf4b45e58c5eefd78b80e9a9b552ab7c6b73127a1f8d60f06d
         name: workload
         ports:
         - containerPort: 8080
