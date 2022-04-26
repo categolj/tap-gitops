@@ -16,7 +16,7 @@ spec:
       annotations:
         autoscaling.knative.dev/minScale: "1"
         boot.spring.io/actuator: http://:8080/actuator
-        boot.spring.io/version: 2.6.6
+        boot.spring.io/version: 2.6.7
         conventions.apps.tanzu.vmware.com/applied-conventions: |-
           appliveview-sample/app-live-view-connector
           appliveview-sample/app-live-view-appflavours
@@ -63,7 +63,7 @@ spec:
           value: "false"
         - name: MANAGEMENT_ENDPOINT_THREADDUMP_ENABLED
           value: "false"
-        image: harbor.dhaka.cf-app.com/dhaka/supply-chain/blog-frontend-tmaki@sha256:352a8ec4c154740aad1dfb0b5f515399214e4fe06e829b5032eb33d71d8e35cb
+        image: harbor.dhaka.cf-app.com/dhaka/supply-chain/blog-frontend-tmaki@sha256:1889c044efa9419374359be6403d87eb87964d59e2ffbdce7c7ceff6e054610a
         name: workload
         ports:
         - containerPort: 8080
