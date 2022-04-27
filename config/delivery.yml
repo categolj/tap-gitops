@@ -49,7 +49,7 @@ spec:
           value: "false"
         - name: MANAGEMENT_ENDPOINT_THREADDUMP_ENABLED
           value: "false"
-        image: harbor.dhaka.cf-app.com/dhaka/supply-chain/blog-api-tmaki@sha256:6ce96c7c5788cbefb104f3b65d66c659ef563aa20899851a0a537c14e0cbefb3
+        image: harbor.dhaka.cf-app.com/dhaka/supply-chain/blog-api-tmaki@sha256:21f1724625678253bf8953059e31b42054402c3bb9da20eab9b20a9c9f0a893f
         name: workload
         resources:
           limits:
