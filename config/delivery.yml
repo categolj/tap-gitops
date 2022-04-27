@@ -73,7 +73,7 @@ spec:
           value: ${java.vm.version} / ${java.vm.name}
         - name: INFO_JAVA_VENDOR
           value: ${java.vm.vendor}
-        image: harbor.dhaka.cf-app.com/dhaka/supply-chain/note-tmaki@sha256:53fe0a851dc23250fe9363e0fbffae6cf0710bad9518d7ca89471848274065e5
+        image: harbor.dhaka.cf-app.com/dhaka/supply-chain/note-tmaki@sha256:d5c9fa4644a044e122cf50412d12132a77ff26f5894a31be6e17c15c7612bab9
         name: workload
         resources:
           limits:
