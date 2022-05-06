@@ -15,41 +15,26 @@ spec:
     metadata:
       annotations:
         autoscaling.knative.dev/minScale: "1"
-        boot.spring.io/actuator: http://:8080/actuator
-        boot.spring.io/version: 2.6.7
-        conventions.apps.tanzu.vmware.com/applied-conventions: |-
-          appliveview-sample/app-live-view-connector
-          appliveview-sample/app-live-view-appflavours
-          appliveview-sample/app-live-view-systemproperties
-          spring-boot-convention/spring-boot
-          spring-boot-convention/spring-boot-web
-          spring-boot-convention/spring-boot-actuator
-          spring-boot-convention/service-intent-postgres
+        conventions.apps.tanzu.vmware.com/applied-conventions: ""
         developer.conventions/target-containers: workload
         kapp.k14s.io/change-rule.delete: delete before deleting git-ssh
         kapp.k14s.io/change-rule.upsert: upsert after upserting git-ssh
         kapp.k14s.io/identity: v1;tmaki/carto.run/Workload/blog-api;carto.run/v1alpha1
         kapp.k14s.io/original: '{"apiVersion":"carto.run/v1alpha1","kind":"Workload","metadata":{"annotations":{"kapp.k14s.io/change-rule.delete":"delete before deleting git-ssh","kapp.k14s.io/change-rule.upsert":"upsert after upserting git-ssh"},"labels":{"app.kubernetes.io/part-of":"blog-api","apps.tanzu.vmware.com/workload-type":"web","kapp.k14s.io/app":"1649171778946676454","kapp.k14s.io/association":"v1.8ec1d6927e5b9b8fda6d4e3e51de4c3c","networking.knative.dev/visibility":"cluster-local"},"name":"blog-api","namespace":"tmaki"},"spec":{"env":[{"name":"JAVA_TOOL_OPTIONS","value":"-XX:ReservedCodeCacheSize=32M -Xss512k -Duser.timezone=Asia/Tokyo -Duser.language=ja -Duser.country=JP -Dfile.encoding=UTF-8"},{"name":"BPL_JVM_THREAD_COUNT","value":"28"},{"name":"SPRING_RSOCKET_SERVER_FRAGMENTSIZE","value":"16MB"},{"name":"SPRING_PROFILES_ACTIVE","value":"kubernetes"},{"name":"BLOG_GITHUB_ACCESS_TOKEN","value":"${k8s.bindings.blog-config.github-access-token}"},{"name":"BLOG_GITHUB_WEBHOOK_SECRET","value":"${k8s.bindings.blog-config.github-webhook-secret}"},{"name":"MANAGEMENT_ENDPOINT_HEAPDUMP_ENABLED","value":"false"},{"name":"MANAGEMENT_ENDPOINT_THREADDUMP_ENABLED","value":"false"}],"params":[{"name":"annotations","value":{"autoscaling.knative.dev/minScale":"1"}},{"name":"gitops_branch","value":"blog-api"},{"name":"gitops_commit_message","value":"Bump"},{"name":"gitops_repository","value":"ssh://git@github.com/categolj/tap-gitops.git"},{"name":"gitops_user_email","value":"makingx+bot@gmail.com"},{"name":"gitops_user_name","value":"making-bot"},{"name":"gitops_ssh_secret","value":"git-ssh"}],"resources":{"limits":{"memory":"256Mi"},"requests":{"memory":"256Mi"}},"serviceClaims":[{"name":"blog-db","ref":{"apiVersion":"v1","kind":"Secret","name":"blog-db"}},{"name":"blog-config","ref":{"apiVersion":"v1","kind":"Secret","name":"blog-config"}}],"source":{"git":{"ref":{"branch":"rsocket"},"url":"https://github.com/categolj/blog-api"}}}}'
         kapp.k14s.io/original-diff-md5: 58e0494c51d30eb3494f7c9198986bb9
-        services.conventions.apps.tanzu.vmware.com/postgres: r2dbc-postgresql/0.8.12.RELEASE
       labels:
         app.kubernetes.io/component: run
         app.kubernetes.io/part-of: blog-api
         apps.tanzu.vmware.com/workload-type: web
         carto.run/workload-name: blog-api
-        conventions.apps.tanzu.vmware.com/framework: spring-boot
         kapp.k14s.io/app: "1649171778946676454"
         kapp.k14s.io/association: v1.8ec1d6927e5b9b8fda6d4e3e51de4c3c
         networking.knative.dev/visibility: cluster-local
-        services.conventions.apps.tanzu.vmware.com/postgres: workload
-        tanzu.app.live.view: "true"
-        tanzu.app.live.view.application.flavours: spring-boot
-        tanzu.app.live.view.application.name: blog-api
     spec:
       containers:
       - env:
         - name: JAVA_TOOL_OPTIONS
-          value: -XX:ReservedCodeCacheSize=32M -Xss512k -Dfile.encoding="UTF-8" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.server.port="8080" -Dserver.port="8080" -Duser.country="JP" -Duser.language="ja" -Duser.timezone="Asia/Tokyo"
+          value: -XX:ReservedCodeCacheSize=32M -Xss512k -Dfile.encoding="UTF-8" -Duser.country="JP" -Duser.language="ja" -Duser.timezone="Asia/Tokyo"
         - name: BPL_JVM_THREAD_COUNT
           value: "28"
         - name: SPRING_RSOCKET_SERVER_FRAGMENTSIZE
@@ -64,11 +49,8 @@ spec:
           value: "false"
         - name: MANAGEMENT_ENDPOINT_THREADDUMP_ENABLED
           value: "false"
-        image: harbor.dhaka.cf-app.com/dhaka/supply-chain/blog-api-tmaki@sha256:1d744adbc1ab12fd6bf62c76c9d9256bc1b36f9f6e03452ed7d00bca47bad824
+        image: harbor.dhaka.cf-app.com/dhaka/supply-chain/blog-api-tmaki@sha256:29ff7bcc8a45c9d019fdf5cff5443b1530b7c7d6232ca063fdab45d796742eb9
         name: workload
-        ports:
-        - containerPort: 8080
-          protocol: TCP
         resources:
           limits:
             memory: 256Mi
