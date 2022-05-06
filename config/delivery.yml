@@ -15,7 +15,15 @@ spec:
     metadata:
       annotations:
         autoscaling.knative.dev/minScale: "1"
-        conventions.apps.tanzu.vmware.com/applied-conventions: ""
+        boot.spring.io/actuator: http://:8080/actuator
+        boot.spring.io/version: 2.6.7
+        conventions.apps.tanzu.vmware.com/applied-conventions: |-
+          appliveview-sample/app-live-view-connector
+          appliveview-sample/app-live-view-appflavours
+          appliveview-sample/app-live-view-systemproperties
+          spring-boot-convention/spring-boot
+          spring-boot-convention/spring-boot-web
+          spring-boot-convention/spring-boot-actuator
         developer.conventions/target-containers: workload
         kapp.k14s.io/change-rule.delete: delete before deleting git-ssh
         kapp.k14s.io/change-rule.upsert: upsert after upserting git-ssh
@@ -27,9 +35,13 @@ spec:
         app.kubernetes.io/part-of: blog-frontend
         apps.tanzu.vmware.com/workload-type: web
         carto.run/workload-name: blog-frontend
+        conventions.apps.tanzu.vmware.com/framework: spring-boot
         kapp.k14s.io/app: "1649223172819760649"
         kapp.k14s.io/association: v1.c25338f1443c6e0658f7178c7dd4955b
         networking.knative.dev/visibility: cluster-local
+        tanzu.app.live.view: "true"
+        tanzu.app.live.view.application.flavours: spring-boot
+        tanzu.app.live.view.application.name: blog-frontend-server
     spec:
       containers:
       - env:
@@ -42,7 +54,7 @@ spec:
         - name: PRERENDER_URL
           value: http://prerender:3000
         - name: JAVA_TOOL_OPTIONS
-          value: -XX:ReservedCodeCacheSize=32M -Xss512k -Dfile.encoding="UTF-8" -Duser.country="JP" -Duser.language="ja" -Duser.timezone="Asia/Tokyo"
+          value: -XX:ReservedCodeCacheSize=32M -Xss512k -Dfile.encoding="UTF-8" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.server.port="8080" -Dserver.port="8080" -Duser.country="JP" -Duser.language="ja" -Duser.timezone="Asia/Tokyo"
         - name: BPL_JVM_THREAD_COUNT
           value: "28"
         - name: SPRING_PROFILES_ACTIVE
@@ -51,8 +63,11 @@ spec:
           value: "false"
         - name: MANAGEMENT_ENDPOINT_THREADDUMP_ENABLED
           value: "false"
-        image: harbor.dhaka.cf-app.com/dhaka/supply-chain/blog-frontend-tmaki@sha256:e060d6eda0e4a07e58454bddaf80390d594f5854a75698614250292da17e8bfd
+        image: harbor.dhaka.cf-app.com/dhaka/supply-chain/blog-frontend-tmaki@sha256:a595ff303c1162080d37d555061dc2a7d7b7021e9adf46f5a6671819c6f20b24
         name: workload
+        ports:
+        - containerPort: 8080
+          protocol: TCP
         resources:
           limits:
             memory: 256Mi
