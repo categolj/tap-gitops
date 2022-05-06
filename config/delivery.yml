@@ -15,37 +15,21 @@ spec:
     metadata:
       annotations:
         autoscaling.knative.dev/minScale: "1"
-        boot.spring.io/actuator: http://:8080/actuator
-        boot.spring.io/version: 2.6.7
-        conventions.apps.tanzu.vmware.com/applied-conventions: |-
-          appliveview-sample/app-live-view-connector
-          appliveview-sample/app-live-view-appflavours
-          appliveview-sample/app-live-view-systemproperties
-          spring-boot-convention/spring-boot
-          spring-boot-convention/spring-boot-graceful-shutdown
-          spring-boot-convention/spring-boot-web
-          spring-boot-convention/spring-boot-actuator
-          spring-boot-convention/service-intent-postgres
+        conventions.apps.tanzu.vmware.com/applied-conventions: ""
         developer.conventions/target-containers: workload
         kapp.k14s.io/change-rule.delete: delete before deleting git-ssh
         kapp.k14s.io/change-rule.upsert: upsert after upserting git-ssh
         kapp.k14s.io/identity: v1;tmaki/carto.run/Workload/blog-translation;carto.run/v1alpha1
         kapp.k14s.io/original: '{"apiVersion":"carto.run/v1alpha1","kind":"Workload","metadata":{"annotations":{"kapp.k14s.io/change-rule.delete":"delete before deleting git-ssh","kapp.k14s.io/change-rule.upsert":"upsert after upserting git-ssh"},"labels":{"app.kubernetes.io/part-of":"blog-translation","apps.tanzu.vmware.com/workload-type":"web","kapp.k14s.io/app":"1649441622493078083","kapp.k14s.io/association":"v1.9bb32728331d6051ebc78489d3afac87","networking.knative.dev/visibility":"cluster-local"},"name":"blog-translation","namespace":"tmaki"},"spec":{"build":{"env":[{"name":"BP_JVM_VERSION","value":"17.*"}]},"env":[{"name":"TRANSLATOR_BLOGAPIURL","value":"http://blog-api.tmaki.svc.cluster.local"},{"name":"TRANSLATOR_GOOGLEAPIKEY","value":"${k8s.bindings.translation-config.google-api-key}"},{"name":"JAVA_TOOL_OPTIONS","value":"-XX:ReservedCodeCacheSize=32M -Xss512k -Duser.timezone=Asia/Tokyo -Duser.language=ja -Duser.country=JP -Dfile.encoding=UTF-8"},{"name":"SERVER_PORT","value":"${PORT}"},{"name":"BPL_JVM_THREAD_COUNT","value":"28"},{"name":"SPRING_SQL_INIT_MODE","value":"always"},{"name":"SPRING_PROFILES_ACTIVE","value":"kubernetes"},{"name":"MANAGEMENT_METRICS_EXPORT_WAVEFRONT_ENABLED","value":"false"},{"name":"MANAGEMENT_INFO_ENV_ENABLED","value":"true"},{"name":"MANAGEMENT_INFO_JAVA_ENABLED","value":"true"},{"name":"MANAGEMENT_ENDPOINT_HEAPDUMP_ENABLED","value":"false"},{"name":"MANAGEMENT_ENDPOINT_THREADDUMP_ENABLED","value":"false"}],"params":[{"name":"annotations","value":{"autoscaling.knative.dev/minScale":"1"}},{"name":"gitops_branch","value":"blog-translation"},{"name":"gitops_commit_message","value":"Bump"},{"name":"gitops_repository","value":"ssh://git@github.com/categolj/tap-gitops.git"},{"name":"gitops_user_email","value":"makingx+bot@gmail.com"},{"name":"gitops_user_name","value":"making-bot"},{"name":"gitops_ssh_secret","value":"git-ssh"}],"resources":{"limits":{"memory":"256Mi"},"requests":{"memory":"256Mi"}},"serviceClaims":[{"name":"blog-db","ref":{"apiVersion":"v1","kind":"Secret","name":"blog-db"}},{"name":"translation-config","ref":{"apiVersion":"v1","kind":"Secret","name":"translation-config"}}],"source":{"git":{"ref":{"branch":"main"},"url":"https://github.com/categolj/blog-translation"}}}}'
         kapp.k14s.io/original-diff-md5: 58e0494c51d30eb3494f7c9198986bb9
-        services.conventions.apps.tanzu.vmware.com/postgres: postgresql/42.3.4
       labels:
         app.kubernetes.io/component: run
         app.kubernetes.io/part-of: blog-translation
         apps.tanzu.vmware.com/workload-type: web
         carto.run/workload-name: blog-translation
-        conventions.apps.tanzu.vmware.com/framework: spring-boot
         kapp.k14s.io/app: "1649441622493078083"
         kapp.k14s.io/association: v1.9bb32728331d6051ebc78489d3afac87
         networking.knative.dev/visibility: cluster-local
-        services.conventions.apps.tanzu.vmware.com/postgres: workload
-        tanzu.app.live.view: "true"
-        tanzu.app.live.view.application.flavours: spring-boot
-        tanzu.app.live.view.application.name: blog-translation
     spec:
       containers:
       - env:
@@ -54,7 +38,7 @@ spec:
         - name: TRANSLATOR_GOOGLEAPIKEY
           value: ${k8s.bindings.translation-config.google-api-key}
         - name: JAVA_TOOL_OPTIONS
-          value: -XX:ReservedCodeCacheSize=32M -Xss512k -Dfile.encoding="UTF-8" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.server.port="8080" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s" -Duser.country="JP" -Duser.language="ja" -Duser.timezone="Asia/Tokyo"
+          value: -XX:ReservedCodeCacheSize=32M -Xss512k -Dfile.encoding="UTF-8" -Duser.country="JP" -Duser.language="ja" -Duser.timezone="Asia/Tokyo"
         - name: SERVER_PORT
           value: ${PORT}
         - name: BPL_JVM_THREAD_COUNT
@@ -73,11 +57,8 @@ spec:
           value: "false"
         - name: MANAGEMENT_ENDPOINT_THREADDUMP_ENABLED
           value: "false"
-        image: harbor.dhaka.cf-app.com/dhaka/supply-chain/blog-translation-tmaki@sha256:9b5031bf514c458b8f0c2ed5493100caddd4fc1c8d3dd8051e1c76ea45ab3bf4
+        image: harbor.dhaka.cf-app.com/dhaka/supply-chain/blog-translation-tmaki@sha256:005b56713897ae10ae6b7e25daff583ac0f9143b4b4aa276da30926acf2f5094
         name: workload
-        ports:
-        - containerPort: 8080
-          protocol: TCP
         resources:
           limits:
             memory: 256Mi
