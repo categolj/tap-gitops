@@ -56,7 +56,7 @@ spec:
       - env:
         - name: NEXT_PUBLIC_APP_BLOG_API
           value: auto
-        image: ghcr.io/jaguchi/blog-ui-blog@sha256:ee562f076eb4e8c5e52aa8f5c3261e824ae6a3a6f8e06319a01870770eb37b65
+        image: ghcr.io/jaguchi/blog-ui-blog@sha256:9ad1f2d361ac6b6f18da3a1613c8ae9c12ba30960c164489558a6159b013fc49
         name: workload
         resources:
           limits:
