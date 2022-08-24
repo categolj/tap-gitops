@@ -15,7 +15,7 @@ spec:
       annotations:
         autoscaling.knative.dev/minScale: "1"
         boot.spring.io/actuator: http://:8081/actuator
-        boot.spring.io/version: 2.7.2
+        boot.spring.io/version: 2.7.3
         conventions.apps.tanzu.vmware.com/applied-conventions: |-
           inspect-image-convention/buildpacks
           inspect-image-convention/base-image
@@ -104,7 +104,7 @@ spec:
           value: ${info.maven.versions.spring-boot}
         - name: MANAGEMENT_METRICS_TAGS_JAVA_VERSION
           value: ${java.version}
-        image: ghcr.io/jaguchi/blog-api-blog@sha256:4f73a550be2ea49da2a71c6c328b3a340939824cc899d1c1f837ca6919f09119
+        image: ghcr.io/jaguchi/blog-api-blog@sha256:8d8bcb0ba3265c52b2f1e2836d564eec4987c876f823427596ac9f147b97fe12
         livenessProbe:
           httpGet:
             path: /livez
