@@ -104,7 +104,7 @@ spec:
           value: ${info.maven.versions.spring-boot}
         - name: MANAGEMENT_METRICS_TAGS_JAVA_VERSION
           value: ${java.version}
-        image: ghcr.io/jaguchi/blog-api-blog@sha256:6ae805e57a4a0c38a4dcfecb2847dd16027c877980e624fe203db27e885e8fc3
+        image: ghcr.io/jaguchi/blog-api-blog@sha256:c9705f850ddcad862553472a29cb66e6360117eef28ce7a765004f2ae06db884
         livenessProbe:
           httpGet:
             path: /livez
