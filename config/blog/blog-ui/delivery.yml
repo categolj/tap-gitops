@@ -53,7 +53,7 @@ spec:
         kapp.k14s.io/association: v1.0ba63a416d64128605b90e7ad1328294
     spec:
       containers:
-      - image: ghcr.io/jaguchi/blog-ui-blog@sha256:abb2bab8102b3fe8d1f3ba3ae8f6681355cbb1efc8f1e23be909d9a84a4bb52c
+      - image: ghcr.io/jaguchi/blog-ui-blog@sha256:940a78ade4f44f2f904c1c26b908c1ac0a7e4c2834f0bda165414d94cd48094f
         name: workload
         resources:
           limits:
