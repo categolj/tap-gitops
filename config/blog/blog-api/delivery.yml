@@ -62,7 +62,7 @@ spec:
         prometheus.io/path: /actuator/prometheus
         prometheus.io/port: "8081"
         prometheus.io/scrape: "true"
-        services.conventions.apps.tanzu.vmware.com/postgres: r2dbc-postgresql/0.9.1.RELEASE
+        services.conventions.apps.tanzu.vmware.com/postgres: r2dbc-postgresql/0.9.2.RELEASE
       labels:
         app.kubernetes.io/component: run
         app.kubernetes.io/part-of: blog-api
@@ -132,7 +132,7 @@ spec:
             secretKeyRef:
               key: trace-headers
               name: otel-config
-        image: ghcr.io/jaguchi/blog-api-blog@sha256:a56be51929940c83b083c67e93f466e693bd737cf8df0f53316f5873f6659b7f
+        image: ghcr.io/jaguchi/blog-api-blog@sha256:063e991223d71015997352f152d442c3ace62d6e3987bc38ca50d297b14d2e34
         livenessProbe:
           httpGet:
             path: /livez
