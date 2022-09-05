@@ -117,6 +117,11 @@ spec:
             secretKeyRef:
               key: service-name
               name: otel-config
+        - name: OTEL_EXPORTER_ZIPKIN_ENDPOINT
+          valueFrom:
+            secretKeyRef:
+              key: trace-endpoint
+              name: otel-config
         - name: OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
           valueFrom:
             secretKeyRef:
