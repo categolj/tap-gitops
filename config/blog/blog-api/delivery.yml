@@ -105,6 +105,10 @@ spec:
           value: ${java.version}
         - name: OTEL_TRACES_EXPORTER
           value: logging
+        - name: OTEL_METRICS_EXPORTER
+          value: none
+        - name: OTEL_LOGS_EXPORTER
+          value: none
         image: ghcr.io/jaguchi/blog-api-blog@sha256:a56be51929940c83b083c67e93f466e693bd737cf8df0f53316f5873f6659b7f
         livenessProbe:
           httpGet:
