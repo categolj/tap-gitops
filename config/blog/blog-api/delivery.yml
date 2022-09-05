@@ -104,7 +104,26 @@ spec:
         - name: MANAGEMENT_METRICS_TAGS_JAVA_VERSION
           value: ${java.version}
         - name: OTEL_TRACES_EXPORTER
-          value: logging
+          value: otlp
+        - name: OTEL_METRICS_EXPORTER
+          value: none
+        - name: OTEL_LOGS_EXPORTER
+          value: none
+        - name: OTEL_SERVICE_NAME
+          valueFrom:
+            secretKeyRef:
+              key: service-name
+              name: otel-config
+        - name: OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
+          valueFrom:
+            secretKeyRef:
+              key: trace-endpoint
+              name: otel-config
+        - name: OTEL_EXPORTER_OTLP_TRACES_HEADERS
+          valueFrom:
+            secretKeyRef:
+              key: trace-headers
+              name: otel-config
         image: ghcr.io/jaguchi/blog-api-blog@sha256:a56be51929940c83b083c67e93f466e693bd737cf8df0f53316f5873f6659b7f
         livenessProbe:
           httpGet:
