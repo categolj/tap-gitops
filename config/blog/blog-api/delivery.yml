@@ -134,7 +134,7 @@ spec:
             secretKeyRef:
               key: trace-headers
               name: otel-config
-        image: ghcr.io/jaguchi/blog-api-blog@sha256:e6c926ab5975ccb13fd941ff8919cc86bc2414cd7aa3da5412417abf6c4209fd
+        image: ghcr.io/jaguchi/blog-api-blog@sha256:9539fb10e70087be724ae9324683824504c96f0c8bce32fa444b9c17a7c5306c
         livenessProbe:
           httpGet:
             path: /livez
