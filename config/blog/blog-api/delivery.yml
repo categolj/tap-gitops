@@ -58,7 +58,7 @@ spec:
           - id: making/opentelemetry-javaagent
             version: 0.1.8
         inspect-image.buildpacks.io/run-image: ghcr.io/jaguchi/build-service@sha256:ec6b4df5da0d22786a15a64540a7d6465193f59ac3d4eb707c06dd29d0874933
-        inspect-image.opencontainers.org/source: rsocket/96728d4cb101a4c31a467e43d2dbebdc937a731c
+        inspect-image.opencontainers.org/source: rsocket/ad9c3aaee3d50c0b2c3aa16b6fd069771a62b60f
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-api;carto.run/v1alpha1
         prometheus.io/path: /actuator/prometheus
@@ -134,7 +134,7 @@ spec:
             secretKeyRef:
               key: trace-headers
               name: otel-config
-        image: ghcr.io/jaguchi/blog-api-blog@sha256:9539fb10e70087be724ae9324683824504c96f0c8bce32fa444b9c17a7c5306c
+        image: ghcr.io/jaguchi/blog-api-blog@sha256:9fc7557206e9d63b231a09fb5499e3e4a66faeaf22a2ce12080943d9606ab63d
         livenessProbe:
           httpGet:
             path: /livez
