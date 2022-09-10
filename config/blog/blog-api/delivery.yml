@@ -81,6 +81,8 @@ spec:
     spec:
       containers:
       - env:
+        - name: BP_JVM_VERSION
+          value: "17"
         - name: JAVA_TOOL_OPTIONS
           value: -XX:ReservedCodeCacheSize=32M -Xss512k -Dfile.encoding="UTF-8" -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details=always -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include=* -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Duser.country="JP" -Duser.language="ja" -Duser.timezone="Asia/Tokyo"
         - name: BPL_JVM_THREAD_COUNT
