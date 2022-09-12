@@ -42,7 +42,7 @@ spec:
           - id: paketo-buildpacks/image-labels
             version: 4.1.2
         inspect-image.buildpacks.io/run-image: ghcr.io/jaguchi/build-service@sha256:ec6b4df5da0d22786a15a64540a7d6465193f59ac3d4eb707c06dd29d0874933
-        inspect-image.opencontainers.org/source: main/56a03e26b2f2b624ff462c88dfde5a014859e0ba
+        inspect-image.opencontainers.org/source: main/48118c506081538e48562b898f6d8f561cf1329d
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-ui;carto.run/v1alpha1
       labels:
@@ -54,7 +54,7 @@ spec:
         kapp.k14s.io/association: v1.0ba63a416d64128605b90e7ad1328294
     spec:
       containers:
-      - image: ghcr.io/jaguchi/blog-ui-blog@sha256:7276880c72cacf276e9334617e520e50f3bcc5d522b404e585fea042dc79fda1
+      - image: ghcr.io/jaguchi/blog-ui-blog@sha256:d3d2be19935df20c99ab53a9a12cd369ebf7ebd5b35a075bb6d96ae6764a1f5f
         name: workload
         resources:
           limits:
