@@ -11,6 +11,8 @@ metadata:
     prometheus.io/scrape: "true"
   labels:
     app.kubernetes.io/part-of: blog-api
+    apps.jaguchi.maki.lol/test-type: maven-jdk-17
+    apps.tanzu.vmware.com/pipeline: test
     apps.tanzu.vmware.com/workload-type: web
     kapp.k14s.io/app: "1660936442515730218"
     kapp.k14s.io/association: v1.eae2bf111fb39e9481c024f683deba7a
@@ -40,6 +42,8 @@ metadata:
     prometheus.io/scrape: "true"
   labels:
     app.kubernetes.io/part-of: blog-api
+    apps.jaguchi.maki.lol/test-type: maven-jdk-17
+    apps.tanzu.vmware.com/pipeline: test
     apps.tanzu.vmware.com/workload-type: web
     kapp.k14s.io/app: "1660936442515730218"
     kapp.k14s.io/association: v1.eae2bf111fb39e9481c024f683deba7a
