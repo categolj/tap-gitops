@@ -4,6 +4,8 @@ metadata:
   name: blog-ui
   labels:
     app.kubernetes.io/part-of: blog-ui
+    apps.jaguchi.maki.lol/test-type: node
+    apps.tanzu.vmware.com/has-tests: "true"
     apps.tanzu.vmware.com/workload-type: web
     kapp.k14s.io/app: "1660936432312369669"
     kapp.k14s.io/association: v1.0ba63a416d64128605b90e7ad1328294
@@ -48,13 +50,15 @@ spec:
       labels:
         app.kubernetes.io/component: run
         app.kubernetes.io/part-of: blog-ui
+        apps.jaguchi.maki.lol/test-type: node
+        apps.tanzu.vmware.com/has-tests: "true"
         apps.tanzu.vmware.com/workload-type: web
         carto.run/workload-name: blog-ui
         kapp.k14s.io/app: "1660936432312369669"
         kapp.k14s.io/association: v1.0ba63a416d64128605b90e7ad1328294
     spec:
       containers:
-      - image: ghcr.io/jaguchi/blog-ui-blog@sha256:55381ee7df9a00ac7911271adc8c791538c4f99d58f4f9bd4405f95e8a985bdc
+      - image: ghcr.io/jaguchi/blog-ui-blog@sha256:6bd51ea7e0bb64d4316c9f356aad394b34412b3a95dfc66d000f6e5f7aa5cce0
         name: workload
         resources:
           limits:
