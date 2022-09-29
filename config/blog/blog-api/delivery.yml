@@ -17,7 +17,7 @@ spec:
       annotations:
         autoscaling.knative.dev/minScale: "1"
         boot.spring.io/actuator: http://:8081/actuator
-        boot.spring.io/version: 2.7.4
+        boot.spring.io/version: 3.0.0-M5
         conventions.apps.tanzu.vmware.com/applied-conventions: |-
           inspect-image-convention/buildpacks
           inspect-image-convention/base-image
@@ -26,7 +26,6 @@ spec:
           spring-boot-convention/spring-boot
           spring-boot-convention/spring-boot-web
           spring-boot-convention/spring-boot-actuator
-          spring-boot-convention/spring-boot-actuator-probes
           spring-boot-convention/service-intent-postgres
           appliveview-sample/app-live-view-appflavour-check
           appliveview-sample/app-live-view-connector-boot
@@ -60,13 +59,13 @@ spec:
           - id: making/opentelemetry-javaagent
             version: 0.2.0
         inspect-image.buildpacks.io/run-image: ghcr.io/jaguchi/build-service@sha256:ec6b4df5da0d22786a15a64540a7d6465193f59ac3d4eb707c06dd29d0874933
-        inspect-image.opencontainers.org/source: main/842a62899faa64d76b65d1aa974f4e0612c5fe71
+        inspect-image.opencontainers.org/source: main/03f128341245a8594134468cf2fb031cd198ee43
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-api;carto.run/v1alpha1
         prometheus.io/path: /actuator/prometheus
         prometheus.io/port: "8081"
         prometheus.io/scrape: "true"
-        services.conventions.apps.tanzu.vmware.com/postgres: r2dbc-postgresql/0.9.2.RELEASE
+        services.conventions.apps.tanzu.vmware.com/postgres: r2dbc-postgresql/1.0.0.RC1
       labels:
         app.kubernetes.io/component: run
         app.kubernetes.io/part-of: blog-api
@@ -86,7 +85,7 @@ spec:
       containers:
       - env:
         - name: JAVA_TOOL_OPTIONS
-          value: -XX:ReservedCodeCacheSize=32M -Xss512k -Dfile.encoding="UTF-8" -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details=always -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include=* -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Duser.country="JP" -Duser.language="ja" -Duser.timezone="Asia/Tokyo"
+          value: -XX:ReservedCodeCacheSize=32M -Xss512k -Dfile.encoding="UTF-8" -Dmanagement.endpoint.health.show-details=always -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include=* -Dmanagement.server.port="8081" -Dserver.port="8080" -Duser.country="JP" -Duser.language="ja" -Duser.timezone="Asia/Tokyo"
         - name: BPL_JVM_THREAD_COUNT
           value: "28"
         - name: SPRING_RSOCKET_SERVER_FRAGMENTSIZE
@@ -146,21 +145,11 @@ spec:
             secretKeyRef:
               key: trace-headers
               name: otel-config
-        image: ghcr.io/jaguchi/blog-api-blog@sha256:1af1acd0ab6d859e37e79514e11806a909f68f80024106047a0f7dafebcb4253
-        livenessProbe:
-          httpGet:
-            path: /livez
-            port: 8080
-            scheme: HTTP
+        image: ghcr.io/jaguchi/blog-api-blog@sha256:371558a73ec54277bec173e144b42b54f8b6f89de7a0fe0af74d7000f807bdcc
         name: workload
         ports:
         - containerPort: 8080
           protocol: TCP
-        readinessProbe:
-          httpGet:
-            path: /readyz
-            port: 8080
-            scheme: HTTP
         resources:
           limits:
             memory: 320Mi
