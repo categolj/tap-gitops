@@ -59,7 +59,7 @@ spec:
           - id: making/opentelemetry-javaagent
             version: 0.2.0
         inspect-image.buildpacks.io/run-image: ghcr.io/jaguchi/build-service@sha256:ec6b4df5da0d22786a15a64540a7d6465193f59ac3d4eb707c06dd29d0874933
-        inspect-image.opencontainers.org/source: main/03f128341245a8594134468cf2fb031cd198ee43
+        inspect-image.opencontainers.org/source: main/13e1d4d4191ce86c3c7840729068e6d0dd538e83
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-api;carto.run/v1alpha1
         prometheus.io/path: /actuator/prometheus
@@ -145,7 +145,7 @@ spec:
             secretKeyRef:
               key: trace-headers
               name: otel-config
-        image: ghcr.io/jaguchi/blog-api-blog@sha256:371558a73ec54277bec173e144b42b54f8b6f89de7a0fe0af74d7000f807bdcc
+        image: ghcr.io/jaguchi/blog-api-blog@sha256:831f2a1e435973b1339c591e8b8e2d4f406de8f1d5527c26b272e7bf7bcddefc
         name: workload
         ports:
         - containerPort: 8080
