@@ -24,26 +24,28 @@ spec:
           appliveview-sample/app-live-view-appflavour-check
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: ghcr.io/jaguchi/build-service@sha256:ec6b4df5da0d22786a15a64540a7d6465193f59ac3d4eb707c06dd29d0874933
-          top_layer: sha256:68affdc487c70ce84b41688af2adb80bcc9b3185125848dc18d8aaae29ba142c
+          reference: ghcr.io/jaguchi/build-service@sha256:f8dbbf8fa654c1731e039671a6683b97d3e4a2cd8344e9e99409cad8ecaf5f95
+          top_layer: sha256:d10fcfd222e42332f995be30faf8856758b34ce68e864bf2206d87bf3f1a7108
         inspect-image.buildpacks.io/buildpacks: |-
+          - id: tanzu-buildpacks/deprecation-warnings
+            version: 0.0.1
           - id: paketo-buildpacks/ca-certificates
-            version: 3.2.3
+            version: 3.4.0
           - id: tanzu-buildpacks/node-engine
-            version: 0.9.2
+            version: 0.13.0
           - id: tanzu-buildpacks/yarn
-            version: 0.4.1
+            version: 0.6.2
           - id: tanzu-buildpacks/yarn-install
-            version: 0.5.0
+            version: 0.7.4
           - id: tanzu-buildpacks/node-module-bom
-            version: 0.1.8
+            version: 0.3.2
           - id: tanzu-buildpacks/node-run-script
-            version: 0.2.5
+            version: 0.3.3
           - id: tanzu-buildpacks/yarn-start
-            version: 0.3.0
+            version: 0.3.3
           - id: paketo-buildpacks/image-labels
-            version: 4.1.2
-        inspect-image.buildpacks.io/run-image: ghcr.io/jaguchi/build-service@sha256:ec6b4df5da0d22786a15a64540a7d6465193f59ac3d4eb707c06dd29d0874933
+            version: 4.3.0
+        inspect-image.buildpacks.io/run-image: ghcr.io/jaguchi/build-service@sha256:f8dbbf8fa654c1731e039671a6683b97d3e4a2cd8344e9e99409cad8ecaf5f95
         inspect-image.opencontainers.org/source: main/c9e9acc8926e523fda3ce777622a8ddc213fd8d0
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-ui;carto.run/v1alpha1
@@ -58,7 +60,7 @@ spec:
         kapp.k14s.io/association: v1.0ba63a416d64128605b90e7ad1328294
     spec:
       containers:
-      - image: ghcr.io/jaguchi/blog-ui-blog@sha256:9ac0e29fc0bd33f1cb5034f13aed30637eea34463c40b94833634236a5ebc683
+      - image: ghcr.io/jaguchi/blog-ui-blog@sha256:52568ba0f956151f3edb957d6d2073d17c64a1a4862f1614aacad2350d59ad68
         name: workload
         resources:
           limits:
