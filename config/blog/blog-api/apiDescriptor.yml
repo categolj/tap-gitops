@@ -1,0 +1,33 @@
+apiVersion: apis.apps.tanzu.vmware.com/v1alpha1
+kind: APIDescriptor
+metadata:
+  name: blog-api
+  annotations:
+    kapp.k14s.io/disable-original: ""
+    kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-api;carto.run/v1alpha1
+    autoscaling.knative.dev/minScale: "1"
+    prometheus.io/path: /actuator/prometheus
+    prometheus.io/port: "8081"
+    prometheus.io/scrape: "true"
+  labels:
+    apis.apps.tanzu.vmware.com/register-api: "true"
+    app.kubernetes.io/part-of: blog-api
+    apps.tanzu.vmware.com/has-tests: "true"
+    apps.tanzu.vmware.com/workload-type: web
+    kapp.k14s.io/app: "1665663307561447397"
+    kapp.k14s.io/association: v1.eae2bf111fb39e9481c024f683deba7a
+    app.kubernetes.io/component: run
+    carto.run/workload-name: blog-api
+spec:
+  type: openapi
+  description: Blog Entry API
+  system: blog
+  owner: making
+  location:
+    path: /v3/api-docs
+    baseURL:
+      ref:
+        apiVersion: serving.knative.dev/v1
+        kind: Service
+        name: blog-api
+

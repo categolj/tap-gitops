@@ -6,6 +6,7 @@ metadata:
     ootb.apps.tanzu.vmware.com/servicebinding-workload: "true"
     ootb.apps.tanzu.vmware.com/apidescriptor-ref: "true"
   labels:
+    apis.apps.tanzu.vmware.com/register-api: "true"
     app.kubernetes.io/part-of: blog-api
     apps.tanzu.vmware.com/has-tests: "true"
     apps.tanzu.vmware.com/workload-type: web
@@ -71,6 +72,7 @@ spec:
         prometheus.io/scrape: "true"
         services.conventions.apps.tanzu.vmware.com/postgres: r2dbc-postgresql/1.0.0.RC1
       labels:
+        apis.apps.tanzu.vmware.com/register-api: "true"
         app.kubernetes.io/component: run
         app.kubernetes.io/part-of: blog-api
         apps.tanzu.vmware.com/has-tests: "true"
