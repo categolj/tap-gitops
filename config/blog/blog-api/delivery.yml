@@ -2,12 +2,14 @@ apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: blog-api
+  annotations:
+    ootb.apps.tanzu.vmware.com/servicebinding-workload: "true"
+    ootb.apps.tanzu.vmware.com/apidescriptor-ref: "true"
   labels:
     app.kubernetes.io/part-of: blog-api
-    apps.jaguchi.maki.lol/test-type: maven-jdk-17
     apps.tanzu.vmware.com/has-tests: "true"
     apps.tanzu.vmware.com/workload-type: web
-    kapp.k14s.io/app: "1660936442515730218"
+    kapp.k14s.io/app: "1665663307561447397"
     kapp.k14s.io/association: v1.eae2bf111fb39e9481c024f683deba7a
     app.kubernetes.io/component: run
     carto.run/workload-name: blog-api
@@ -18,7 +20,7 @@ spec:
         autoscaling.knative.dev/minScale: "1"
         boot.spring.io/actuator: http://:8081/actuator
         boot.spring.io/version: 3.0.0-M5
-        conventions.apps.tanzu.vmware.com/applied-conventions: |-
+        conventions.carto.run/applied-conventions: |-
           inspect-image-convention/buildpacks
           inspect-image-convention/base-image
           inspect-image-convention/run-image
@@ -33,7 +35,7 @@ spec:
           appliveview-sample/app-live-view-systemproperties
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: ghcr.io/jaguchi/build-service@sha256:f8dbbf8fa654c1731e039671a6683b97d3e4a2cd8344e9e99409cad8ecaf5f95
+          reference: ghcr.io/making/build-service@sha256:f8dbbf8fa654c1731e039671a6683b97d3e4a2cd8344e9e99409cad8ecaf5f95
           top_layer: sha256:d10fcfd222e42332f995be30faf8856758b34ce68e864bf2206d87bf3f1a7108
         inspect-image.buildpacks.io/buildpacks: |-
           - id: tanzu-buildpacks/deprecation-warnings
@@ -60,9 +62,7 @@ spec:
             version: 5.18.0
           - id: paketo-buildpacks/image-labels
             version: 4.3.0
-          - id: making/opentelemetry-javaagent
-            version: 0.2.0
-        inspect-image.buildpacks.io/run-image: ghcr.io/jaguchi/build-service@sha256:f8dbbf8fa654c1731e039671a6683b97d3e4a2cd8344e9e99409cad8ecaf5f95
+        inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:f8dbbf8fa654c1731e039671a6683b97d3e4a2cd8344e9e99409cad8ecaf5f95
         inspect-image.opencontainers.org/source: main/13e1d4d4191ce86c3c7840729068e6d0dd538e83
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-api;carto.run/v1alpha1
@@ -73,12 +73,11 @@ spec:
       labels:
         app.kubernetes.io/component: run
         app.kubernetes.io/part-of: blog-api
-        apps.jaguchi.maki.lol/test-type: maven-jdk-17
         apps.tanzu.vmware.com/has-tests: "true"
         apps.tanzu.vmware.com/workload-type: web
         carto.run/workload-name: blog-api
         conventions.apps.tanzu.vmware.com/framework: spring-boot
-        kapp.k14s.io/app: "1660936442515730218"
+        kapp.k14s.io/app: "1665663307561447397"
         kapp.k14s.io/association: v1.eae2bf111fb39e9481c024f683deba7a
         services.conventions.apps.tanzu.vmware.com/postgres: workload
         tanzu.app.live.view: "true"
@@ -120,36 +119,7 @@ spec:
           value: ${K_CONFIGURATION}
         - name: INFO_ENV_K_REVISION
           value: ${K_REVISION}
-        - name: OTEL_TRACES_EXPORTER
-          valueFrom:
-            secretKeyRef:
-              key: trace-exporter
-              name: otel-config
-        - name: OTEL_METRICS_EXPORTER
-          value: none
-        - name: OTEL_LOGS_EXPORTER
-          value: none
-        - name: OTEL_SERVICE_NAME
-          valueFrom:
-            secretKeyRef:
-              key: service-name
-              name: otel-config
-        - name: OTEL_EXPORTER_ZIPKIN_ENDPOINT
-          valueFrom:
-            secretKeyRef:
-              key: trace-endpoint
-              name: otel-config
-        - name: OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
-          valueFrom:
-            secretKeyRef:
-              key: trace-endpoint
-              name: otel-config
-        - name: OTEL_EXPORTER_OTLP_TRACES_HEADERS
-          valueFrom:
-            secretKeyRef:
-              key: trace-headers
-              name: otel-config
-        image: ghcr.io/jaguchi/blog-api-blog@sha256:b88c3dceab221bc0d36aa38be0c68abdfa92d0a047cf3869a310010b253b5655
+        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:0ca4998ef2f0ac2cc02f2928718bba7e3400b6094c6e8919fe5321f998d4396d
         name: workload
         ports:
         - containerPort: 8080
