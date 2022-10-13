@@ -19,6 +19,10 @@ spec:
         boot.spring.io/actuator: http://:8081/actuator
         boot.spring.io/version: 2.7.3
         conventions.carto.run/applied-conventions: |-
+          inspect-image-convention/buildpacks
+          inspect-image-convention/base-image
+          inspect-image-convention/run-image
+          inspect-image-convention/source
           spring-boot-convention/spring-boot
           spring-boot-convention/spring-boot-graceful-shutdown
           spring-boot-convention/spring-boot-web
@@ -29,6 +33,36 @@ spec:
           appliveview-sample/app-live-view-appflavours-boot
           appliveview-sample/app-live-view-systemproperties
         developer.conventions/target-containers: workload
+        inspect-image.buildpacks.io/base-image: |-
+          reference: ghcr.io/making/build-service@sha256:f8dbbf8fa654c1731e039671a6683b97d3e4a2cd8344e9e99409cad8ecaf5f95
+          top_layer: sha256:d10fcfd222e42332f995be30faf8856758b34ce68e864bf2206d87bf3f1a7108
+        inspect-image.buildpacks.io/buildpacks: |-
+          - id: tanzu-buildpacks/deprecation-warnings
+            version: 0.0.1
+          - id: paketo-buildpacks/ca-certificates
+            version: 3.4.0
+          - id: paketo-buildpacks/bellsoft-liberica
+            version: 9.6.1
+          - id: paketo-buildpacks/syft
+            version: 1.10.1
+          - id: paketo-buildpacks/maven
+            version: 6.8.0
+          - id: paketo-buildpacks/executable-jar
+            version: 6.4.0
+          - id: paketo-buildpacks/apache-tomcat
+            version: 7.5.0
+          - id: paketo-buildpacks/apache-tomee
+            version: 1.2.0
+          - id: paketo-buildpacks/liberty
+            version: 2.1.1
+          - id: paketo-buildpacks/dist-zip
+            version: 5.3.0
+          - id: paketo-buildpacks/spring-boot
+            version: 5.18.0
+          - id: paketo-buildpacks/image-labels
+            version: 4.3.0
+        inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:f8dbbf8fa654c1731e039671a6683b97d3e4a2cd8344e9e99409cad8ecaf5f95
+        inspect-image.opencontainers.org/source: main/6db88c7a7e7dec1843809b058195b68480c4c12a
       labels:
         app.kubernetes.io/component: run
         app.kubernetes.io/part-of: tanzu-java-web-app
