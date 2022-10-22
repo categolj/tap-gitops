@@ -60,7 +60,7 @@ spec:
           - id: paketo-buildpacks/image-labels
             version: 4.3.0
         inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:5e6ed534c57cd65f8efc3144bac47b83f9d705d8f7871c42ec94a720463924a3
-        inspect-image.opencontainers.org/source: main/5657954b1d11075f29c68068ceeeaee7e310dbc9
+        inspect-image.opencontainers.org/source: main/8953cea15c7fdf8e6eeb36f440953daab790892b
       labels:
         app.kubernetes.io/component: run
         app.kubernetes.io/part-of: demo-redis
@@ -77,7 +77,7 @@ spec:
       - env:
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details=always -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include=* -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: ghcr.io/making/supply-chain/demo-redis-demo@sha256:11ca9db792488e6b8b2f7b99ce0875b58dc284c66a61a5a85c91555ef807e3f4
+        image: ghcr.io/making/supply-chain/demo-redis-demo@sha256:298bdf9a6e066a16c0467e687e98934ccd6c4ddd5bec6c79e4b86c808091a93d
         livenessProbe:
           httpGet:
             path: /livez
