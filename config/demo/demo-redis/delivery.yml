@@ -1,35 +1,34 @@
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
-  name: blog-api
+  name: demo-redis
   annotations:
     ootb.apps.tanzu.vmware.com/servicebinding-workload: "true"
     ootb.apps.tanzu.vmware.com/apidescriptor-ref: "true"
   labels:
     apis.apps.tanzu.vmware.com/register-api: "true"
-    app.kubernetes.io/part-of: blog-api
+    app.kubernetes.io/part-of: demo-redis
     apps.tanzu.vmware.com/has-tests: "true"
     apps.tanzu.vmware.com/workload-type: web
-    kapp.k14s.io/app: "1665663307561447397"
-    kapp.k14s.io/association: v1.eae2bf111fb39e9481c024f683deba7a
     app.kubernetes.io/component: run
-    carto.run/workload-name: blog-api
+    carto.run/workload-name: demo-redis
 spec:
   template:
     metadata:
       annotations:
         autoscaling.knative.dev/minScale: "1"
         boot.spring.io/actuator: http://:8081/actuator
-        boot.spring.io/version: 3.0.0-SNAPSHOT
+        boot.spring.io/version: 2.7.5
         conventions.carto.run/applied-conventions: |-
           inspect-image-convention/buildpacks
           inspect-image-convention/base-image
           inspect-image-convention/run-image
           inspect-image-convention/source
           spring-boot-convention/spring-boot
+          spring-boot-convention/spring-boot-graceful-shutdown
           spring-boot-convention/spring-boot-web
           spring-boot-convention/spring-boot-actuator
-          spring-boot-convention/service-intent-postgres
+          spring-boot-convention/spring-boot-actuator-probes
           appliveview-sample/app-live-view-appflavour-check
           appliveview-sample/app-live-view-connector-boot
           appliveview-sample/app-live-view-appflavours-boot
@@ -62,73 +61,40 @@ spec:
           - id: paketo-buildpacks/image-labels
             version: 4.3.0
         inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:5e6ed534c57cd65f8efc3144bac47b83f9d705d8f7871c42ec94a720463924a3
-        inspect-image.opencontainers.org/source: main/91bc8afea352b9cbf38a0af0598e12a40331278b
-        kapp.k14s.io/disable-original: ""
-        kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-api;carto.run/v1alpha1
-        prometheus.io/path: /actuator/prometheus
-        prometheus.io/port: "8081"
-        prometheus.io/scrape: "true"
-        services.conventions.apps.tanzu.vmware.com/postgres: r2dbc-postgresql/1.0.0.RC1
+        inspect-image.opencontainers.org/source: main/0975567252805e7379f22502297ef7f023e5395a
       labels:
         apis.apps.tanzu.vmware.com/register-api: "true"
         app.kubernetes.io/component: run
-        app.kubernetes.io/part-of: blog-api
+        app.kubernetes.io/part-of: demo-redis
         apps.tanzu.vmware.com/has-tests: "true"
         apps.tanzu.vmware.com/workload-type: web
-        carto.run/workload-name: blog-api
+        carto.run/workload-name: demo-redis
         conventions.apps.tanzu.vmware.com/framework: spring-boot
-        kapp.k14s.io/app: "1665663307561447397"
-        kapp.k14s.io/association: v1.eae2bf111fb39e9481c024f683deba7a
-        services.conventions.apps.tanzu.vmware.com/postgres: workload
         tanzu.app.live.view: "true"
         tanzu.app.live.view.application.actuator.port: "8081"
         tanzu.app.live.view.application.flavours: spring-boot
-        tanzu.app.live.view.application.name: blog-api
+        tanzu.app.live.view.application.name: demo-redis
     spec:
       containers:
       - env:
         - name: JAVA_TOOL_OPTIONS
-          value: -XX:ReservedCodeCacheSize=32M -Xss512k -Dfile.encoding="UTF-8" -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details=always -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include=* -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Duser.country="JP" -Duser.language="ja" -Duser.timezone="Asia/Tokyo"
-        - name: BPL_JVM_THREAD_COUNT
-          value: "28"
-        - name: SPRING_RSOCKET_SERVER_FRAGMENTSIZE
-          value: 16MB
-        - name: SPRING_PROFILES_ACTIVE
-          value: kubernetes
-        - name: BLOG_GITHUB_ACCESS_TOKEN
-          valueFrom:
-            secretKeyRef:
-              key: github-access-token
-              name: blog-config
-        - name: BLOG_GITHUB_WEBHOOK_SECRET
-          valueFrom:
-            secretKeyRef:
-              key: github-webhook-secret
-              name: blog-config
-        - name: MANAGEMENT_ENDPOINT_HEAPDUMP_ENABLED
-          value: "false"
-        - name: MANAGEMENT_ENDPOINT_THREADDUMP_ENABLED
-          value: "false"
-        - name: MANAGEMENT_METRICS_TAGS_JAVA_VERSION
-          value: ${java.version}
-        - name: INFO_ENV_HOSTNAME
-          value: ${HOSTNAME}
-        - name: INFO_ENV_K_SERVICE
-          value: ${K_SERVICE}
-        - name: INFO_ENV_K_CONFIGURATION
-          value: ${K_CONFIGURATION}
-        - name: INFO_ENV_K_REVISION
-          value: ${K_REVISION}
-        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:3c738bf1dea6788d6a4a8bdf5a52dd5ed131bb54a9b73195f92df7e5abdd4993
+          value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details=always -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include=* -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
+        image: ghcr.io/making/supply-chain/demo-redis-demo@sha256:2544e73fdca992264be28e6b6c4004e9cf7569040c49f4d262c1fe5b78a25de8
+        livenessProbe:
+          httpGet:
+            path: /livez
+            port: 8080
+            scheme: HTTP
         name: workload
         ports:
         - containerPort: 8080
           protocol: TCP
-        resources:
-          limits:
-            memory: 320Mi
-          requests:
-            memory: 320Mi
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 8080
+            scheme: HTTP
+        resources: {}
         securityContext:
           runAsUser: 1000
       serviceAccountName: default
