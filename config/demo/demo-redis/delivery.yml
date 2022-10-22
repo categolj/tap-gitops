@@ -75,8 +75,6 @@ spec:
     spec:
       containers:
       - env:
-        - name: spring.redis.lettuce.cluster.refresh.adaptive
-          value: "true"
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details=always -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include=* -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
         image: ghcr.io/making/supply-chain/demo-redis-demo@sha256:f574e02d46b575a0b44972b0895369a3d60c0238eeee73192313824a6b862163
