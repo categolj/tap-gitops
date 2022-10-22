@@ -1,7 +1,7 @@
-apiVersion: servicebinding.io/v1alpha3
-kind: ServiceBinding
+apiVersion: apis.apps.tanzu.vmware.com/v1alpha1
+kind: APIDescriptor
 metadata:
-  name: demo-redis-redis
+  name: demo-redis
   annotations:
     autoscaling.knative.dev/minScale: "1"
   labels:
@@ -12,13 +12,15 @@ metadata:
     app.kubernetes.io/component: run
     carto.run/workload-name: demo-redis
 spec:
-  name: redis
-  service:
-    apiVersion: services.apps.tanzu.vmware.com/v1alpha1
-    kind: ResourceClaim
-    name: redis
-  workload:
-    apiVersion: serving.knative.dev/v1
-    kind: Service
-    name: demo-redis
+  type: openapi
+  description: Demo Redis
+  system: dev
+  owner: demo
+  location:
+    path: /v3/api-docs
+    baseURL:
+      ref:
+        apiVersion: serving.knative.dev/v1
+        kind: Service
+        name: demo-redis
 
