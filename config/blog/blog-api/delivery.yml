@@ -20,7 +20,7 @@ spec:
       annotations:
         autoscaling.knative.dev/minScale: "1"
         boot.spring.io/actuator: http://:8081/actuator
-        boot.spring.io/version: 3.0.0-SNAPSHOT
+        boot.spring.io/version: 3.0.0-RC1
         conventions.carto.run/applied-conventions: |-
           inspect-image-convention/buildpacks
           inspect-image-convention/base-image
@@ -62,7 +62,7 @@ spec:
           - id: paketo-buildpacks/image-labels
             version: 4.3.0
         inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:5e6ed534c57cd65f8efc3144bac47b83f9d705d8f7871c42ec94a720463924a3
-        inspect-image.opencontainers.org/source: main/91bc8afea352b9cbf38a0af0598e12a40331278b
+        inspect-image.opencontainers.org/source: main/c53da32daa69b0f18f20b4ce8d8339299b9cbb42
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-api;carto.run/v1alpha1
         prometheus.io/path: /actuator/prometheus
@@ -119,7 +119,7 @@ spec:
           value: ${K_CONFIGURATION}
         - name: INFO_ENV_K_REVISION
           value: ${K_REVISION}
-        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:3c738bf1dea6788d6a4a8bdf5a52dd5ed131bb54a9b73195f92df7e5abdd4993
+        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:383269da5c10664e5eee6ad7c0f38a99a7114bb1661849fd4fa55c298e2c0ede
         name: workload
         ports:
         - containerPort: 8080
