@@ -20,7 +20,7 @@ spec:
       annotations:
         autoscaling.knative.dev/minScale: "1"
         boot.spring.io/actuator: http://:8081/actuator
-        boot.spring.io/version: 3.0.0-SNAPSHOT
+        boot.spring.io/version: 3.0.0-RC1
         conventions.carto.run/applied-conventions: |-
           inspect-image-convention/buildpacks
           inspect-image-convention/base-image
@@ -62,7 +62,7 @@ spec:
           - id: paketo-buildpacks/image-labels
             version: 4.3.0
         inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:5e6ed534c57cd65f8efc3144bac47b83f9d705d8f7871c42ec94a720463924a3
-        inspect-image.opencontainers.org/source: main/91bc8afea352b9cbf38a0af0598e12a40331278b
+        inspect-image.opencontainers.org/source: main/c53da32daa69b0f18f20b4ce8d8339299b9cbb42
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-api;carto.run/v1alpha1
         prometheus.io/path: /actuator/prometheus
@@ -87,6 +87,8 @@ spec:
     spec:
       containers:
       - env:
+        - name: spring.r2dbc.properties.sslRootCert
+          value: /bindings/blog-db-tls-ca/ca.crt
         - name: JAVA_TOOL_OPTIONS
           value: -XX:ReservedCodeCacheSize=32M -Xss512k -Dfile.encoding="UTF-8" -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details=always -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include=* -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Duser.country="JP" -Duser.language="ja" -Duser.timezone="Asia/Tokyo"
         - name: BPL_JVM_THREAD_COUNT
@@ -119,7 +121,7 @@ spec:
           value: ${K_CONFIGURATION}
         - name: INFO_ENV_K_REVISION
           value: ${K_REVISION}
-        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:f7d57883b6ef2cf29fc82208a555ef2b39b557c2eb1616c9897e1fbe17838d5b
+        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:32416b12d3ca045c2b55b25f714a4d2cdc2cf1a4e13bd057a37b1544d834a7a3
         name: workload
         ports:
         - containerPort: 8080
@@ -132,3 +134,4 @@ spec:
         securityContext:
           runAsUser: 1000
       serviceAccountName: default
+
