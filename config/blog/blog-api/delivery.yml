@@ -88,14 +88,12 @@ spec:
     spec:
       containers:
       - env:
-        - name: spring.r2dbc.properties.sslRootCert
+        - name: SPRING_DATASOURCE_HIKARI_DATASOURCEPROPERTIES_SSLCERT
           value: /bindings/blog-db-tls-ca/ca.crt
         - name: JAVA_TOOL_OPTIONS
           value: -XX:ReservedCodeCacheSize=32M -Xss512k -Dfile.encoding="UTF-8" -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details=always -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include=* -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s" -Duser.country="JP" -Duser.language="ja" -Duser.timezone="Asia/Tokyo"
         - name: BPL_JVM_THREAD_COUNT
           value: "28"
-        - name: SPRING_RSOCKET_SERVER_FRAGMENTSIZE
-          value: 16MB
         - name: SPRING_PROFILES_ACTIVE
           value: kubernetes
         - name: BLOG_GITHUB_ACCESS_TOKEN
