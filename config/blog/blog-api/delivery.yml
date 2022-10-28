@@ -106,10 +106,6 @@ spec:
             secretKeyRef:
               key: github-webhook-secret
               name: blog-config
-        - name: MANAGEMENT_ENDPOINT_HEAPDUMP_ENABLED
-          value: "false"
-        - name: MANAGEMENT_ENDPOINT_THREADDUMP_ENABLED
-          value: "false"
         - name: MANAGEMENT_METRICS_TAGS_JAVA_VERSION
           value: ${java.version}
         - name: INFO_ENV_HOSTNAME
