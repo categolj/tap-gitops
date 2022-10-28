@@ -27,6 +27,7 @@ spec:
           inspect-image-convention/run-image
           inspect-image-convention/source
           spring-boot-convention/spring-boot
+          spring-boot-convention/spring-boot-graceful-shutdown
           spring-boot-convention/spring-boot-web
           spring-boot-convention/spring-boot-actuator
           spring-boot-convention/service-intent-postgres
@@ -36,9 +37,11 @@ spec:
           appliveview-sample/app-live-view-systemproperties
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: ghcr.io/making/build-service@sha256:5e6ed534c57cd65f8efc3144bac47b83f9d705d8f7871c42ec94a720463924a3
-          top_layer: sha256:3a9d95bc053606bee683b5fd4f3e80c26cefaf45a7fe9763f4236ff10dc4609c
+          reference: ghcr.io/making/build-service@sha256:f8dbbf8fa654c1731e039671a6683b97d3e4a2cd8344e9e99409cad8ecaf5f95
+          top_layer: sha256:d10fcfd222e42332f995be30faf8856758b34ce68e864bf2206d87bf3f1a7108
         inspect-image.buildpacks.io/buildpacks: |-
+          - id: tanzu-buildpacks/deprecation-warnings
+            version: 0.0.2
           - id: paketo-buildpacks/ca-certificates
             version: 3.4.0
           - id: paketo-buildpacks/bellsoft-liberica
@@ -61,14 +64,14 @@ spec:
             version: 5.19.0
           - id: paketo-buildpacks/image-labels
             version: 4.3.0
-        inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:5e6ed534c57cd65f8efc3144bac47b83f9d705d8f7871c42ec94a720463924a3
-        inspect-image.opencontainers.org/source: main/81ab332020c01679ac321964b3f4075b6258e96f
+        inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:f8dbbf8fa654c1731e039671a6683b97d3e4a2cd8344e9e99409cad8ecaf5f95
+        inspect-image.opencontainers.org/source: main/7be7f0bed973f9745b00e38c8b10196ef968f407
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-api;carto.run/v1alpha1
         prometheus.io/path: /actuator/prometheus
         prometheus.io/port: "8081"
         prometheus.io/scrape: "true"
-        services.conventions.apps.tanzu.vmware.com/postgres: r2dbc-postgresql/1.0.0.RC1
+        services.conventions.apps.tanzu.vmware.com/postgres: postgresql/42.5.0
       labels:
         apis.apps.tanzu.vmware.com/register-api: "true"
         app.kubernetes.io/component: run
@@ -87,16 +90,10 @@ spec:
     spec:
       containers:
       - env:
-        - name: spring.r2dbc.properties.sslRootCert
-          value: /bindings/blog-db-tls-ca/ca.crt
         - name: JAVA_TOOL_OPTIONS
-          value: -XX:ReservedCodeCacheSize=32M -Xss512k -Dfile.encoding="UTF-8" -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details=always -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include=* -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Duser.country="JP" -Duser.language="ja" -Duser.timezone="Asia/Tokyo"
+          value: -XX:ReservedCodeCacheSize=32M -Xss512k -Dfile.encoding="UTF-8" -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details=always -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include=* -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s" -Duser.country="JP" -Duser.language="ja" -Duser.timezone="Asia/Tokyo"
         - name: BPL_JVM_THREAD_COUNT
           value: "28"
-        - name: SPRING_RSOCKET_SERVER_FRAGMENTSIZE
-          value: 16MB
-        - name: SPRING_PROFILES_ACTIVE
-          value: kubernetes
         - name: BLOG_GITHUB_ACCESS_TOKEN
           valueFrom:
             secretKeyRef:
@@ -121,7 +118,7 @@ spec:
           value: ${K_CONFIGURATION}
         - name: INFO_ENV_K_REVISION
           value: ${K_REVISION}
-        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:8618890a60c4e72785ca78e10258214e666687aa210d7d67adf9861d89d683fa
+        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:8358e24c8a1c5ca29d6c0f156eba0e3c30b077b27785960de15228a455ed8a08
         name: workload
         ports:
         - containerPort: 8080
