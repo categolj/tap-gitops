@@ -26,9 +26,11 @@ spec:
           appliveview-sample/app-live-view-appflavour-check
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: ghcr.io/making/build-service@sha256:5e6ed534c57cd65f8efc3144bac47b83f9d705d8f7871c42ec94a720463924a3
-          top_layer: sha256:3a9d95bc053606bee683b5fd4f3e80c26cefaf45a7fe9763f4236ff10dc4609c
+          reference: ghcr.io/making/build-service@sha256:f8dbbf8fa654c1731e039671a6683b97d3e4a2cd8344e9e99409cad8ecaf5f95
+          top_layer: sha256:d10fcfd222e42332f995be30faf8856758b34ce68e864bf2206d87bf3f1a7108
         inspect-image.buildpacks.io/buildpacks: |-
+          - id: tanzu-buildpacks/deprecation-warnings
+            version: 0.0.1
           - id: paketo-buildpacks/ca-certificates
             version: 3.4.0
           - id: tanzu-buildpacks/node-engine
@@ -45,7 +47,7 @@ spec:
             version: 0.3.3
           - id: paketo-buildpacks/image-labels
             version: 4.3.0
-        inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:5e6ed534c57cd65f8efc3144bac47b83f9d705d8f7871c42ec94a720463924a3
+        inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:f8dbbf8fa654c1731e039671a6683b97d3e4a2cd8344e9e99409cad8ecaf5f95
         inspect-image.opencontainers.org/source: main/8b288a865062e1fde4ece0b6ca640ce5bad8883b
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-ui;carto.run/v1alpha1
@@ -59,7 +61,7 @@ spec:
         kapp.k14s.io/association: v1.0ba63a416d64128605b90e7ad1328294
     spec:
       containers:
-      - image: ghcr.io/making/supply-chain/blog-ui-blog@sha256:9c03e1e1d6608b8084882020118d1ab8483b831239f5a93a5b7e50dc3837ea0a
+      - image: ghcr.io/making/supply-chain/blog-ui-blog@sha256:b5e1e0125aef0c93d1f0a001ad1b8ff854eb7156b6f4a1d9fddd221f2bc5afae
         name: workload
         resources:
           limits:
