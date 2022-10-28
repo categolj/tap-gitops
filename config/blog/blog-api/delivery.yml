@@ -65,7 +65,7 @@ spec:
           - id: paketo-buildpacks/image-labels
             version: 4.3.0
         inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:f8dbbf8fa654c1731e039671a6683b97d3e4a2cd8344e9e99409cad8ecaf5f95
-        inspect-image.opencontainers.org/source: main/7be7f0bed973f9745b00e38c8b10196ef968f407
+        inspect-image.opencontainers.org/source: main/fe68f95e6a3838cc7837aa53fe1c4808b2aff28f
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-api;carto.run/v1alpha1
         prometheus.io/path: /actuator/prometheus
@@ -90,6 +90,8 @@ spec:
     spec:
       containers:
       - env:
+        - name: SPRING_DATASOURCE_HIKARI_DATASOURCEPROPERTIES_SSLFACTORY
+          value: org.postgresql.ssl.DefaultJavaSSLFactory
         - name: JAVA_TOOL_OPTIONS
           value: -XX:ReservedCodeCacheSize=32M -Xss512k -Dfile.encoding="UTF-8" -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details=always -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include=* -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s" -Duser.country="JP" -Duser.language="ja" -Duser.timezone="Asia/Tokyo"
         - name: BPL_JVM_THREAD_COUNT
@@ -104,10 +106,6 @@ spec:
             secretKeyRef:
               key: github-webhook-secret
               name: blog-config
-        - name: MANAGEMENT_ENDPOINT_HEAPDUMP_ENABLED
-          value: "false"
-        - name: MANAGEMENT_ENDPOINT_THREADDUMP_ENABLED
-          value: "false"
         - name: MANAGEMENT_METRICS_TAGS_JAVA_VERSION
           value: ${java.version}
         - name: INFO_ENV_HOSTNAME
@@ -118,7 +116,7 @@ spec:
           value: ${K_CONFIGURATION}
         - name: INFO_ENV_K_REVISION
           value: ${K_REVISION}
-        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:8358e24c8a1c5ca29d6c0f156eba0e3c30b077b27785960de15228a455ed8a08
+        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:05298a9392dc6a87fe5df829de57eea7bd67e0ae8071c0e2810ae6dd354487a6
         name: workload
         ports:
         - containerPort: 8080
