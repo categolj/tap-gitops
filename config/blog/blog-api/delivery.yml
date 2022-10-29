@@ -90,12 +90,17 @@ spec:
     spec:
       containers:
       - env:
-        - name: SPRING_DATASOURCE_HIKARI_DATASOURCEPROPERTIES_SSLFACTORY
-          value: org.postgresql.ssl.DefaultJavaSSLFactory
         - name: JAVA_TOOL_OPTIONS
           value: -XX:ReservedCodeCacheSize=32M -Xss512k -Dfile.encoding="UTF-8" -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details=always -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include=* -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s" -Duser.country="JP" -Duser.language="ja" -Duser.timezone="Asia/Tokyo"
         - name: BPL_JVM_THREAD_COUNT
           value: "28"
+        - name: SPRING_APPLICATION_NAME
+          valueFrom:
+            secretKeyRef:
+              key: otel-trace-service-name
+              name: otel-config
+        - name: SPRING_DATASOURCE_HIKARI_DATASOURCEPROPERTIES_SSLFACTORY
+          value: org.postgresql.ssl.DefaultJavaSSLFactory
         - name: BLOG_GITHUB_ACCESS_TOKEN
           valueFrom:
             secretKeyRef:
@@ -106,6 +111,21 @@ spec:
             secretKeyRef:
               key: github-webhook-secret
               name: blog-config
+        - name: MANAGEMENT_OTEL_EXPORTER_OTLP_ENDPOINT
+          valueFrom:
+            secretKeyRef:
+              key: otel-trace-endpoint
+              name: otel-config
+        - name: MANAGEMENT_OTEL_EXPORTER_OTLP_BASICAUTH_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: otel-trace-username
+              name: otel-config
+        - name: MANAGEMENT_OTEL_EXPORTER_OTLP_BASICAUTH_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: otel-trace-password
+              name: otel-config
         - name: MANAGEMENT_METRICS_TAGS_JAVA_VERSION
           value: ${java.version}
         - name: INFO_ENV_HOSTNAME
