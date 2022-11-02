@@ -136,7 +136,7 @@ spec:
           value: ${K_CONFIGURATION}
         - name: INFO_ENV_K_REVISION
           value: ${K_REVISION}
-        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:f3781a29f19f275a56b4db886cfb9ca1c50c41523f4c43600f1b1ccca6fdf615
+        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:aedcec67b16fb56bbc23e824334a4399ae9b594dc17c1b7f73b68c13015f5fd0
         name: workload
         ports:
         - containerPort: 8080
