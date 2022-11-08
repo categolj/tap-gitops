@@ -49,11 +49,11 @@ spec:
           - id: paketo-buildpacks/syft
             version: 1.10.1
           - id: paketo-buildpacks/maven
-            version: 6.8.0
+            version: 6.11.0
           - id: paketo-buildpacks/executable-jar
             version: 6.5.0
           - id: paketo-buildpacks/apache-tomcat
-            version: 7.6.0
+            version: 7.8.0
           - id: paketo-buildpacks/apache-tomee
             version: 1.3.0
           - id: paketo-buildpacks/liberty
@@ -141,7 +141,7 @@ spec:
           value: ${K_CONFIGURATION}
         - name: INFO_ENV_K_REVISION
           value: ${K_REVISION}
-        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:c7c6747d49a3d70ca5d226912e4c7c0cbfdc2617362f9a8d3d384b30c82b613f
+        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:8303932a0776d2d1841f981497771cb3ee468648f3db4cf666034b7d76b4d58a
         name: workload
         ports:
         - containerPort: 8080
