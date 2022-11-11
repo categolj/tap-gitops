@@ -65,7 +65,7 @@ spec:
           - id: paketo-buildpacks/image-labels
             version: 4.3.0
         inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:f8dbbf8fa654c1731e039671a6683b97d3e4a2cd8344e9e99409cad8ecaf5f95
-        inspect-image.opencontainers.org/source: main/36a44d3a411bde769658963d27331eb78798c18b
+        inspect-image.opencontainers.org/source: main/f018addbb8d2f7178c12868fd5e73286370ddbf9
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-api;carto.run/v1alpha1
         prometheus.io/path: /actuator/prometheus
@@ -131,7 +131,7 @@ spec:
           value: ${K_CONFIGURATION}
         - name: INFO_ENV_K_REVISION
           value: ${K_REVISION}
-        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:6f359a60e70253e62c81ccc969e6622ce6e62e8651ba6b052dd5f2f7606cd8bf
+        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:ccbc2cd4d72a3b86a1bc16c8af5a94eb36e1f4b0a35820d93666f30a7dcefb51
         name: workload
         ports:
         - containerPort: 8080
