@@ -20,7 +20,7 @@ spec:
       annotations:
         autoscaling.knative.dev/minScale: "1"
         boot.spring.io/actuator: http://:8081/actuator
-        boot.spring.io/version: 3.0.0-RC2
+        boot.spring.io/version: 3.0.0
         conventions.carto.run/applied-conventions: |-
           inspect-image-convention/buildpacks
           inspect-image-convention/base-image
@@ -30,6 +30,7 @@ spec:
           spring-boot-convention/spring-boot-graceful-shutdown
           spring-boot-convention/spring-boot-web
           spring-boot-convention/spring-boot-actuator
+          spring-boot-convention/spring-boot-actuator-probes
           spring-boot-convention/service-intent-postgres
           appliveview-sample/app-live-view-appflavour-check
           appliveview-sample/app-live-view-connector-boot
@@ -65,13 +66,13 @@ spec:
           - id: paketo-buildpacks/image-labels
             version: 4.3.0
         inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:f8dbbf8fa654c1731e039671a6683b97d3e4a2cd8344e9e99409cad8ecaf5f95
-        inspect-image.opencontainers.org/source: main/947943b6a442c3f93f20eb1a2d4830a3352cc1ef
+        inspect-image.opencontainers.org/source: main/2c34e5e8baaafc3cf0f24e4a4b034f1e81486fef
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-api;carto.run/v1alpha1
         prometheus.io/path: /actuator/prometheus
         prometheus.io/port: "8081"
         prometheus.io/scrape: "true"
-        services.conventions.apps.tanzu.vmware.com/postgres: postgresql/42.5.0
+        services.conventions.apps.tanzu.vmware.com/postgres: postgresql/42.5.1
       labels:
         apis.apps.tanzu.vmware.com/register-api: "true"
         app.kubernetes.io/component: run
@@ -133,11 +134,21 @@ spec:
           value: ${K_CONFIGURATION}
         - name: INFO_ENV_K_REVISION
           value: ${K_REVISION}
-        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:074af3becb20480392fe78ad362786c0ae3042b5fa212ecc4511ab56c994ddae
+        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:bbb359443341bf238a571b79b1c9da265dee4dc0c84c044014a02cbbd9f67726
+        livenessProbe:
+          httpGet:
+            path: /livez
+            port: 8080
+            scheme: HTTP
         name: workload
         ports:
         - containerPort: 8080
           protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 8080
+            scheme: HTTP
         resources:
           limits:
             memory: 320Mi
