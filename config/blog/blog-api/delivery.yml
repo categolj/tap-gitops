@@ -19,23 +19,12 @@ spec:
     metadata:
       annotations:
         autoscaling.knative.dev/minScale: "1"
-        boot.spring.io/actuator: http://:8081/actuator
-        boot.spring.io/version: 3.0.0
         conventions.carto.run/applied-conventions: |-
           inspect-image-convention/buildpacks
           inspect-image-convention/base-image
           inspect-image-convention/run-image
           inspect-image-convention/source
-          spring-boot-convention/spring-boot
-          spring-boot-convention/spring-boot-graceful-shutdown
-          spring-boot-convention/spring-boot-web
-          spring-boot-convention/spring-boot-actuator
-          spring-boot-convention/spring-boot-actuator-probes
-          spring-boot-convention/service-intent-postgres
           appliveview-sample/app-live-view-appflavour-check
-          appliveview-sample/app-live-view-connector-boot
-          appliveview-sample/app-live-view-appflavours-boot
-          appliveview-sample/app-live-view-systemproperties
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
           reference: ghcr.io/making/build-service@sha256:15368fb1446fdd34f7198bff16fe569f980f30943dde59d1a83f6f79f087f21c
@@ -66,13 +55,12 @@ spec:
           - id: paketo-buildpacks/image-labels
             version: 4.3.0
         inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:15368fb1446fdd34f7198bff16fe569f980f30943dde59d1a83f6f79f087f21c
-        inspect-image.opencontainers.org/source: main/362eda7d73ed19263f1b1f18eb02b337160c37d1
+        inspect-image.opencontainers.org/source: main/fc82bc1ca62c3efe3e1124b25a995a99b5e9e591
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-api;carto.run/v1alpha1
         prometheus.io/path: /actuator/prometheus
         prometheus.io/port: "8081"
         prometheus.io/scrape: "true"
-        services.conventions.apps.tanzu.vmware.com/postgres: postgresql/42.5.1
       labels:
         apis.apps.tanzu.vmware.com/register-api: "true"
         app.kubernetes.io/component: run
@@ -80,19 +68,13 @@ spec:
         apps.tanzu.vmware.com/has-tests: "true"
         apps.tanzu.vmware.com/workload-type: web
         carto.run/workload-name: blog-api
-        conventions.apps.tanzu.vmware.com/framework: spring-boot
         kapp.k14s.io/app: "1665663307561447397"
         kapp.k14s.io/association: v1.eae2bf111fb39e9481c024f683deba7a
-        services.conventions.apps.tanzu.vmware.com/postgres: workload
-        tanzu.app.live.view: "true"
-        tanzu.app.live.view.application.actuator.port: "8081"
-        tanzu.app.live.view.application.flavours: spring-boot
-        tanzu.app.live.view.application.name: blog-api
     spec:
       containers:
       - env:
         - name: JAVA_TOOL_OPTIONS
-          value: -XX:ReservedCodeCacheSize=32M -Xss512k -Dfile.encoding="UTF-8" -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details=always -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include=* -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s" -Duser.country="JP" -Duser.language="ja" -Duser.timezone="Asia/Tokyo"
+          value: -XX:ReservedCodeCacheSize=32M -Xss512k
         - name: BPL_JVM_THREAD_COUNT
           value: "28"
         - name: SPRING_APPLICATION_NAME
@@ -138,21 +120,8 @@ spec:
           value: ${K_CONFIGURATION}
         - name: INFO_ENV_K_REVISION
           value: ${K_REVISION}
-        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:03d7775b6076264ace26fa4a1b136a24df5ac397770698eec0d001a3b63ac287
-        livenessProbe:
-          httpGet:
-            path: /livez
-            port: 8080
-            scheme: HTTP
+        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:bcbe2662357985187a0b8140922d2aa9fd4804ae6813439ae5935785d90663e7
         name: workload
-        ports:
-        - containerPort: 8080
-          protocol: TCP
-        readinessProbe:
-          httpGet:
-            path: /readyz
-            port: 8080
-            scheme: HTTP
         resources:
           limits:
             memory: 320Mi
