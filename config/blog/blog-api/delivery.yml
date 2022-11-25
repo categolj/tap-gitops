@@ -38,15 +38,15 @@ spec:
           appliveview-sample/app-live-view-systemproperties
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: ghcr.io/making/build-service@sha256:f8dbbf8fa654c1731e039671a6683b97d3e4a2cd8344e9e99409cad8ecaf5f95
-          top_layer: sha256:d10fcfd222e42332f995be30faf8856758b34ce68e864bf2206d87bf3f1a7108
+          reference: ghcr.io/making/build-service@sha256:15368fb1446fdd34f7198bff16fe569f980f30943dde59d1a83f6f79f087f21c
+          top_layer: sha256:a04a6215363d4f9dd8816f17f4a382d4861a1a2bd255910bd0554b8930987e3a
         inspect-image.buildpacks.io/buildpacks: |-
           - id: tanzu-buildpacks/deprecation-warnings
             version: 0.0.2
           - id: paketo-buildpacks/ca-certificates
-            version: 3.4.0
+            version: 3.5.0
           - id: paketo-buildpacks/bellsoft-liberica
-            version: 9.8.0
+            version: 9.10.0
           - id: paketo-buildpacks/syft
             version: 1.10.1
           - id: paketo-buildpacks/maven
@@ -54,19 +54,19 @@ spec:
           - id: paketo-buildpacks/executable-jar
             version: 6.5.0
           - id: paketo-buildpacks/apache-tomcat
-            version: 7.8.0
+            version: 7.9.0
           - id: paketo-buildpacks/apache-tomee
-            version: 1.3.0
+            version: 1.4.0
           - id: paketo-buildpacks/liberty
-            version: 2.2.0
+            version: 2.4.0
           - id: paketo-buildpacks/dist-zip
             version: 5.4.0
           - id: paketo-buildpacks/spring-boot
-            version: 5.19.0
+            version: 5.20.0
           - id: paketo-buildpacks/image-labels
             version: 4.3.0
-        inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:f8dbbf8fa654c1731e039671a6683b97d3e4a2cd8344e9e99409cad8ecaf5f95
-        inspect-image.opencontainers.org/source: main/2c34e5e8baaafc3cf0f24e4a4b034f1e81486fef
+        inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:15368fb1446fdd34f7198bff16fe569f980f30943dde59d1a83f6f79f087f21c
+        inspect-image.opencontainers.org/source: main/edb0c4c99eb3372ae3d682a9f0f1b30898d61855
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-api;carto.run/v1alpha1
         prometheus.io/path: /actuator/prometheus
@@ -134,7 +134,7 @@ spec:
           value: ${K_CONFIGURATION}
         - name: INFO_ENV_K_REVISION
           value: ${K_REVISION}
-        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:bbb359443341bf238a571b79b1c9da265dee4dc0c84c044014a02cbbd9f67726
+        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:25b037b0120a7b3b9f2d67e699dbfd9dcec1909d1d745252e5b591e0fc0b5432
         livenessProbe:
           httpGet:
             path: /livez
