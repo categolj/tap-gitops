@@ -10,7 +10,7 @@ metadata:
     app.kubernetes.io/part-of: blog-api
     apps.tanzu.vmware.com/has-tests: "true"
     apps.tanzu.vmware.com/workload-type: web
-    kapp.k14s.io/app: "1665663307561447397"
+    kapp.k14s.io/app: "1669493078723467290"
     kapp.k14s.io/association: v1.eae2bf111fb39e9481c024f683deba7a
     app.kubernetes.io/component: run
     carto.run/workload-name: blog-api
@@ -38,15 +38,15 @@ spec:
           appliveview-sample/app-live-view-systemproperties
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: ghcr.io/making/build-service@sha256:15368fb1446fdd34f7198bff16fe569f980f30943dde59d1a83f6f79f087f21c
-          top_layer: sha256:a04a6215363d4f9dd8816f17f4a382d4861a1a2bd255910bd0554b8930987e3a
+          reference: ghcr.io/making/build-service@sha256:f8dbbf8fa654c1731e039671a6683b97d3e4a2cd8344e9e99409cad8ecaf5f95
+          top_layer: sha256:d10fcfd222e42332f995be30faf8856758b34ce68e864bf2206d87bf3f1a7108
         inspect-image.buildpacks.io/buildpacks: |-
           - id: tanzu-buildpacks/deprecation-warnings
             version: 0.0.2
           - id: paketo-buildpacks/ca-certificates
-            version: 3.5.0
+            version: 3.4.0
           - id: paketo-buildpacks/bellsoft-liberica
-            version: 9.10.0
+            version: 9.8.0
           - id: paketo-buildpacks/syft
             version: 1.10.1
           - id: paketo-buildpacks/maven
@@ -54,19 +54,17 @@ spec:
           - id: paketo-buildpacks/executable-jar
             version: 6.5.0
           - id: paketo-buildpacks/apache-tomcat
-            version: 7.9.0
-          - id: paketo-buildpacks/apache-tomee
-            version: 1.4.0
+            version: 7.8.0
           - id: paketo-buildpacks/liberty
-            version: 2.4.0
+            version: 2.2.0
           - id: paketo-buildpacks/dist-zip
             version: 5.4.0
           - id: paketo-buildpacks/spring-boot
-            version: 5.20.0
+            version: 5.19.0
           - id: paketo-buildpacks/image-labels
             version: 4.3.0
-        inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:15368fb1446fdd34f7198bff16fe569f980f30943dde59d1a83f6f79f087f21c
-        inspect-image.opencontainers.org/source: main/edb0c4c99eb3372ae3d682a9f0f1b30898d61855
+        inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:f8dbbf8fa654c1731e039671a6683b97d3e4a2cd8344e9e99409cad8ecaf5f95
+        inspect-image.opencontainers.org/source: main/8c489a9f1b1549cd41af86abafcb99350e4f3e08
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-api;carto.run/v1alpha1
         prometheus.io/path: /actuator/prometheus
@@ -81,7 +79,7 @@ spec:
         apps.tanzu.vmware.com/workload-type: web
         carto.run/workload-name: blog-api
         conventions.apps.tanzu.vmware.com/framework: spring-boot
-        kapp.k14s.io/app: "1665663307561447397"
+        kapp.k14s.io/app: "1669493078723467290"
         kapp.k14s.io/association: v1.eae2bf111fb39e9481c024f683deba7a
         services.conventions.apps.tanzu.vmware.com/postgres: workload
         tanzu.app.live.view: "true"
@@ -109,12 +107,16 @@ spec:
             secretKeyRef:
               key: admin-password
               name: blog-config
-        - name: BLOG_GITHUB_ACCESS_TOKEN
+        - name: BLOG_GITHUB_CONTENTOWNER
+          value: making
+        - name: BLOG_GITHUB_CONTENTREPO
+          value: blog.ik.am
+        - name: BLOG_GITHUB_ACCESSTOKEN
           valueFrom:
             secretKeyRef:
               key: github-access-token
               name: blog-config
-        - name: BLOG_GITHUB_WEBHOOK_SECRET
+        - name: BLOG_GITHUB_WEBHOOKSECRET
           valueFrom:
             secretKeyRef:
               key: github-webhook-secret
@@ -134,7 +136,7 @@ spec:
           value: ${K_CONFIGURATION}
         - name: INFO_ENV_K_REVISION
           value: ${K_REVISION}
-        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:25b037b0120a7b3b9f2d67e699dbfd9dcec1909d1d745252e5b591e0fc0b5432
+        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:f9f31fdd956bdf16a279c003abff73897410057a7ff523a596a3c0052f3dde0e
         livenessProbe:
           httpGet:
             path: /livez
