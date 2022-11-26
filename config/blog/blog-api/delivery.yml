@@ -20,7 +20,7 @@ spec:
       annotations:
         autoscaling.knative.dev/minScale: "1"
         boot.spring.io/actuator: http://:8081/actuator
-        boot.spring.io/version: 3.0.0
+        boot.spring.io/version: 3.0.0-RC2
         conventions.carto.run/applied-conventions: |-
           inspect-image-convention/buildpacks
           inspect-image-convention/base-image
@@ -30,7 +30,6 @@ spec:
           spring-boot-convention/spring-boot-graceful-shutdown
           spring-boot-convention/spring-boot-web
           spring-boot-convention/spring-boot-actuator
-          spring-boot-convention/spring-boot-actuator-probes
           spring-boot-convention/service-intent-postgres
           appliveview-sample/app-live-view-appflavour-check
           appliveview-sample/app-live-view-connector-boot
@@ -38,15 +37,15 @@ spec:
           appliveview-sample/app-live-view-systemproperties
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: ghcr.io/making/build-service@sha256:15368fb1446fdd34f7198bff16fe569f980f30943dde59d1a83f6f79f087f21c
-          top_layer: sha256:a04a6215363d4f9dd8816f17f4a382d4861a1a2bd255910bd0554b8930987e3a
+          reference: ghcr.io/making/build-service@sha256:f8dbbf8fa654c1731e039671a6683b97d3e4a2cd8344e9e99409cad8ecaf5f95
+          top_layer: sha256:d10fcfd222e42332f995be30faf8856758b34ce68e864bf2206d87bf3f1a7108
         inspect-image.buildpacks.io/buildpacks: |-
           - id: tanzu-buildpacks/deprecation-warnings
             version: 0.0.2
           - id: paketo-buildpacks/ca-certificates
-            version: 3.5.0
+            version: 3.4.0
           - id: paketo-buildpacks/bellsoft-liberica
-            version: 9.10.0
+            version: 9.8.0
           - id: paketo-buildpacks/syft
             version: 1.10.1
           - id: paketo-buildpacks/maven
@@ -54,25 +53,25 @@ spec:
           - id: paketo-buildpacks/executable-jar
             version: 6.5.0
           - id: paketo-buildpacks/apache-tomcat
-            version: 7.9.0
+            version: 7.8.0
           - id: paketo-buildpacks/apache-tomee
-            version: 1.4.0
+            version: 1.3.0
           - id: paketo-buildpacks/liberty
-            version: 2.4.0
+            version: 2.2.0
           - id: paketo-buildpacks/dist-zip
             version: 5.4.0
           - id: paketo-buildpacks/spring-boot
-            version: 5.20.0
+            version: 5.19.0
           - id: paketo-buildpacks/image-labels
             version: 4.3.0
-        inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:15368fb1446fdd34f7198bff16fe569f980f30943dde59d1a83f6f79f087f21c
-        inspect-image.opencontainers.org/source: main/362eda7d73ed19263f1b1f18eb02b337160c37d1
+        inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:f8dbbf8fa654c1731e039671a6683b97d3e4a2cd8344e9e99409cad8ecaf5f95
+        inspect-image.opencontainers.org/source: main/f018addbb8d2f7178c12868fd5e73286370ddbf9
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-api;carto.run/v1alpha1
         prometheus.io/path: /actuator/prometheus
         prometheus.io/port: "8081"
         prometheus.io/scrape: "true"
-        services.conventions.apps.tanzu.vmware.com/postgres: postgresql/42.5.1
+        services.conventions.apps.tanzu.vmware.com/postgres: postgresql/42.5.0
       labels:
         apis.apps.tanzu.vmware.com/register-api: "true"
         app.kubernetes.io/component: run
@@ -109,16 +108,12 @@ spec:
             secretKeyRef:
               key: admin-password
               name: blog-config
-        - name: BLOG_GITHUB_CONTENTOWNER
-          value: making
-        - name: BLOG_GITHUB_CONTENTREPO
-          value: blog.ik.am
-        - name: BLOG_GITHUB_ACCESSTOKEN
+        - name: BLOG_GITHUB_ACCESS_TOKEN
           valueFrom:
             secretKeyRef:
               key: github-access-token
               name: blog-config
-        - name: BLOG_GITHUB_WEBHOOKSECRET
+        - name: BLOG_GITHUB_WEBHOOK_SECRET
           valueFrom:
             secretKeyRef:
               key: github-webhook-secret
@@ -138,21 +133,11 @@ spec:
           value: ${K_CONFIGURATION}
         - name: INFO_ENV_K_REVISION
           value: ${K_REVISION}
-        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:03d7775b6076264ace26fa4a1b136a24df5ac397770698eec0d001a3b63ac287
-        livenessProbe:
-          httpGet:
-            path: /livez
-            port: 8080
-            scheme: HTTP
+        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:ccbc2cd4d72a3b86a1bc16c8af5a94eb36e1f4b0a35820d93666f30a7dcefb51
         name: workload
         ports:
         - containerPort: 8080
           protocol: TCP
-        readinessProbe:
-          httpGet:
-            path: /readyz
-            port: 8080
-            scheme: HTTP
         resources:
           limits:
             memory: 320Mi
