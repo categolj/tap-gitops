@@ -32,7 +32,7 @@ spec:
         kapp.k14s.io/association: v1.0ba63a416d64128605b90e7ad1328294
     spec:
       containers:
-      - image: ghcr.io/making/supply-chain/blog-ui-blog@sha256:b1e7afad4d2ee715697d13f9283c4235eb43cb43a92fe5fc58a98d7567d2c65c
+      - image: ghcr.io/making/supply-chain/blog-ui-blog@sha256:7570f1408c43d723c7cc6621bbcb0f4f0fdd36940665e041ab844399fe25513f
         name: workload
         resources:
           limits:
