@@ -1,0 +1,151 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: note-api
+  annotations:
+    ootb.apps.tanzu.vmware.com/servicebinding-workload: "true"
+    ootb.apps.tanzu.vmware.com/apidescriptor-ref: "true"
+  labels:
+    app.kubernetes.io/part-of: note-api
+    apps.tanzu.vmware.com/has-tests: "true"
+    apps.tanzu.vmware.com/workload-type: web
+    kapp.k14s.io/app: "1670699973328735248"
+    kapp.k14s.io/association: v1.f2bab8a28f3035fb38c00b9be169bab1
+    app.kubernetes.io/component: run
+    carto.run/workload-name: note-api
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/minScale: "1"
+        boot.spring.io/actuator: http://:8081/actuator
+        boot.spring.io/version: 3.0.0
+        conventions.carto.run/applied-conventions: |-
+          inspect-image-convention/buildpacks
+          inspect-image-convention/base-image
+          inspect-image-convention/run-image
+          inspect-image-convention/source
+          spring-boot-convention/spring-boot
+          spring-boot-convention/spring-boot-graceful-shutdown
+          spring-boot-convention/spring-boot-web
+          spring-boot-convention/spring-boot-actuator
+          spring-boot-convention/spring-boot-actuator-probes
+          spring-boot-convention/service-intent-postgres
+          appliveview-sample/app-live-view-appflavour-check
+          appliveview-sample/app-live-view-connector-boot
+          appliveview-sample/app-live-view-appflavours-boot
+          appliveview-sample/app-live-view-systemproperties
+        developer.conventions/target-containers: workload
+        inspect-image.buildpacks.io/base-image: |-
+          reference: ghcr.io/making/build-service@sha256:f8dbbf8fa654c1731e039671a6683b97d3e4a2cd8344e9e99409cad8ecaf5f95
+          top_layer: sha256:d10fcfd222e42332f995be30faf8856758b34ce68e864bf2206d87bf3f1a7108
+        inspect-image.buildpacks.io/buildpacks: |-
+          - id: tanzu-buildpacks/deprecation-warnings
+            version: 0.0.2
+          - id: paketo-buildpacks/ca-certificates
+            version: 3.4.0
+          - id: paketo-buildpacks/bellsoft-liberica
+            version: 9.8.0
+          - id: paketo-buildpacks/syft
+            version: 1.10.1
+          - id: paketo-buildpacks/maven
+            version: 6.11.0
+          - id: paketo-buildpacks/executable-jar
+            version: 6.5.0
+          - id: paketo-buildpacks/apache-tomcat
+            version: 7.8.0
+          - id: paketo-buildpacks/liberty
+            version: 2.2.0
+          - id: paketo-buildpacks/dist-zip
+            version: 5.4.0
+          - id: paketo-buildpacks/spring-boot
+            version: 5.19.0
+          - id: paketo-buildpacks/image-labels
+            version: 4.3.0
+        inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:f8dbbf8fa654c1731e039671a6683b97d3e4a2cd8344e9e99409cad8ecaf5f95
+        inspect-image.opencontainers.org/source: main/c79cae2e15ef4c399fbee5aee880ebd9071352bc
+        kapp.k14s.io/disable-original: ""
+        kapp.k14s.io/identity: v1;note/carto.run/Workload/note-api;carto.run/v1alpha1
+        prometheus.io/path: /actuator/prometheus
+        prometheus.io/port: "8081"
+        prometheus.io/scrape: "true"
+        services.conventions.apps.tanzu.vmware.com/postgres: postgresql/42.5.1
+      labels:
+        app.kubernetes.io/component: run
+        app.kubernetes.io/part-of: note-api
+        apps.tanzu.vmware.com/has-tests: "true"
+        apps.tanzu.vmware.com/workload-type: web
+        carto.run/workload-name: note-api
+        conventions.apps.tanzu.vmware.com/framework: spring-boot
+        kapp.k14s.io/app: "1670699973328735248"
+        kapp.k14s.io/association: v1.f2bab8a28f3035fb38c00b9be169bab1
+        services.conventions.apps.tanzu.vmware.com/postgres: workload
+        tanzu.app.live.view: "true"
+        tanzu.app.live.view.application.actuator.port: "8081"
+        tanzu.app.live.view.application.flavours: spring-boot
+        tanzu.app.live.view.application.name: note-api
+    spec:
+      containers:
+      - env:
+        - name: JAVA_TOOL_OPTIONS
+          value: -XX:ReservedCodeCacheSize=32M -Xss512k -Dfile.encoding="UTF-8" -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details=always -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include=* -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s" -Duser.country="JP" -Duser.language="ja" -Duser.timezone="Asia/Tokyo"
+        - name: ENTRY_APIURL
+          value: ${k8s.bindings.note-config.entry-api-url}
+        - name: ENTRY_CLIENTID
+          value: ${k8s.bindings.note-config.entry-api-client-id}
+        - name: ENTRY_CLIENTSECRET
+          value: ${k8s.bindings.note-config.entry-api-client-secret}
+        - name: RSA_PRIVATEKEY
+          value: file:/bindings/note-config/rsa-private-key.pem
+        - name: RSA_PUBLICKEU
+          value: file:/bindings/note-config/rsa-public-key.pem
+        - name: BPL_JVM_THREAD_COUNT
+          value: "28"
+        - name: SPRING_APPLICATION_NAME
+          valueFrom:
+            secretKeyRef:
+              key: otel-trace-service-name
+              name: otel-config
+        - name: SPRING_DATASOURCE_HIKARI_DATASOURCEPROPERTIES_SSLFACTORY
+          value: org.postgresql.ssl.DefaultJavaSSLFactory
+        - name: MANAGEMENT_TRACING_PROPAGATION_TYPE
+          value: B3
+        - name: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
+          valueFrom:
+            secretKeyRef:
+              key: otel-trace-endpoint
+              name: otel-config
+        - name: MANAGEMENT_METRICS_TAGS_JAVA_VERSION
+          value: ${java.version}
+        - name: INFO_ENV_HOSTNAME
+          value: ${HOSTNAME}
+        - name: INFO_ENV_K_SERVICE
+          value: ${K_SERVICE}
+        - name: INFO_ENV_K_CONFIGURATION
+          value: ${K_CONFIGURATION}
+        - name: INFO_ENV_K_REVISION
+          value: ${K_REVISION}
+        image: ghcr.io/making/supply-chain/note-api-note@sha256:3f55f0c2c2f58d736f4755b186b2ad895099c32fc53cb25ae1ac5360e978a6ea
+        livenessProbe:
+          httpGet:
+            path: /livez
+            port: 8080
+            scheme: HTTP
+        name: workload
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 8080
+            scheme: HTTP
+        resources:
+          limits:
+            memory: 384Mi
+          requests:
+            memory: 384Mi
+        securityContext:
+          runAsUser: 1000
+      serviceAccountName: default
+
