@@ -18,8 +18,37 @@ spec:
     metadata:
       annotations:
         autoscaling.knative.dev/minScale: "1"
-        conventions.carto.run/applied-conventions: appliveview-sample/app-live-view-appflavour-check
+        conventions.carto.run/applied-conventions: |-
+          inspect-image-convention/buildpacks
+          inspect-image-convention/base-image
+          inspect-image-convention/run-image
+          inspect-image-convention/source
+          appliveview-sample/app-live-view-appflavour-check
         developer.conventions/target-containers: workload
+        inspect-image.buildpacks.io/base-image: |-
+          reference: ghcr.io/making/build-service@sha256:f8dbbf8fa654c1731e039671a6683b97d3e4a2cd8344e9e99409cad8ecaf5f95
+          top_layer: sha256:d10fcfd222e42332f995be30faf8856758b34ce68e864bf2206d87bf3f1a7108
+        inspect-image.buildpacks.io/buildpacks: |-
+          - id: tanzu-buildpacks/deprecation-warnings
+            version: 0.0.1
+          - id: paketo-buildpacks/ca-certificates
+            version: 3.4.0
+          - id: tanzu-buildpacks/node-engine-lite
+            version: 0.13.0
+          - id: tanzu-buildpacks/yarn-lite
+            version: 0.6.2
+          - id: tanzu-buildpacks/yarn-install
+            version: 0.7.4
+          - id: tanzu-buildpacks/node-module-bom-lite
+            version: 0.3.2
+          - id: tanzu-buildpacks/node-run-script
+            version: 0.3.3
+          - id: tanzu-buildpacks/yarn-start
+            version: 0.3.3
+          - id: paketo-buildpacks/image-labels
+            version: 4.3.0
+        inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:f8dbbf8fa654c1731e039671a6683b97d3e4a2cd8344e9e99409cad8ecaf5f95
+        inspect-image.opencontainers.org/source: main/fdc22672cc675f504f9f388fd82708cf6ce5c924
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-ui;carto.run/v1alpha1
       labels:
