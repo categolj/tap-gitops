@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/part-of: blog-ui
     apps.tanzu.vmware.com/has-tests: "true"
     apps.tanzu.vmware.com/workload-type: web
-    kapp.k14s.io/app: "1670145605721382407"
+    kapp.k14s.io/app: "1672995247146136642"
     kapp.k14s.io/association: v1.0ba63a416d64128605b90e7ad1328294
     app.kubernetes.io/component: run
     carto.run/workload-name: blog-ui
@@ -28,11 +28,11 @@ spec:
         apps.tanzu.vmware.com/has-tests: "true"
         apps.tanzu.vmware.com/workload-type: web
         carto.run/workload-name: blog-ui
-        kapp.k14s.io/app: "1670145605721382407"
+        kapp.k14s.io/app: "1672995247146136642"
         kapp.k14s.io/association: v1.0ba63a416d64128605b90e7ad1328294
     spec:
       containers:
-      - image: ghcr.io/making/supply-chain/blog-ui-blog@sha256:eeb65dd68c095d0226467cb831a1232d1b1fb0fac708db9d087e33e8f4b44ca3
+      - image: ghcr.io/making/supply-chain/blog-ui-blog@sha256:51aaee028d533e9ceaf2fde93a175115b68152131add5475d44976ba0f3ab22f
         name: workload
         resources:
           limits:
