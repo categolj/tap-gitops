@@ -14,7 +14,7 @@ metadata:
     app.kubernetes.io/part-of: blog-api
     apps.tanzu.vmware.com/has-tests: "true"
     apps.tanzu.vmware.com/workload-type: web
-    kapp.k14s.io/app: "1673001989096365132"
+    kapp.k14s.io/app: "1673062250001482428"
     kapp.k14s.io/association: v1.eae2bf111fb39e9481c024f683deba7a
     app.kubernetes.io/component: run
     carto.run/workload-name: blog-api
@@ -45,7 +45,7 @@ metadata:
     app.kubernetes.io/part-of: blog-api
     apps.tanzu.vmware.com/has-tests: "true"
     apps.tanzu.vmware.com/workload-type: web
-    kapp.k14s.io/app: "1673001989096365132"
+    kapp.k14s.io/app: "1673062250001482428"
     kapp.k14s.io/association: v1.eae2bf111fb39e9481c024f683deba7a
     app.kubernetes.io/component: run
     carto.run/workload-name: blog-api
