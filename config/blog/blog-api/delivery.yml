@@ -65,7 +65,7 @@ spec:
           - id: paketo-buildpacks/image-labels
             version: 4.3.0
         inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:87d92d68b7f5c4c22da6985947e585dc95346898adf82c2c3708dd0ef7a9bef3
-        inspect-image.opencontainers.org/source: main/ee4bd11bf7be74b6add4db041e15591e75023f4c
+        inspect-image.opencontainers.org/source: main/1cc65bc489a150b1175416b3ad42c75d0ca2a54d
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-api;carto.run/v1alpha1
         prometheus.io/path: /actuator/prometheus
@@ -168,7 +168,7 @@ spec:
           value: ${K_CONFIGURATION}
         - name: INFO_ENV_K_REVISION
           value: ${K_REVISION}
-        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:56f4b3473fc86f78036a1de5123cbbbc4a2e13c4c3d23f114f676bc70cfdc6be
+        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:2d6b300942a3193a8f3aa3239ce0e285256b13cefcf06b7b5a6a852589fdabe7
         livenessProbe:
           httpGet:
             path: /livez
