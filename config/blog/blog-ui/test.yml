@@ -1,0 +1,1329 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hello
+data: 
+  values: config:
+  metadata:
+    annotations:
+      autoscaling.knative.dev/minScale: "1"
+      conventions.carto.run/applied-conventions: |-
+        inspect-image-convention/buildpacks
+        inspect-image-convention/base-image
+        inspect-image-convention/run-image
+        inspect-image-convention/source
+        spring-boot-convention/auto-configure-actuators-check
+        spring-boot-convention/app-live-view-appflavour-check
+        appliveview-sample/app-live-view-appflavour-check
+      developer.conventions/target-containers: workload
+      inspect-image.buildpacks.io/base-image: |-
+        reference: ghcr.io/making/build-service@sha256:87d92d68b7f5c4c22da6985947e585dc95346898adf82c2c3708dd0ef7a9bef3
+        top_layer: sha256:bb05b721056f3f86cca3e0f3486781718d8a9faa8bc2b4d7960487cd6b03c844
+      inspect-image.buildpacks.io/buildpacks: |-
+        - id: tanzu-buildpacks/deprecation-warnings
+          version: 0.0.2
+        - id: paketo-buildpacks/ca-certificates
+          version: 3.4.0
+        - id: tanzu-buildpacks/node-engine-lite
+          version: 0.16.0
+        - id: tanzu-buildpacks/yarn-lite
+          version: 0.6.5
+        - id: tanzu-buildpacks/yarn-install
+          version: 0.7.9
+        - id: tanzu-buildpacks/node-module-bom-lite
+          version: 0.3.3
+        - id: tanzu-buildpacks/node-run-script
+          version: 0.4.2
+        - id: tanzu-buildpacks/yarn-start
+          version: 0.3.6
+        - id: paketo-buildpacks/image-labels
+          version: 4.3.0
+      inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:87d92d68b7f5c4c22da6985947e585dc95346898adf82c2c3708dd0ef7a9bef3
+      inspect-image.opencontainers.org/source: main/5604f8d5ad092859e4dc3cbc80bfa543d4ab7fb0
+      kapp.k14s.io/disable-original: ""
+      kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-ui;carto.run/v1alpha1
+    labels:
+      app.kubernetes.io/component: run
+      app.kubernetes.io/part-of: blog-ui
+      apps.tanzu.vmware.com/has-tests: "true"
+      apps.tanzu.vmware.com/workload-type: web
+      carto.run/workload-name: blog-ui
+      kapp.k14s.io/app: "1672995247146136642"
+      kapp.k14s.io/association: v1.0ba63a416d64128605b90e7ad1328294
+  spec:
+    containers:
+    - image: ghcr.io/making/supply-chain/blog-ui-blog@sha256:c1ec71dc1a836cad64a5912ad649f7a95f7a37fe1e72299060615785102b3fc1
+      name: workload
+      resources:
+        limits:
+          memory: 256Mi
+        requests:
+          memory: 256Mi
+      securityContext:
+        runAsUser: 1000
+    serviceAccountName: default
+deliverable:
+  apiVersion: carto.run/v1alpha1
+  kind: Workload
+  metadata:
+    annotations:
+      kapp.k14s.io/disable-original: ""
+      kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-ui;carto.run/v1alpha1
+    creationTimestamp: "2023-01-07T03:30:50Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/part-of: blog-ui
+      apps.tanzu.vmware.com/has-tests: "true"
+      apps.tanzu.vmware.com/workload-type: web
+      kapp.k14s.io/app: "1672995247146136642"
+      kapp.k14s.io/association: v1.0ba63a416d64128605b90e7ad1328294
+    managedFields:
+    - apiVersion: carto.run/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kapp.k14s.io/disable-original: {}
+            f:kapp.k14s.io/identity: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/part-of: {}
+            f:apps.tanzu.vmware.com/has-tests: {}
+            f:apps.tanzu.vmware.com/workload-type: {}
+            f:kapp.k14s.io/app: {}
+            f:kapp.k14s.io/association: {}
+        f:spec:
+          .: {}
+          f:build:
+            .: {}
+            f:env: {}
+          f:params: {}
+          f:resources:
+            .: {}
+            f:limits:
+              .: {}
+              f:memory: {}
+            f:requests:
+              .: {}
+              f:memory: {}
+          f:source:
+            .: {}
+            f:git:
+              .: {}
+              f:ref:
+                .: {}
+                f:branch: {}
+              f:url: {}
+      manager: kapp
+      operation: Update
+      time: "2023-01-07T03:30:50Z"
+    - apiVersion: carto.run/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          .: {}
+          f:conditions: {}
+          f:observedGeneration: {}
+          f:resources: {}
+          f:supplyChainRef:
+            .: {}
+            f:kind: {}
+            f:name: {}
+      manager: cartographer
+      operation: Update
+      subresource: status
+      time: "2023-01-07T03:30:53Z"
+    name: blog-ui
+    namespace: blog
+    resourceVersion: "21994562"
+    uid: 8b23fcdb-dc5b-420e-9e48-f21a9d25f321
+  spec:
+    build:
+      env:
+      - name: NEXT_PUBLIC_APP_BLOG_API
+        value: auto
+      - name: BP_NODE_RUN_SCRIPTS
+        value: build
+      - name: BP_NODE_OPTIMIZE_MEMORY
+        value: "true"
+      - name: NODE_ENV
+        value: production
+    params:
+    - name: testing_pipeline_matching_labels
+      value:
+        apps.tanzu.vmware.com/language: node
+        apps.tanzu.vmware.com/pipeline: test
+    - name: testing_pipeline_params
+      value:
+        slack-test-failure-message: "\U0001F6A8 [blog-ui] Test Failed!\nhttps://tap-gui.view.lime.maki.lol/supply-chain/lime-build/blog/blog-ui/source-tester\n"
+        slack-webhook-secret: slack-webhook
+    - name: annotations
+      value:
+        autoscaling.knative.dev/minScale: "1"
+    - name: gitops_branch
+      value: lime
+    - name: gitops_ssh_secret
+      value: git-basic
+    - name: gitops_user_email
+      value: makingx+bot@gmail.com
+    - name: gitops_user_name
+      value: making-bot
+    resources:
+      limits:
+        memory: 256Mi
+      requests:
+        memory: 256Mi
+    source:
+      git:
+        ref:
+          branch: main
+        url: https://github.com/categolj/blog-ui
+  status:
+    conditions:
+    - lastTransitionTime: "2023-01-07T03:30:51Z"
+      message: ""
+      reason: Ready
+      status: "True"
+      type: SupplyChainReady
+    - lastTransitionTime: "2023-01-15T08:30:32Z"
+      message: ""
+      reason: ResourceSubmissionComplete
+      status: "True"
+      type: ResourcesSubmitted
+    - lastTransitionTime: "2023-01-15T08:30:32Z"
+      message: ""
+      reason: HealthyConditionRule
+      status: "True"
+      type: ResourcesHealthy
+    - lastTransitionTime: "2023-01-15T08:30:32Z"
+      message: ""
+      reason: Ready
+      status: "True"
+      type: Ready
+    observedGeneration: 1
+    resources:
+    - conditions:
+      - lastTransitionTime: "2023-01-08T09:19:15Z"
+        message: ""
+        reason: ResourceSubmissionComplete
+        status: "True"
+        type: ResourceSubmitted
+      - lastTransitionTime: "2023-01-12T06:18:32Z"
+        message: stored artifact for revision 'main/5604f8d5ad092859e4dc3cbc80bfa543d4ab7fb0'
+        reason: ReadyCondition
+        status: "True"
+        type: Healthy
+      - lastTransitionTime: "2023-01-08T09:19:15Z"
+        message: ""
+        reason: Ready
+        status: "True"
+        type: Ready
+      name: source-provider
+      outputs:
+      - digest: sha256:3e465cba8293a1b981cdc16de1f321a6858c6fe7c688506ca54fe19b6fe1decf
+        lastTransitionTime: "2023-01-12T06:18:32Z"
+        name: url
+        preview: |
+          http://fluxcd-source-controller.flux-system.svc.cluster.local./gitrepository/blog/blog-ui/5604f8d5ad092859e4dc3cbc80bfa543d4ab7fb0.tar.gz
+      - digest: sha256:9280e22030f8bb4de399ca20f11243bfbbaed4b5301e6a41ee6384404f46cc22
+        lastTransitionTime: "2023-01-12T06:18:32Z"
+        name: revision
+        preview: |
+          main/5604f8d5ad092859e4dc3cbc80bfa543d4ab7fb0
+      stampedRef:
+        apiVersion: source.toolkit.fluxcd.io/v1beta1
+        kind: GitRepository
+        name: blog-ui
+        namespace: blog
+        resource: gitrepositories.source.toolkit.fluxcd.io
+      templateRef:
+        apiVersion: carto.run/v1alpha1
+        kind: ClusterSourceTemplate
+        name: source-template
+    - conditions:
+      - lastTransitionTime: "2023-01-08T09:20:53Z"
+        message: ""
+        reason: ResourceSubmissionComplete
+        status: "True"
+        type: ResourceSubmitted
+      - lastTransitionTime: "2023-01-15T07:43:04Z"
+        message: ""
+        reason: ReadyCondition
+        status: "True"
+        type: Healthy
+      - lastTransitionTime: "2023-01-15T07:43:04Z"
+        message: ""
+        reason: Ready
+        status: "True"
+        type: Ready
+      inputs:
+      - name: source-provider
+      name: source-tester
+      outputs:
+      - digest: sha256:3e465cba8293a1b981cdc16de1f321a6858c6fe7c688506ca54fe19b6fe1decf
+        lastTransitionTime: "2023-01-12T06:19:56Z"
+        name: url
+        preview: |
+          http://fluxcd-source-controller.flux-system.svc.cluster.local./gitrepository/blog/blog-ui/5604f8d5ad092859e4dc3cbc80bfa543d4ab7fb0.tar.gz
+      - digest: sha256:9280e22030f8bb4de399ca20f11243bfbbaed4b5301e6a41ee6384404f46cc22
+        lastTransitionTime: "2023-01-12T06:19:56Z"
+        name: revision
+        preview: |
+          main/5604f8d5ad092859e4dc3cbc80bfa543d4ab7fb0
+      stampedRef:
+        apiVersion: carto.run/v1alpha1
+        kind: Runnable
+        name: blog-ui
+        namespace: blog
+        resource: runnables.carto.run
+      templateRef:
+        apiVersion: carto.run/v1alpha1
+        kind: ClusterSourceTemplate
+        name: testing-pipeline
+    - conditions:
+      - lastTransitionTime: "2023-01-08T09:23:08Z"
+        message: ""
+        reason: ResourceSubmissionComplete
+        status: "True"
+        type: ResourceSubmitted
+      - lastTransitionTime: "2023-01-15T07:49:35Z"
+        message: 'condition status: True, message: '
+        reason: MatchedCondition
+        status: "True"
+        type: Healthy
+      - lastTransitionTime: "2023-01-15T07:49:35Z"
+        message: ""
+        reason: Ready
+        status: "True"
+        type: Ready
+      inputs:
+      - name: source-tester
+      name: image-provider
+      outputs:
+      - digest: sha256:8762e55840af3ac1b09c0ba2c217fc642072a8ce17d331363229f767c427a18f
+        lastTransitionTime: "2023-01-15T07:49:35Z"
+        name: image
+        preview: |
+          ghcr.io/making/supply-chain/blog-ui-blog@sha256:c1ec71dc1a836cad64a5912ad649f7a95f7a37fe1e72299060615785102b3fc1
+      stampedRef:
+        apiVersion: kpack.io/v1alpha2
+        kind: Image
+        name: blog-ui
+        namespace: blog
+        resource: images.kpack.io
+      templateRef:
+        apiVersion: carto.run/v1alpha1
+        kind: ClusterImageTemplate
+        name: kpack-template
+    - conditions:
+      - lastTransitionTime: "2023-01-15T08:30:31Z"
+        message: ""
+        reason: ResourceSubmissionComplete
+        status: "True"
+        type: ResourceSubmitted
+      - lastTransitionTime: "2023-01-15T08:30:31Z"
+        message: 'condition status: True, message: Scan completed. Found 21 CVE(s): 6 High, 4 Medium, 11 Low'
+        reason: MatchedCondition
+        status: "True"
+        type: Healthy
+      - lastTransitionTime: "2023-01-15T08:30:31Z"
+        message: ""
+        reason: Ready
+        status: "True"
+        type: Ready
+      inputs:
+      - name: image-provider
+      name: image-scanner
+      outputs:
+      - digest: sha256:8762e55840af3ac1b09c0ba2c217fc642072a8ce17d331363229f767c427a18f
+        lastTransitionTime: "2023-01-15T08:30:31Z"
+        name: image
+        preview: |
+          ghcr.io/making/supply-chain/blog-ui-blog@sha256:c1ec71dc1a836cad64a5912ad649f7a95f7a37fe1e72299060615785102b3fc1
+      stampedRef:
+        apiVersion: scanning.apps.tanzu.vmware.com/v1beta1
+        kind: ImageScan
+        name: blog-ui
+        namespace: blog
+        resource: imagescans.scanning.apps.tanzu.vmware.com
+      templateRef:
+        apiVersion: carto.run/v1alpha1
+        kind: ClusterImageTemplate
+        name: image-scanner-template
+    - conditions:
+      - lastTransitionTime: "2023-01-15T08:30:31Z"
+        message: ""
+        reason: ResourceSubmissionComplete
+        status: "True"
+        type: ResourceSubmitted
+      - lastTransitionTime: "2023-01-08T09:24:13Z"
+        message: ""
+        reason: ReadyCondition
+        status: "True"
+        type: Healthy
+      - lastTransitionTime: "2023-01-15T08:30:31Z"
+        message: ""
+        reason: Ready
+        status: "True"
+        type: Ready
+      inputs:
+      - name: image-scanner
+      name: config-provider
+      outputs:
+      - digest: sha256:814ea429df65b2596335754406c638b7840ee5fb8c76e82c9b34263a1a386510
+        lastTransitionTime: "2023-01-15T07:51:09Z"
+        name: config
+        preview: |
+          metadata:
+              annotations:
+                  autoscaling.knative.dev/minScale: "1"
+                  conventions.carto.run/applied-conventions: |-
+                      inspect-image-convention/buildpacks
+                      inspect-image-convention/base-image
+                      inspect-image-convention/run-image
+                      inspect-image-convention/source
+                      spring-boot-convention/auto-configure-actuators-check
+                      spring-boot-convention/app-live-view-appflavour-check
+                      appliveview-sample/app-live-view-appflavour-check
+                  developer.conventions/target-containers: workload
+                  inspect-image.buildpacks.io/base-image: |-
+                      reference: ghcr.io/making/build-service@sha256:87d92d68b7f5c4c22da6985947e585dc95346898adf82c2c3708dd0ef7a9bef3
+                      top_layer: sha256:bb05b721056f3f86cca3e0f3486781718d8a9faa8bc2b4d7960487cd6b03c844
+                  inspect-image.buildpacks.io/buildpacks: |-
+                      - id: tanzu-buildpacks/deprecation-warnings
+                        version: 0.0.2
+                      - id: paketo-buildpacks/ca-certificates
+      stampedRef:
+        apiVersion: conventions.carto.run/v1alpha1
+        kind: PodIntent
+        name: blog-ui
+        namespace: blog
+        resource: podintents.conventions.carto.run
+      templateRef:
+        apiVersion: carto.run/v1alpha1
+        kind: ClusterConfigTemplate
+        name: convention-template
+    - conditions:
+      - lastTransitionTime: "2023-01-15T08:30:31Z"
+        message: ""
+        reason: ResourceSubmissionComplete
+        status: "True"
+        type: ResourceSubmitted
+      - lastTransitionTime: "2023-01-07T03:30:53Z"
+        message: ""
+        reason: AlwaysHealthy
+        status: "True"
+        type: Healthy
+      - lastTransitionTime: "2023-01-15T08:30:31Z"
+        message: ""
+        reason: Ready
+        status: "True"
+        type: Ready
+      inputs:
+      - name: config-provider
+      name: app-config
+      outputs:
+      - digest: sha256:7b90d637b20c5eb1e271c3ccba34b7847c35b2df1d9d64f817983b95be0f28da
+        lastTransitionTime: "2023-02-01T09:45:43Z"
+        name: config
+        preview: |-
+          delivery.yml: |
+              apiVersion: serving.knative.dev/v1
+              kind: Service
+              metadata:
+                name: blog-ui
+                annotations:
+                  ootb.apps.tanzu.vmware.com/servicebinding-workload: "true"
+                  ootb.apps.tanzu.vmware.com/apidescriptor-ref: "true"
+                labels:
+                  app.kubernetes.io/part-of: blog-ui
+                  apps.tanzu.vmware.com/has-tests: "true"
+                  apps.tanzu.vmware.com/workload-type: web
+                  kapp.k14s.io/app: "1672995247146136642"
+                  kapp.k14s.io/association: v1.0ba63a416d64128605b90e7ad1328294
+                  app.kubernetes.io/component: run
+                  carto.run/workload-name: blog-ui
+              spec:
+                template:
+                  metadata:
+                    annotations:
+                      autoscaling.knative.dev/minScale: "1"
+                      conventions.carto.run/applied-conventions: |-
+                        inspect-image-convention/buildpacks
+                        inspect-image-convention/base-image
+                        inspect-image-convention/run-image
+                        inspect-image-convention/source
+                        spring-boot-convention/auto-conf
+      stampedRef:
+        apiVersion: v1
+        kind: ConfigMap
+        name: blog-ui
+        namespace: blog
+        resource: configmaps
+      templateRef:
+        apiVersion: carto.run/v1alpha1
+        kind: ClusterConfigTemplate
+        name: config-template
+    - conditions:
+      - lastTransitionTime: "2023-01-15T08:30:31Z"
+        message: ""
+        reason: ResourceSubmissionComplete
+        status: "True"
+        type: ResourceSubmitted
+      - lastTransitionTime: "2023-01-07T03:30:53Z"
+        message: ""
+        reason: AlwaysHealthy
+        status: "True"
+        type: Healthy
+      - lastTransitionTime: "2023-01-15T08:30:31Z"
+        message: ""
+        reason: Ready
+        status: "True"
+        type: Ready
+      inputs:
+      - name: app-config
+      name: service-bindings
+      outputs:
+      - digest: sha256:7b90d637b20c5eb1e271c3ccba34b7847c35b2df1d9d64f817983b95be0f28da
+        lastTransitionTime: "2023-02-01T09:45:44Z"
+        name: config
+        preview: |-
+          delivery.yml: |
+              apiVersion: serving.knative.dev/v1
+              kind: Service
+              metadata:
+                name: blog-ui
+                annotations:
+                  ootb.apps.tanzu.vmware.com/servicebinding-workload: "true"
+                  ootb.apps.tanzu.vmware.com/apidescriptor-ref: "true"
+                labels:
+                  app.kubernetes.io/part-of: blog-ui
+                  apps.tanzu.vmware.com/has-tests: "true"
+                  apps.tanzu.vmware.com/workload-type: web
+                  kapp.k14s.io/app: "1672995247146136642"
+                  kapp.k14s.io/association: v1.0ba63a416d64128605b90e7ad1328294
+                  app.kubernetes.io/component: run
+                  carto.run/workload-name: blog-ui
+              spec:
+                template:
+                  metadata:
+                    annotations:
+                      autoscaling.knative.dev/minScale: "1"
+                      conventions.carto.run/applied-conventions: |-
+                        inspect-image-convention/buildpacks
+                        inspect-image-convention/base-image
+                        inspect-image-convention/run-image
+                        inspect-image-convention/source
+                        spring-boot-convention/auto-conf
+      stampedRef:
+        apiVersion: v1
+        kind: ConfigMap
+        name: blog-ui-with-claims
+        namespace: blog
+        resource: configmaps
+      templateRef:
+        apiVersion: carto.run/v1alpha1
+        kind: ClusterConfigTemplate
+        name: service-bindings
+    - conditions:
+      - lastTransitionTime: "2023-01-15T08:30:31Z"
+        message: ""
+        reason: ResourceSubmissionComplete
+        status: "True"
+        type: ResourceSubmitted
+      - lastTransitionTime: "2023-01-07T03:30:53Z"
+        message: ""
+        reason: AlwaysHealthy
+        status: "True"
+        type: Healthy
+      - lastTransitionTime: "2023-01-15T08:30:31Z"
+        message: ""
+        reason: Ready
+        status: "True"
+        type: Ready
+      inputs:
+      - name: service-bindings
+      name: api-descriptors
+      outputs:
+      - digest: sha256:7b90d637b20c5eb1e271c3ccba34b7847c35b2df1d9d64f817983b95be0f28da
+        lastTransitionTime: "2023-02-01T09:45:44Z"
+        name: config
+        preview: |-
+          delivery.yml: |
+              apiVersion: serving.knative.dev/v1
+              kind: Service
+              metadata:
+                name: blog-ui
+                annotations:
+                  ootb.apps.tanzu.vmware.com/servicebinding-workload: "true"
+                  ootb.apps.tanzu.vmware.com/apidescriptor-ref: "true"
+                labels:
+                  app.kubernetes.io/part-of: blog-ui
+                  apps.tanzu.vmware.com/has-tests: "true"
+                  apps.tanzu.vmware.com/workload-type: web
+                  kapp.k14s.io/app: "1672995247146136642"
+                  kapp.k14s.io/association: v1.0ba63a416d64128605b90e7ad1328294
+                  app.kubernetes.io/component: run
+                  carto.run/workload-name: blog-ui
+              spec:
+                template:
+                  metadata:
+                    annotations:
+                      autoscaling.knative.dev/minScale: "1"
+                      conventions.carto.run/applied-conventions: |-
+                        inspect-image-convention/buildpacks
+                        inspect-image-convention/base-image
+                        inspect-image-convention/run-image
+                        inspect-image-convention/source
+                        spring-boot-convention/auto-conf
+      stampedRef:
+        apiVersion: v1
+        kind: ConfigMap
+        name: blog-ui-with-api-descriptors
+        namespace: blog
+        resource: configmaps
+      templateRef:
+        apiVersion: carto.run/v1alpha1
+        kind: ClusterConfigTemplate
+        name: api-descriptors
+    - conditions:
+      - lastTransitionTime: "2023-01-15T08:30:31Z"
+        message: ""
+        reason: ResourceSubmissionComplete
+        status: "True"
+        type: ResourceSubmitted
+      - lastTransitionTime: "2023-01-08T09:24:13Z"
+        message: ""
+        reason: AlwaysHealthy
+        status: "True"
+        type: Healthy
+      - lastTransitionTime: "2023-01-15T08:30:31Z"
+        message: ""
+        reason: Ready
+        status: "True"
+        type: Ready
+      inputs:
+      - name: api-descriptors
+      name: config-writer
+      stampedRef:
+        apiVersion: carto.run/v1alpha1
+        kind: Runnable
+        name: blog-ui-config-writer-pull-requester
+        namespace: blog
+        resource: runnables.carto.run
+      templateRef:
+        apiVersion: carto.run/v1alpha1
+        kind: ClusterTemplate
+        name: config-writer-and-pull-requester-template
+    - conditions:
+      - lastTransitionTime: "2023-01-07T03:30:53Z"
+        message: ""
+        reason: ResourceSubmissionComplete
+        status: "True"
+        type: ResourceSubmitted
+      - lastTransitionTime: "2023-01-07T03:30:53Z"
+        message: ""
+        reason: AlwaysHealthy
+        status: "True"
+        type: Healthy
+      - lastTransitionTime: "2023-01-07T03:30:53Z"
+        message: ""
+        reason: Ready
+        status: "True"
+        type: Ready
+      name: deliverable
+      stampedRef:
+        apiVersion: v1
+        kind: ConfigMap
+        name: blog-ui-deliverable
+        namespace: blog
+        resource: configmaps
+      templateRef:
+        apiVersion: carto.run/v1alpha1
+        kind: ClusterTemplate
+        name: external-deliverable-template
+    supplyChainRef:
+      kind: ClusterSupplyChain
+      name: source-test-scan-to-url
+deployment: null
+labels:
+  carto.run/cluster-template-name: ""
+  carto.run/resource-name: app-config
+  carto.run/supply-chain-name: source-test-scan-to-url
+  carto.run/template-kind: ClusterConfigTemplate
+  carto.run/template-lifecycle: mutable
+  carto.run/workload-name: blog-ui
+  carto.run/workload-namespace: blog
+workload:
+  apiVersion: carto.run/v1alpha1
+  kind: Workload
+  metadata:
+    annotations:
+      kapp.k14s.io/disable-original: ""
+      kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-ui;carto.run/v1alpha1
+    creationTimestamp: "2023-01-07T03:30:50Z"
+    generation: 1
+    labels:
+      app.kubernetes.io/part-of: blog-ui
+      apps.tanzu.vmware.com/has-tests: "true"
+      apps.tanzu.vmware.com/workload-type: web
+      kapp.k14s.io/app: "1672995247146136642"
+      kapp.k14s.io/association: v1.0ba63a416d64128605b90e7ad1328294
+    managedFields:
+    - apiVersion: carto.run/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:kapp.k14s.io/disable-original: {}
+            f:kapp.k14s.io/identity: {}
+          f:labels:
+            .: {}
+            f:app.kubernetes.io/part-of: {}
+            f:apps.tanzu.vmware.com/has-tests: {}
+            f:apps.tanzu.vmware.com/workload-type: {}
+            f:kapp.k14s.io/app: {}
+            f:kapp.k14s.io/association: {}
+        f:spec:
+          .: {}
+          f:build:
+            .: {}
+            f:env: {}
+          f:params: {}
+          f:resources:
+            .: {}
+            f:limits:
+              .: {}
+              f:memory: {}
+            f:requests:
+              .: {}
+              f:memory: {}
+          f:source:
+            .: {}
+            f:git:
+              .: {}
+              f:ref:
+                .: {}
+                f:branch: {}
+              f:url: {}
+      manager: kapp
+      operation: Update
+      time: "2023-01-07T03:30:50Z"
+    - apiVersion: carto.run/v1alpha1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          .: {}
+          f:conditions: {}
+          f:observedGeneration: {}
+          f:resources: {}
+          f:supplyChainRef:
+            .: {}
+            f:kind: {}
+            f:name: {}
+      manager: cartographer
+      operation: Update
+      subresource: status
+      time: "2023-01-07T03:30:53Z"
+    name: blog-ui
+    namespace: blog
+    resourceVersion: "21994562"
+    uid: 8b23fcdb-dc5b-420e-9e48-f21a9d25f321
+  spec:
+    build:
+      env:
+      - name: NEXT_PUBLIC_APP_BLOG_API
+        value: auto
+      - name: BP_NODE_RUN_SCRIPTS
+        value: build
+      - name: BP_NODE_OPTIMIZE_MEMORY
+        value: "true"
+      - name: NODE_ENV
+        value: production
+    params:
+    - name: testing_pipeline_matching_labels
+      value:
+        apps.tanzu.vmware.com/language: node
+        apps.tanzu.vmware.com/pipeline: test
+    - name: testing_pipeline_params
+      value:
+        slack-test-failure-message: "\U0001F6A8 [blog-ui] Test Failed!\nhttps://tap-gui.view.lime.maki.lol/supply-chain/lime-build/blog/blog-ui/source-tester\n"
+        slack-webhook-secret: slack-webhook
+    - name: annotations
+      value:
+        autoscaling.knative.dev/minScale: "1"
+    - name: gitops_branch
+      value: lime
+    - name: gitops_ssh_secret
+      value: git-basic
+    - name: gitops_user_email
+      value: makingx+bot@gmail.com
+    - name: gitops_user_name
+      value: making-bot
+    resources:
+      limits:
+        memory: 256Mi
+      requests:
+        memory: 256Mi
+    source:
+      git:
+        ref:
+          branch: main
+        url: https://github.com/categolj/blog-ui
+  status:
+    conditions:
+    - lastTransitionTime: "2023-01-07T03:30:51Z"
+      message: ""
+      reason: Ready
+      status: "True"
+      type: SupplyChainReady
+    - lastTransitionTime: "2023-01-15T08:30:32Z"
+      message: ""
+      reason: ResourceSubmissionComplete
+      status: "True"
+      type: ResourcesSubmitted
+    - lastTransitionTime: "2023-01-15T08:30:32Z"
+      message: ""
+      reason: HealthyConditionRule
+      status: "True"
+      type: ResourcesHealthy
+    - lastTransitionTime: "2023-01-15T08:30:32Z"
+      message: ""
+      reason: Ready
+      status: "True"
+      type: Ready
+    observedGeneration: 1
+    resources:
+    - conditions:
+      - lastTransitionTime: "2023-01-08T09:19:15Z"
+        message: ""
+        reason: ResourceSubmissionComplete
+        status: "True"
+        type: ResourceSubmitted
+      - lastTransitionTime: "2023-01-12T06:18:32Z"
+        message: stored artifact for revision 'main/5604f8d5ad092859e4dc3cbc80bfa543d4ab7fb0'
+        reason: ReadyCondition
+        status: "True"
+        type: Healthy
+      - lastTransitionTime: "2023-01-08T09:19:15Z"
+        message: ""
+        reason: Ready
+        status: "True"
+        type: Ready
+      name: source-provider
+      outputs:
+      - digest: sha256:3e465cba8293a1b981cdc16de1f321a6858c6fe7c688506ca54fe19b6fe1decf
+        lastTransitionTime: "2023-01-12T06:18:32Z"
+        name: url
+        preview: |
+          http://fluxcd-source-controller.flux-system.svc.cluster.local./gitrepository/blog/blog-ui/5604f8d5ad092859e4dc3cbc80bfa543d4ab7fb0.tar.gz
+      - digest: sha256:9280e22030f8bb4de399ca20f11243bfbbaed4b5301e6a41ee6384404f46cc22
+        lastTransitionTime: "2023-01-12T06:18:32Z"
+        name: revision
+        preview: |
+          main/5604f8d5ad092859e4dc3cbc80bfa543d4ab7fb0
+      stampedRef:
+        apiVersion: source.toolkit.fluxcd.io/v1beta1
+        kind: GitRepository
+        name: blog-ui
+        namespace: blog
+        resource: gitrepositories.source.toolkit.fluxcd.io
+      templateRef:
+        apiVersion: carto.run/v1alpha1
+        kind: ClusterSourceTemplate
+        name: source-template
+    - conditions:
+      - lastTransitionTime: "2023-01-08T09:20:53Z"
+        message: ""
+        reason: ResourceSubmissionComplete
+        status: "True"
+        type: ResourceSubmitted
+      - lastTransitionTime: "2023-01-15T07:43:04Z"
+        message: ""
+        reason: ReadyCondition
+        status: "True"
+        type: Healthy
+      - lastTransitionTime: "2023-01-15T07:43:04Z"
+        message: ""
+        reason: Ready
+        status: "True"
+        type: Ready
+      inputs:
+      - name: source-provider
+      name: source-tester
+      outputs:
+      - digest: sha256:3e465cba8293a1b981cdc16de1f321a6858c6fe7c688506ca54fe19b6fe1decf
+        lastTransitionTime: "2023-01-12T06:19:56Z"
+        name: url
+        preview: |
+          http://fluxcd-source-controller.flux-system.svc.cluster.local./gitrepository/blog/blog-ui/5604f8d5ad092859e4dc3cbc80bfa543d4ab7fb0.tar.gz
+      - digest: sha256:9280e22030f8bb4de399ca20f11243bfbbaed4b5301e6a41ee6384404f46cc22
+        lastTransitionTime: "2023-01-12T06:19:56Z"
+        name: revision
+        preview: |
+          main/5604f8d5ad092859e4dc3cbc80bfa543d4ab7fb0
+      stampedRef:
+        apiVersion: carto.run/v1alpha1
+        kind: Runnable
+        name: blog-ui
+        namespace: blog
+        resource: runnables.carto.run
+      templateRef:
+        apiVersion: carto.run/v1alpha1
+        kind: ClusterSourceTemplate
+        name: testing-pipeline
+    - conditions:
+      - lastTransitionTime: "2023-01-08T09:23:08Z"
+        message: ""
+        reason: ResourceSubmissionComplete
+        status: "True"
+        type: ResourceSubmitted
+      - lastTransitionTime: "2023-01-15T07:49:35Z"
+        message: 'condition status: True, message: '
+        reason: MatchedCondition
+        status: "True"
+        type: Healthy
+      - lastTransitionTime: "2023-01-15T07:49:35Z"
+        message: ""
+        reason: Ready
+        status: "True"
+        type: Ready
+      inputs:
+      - name: source-tester
+      name: image-provider
+      outputs:
+      - digest: sha256:8762e55840af3ac1b09c0ba2c217fc642072a8ce17d331363229f767c427a18f
+        lastTransitionTime: "2023-01-15T07:49:35Z"
+        name: image
+        preview: |
+          ghcr.io/making/supply-chain/blog-ui-blog@sha256:c1ec71dc1a836cad64a5912ad649f7a95f7a37fe1e72299060615785102b3fc1
+      stampedRef:
+        apiVersion: kpack.io/v1alpha2
+        kind: Image
+        name: blog-ui
+        namespace: blog
+        resource: images.kpack.io
+      templateRef:
+        apiVersion: carto.run/v1alpha1
+        kind: ClusterImageTemplate
+        name: kpack-template
+    - conditions:
+      - lastTransitionTime: "2023-01-15T08:30:31Z"
+        message: ""
+        reason: ResourceSubmissionComplete
+        status: "True"
+        type: ResourceSubmitted
+      - lastTransitionTime: "2023-01-15T08:30:31Z"
+        message: 'condition status: True, message: Scan completed. Found 21 CVE(s): 6 High, 4 Medium, 11 Low'
+        reason: MatchedCondition
+        status: "True"
+        type: Healthy
+      - lastTransitionTime: "2023-01-15T08:30:31Z"
+        message: ""
+        reason: Ready
+        status: "True"
+        type: Ready
+      inputs:
+      - name: image-provider
+      name: image-scanner
+      outputs:
+      - digest: sha256:8762e55840af3ac1b09c0ba2c217fc642072a8ce17d331363229f767c427a18f
+        lastTransitionTime: "2023-01-15T08:30:31Z"
+        name: image
+        preview: |
+          ghcr.io/making/supply-chain/blog-ui-blog@sha256:c1ec71dc1a836cad64a5912ad649f7a95f7a37fe1e72299060615785102b3fc1
+      stampedRef:
+        apiVersion: scanning.apps.tanzu.vmware.com/v1beta1
+        kind: ImageScan
+        name: blog-ui
+        namespace: blog
+        resource: imagescans.scanning.apps.tanzu.vmware.com
+      templateRef:
+        apiVersion: carto.run/v1alpha1
+        kind: ClusterImageTemplate
+        name: image-scanner-template
+    - conditions:
+      - lastTransitionTime: "2023-01-15T08:30:31Z"
+        message: ""
+        reason: ResourceSubmissionComplete
+        status: "True"
+        type: ResourceSubmitted
+      - lastTransitionTime: "2023-01-08T09:24:13Z"
+        message: ""
+        reason: ReadyCondition
+        status: "True"
+        type: Healthy
+      - lastTransitionTime: "2023-01-15T08:30:31Z"
+        message: ""
+        reason: Ready
+        status: "True"
+        type: Ready
+      inputs:
+      - name: image-scanner
+      name: config-provider
+      outputs:
+      - digest: sha256:814ea429df65b2596335754406c638b7840ee5fb8c76e82c9b34263a1a386510
+        lastTransitionTime: "2023-01-15T07:51:09Z"
+        name: config
+        preview: |
+          metadata:
+              annotations:
+                  autoscaling.knative.dev/minScale: "1"
+                  conventions.carto.run/applied-conventions: |-
+                      inspect-image-convention/buildpacks
+                      inspect-image-convention/base-image
+                      inspect-image-convention/run-image
+                      inspect-image-convention/source
+                      spring-boot-convention/auto-configure-actuators-check
+                      spring-boot-convention/app-live-view-appflavour-check
+                      appliveview-sample/app-live-view-appflavour-check
+                  developer.conventions/target-containers: workload
+                  inspect-image.buildpacks.io/base-image: |-
+                      reference: ghcr.io/making/build-service@sha256:87d92d68b7f5c4c22da6985947e585dc95346898adf82c2c3708dd0ef7a9bef3
+                      top_layer: sha256:bb05b721056f3f86cca3e0f3486781718d8a9faa8bc2b4d7960487cd6b03c844
+                  inspect-image.buildpacks.io/buildpacks: |-
+                      - id: tanzu-buildpacks/deprecation-warnings
+                        version: 0.0.2
+                      - id: paketo-buildpacks/ca-certificates
+      stampedRef:
+        apiVersion: conventions.carto.run/v1alpha1
+        kind: PodIntent
+        name: blog-ui
+        namespace: blog
+        resource: podintents.conventions.carto.run
+      templateRef:
+        apiVersion: carto.run/v1alpha1
+        kind: ClusterConfigTemplate
+        name: convention-template
+    - conditions:
+      - lastTransitionTime: "2023-01-15T08:30:31Z"
+        message: ""
+        reason: ResourceSubmissionComplete
+        status: "True"
+        type: ResourceSubmitted
+      - lastTransitionTime: "2023-01-07T03:30:53Z"
+        message: ""
+        reason: AlwaysHealthy
+        status: "True"
+        type: Healthy
+      - lastTransitionTime: "2023-01-15T08:30:31Z"
+        message: ""
+        reason: Ready
+        status: "True"
+        type: Ready
+      inputs:
+      - name: config-provider
+      name: app-config
+      outputs:
+      - digest: sha256:7b90d637b20c5eb1e271c3ccba34b7847c35b2df1d9d64f817983b95be0f28da
+        lastTransitionTime: "2023-02-01T09:45:43Z"
+        name: config
+        preview: |-
+          delivery.yml: |
+              apiVersion: serving.knative.dev/v1
+              kind: Service
+              metadata:
+                name: blog-ui
+                annotations:
+                  ootb.apps.tanzu.vmware.com/servicebinding-workload: "true"
+                  ootb.apps.tanzu.vmware.com/apidescriptor-ref: "true"
+                labels:
+                  app.kubernetes.io/part-of: blog-ui
+                  apps.tanzu.vmware.com/has-tests: "true"
+                  apps.tanzu.vmware.com/workload-type: web
+                  kapp.k14s.io/app: "1672995247146136642"
+                  kapp.k14s.io/association: v1.0ba63a416d64128605b90e7ad1328294
+                  app.kubernetes.io/component: run
+                  carto.run/workload-name: blog-ui
+              spec:
+                template:
+                  metadata:
+                    annotations:
+                      autoscaling.knative.dev/minScale: "1"
+                      conventions.carto.run/applied-conventions: |-
+                        inspect-image-convention/buildpacks
+                        inspect-image-convention/base-image
+                        inspect-image-convention/run-image
+                        inspect-image-convention/source
+                        spring-boot-convention/auto-conf
+      stampedRef:
+        apiVersion: v1
+        kind: ConfigMap
+        name: blog-ui
+        namespace: blog
+        resource: configmaps
+      templateRef:
+        apiVersion: carto.run/v1alpha1
+        kind: ClusterConfigTemplate
+        name: config-template
+    - conditions:
+      - lastTransitionTime: "2023-01-15T08:30:31Z"
+        message: ""
+        reason: ResourceSubmissionComplete
+        status: "True"
+        type: ResourceSubmitted
+      - lastTransitionTime: "2023-01-07T03:30:53Z"
+        message: ""
+        reason: AlwaysHealthy
+        status: "True"
+        type: Healthy
+      - lastTransitionTime: "2023-01-15T08:30:31Z"
+        message: ""
+        reason: Ready
+        status: "True"
+        type: Ready
+      inputs:
+      - name: app-config
+      name: service-bindings
+      outputs:
+      - digest: sha256:7b90d637b20c5eb1e271c3ccba34b7847c35b2df1d9d64f817983b95be0f28da
+        lastTransitionTime: "2023-02-01T09:45:44Z"
+        name: config
+        preview: |-
+          delivery.yml: |
+              apiVersion: serving.knative.dev/v1
+              kind: Service
+              metadata:
+                name: blog-ui
+                annotations:
+                  ootb.apps.tanzu.vmware.com/servicebinding-workload: "true"
+                  ootb.apps.tanzu.vmware.com/apidescriptor-ref: "true"
+                labels:
+                  app.kubernetes.io/part-of: blog-ui
+                  apps.tanzu.vmware.com/has-tests: "true"
+                  apps.tanzu.vmware.com/workload-type: web
+                  kapp.k14s.io/app: "1672995247146136642"
+                  kapp.k14s.io/association: v1.0ba63a416d64128605b90e7ad1328294
+                  app.kubernetes.io/component: run
+                  carto.run/workload-name: blog-ui
+              spec:
+                template:
+                  metadata:
+                    annotations:
+                      autoscaling.knative.dev/minScale: "1"
+                      conventions.carto.run/applied-conventions: |-
+                        inspect-image-convention/buildpacks
+                        inspect-image-convention/base-image
+                        inspect-image-convention/run-image
+                        inspect-image-convention/source
+                        spring-boot-convention/auto-conf
+      stampedRef:
+        apiVersion: v1
+        kind: ConfigMap
+        name: blog-ui-with-claims
+        namespace: blog
+        resource: configmaps
+      templateRef:
+        apiVersion: carto.run/v1alpha1
+        kind: ClusterConfigTemplate
+        name: service-bindings
+    - conditions:
+      - lastTransitionTime: "2023-01-15T08:30:31Z"
+        message: ""
+        reason: ResourceSubmissionComplete
+        status: "True"
+        type: ResourceSubmitted
+      - lastTransitionTime: "2023-01-07T03:30:53Z"
+        message: ""
+        reason: AlwaysHealthy
+        status: "True"
+        type: Healthy
+      - lastTransitionTime: "2023-01-15T08:30:31Z"
+        message: ""
+        reason: Ready
+        status: "True"
+        type: Ready
+      inputs:
+      - name: service-bindings
+      name: api-descriptors
+      outputs:
+      - digest: sha256:7b90d637b20c5eb1e271c3ccba34b7847c35b2df1d9d64f817983b95be0f28da
+        lastTransitionTime: "2023-02-01T09:45:44Z"
+        name: config
+        preview: |-
+          delivery.yml: |
+              apiVersion: serving.knative.dev/v1
+              kind: Service
+              metadata:
+                name: blog-ui
+                annotations:
+                  ootb.apps.tanzu.vmware.com/servicebinding-workload: "true"
+                  ootb.apps.tanzu.vmware.com/apidescriptor-ref: "true"
+                labels:
+                  app.kubernetes.io/part-of: blog-ui
+                  apps.tanzu.vmware.com/has-tests: "true"
+                  apps.tanzu.vmware.com/workload-type: web
+                  kapp.k14s.io/app: "1672995247146136642"
+                  kapp.k14s.io/association: v1.0ba63a416d64128605b90e7ad1328294
+                  app.kubernetes.io/component: run
+                  carto.run/workload-name: blog-ui
+              spec:
+                template:
+                  metadata:
+                    annotations:
+                      autoscaling.knative.dev/minScale: "1"
+                      conventions.carto.run/applied-conventions: |-
+                        inspect-image-convention/buildpacks
+                        inspect-image-convention/base-image
+                        inspect-image-convention/run-image
+                        inspect-image-convention/source
+                        spring-boot-convention/auto-conf
+      stampedRef:
+        apiVersion: v1
+        kind: ConfigMap
+        name: blog-ui-with-api-descriptors
+        namespace: blog
+        resource: configmaps
+      templateRef:
+        apiVersion: carto.run/v1alpha1
+        kind: ClusterConfigTemplate
+        name: api-descriptors
+    - conditions:
+      - lastTransitionTime: "2023-01-15T08:30:31Z"
+        message: ""
+        reason: ResourceSubmissionComplete
+        status: "True"
+        type: ResourceSubmitted
+      - lastTransitionTime: "2023-01-08T09:24:13Z"
+        message: ""
+        reason: AlwaysHealthy
+        status: "True"
+        type: Healthy
+      - lastTransitionTime: "2023-01-15T08:30:31Z"
+        message: ""
+        reason: Ready
+        status: "True"
+        type: Ready
+      inputs:
+      - name: api-descriptors
+      name: config-writer
+      stampedRef:
+        apiVersion: carto.run/v1alpha1
+        kind: Runnable
+        name: blog-ui-config-writer-pull-requester
+        namespace: blog
+        resource: runnables.carto.run
+      templateRef:
+        apiVersion: carto.run/v1alpha1
+        kind: ClusterTemplate
+        name: config-writer-and-pull-requester-template
+    - conditions:
+      - lastTransitionTime: "2023-01-07T03:30:53Z"
+        message: ""
+        reason: ResourceSubmissionComplete
+        status: "True"
+        type: ResourceSubmitted
+      - lastTransitionTime: "2023-01-07T03:30:53Z"
+        message: ""
+        reason: AlwaysHealthy
+        status: "True"
+        type: Healthy
+      - lastTransitionTime: "2023-01-07T03:30:53Z"
+        message: ""
+        reason: Ready
+        status: "True"
+        type: Ready
+      name: deliverable
+      stampedRef:
+        apiVersion: v1
+        kind: ConfigMap
+        name: blog-ui-deliverable
+        namespace: blog
+        resource: configmaps
+      templateRef:
+        apiVersion: carto.run/v1alpha1
+        kind: ClusterTemplate
+        name: external-deliverable-template
+    supplyChainRef:
+      kind: ClusterSupplyChain
+      name: source-test-scan-to-url
+configs:
+  config:
+    config:
+      metadata:
+        annotations:
+          autoscaling.knative.dev/minScale: "1"
+          conventions.carto.run/applied-conventions: |-
+            inspect-image-convention/buildpacks
+            inspect-image-convention/base-image
+            inspect-image-convention/run-image
+            inspect-image-convention/source
+            spring-boot-convention/auto-configure-actuators-check
+            spring-boot-convention/app-live-view-appflavour-check
+            appliveview-sample/app-live-view-appflavour-check
+          developer.conventions/target-containers: workload
+          inspect-image.buildpacks.io/base-image: |-
+            reference: ghcr.io/making/build-service@sha256:87d92d68b7f5c4c22da6985947e585dc95346898adf82c2c3708dd0ef7a9bef3
+            top_layer: sha256:bb05b721056f3f86cca3e0f3486781718d8a9faa8bc2b4d7960487cd6b03c844
+          inspect-image.buildpacks.io/buildpacks: |-
+            - id: tanzu-buildpacks/deprecation-warnings
+              version: 0.0.2
+            - id: paketo-buildpacks/ca-certificates
+              version: 3.4.0
+            - id: tanzu-buildpacks/node-engine-lite
+              version: 0.16.0
+            - id: tanzu-buildpacks/yarn-lite
+              version: 0.6.5
+            - id: tanzu-buildpacks/yarn-install
+              version: 0.7.9
+            - id: tanzu-buildpacks/node-module-bom-lite
+              version: 0.3.3
+            - id: tanzu-buildpacks/node-run-script
+              version: 0.4.2
+            - id: tanzu-buildpacks/yarn-start
+              version: 0.3.6
+            - id: paketo-buildpacks/image-labels
+              version: 4.3.0
+          inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:87d92d68b7f5c4c22da6985947e585dc95346898adf82c2c3708dd0ef7a9bef3
+          inspect-image.opencontainers.org/source: main/5604f8d5ad092859e4dc3cbc80bfa543d4ab7fb0
+          kapp.k14s.io/disable-original: ""
+          kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-ui;carto.run/v1alpha1
+        labels:
+          app.kubernetes.io/component: run
+          app.kubernetes.io/part-of: blog-ui
+          apps.tanzu.vmware.com/has-tests: "true"
+          apps.tanzu.vmware.com/workload-type: web
+          carto.run/workload-name: blog-ui
+          kapp.k14s.io/app: "1672995247146136642"
+          kapp.k14s.io/association: v1.0ba63a416d64128605b90e7ad1328294
+      spec:
+        containers:
+        - image: ghcr.io/making/supply-chain/blog-ui-blog@sha256:c1ec71dc1a836cad64a5912ad649f7a95f7a37fe1e72299060615785102b3fc1
+          name: workload
+          resources:
+            limits:
+              memory: 256Mi
+            requests:
+              memory: 256Mi
+          securityContext:
+            runAsUser: 1000
+        serviceAccountName: default
+    name: config
+images: {}
+params:
+  annotations:
+    autoscaling.knative.dev/minScale: "1"
+  gitops_branch: lime
+  gitops_commit_branch: ""
+  gitops_commit_message: Bump
+  gitops_pull_request_body: generated by ootb_supply_chain_testing
+  gitops_pull_request_title: ready for review
+  gitops_repository_name: tap-gitops
+  gitops_repository_owner: categolj
+  gitops_server_address: https://github.com
+  gitops_server_kind: github
+  gitops_ssh_secret: git-basic
+  gitops_user_email: makingx+bot@gmail.com
+  gitops_user_name: making-bot
+  maven_repository_url: https://repo.maven.apache.org/maven2
+  testing_pipeline_matching_labels:
+    apps.tanzu.vmware.com/language: node
+    apps.tanzu.vmware.com/pipeline: test
+  testing_pipeline_params:
+    slack-test-failure-message: "\U0001F6A8 [blog-ui] Test Failed!\nhttps://tap-gui.view.lime.maki.lol/supply-chain/lime-build/blog/blog-ui/source-tester\n"
+    slack-webhook-secret: slack-webhook
+sources: {}
+
+
