@@ -131,17 +131,7 @@ spec:
         - name: DD_PROMETHEUS_SCRAPE_VERSION
           value: "2"
         image: gcr.io/datadoghq/agent@sha256:14bf56bb7fcadbeab0e2f60a81d795b2d3a2db79206423704f973f729cc7e598
-        livenessProbe:
-          httpGet:
-            path: /live
-            port: 5555
-            scheme: HTTP
         name: datadog-agent
-        readinessProbe:
-          httpGet:
-            path: /ready
-            port: 5555
-            scheme: HTTP
         resources: {}
       serviceAccountName: default
 
