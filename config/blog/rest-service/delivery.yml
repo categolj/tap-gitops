@@ -132,22 +132,16 @@ spec:
           value: "2"
         image: gcr.io/datadoghq/agent@sha256:14bf56bb7fcadbeab0e2f60a81d795b2d3a2db79206423704f973f729cc7e598
         livenessProbe:
-          failureThreshold: 6
           httpGet:
             path: /live
             port: 5555
-          initialDelaySeconds: 15
-          periodSeconds: 15
-          timeoutSeconds: 5
+            scheme: HTTP
         name: datadog-agent
         readinessProbe:
-          failureThreshold: 6
           httpGet:
             path: /ready
             port: 5555
-          initialDelaySeconds: 15
-          periodSeconds: 15
-          timeoutSeconds: 5
+            scheme: HTTP
         resources: {}
       serviceAccountName: default
 
