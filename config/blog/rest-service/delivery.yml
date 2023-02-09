@@ -144,7 +144,7 @@ spec:
         - containerPort: 8125
           hostPort: 8125
           name: dogstatsdport
-          protocol: UDP
+          protocol: TCP
         readinessProbe:
           failureThreshold: 6
           httpGet:
