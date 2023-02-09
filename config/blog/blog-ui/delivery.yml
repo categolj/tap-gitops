@@ -64,7 +64,18 @@ spec:
     spec:
       containers:
       - image: ghcr.io/making/supply-chain/blog-ui-blog@sha256:c1ec71dc1a836cad64a5912ad649f7a95f7a37fe1e72299060615785102b3fc1
+        livenessProbe:
+          httpGet:
+            path: /aboutme
+            port: 8080
+            scheme: HTTP
         name: workload
+        readinessProbe:
+          httpGet:
+            path: /aboutme
+            port: 8080
+            scheme: HTTP
+          successThreshold: 1
         resources:
           limits:
             memory: 256Mi
