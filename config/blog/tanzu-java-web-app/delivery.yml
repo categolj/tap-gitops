@@ -45,6 +45,9 @@ spec:
           spring-boot-convention/app-live-view-appflavour-check
           spring-boot-convention/app-live-view-connector-boot
           spring-boot-convention/app-live-view-appflavours-boot
+          spring-boot-convention/auto-configure-actuators-check
+          spring-boot-convention/app-live-view-appflavour-check
+          appliveview-sample/app-live-view-appflavour-check
           appliveview-sample/app-live-view-appflavour-check
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
@@ -111,6 +114,13 @@ spec:
         resources: {}
         securityContext:
           runAsUser: 1000
+      - command:
+        - sh
+        - -c
+        - while true; do data; sleep 30; done
+        image: index.docker.io/library/busybox@sha256:907ca53d7e2947e849b839b1cd258c98fd3916c60f2e6e70c30edbf741ab6754
+        name: sidecar
+        resources: {}
       serviceAccountName: default
 ---
 apiVersion: v1
