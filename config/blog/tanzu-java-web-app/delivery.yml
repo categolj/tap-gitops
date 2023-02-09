@@ -45,6 +45,9 @@ spec:
           spring-boot-convention/app-live-view-appflavour-check
           spring-boot-convention/app-live-view-connector-boot
           spring-boot-convention/app-live-view-appflavours-boot
+          spring-boot-convention/auto-configure-actuators-check
+          spring-boot-convention/app-live-view-appflavour-check
+          appliveview-sample/app-live-view-appflavour-check
           appliveview-sample/app-live-view-appflavour-check
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
@@ -111,6 +114,52 @@ spec:
         resources: {}
         securityContext:
           runAsUser: 1000
+      - env:
+        - name: DD_API_KEY
+          valueFrom:
+            secretKeyRef:
+              key: api-key
+              name: datadog
+        - name: DD_SITE
+          value: us3.datadoghq.com
+        - name: DD_LOG_LEVEL
+          value: INFO
+        - name: DD_DOGSTATSD_PORT
+          value: "8125"
+        - name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC
+          value: "true"
+        - name: DD_LOGS_ENABLED
+          value: "true"
+        - name: DD_HEALTH_PORT
+          value: "5555"
+        - name: DD_PROMETHEUS_SCRAPE_ENABLED
+          value: "true"
+        - name: DD_PROMETHEUS_SCRAPE_VERSION
+          value: "2"
+        image: gcr.io/datadoghq/agent@sha256:14bf56bb7fcadbeab0e2f60a81d795b2d3a2db79206423704f973f729cc7e598
+        livenessProbe:
+          failureThreshold: 6
+          httpGet:
+            path: /live
+            port: 5555
+          initialDelaySeconds: 15
+          periodSeconds: 15
+          timeoutSeconds: 5
+        name: datadog-agent
+        ports:
+        - containerPort: 8125
+          hostPort: 8125
+          name: dogstatsdport
+          protocol: UDP
+        readinessProbe:
+          failureThreshold: 6
+          httpGet:
+            path: /ready
+            port: 5555
+          initialDelaySeconds: 15
+          periodSeconds: 15
+          timeoutSeconds: 5
+        resources: {}
       serviceAccountName: default
 ---
 apiVersion: v1
@@ -141,4 +190,7 @@ spec:
   - targetPort: 8080
     port: 8080
     name: http
+  - targetPort: 8125
+    port: 8125
+    name: dogstatsdport
 
