@@ -83,5 +83,7 @@ spec:
             memory: 256Mi
         securityContext:
           runAsUser: 1000
+      - name: sidecar
+        resources: {}
       serviceAccountName: default
 
