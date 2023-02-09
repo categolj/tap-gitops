@@ -140,9 +140,6 @@ spec:
           periodSeconds: 15
           timeoutSeconds: 5
         name: datadog-agent
-        ports:
-        - containerPort: 8125
-          protocol: UDP
         readinessProbe:
           failureThreshold: 6
           httpGet:
