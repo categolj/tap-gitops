@@ -5,6 +5,7 @@ metadata:
   annotations:
     ootb.apps.tanzu.vmware.com/servicebinding-workload: "true"
     ootb.apps.tanzu.vmware.com/apidescriptor-ref: "true"
+    kapp.k14s.io/change-rule: upsert after upserting servicebinding.io/ServiceBindings
   labels:
     app.kubernetes.io/part-of: blog-ui
     apps.tanzu.vmware.com/has-tests: "true"
@@ -28,8 +29,8 @@ spec:
           appliveview-sample/app-live-view-appflavour-check
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: ghcr.io/making/build-service@sha256:87d92d68b7f5c4c22da6985947e585dc95346898adf82c2c3708dd0ef7a9bef3
-          top_layer: sha256:bb05b721056f3f86cca3e0f3486781718d8a9faa8bc2b4d7960487cd6b03c844
+          reference: ghcr.io/making/build-service@sha256:2102b927cd48b53fb4f438c374087280601ac60f877eeb61ef519effa358723b
+          top_layer: sha256:dbf57a4163eceb8bfb3b1301b8bb9d0015be22af50a072e9ca7f6094e423ac8a
         inspect-image.buildpacks.io/buildpacks: |-
           - id: tanzu-buildpacks/deprecation-warnings
             version: 0.0.2
@@ -63,7 +64,7 @@ spec:
         kapp.k14s.io/association: v1.0ba63a416d64128605b90e7ad1328294
     spec:
       containers:
-      - image: ghcr.io/making/supply-chain/blog-ui-blog@sha256:c1ec71dc1a836cad64a5912ad649f7a95f7a37fe1e72299060615785102b3fc1
+      - image: ghcr.io/making/supply-chain/blog-ui-blog@sha256:0489a1d6d719d30f4f971ae4f0f0f5e668ec5c43525f120acc09ec4a48fb7ec4
         livenessProbe:
           httpGet:
             path: /aboutme

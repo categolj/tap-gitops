@@ -24,6 +24,7 @@ metadata:
     prometheus.io/path: /actuator/prometheus
     prometheus.io/port: "8081"
     prometheus.io/scrape: "true"
+    kapp.k14s.io/change-group: servicebinding.io/ServiceBindings
   labels:
     apis.apps.tanzu.vmware.com/register-api: "true"
     app.kubernetes.io/part-of: blog-api
@@ -55,6 +56,7 @@ metadata:
     prometheus.io/path: /actuator/prometheus
     prometheus.io/port: "8081"
     prometheus.io/scrape: "true"
+    kapp.k14s.io/change-group: servicebinding.io/ServiceBindings
   labels:
     apis.apps.tanzu.vmware.com/register-api: "true"
     app.kubernetes.io/part-of: blog-api
