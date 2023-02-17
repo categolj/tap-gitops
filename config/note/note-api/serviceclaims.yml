@@ -24,6 +24,7 @@ metadata:
     prometheus.io/path: /actuator/prometheus
     prometheus.io/port: "8081"
     prometheus.io/scrape: "true"
+    kapp.k14s.io/change-group: servicebinding.io/ServiceBindings
   labels:
     app.kubernetes.io/part-of: note-api
     apps.tanzu.vmware.com/has-tests: "true"
@@ -54,6 +55,7 @@ metadata:
     prometheus.io/path: /actuator/prometheus
     prometheus.io/port: "8081"
     prometheus.io/scrape: "true"
+    kapp.k14s.io/change-group: servicebinding.io/ServiceBindings
   labels:
     app.kubernetes.io/part-of: note-api
     apps.tanzu.vmware.com/has-tests: "true"
@@ -84,6 +86,7 @@ metadata:
     prometheus.io/path: /actuator/prometheus
     prometheus.io/port: "8081"
     prometheus.io/scrape: "true"
+    kapp.k14s.io/change-group: servicebinding.io/ServiceBindings
   labels:
     app.kubernetes.io/part-of: note-api
     apps.tanzu.vmware.com/has-tests: "true"
