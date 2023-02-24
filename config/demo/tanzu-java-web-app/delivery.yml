@@ -1,17 +1,32 @@
-apiVersion: serving.knative.dev/v1
-kind: Service
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: tanzu-java-web-app
   annotations:
+    kapp.k14s.io/update-strategy: fallback-on-replace
     ootb.apps.tanzu.vmware.com/servicebinding-workload: "true"
-    ootb.apps.tanzu.vmware.com/apidescriptor-ref: "true"
+    kapp.k14s.io/change-rule: upsert after upserting servicebinding.io/ServiceBindings
   labels:
     app.kubernetes.io/part-of: tanzu-java-web-app
     apps.tanzu.vmware.com/has-tests: "true"
-    apps.tanzu.vmware.com/workload-type: web
+    apps.tanzu.vmware.com/workload-type: server
     app.kubernetes.io/component: run
     carto.run/workload-name: tanzu-java-web-app
 spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: run
+      app.kubernetes.io/part-of: tanzu-java-web-app
+      apps.tanzu.vmware.com/auto-configure-actuators: "true"
+      apps.tanzu.vmware.com/has-tests: "true"
+      apps.tanzu.vmware.com/workload-type: web
+      carto.run/workload-name: tanzu-java-web-app
+      conventions.carto.run/framework: spring-boot
+      tanzu.app.live.view: "true"
+      tanzu.app.live.view.application.actuator.path: actuator
+      tanzu.app.live.view.application.actuator.port: "8081"
+      tanzu.app.live.view.application.flavours: spring-boot
+      tanzu.app.live.view.application.name: tanzu-java-web-app
   template:
     metadata:
       annotations:
@@ -23,54 +38,55 @@ spec:
           inspect-image-convention/base-image
           inspect-image-convention/run-image
           inspect-image-convention/source
+          spring-boot-convention/auto-configure-actuators-check
           spring-boot-convention/spring-boot
           spring-boot-convention/spring-boot-graceful-shutdown
           spring-boot-convention/spring-boot-web
           spring-boot-convention/spring-boot-actuator
           spring-boot-convention/spring-boot-actuator-probes
+          spring-boot-convention/app-live-view-appflavour-check
+          spring-boot-convention/app-live-view-connector-boot
+          spring-boot-convention/app-live-view-appflavours-boot
           appliveview-sample/app-live-view-appflavour-check
-          appliveview-sample/app-live-view-connector-boot
-          appliveview-sample/app-live-view-appflavours-boot
-          appliveview-sample/app-live-view-systemproperties
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: ghcr.io/making/build-service@sha256:f8dbbf8fa654c1731e039671a6683b97d3e4a2cd8344e9e99409cad8ecaf5f95
-          top_layer: sha256:d10fcfd222e42332f995be30faf8856758b34ce68e864bf2206d87bf3f1a7108
+          reference: ghcr.io/making/build-service@sha256:2102b927cd48b53fb4f438c374087280601ac60f877eeb61ef519effa358723b
+          top_layer: sha256:dbf57a4163eceb8bfb3b1301b8bb9d0015be22af50a072e9ca7f6094e423ac8a
         inspect-image.buildpacks.io/buildpacks: |-
           - id: tanzu-buildpacks/deprecation-warnings
-            version: 0.0.1
+            version: 0.0.3
           - id: paketo-buildpacks/ca-certificates
-            version: 3.4.0
+            version: 3.5.1
           - id: paketo-buildpacks/bellsoft-liberica
-            version: 9.6.1
+            version: 9.10.3
           - id: paketo-buildpacks/syft
             version: 1.10.1
           - id: paketo-buildpacks/maven
-            version: 6.8.0
+            version: 6.12.1
           - id: paketo-buildpacks/executable-jar
-            version: 6.4.0
+            version: 6.5.0
           - id: paketo-buildpacks/apache-tomcat
-            version: 7.5.0
-          - id: paketo-buildpacks/apache-tomee
-            version: 1.2.0
+            version: 7.11.1
           - id: paketo-buildpacks/liberty
-            version: 2.1.1
+            version: 3.3.0
           - id: paketo-buildpacks/dist-zip
-            version: 5.3.0
+            version: 5.4.0
           - id: paketo-buildpacks/spring-boot
-            version: 5.18.0
+            version: 5.22.1
           - id: paketo-buildpacks/image-labels
             version: 4.3.0
-        inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:f8dbbf8fa654c1731e039671a6683b97d3e4a2cd8344e9e99409cad8ecaf5f95
+        inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:2102b927cd48b53fb4f438c374087280601ac60f877eeb61ef519effa358723b
         inspect-image.opencontainers.org/source: main/6db88c7a7e7dec1843809b058195b68480c4c12a
       labels:
         app.kubernetes.io/component: run
         app.kubernetes.io/part-of: tanzu-java-web-app
+        apps.tanzu.vmware.com/auto-configure-actuators: "true"
         apps.tanzu.vmware.com/has-tests: "true"
         apps.tanzu.vmware.com/workload-type: web
         carto.run/workload-name: tanzu-java-web-app
-        conventions.apps.tanzu.vmware.com/framework: spring-boot
+        conventions.carto.run/framework: spring-boot
         tanzu.app.live.view: "true"
+        tanzu.app.live.view.application.actuator.path: actuator
         tanzu.app.live.view.application.actuator.port: "8081"
         tanzu.app.live.view.application.flavours: spring-boot
         tanzu.app.live.view.application.name: tanzu-java-web-app
@@ -78,8 +94,8 @@ spec:
       containers:
       - env:
         - name: JAVA_TOOL_OPTIONS
-          value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details=always -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include=* -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: ghcr.io/making/supply-chain/tanzu-java-web-app-demo@sha256:ca5412791f9dc4728e6a9c1fbc053bc70ac771d7456881d343bddd90b9c7c1f1
+          value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
+        image: ghcr.io/making/supply-chain/tanzu-java-web-app-demo@sha256:6792b717ad22ae8684714d4f1254676d0d1c166da5687766394f171b634ce25a
         livenessProbe:
           httpGet:
             path: /livez
@@ -98,4 +114,33 @@ spec:
         securityContext:
           runAsUser: 1000
       serviceAccountName: default
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tanzu-java-web-app
+  labels:
+    app.kubernetes.io/part-of: tanzu-java-web-app
+    apps.tanzu.vmware.com/has-tests: "true"
+    apps.tanzu.vmware.com/workload-type: server
+    app.kubernetes.io/component: run
+    carto.run/workload-name: tanzu-java-web-app
+spec:
+  selector:
+    app.kubernetes.io/component: run
+    app.kubernetes.io/part-of: tanzu-java-web-app
+    apps.tanzu.vmware.com/auto-configure-actuators: "true"
+    apps.tanzu.vmware.com/has-tests: "true"
+    apps.tanzu.vmware.com/workload-type: web
+    carto.run/workload-name: tanzu-java-web-app
+    conventions.carto.run/framework: spring-boot
+    tanzu.app.live.view: "true"
+    tanzu.app.live.view.application.actuator.path: actuator
+    tanzu.app.live.view.application.actuator.port: "8081"
+    tanzu.app.live.view.application.flavours: spring-boot
+    tanzu.app.live.view.application.name: tanzu-java-web-app
+  ports:
+  - targetPort: 8080
+    port: 8080
+    name: http
 
