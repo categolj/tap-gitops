@@ -162,13 +162,13 @@ spec:
               key: otel-trace-endpoint
               name: otel-config
         - name: INFO_ENV_HOSTNAME
-          value: ${HOSTNAME}
+          value: ${HOSTNAME:}
         - name: INFO_ENV_K_SERVICE
-          value: ${K_SERVICE}
+          value: ${K_SERVICE:}
         - name: INFO_ENV_K_CONFIGURATION
-          value: ${K_CONFIGURATION}
+          value: ${K_CONFIGURATION:}
         - name: INFO_ENV_K_REVISION
-          value: ${K_REVISION}
+          value: ${K_REVISION:}
         image: ghcr.io/making/supply-chain/blog-api-blog@sha256:91af016ac070e82e8f5d121ac8b104ff280b1952310b6d785998a0c38eeeeb9e
         livenessProbe:
           httpGet:
