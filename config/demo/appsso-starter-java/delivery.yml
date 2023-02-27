@@ -1,0 +1,81 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: appsso-starter-java
+  annotations:
+    ootb.apps.tanzu.vmware.com/servicebinding-workload: "true"
+    ootb.apps.tanzu.vmware.com/apidescriptor-ref: "true"
+    kapp.k14s.io/change-rule: upsert after upserting servicebinding.io/ServiceBindings
+  labels:
+    app.kubernetes.io/part-of: appsso-starter-java
+    apps.tanzu.vmware.com/has-tests: "true"
+    apps.tanzu.vmware.com/workload-type: web
+    app.kubernetes.io/component: run
+    carto.run/workload-name: appsso-starter-java
+spec:
+  template:
+    metadata:
+      annotations:
+        boot.spring.io/version: 3.0.2
+        conventions.carto.run/applied-conventions: |-
+          inspect-image-convention/buildpacks
+          inspect-image-convention/base-image
+          inspect-image-convention/run-image
+          inspect-image-convention/source
+          spring-boot-convention/auto-configure-actuators-check
+          spring-boot-convention/spring-boot
+          spring-boot-convention/spring-boot-graceful-shutdown
+          spring-boot-convention/spring-boot-web
+          spring-boot-convention/app-live-view-appflavour-check
+          appliveview-sample/app-live-view-appflavour-check
+        developer.conventions/target-containers: workload
+        inspect-image.buildpacks.io/base-image: |-
+          reference: ghcr.io/making/build-service@sha256:2102b927cd48b53fb4f438c374087280601ac60f877eeb61ef519effa358723b
+          top_layer: sha256:dbf57a4163eceb8bfb3b1301b8bb9d0015be22af50a072e9ca7f6094e423ac8a
+        inspect-image.buildpacks.io/buildpacks: |-
+          - id: tanzu-buildpacks/deprecation-warnings
+            version: 0.0.3
+          - id: paketo-buildpacks/ca-certificates
+            version: 3.5.1
+          - id: paketo-buildpacks/bellsoft-liberica
+            version: 9.10.3
+          - id: paketo-buildpacks/syft
+            version: 1.10.1
+          - id: paketo-buildpacks/gradle
+            version: 6.10.0
+          - id: paketo-buildpacks/executable-jar
+            version: 6.5.0
+          - id: paketo-buildpacks/apache-tomcat
+            version: 7.11.1
+          - id: paketo-buildpacks/liberty
+            version: 3.3.0
+          - id: paketo-buildpacks/dist-zip
+            version: 5.4.0
+          - id: paketo-buildpacks/spring-boot
+            version: 5.22.1
+          - id: paketo-buildpacks/image-labels
+            version: 4.3.0
+        inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:2102b927cd48b53fb4f438c374087280601ac60f877eeb61ef519effa358723b
+        inspect-image.opencontainers.org/source: main/c0fbfa8c8f057ca858958c5ed65925cd97619a89
+      labels:
+        app.kubernetes.io/component: run
+        app.kubernetes.io/part-of: appsso-starter-java
+        apps.tanzu.vmware.com/has-tests: "true"
+        apps.tanzu.vmware.com/workload-type: web
+        carto.run/workload-name: appsso-starter-java
+        conventions.carto.run/framework: spring-boot
+    spec:
+      containers:
+      - env:
+        - name: JAVA_TOOL_OPTIONS
+          value: -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
+        image: ghcr.io/making/supply-chain/appsso-starter-java-demo@sha256:114cb24348e0eb49eaece379965f7593fcb9f4d74931288e588ce30302e42ec7
+        name: workload
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        resources: {}
+        securityContext:
+          runAsUser: 1000
+      serviceAccountName: default
+
