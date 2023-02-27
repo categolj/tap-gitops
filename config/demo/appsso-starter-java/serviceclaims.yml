@@ -18,6 +18,7 @@ kind: ServiceBinding
 metadata:
   name: appsso-starter-java-appsso-starter-java
   annotations:
+    autoscaling.knative.dev/minScale: "1"
     kapp.k14s.io/change-group: servicebinding.io/ServiceBindings
   labels:
     app.kubernetes.io/part-of: appsso-starter-java

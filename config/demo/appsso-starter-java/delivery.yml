@@ -16,6 +16,7 @@ spec:
   template:
     metadata:
       annotations:
+        autoscaling.knative.dev/minScale: "1"
         boot.spring.io/version: 3.0.2
         conventions.carto.run/applied-conventions: |-
           inspect-image-convention/buildpacks
