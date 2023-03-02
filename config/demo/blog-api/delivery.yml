@@ -72,8 +72,10 @@ spec:
             secretKeyRef:
               key: DATABASE_URL
               name: blog-db
+        - name: logging.level.io.opentelemetry.exporter.zipkin.ZipkinSpanExporter
+          value: ERROR
         - name: JAVA_TOOL_OPTIONS
-          value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
+          value: -Dfile.encoding="UTF-8" -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
         image: ghcr.io/categolj/blog-api@sha256:79239f6ec16362376c74c8a9da41340223279ac2366af67dac084199f37f9814
         livenessProbe:
           httpGet:
