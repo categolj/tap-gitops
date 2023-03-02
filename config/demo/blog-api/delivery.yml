@@ -1,0 +1,96 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: blog-api
+  annotations:
+    ootb.apps.tanzu.vmware.com/servicebinding-workload: "true"
+    ootb.apps.tanzu.vmware.com/apidescriptor-ref: "true"
+    kapp.k14s.io/change-rule: upsert after upserting servicebinding.io/ServiceBindings
+  labels:
+    app.kubernetes.io/part-of: blog-api
+    apps.tanzu.vmware.com/workload-type: web
+    app.kubernetes.io/component: run
+    carto.run/workload-name: blog-api
+spec:
+  template:
+    metadata:
+      annotations:
+        boot.spring.io/actuator: http://:8081/actuator
+        boot.spring.io/version: 3.0.3
+        conventions.carto.run/applied-conventions: |-
+          inspect-image-convention/buildpacks
+          inspect-image-convention/base-image
+          inspect-image-convention/run-image
+          spring-boot-convention/auto-configure-actuators-check
+          spring-boot-convention/spring-boot
+          spring-boot-convention/spring-boot-graceful-shutdown
+          spring-boot-convention/spring-boot-web
+          spring-boot-convention/spring-boot-actuator
+          spring-boot-convention/spring-boot-actuator-probes
+          spring-boot-convention/app-live-view-appflavour-check
+          spring-boot-convention/app-live-view-connector-boot
+          spring-boot-convention/app-live-view-appflavours-boot
+          spring-boot-convention/service-intent-postgres
+          appliveview-sample/app-live-view-appflavour-check
+        developer.conventions/target-containers: workload
+        inspect-image.buildpacks.io/base-image: |-
+          reference: b0c2af752d236f606f53bb5bca21c88cb28fa7893e3b7826ee076774f5ccc0bc
+          top_layer: sha256:87e57dc3ce1cf530daa93e03bcd101ce8b732eb61bb2f69dcfd47bec1291240f
+        inspect-image.buildpacks.io/buildpacks: |-
+          - id: paketo-buildpacks/ca-certificates
+            version: 3.6.0
+          - id: paketo-buildpacks/bellsoft-liberica
+            version: 9.11.0
+          - id: paketo-buildpacks/syft
+            version: 1.25.0
+          - id: paketo-buildpacks/executable-jar
+            version: 6.6.1
+          - id: paketo-buildpacks/spring-boot
+            version: 5.23.0
+          - id: paketo-buildpacks/native-image
+            version: 5.9.0
+        inspect-image.buildpacks.io/run-image: index.docker.io/paketobuildpacks/run:tiny-cnb
+        services.conventions.carto.run/postgres: postgresql/
+      labels:
+        app.kubernetes.io/component: run
+        app.kubernetes.io/part-of: blog-api
+        apps.tanzu.vmware.com/auto-configure-actuators: "true"
+        apps.tanzu.vmware.com/workload-type: web
+        carto.run/workload-name: blog-api
+        conventions.carto.run/framework: spring-boot
+        services.conventions.carto.run/postgres: workload
+        tanzu.app.live.view: "true"
+        tanzu.app.live.view.application.actuator.path: actuator
+        tanzu.app.live.view.application.actuator.port: "8081"
+        tanzu.app.live.view.application.flavours: spring-boot
+        tanzu.app.live.view.application.name: blog-api
+    spec:
+      containers:
+      - env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              key: DATABASE_URL
+              name: blog-db
+        - name: JAVA_TOOL_OPTIONS
+          value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
+        image: ghcr.io/categolj/blog-api@sha256:79239f6ec16362376c74c8a9da41340223279ac2366af67dac084199f37f9814
+        livenessProbe:
+          httpGet:
+            path: /livez
+            port: 8080
+            scheme: HTTP
+        name: workload
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 8080
+            scheme: HTTP
+        resources: {}
+        securityContext:
+          runAsUser: 1000
+      serviceAccountName: default
+
