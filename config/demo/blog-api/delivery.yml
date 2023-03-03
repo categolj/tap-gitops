@@ -7,6 +7,7 @@ metadata:
     ootb.apps.tanzu.vmware.com/servicebinding-workload: "true"
     kapp.k14s.io/change-rule: upsert after upserting servicebinding.io/ServiceBindings
   labels:
+    apis.apps.tanzu.vmware.com/register-api: "true"
     app.kubernetes.io/part-of: blog-api
     apps.tanzu.vmware.com/workload-type: server
     app.kubernetes.io/component: run
@@ -14,6 +15,7 @@ metadata:
 spec:
   selector:
     matchLabels:
+      apis.apps.tanzu.vmware.com/register-api: "true"
       app.kubernetes.io/component: run
       app.kubernetes.io/part-of: blog-api
       apps.tanzu.vmware.com/auto-configure-actuators: "true"
@@ -64,8 +66,12 @@ spec:
           - id: paketo-buildpacks/native-image
             version: 5.9.0
         inspect-image.buildpacks.io/run-image: index.docker.io/paketobuildpacks/run:tiny-cnb
+        prometheus.io/path: /actuator/prometheus
+        prometheus.io/port: "8080"
+        prometheus.io/scrape: "true"
         services.conventions.carto.run/postgres: postgresql/
       labels:
+        apis.apps.tanzu.vmware.com/register-api: "true"
         app.kubernetes.io/component: run
         app.kubernetes.io/part-of: blog-api
         apps.tanzu.vmware.com/auto-configure-actuators: "true"
@@ -115,12 +121,14 @@ kind: Service
 metadata:
   name: blog-api
   labels:
+    apis.apps.tanzu.vmware.com/register-api: "true"
     app.kubernetes.io/part-of: blog-api
     apps.tanzu.vmware.com/workload-type: server
     app.kubernetes.io/component: run
     carto.run/workload-name: blog-api
 spec:
   selector:
+    apis.apps.tanzu.vmware.com/register-api: "true"
     app.kubernetes.io/component: run
     app.kubernetes.io/part-of: blog-api
     apps.tanzu.vmware.com/auto-configure-actuators: "true"
