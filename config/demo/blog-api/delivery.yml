@@ -34,8 +34,8 @@ spec:
           appliveview-sample/app-live-view-appflavour-check
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: b0c2af752d236f606f53bb5bca21c88cb28fa7893e3b7826ee076774f5ccc0bc
-          top_layer: sha256:87e57dc3ce1cf530daa93e03bcd101ce8b732eb61bb2f69dcfd47bec1291240f
+          reference: 6b67d5e2ed5759cdd5ad5cb343b34e75af7fc6f877c04af1c7c25abbbbebc34d
+          top_layer: sha256:ad3bf14b751a19baf56f9f94ae55ac35377c58ee9065ff2b39a1f2201ad4eac4
         inspect-image.buildpacks.io/buildpacks: |-
           - id: paketo-buildpacks/ca-certificates
             version: 3.6.0
@@ -76,7 +76,7 @@ spec:
           value: ERROR
         - name: JAVA_TOOL_OPTIONS
           value: -Dfile.encoding="UTF-8" -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: ghcr.io/categolj/blog-api@sha256:79239f6ec16362376c74c8a9da41340223279ac2366af67dac084199f37f9814
+        image: ghcr.io/categolj/blog-api@sha256:2f115453e1f867af3420759588ae47bede8aa8fceb9daa1b6b8109be105d3ae0
         livenessProbe:
           httpGet:
             path: /livez
