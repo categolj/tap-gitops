@@ -9,6 +9,7 @@ metadata:
   labels:
     apis.apps.tanzu.vmware.com/register-api: "true"
     app.kubernetes.io/part-of: blog-api
+    apps.tanzu.vmware.com/auto-configure-actuators: "false"
     apps.tanzu.vmware.com/workload-type: server
     app.kubernetes.io/component: run
     carto.run/workload-name: blog-api
@@ -123,6 +124,7 @@ metadata:
   labels:
     apis.apps.tanzu.vmware.com/register-api: "true"
     app.kubernetes.io/part-of: blog-api
+    apps.tanzu.vmware.com/auto-configure-actuators: "false"
     apps.tanzu.vmware.com/workload-type: server
     app.kubernetes.io/component: run
     carto.run/workload-name: blog-api
