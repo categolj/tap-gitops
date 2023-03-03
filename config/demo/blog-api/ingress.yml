@@ -14,7 +14,7 @@ metadata:
     
 spec:
   tls:
-    - secretName: blog-api
+    - secretName: blog-api-tls
       hosts:
       - blog-api.run.lime.maki.lol
   rules:
