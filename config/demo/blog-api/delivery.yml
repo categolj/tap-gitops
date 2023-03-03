@@ -7,6 +7,7 @@ metadata:
     ootb.apps.tanzu.vmware.com/servicebinding-workload: "true"
     kapp.k14s.io/change-rule: upsert after upserting servicebinding.io/ServiceBindings
   labels:
+    apis.apps.tanzu.vmware.com/register-api: "true"
     app.kubernetes.io/part-of: blog-api
     apps.tanzu.vmware.com/workload-type: server
     app.kubernetes.io/component: run
@@ -115,6 +116,7 @@ kind: Service
 metadata:
   name: blog-api
   labels:
+    apis.apps.tanzu.vmware.com/register-api: "true"
     app.kubernetes.io/part-of: blog-api
     apps.tanzu.vmware.com/workload-type: server
     app.kubernetes.io/component: run
