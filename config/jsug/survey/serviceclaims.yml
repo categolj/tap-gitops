@@ -18,6 +18,7 @@ kind: ServiceBinding
 metadata:
   name: survey-survey-db
   annotations:
+    kapp.k14s.io/disable-default-label-scoping-rules: ""
     kapp.k14s.io/disable-original: ""
     kapp.k14s.io/identity: v1;jsug/carto.run/Workload/survey;carto.run/v1alpha1
     prometheus.io/path: /actuator/prometheus
