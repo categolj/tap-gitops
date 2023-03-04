@@ -81,7 +81,7 @@ spec:
           - id: paketo-buildpacks/image-labels
             version: 4.3.0
         inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:2102b927cd48b53fb4f438c374087280601ac60f877eeb61ef519effa358723b
-        inspect-image.opencontainers.org/source: master/4f589769acaa99de29b3379b6e336aca968dc9dc
+        inspect-image.opencontainers.org/source: master/c169608ec6880e1c6e213f2ad0553c2de83d10e4
         kapp.k14s.io/disable-default-label-scoping-rules: ""
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;jsug/carto.run/Workload/survey;carto.run/v1alpha1
@@ -112,7 +112,7 @@ spec:
           value: "28"
         - name: SPRING_PROFILES_ACTIVE
           value: cloud
-        image: ghcr.io/making/supply-chain/survey-jsug@sha256:a1b2f7d7f401ac6f06a119d2e3deefa14c82485a0122e21c02e27acde781df9d
+        image: ghcr.io/making/supply-chain/survey-jsug@sha256:7340217648ee50273f910bd6c1368b7a3497345ec1161ac8d5f3a4d8a1326cf1
         livenessProbe:
           httpGet:
             path: /livez
