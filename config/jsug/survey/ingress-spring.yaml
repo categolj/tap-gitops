@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: survey-spring
+  annotations:
+    kubernetes.io/ingress.class: contour
+    cert-manager.io/cluster-issuer: letsencrypt-http01
+  labels: 
+    app.kubernetes.io/part-of: survey
+spec:
+  tls:
+    - secretName: survey-spring-tls
+      hosts:
+      - survey.springframework.jp
+  rules:
+  - host: survey.springframework.jp
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: survey
+            port:
+              number: 8080
