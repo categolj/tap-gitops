@@ -15,7 +15,7 @@ metadata:
     
 spec:
   tls:
-    - secretName: tanzu-java-web-app
+    - secretName: tanzu-java-web-app-tls
       hosts:
       - tanzu-java-web-app.run.lime.maki.lol
   rules:
