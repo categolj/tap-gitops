@@ -1,22 +1,2 @@
-#@ load("@ytt:overlay", "overlay")
-#@overlay/match by=overlay.subset({"kind": "Deployment"})
----
-spec:
-  #@overlay/match-child-defaults missing_ok=True
-  template:
-    spec:
-      affinity:
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchExpressions:
-              - key: carto.run/workload-name
-                operator: In
-                values:
-                - survey
-              - key: app.kubernetes.io/component
-                operator: In
-                values:
-                - run
-            topologyKey: "kubernetes.io/hostname"
+
 
