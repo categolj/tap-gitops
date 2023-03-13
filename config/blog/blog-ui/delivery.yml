@@ -29,8 +29,8 @@ spec:
           appliveview-sample/app-live-view-appflavour-check
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: ghcr.io/making/build-service@sha256:2102b927cd48b53fb4f438c374087280601ac60f877eeb61ef519effa358723b
-          top_layer: sha256:dbf57a4163eceb8bfb3b1301b8bb9d0015be22af50a072e9ca7f6094e423ac8a
+          reference: ghcr.io/making/build-service@sha256:bfbf88195592e6a9a0cd120f64aa6a8a163662b73bc36f36cada3eaf9712b4dd
+          top_layer: sha256:3a04f80104ae69f964b84b9ca2ea313df86ab447433857a82440717bc8edc5d4
         inspect-image.buildpacks.io/buildpacks: |-
           - id: tanzu-buildpacks/deprecation-warnings
             version: 0.0.2
@@ -64,7 +64,7 @@ spec:
         kapp.k14s.io/association: v1.0ba63a416d64128605b90e7ad1328294
     spec:
       containers:
-      - image: ghcr.io/making/supply-chain/blog-ui-blog@sha256:0489a1d6d719d30f4f971ae4f0f0f5e668ec5c43525f120acc09ec4a48fb7ec4
+      - image: ghcr.io/making/supply-chain/blog-ui-blog@sha256:f81c411b11da75a85b47811fb66e0111f70dd09ef6befd00be1e500177374263
         livenessProbe:
           httpGet:
             path: /aboutme
