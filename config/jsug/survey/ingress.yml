@@ -20,9 +20,9 @@ spec:
   tls:
     - secretName: survey-tls
       hosts:
-      - survey.run.lime.maki.lol
+      - survey-jsug.run.lime.maki.lol
   rules:
-  - host: survey.run.lime.maki.lol
+  - host: survey-jsug.run.lime.maki.lol
     http:
       paths:
       - pathType: Prefix
