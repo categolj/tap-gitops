@@ -18,7 +18,7 @@ spec:
   template:
     metadata:
       annotations:
-        autoscaling.knative.dev/maxScale: "2"
+        autoscaling.knative.dev/maxScale: "1"
         autoscaling.knative.dev/minScale: "1"
         conventions.carto.run/applied-conventions: |-
           inspect-image-convention/buildpacks
