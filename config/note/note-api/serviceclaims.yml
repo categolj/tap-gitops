@@ -20,7 +20,7 @@ metadata:
   annotations:
     kapp.k14s.io/disable-original: ""
     kapp.k14s.io/identity: v1;note/carto.run/Workload/note-api;carto.run/v1alpha1
-    autoscaling.knative.dev/maxScale: "2"
+    autoscaling.knative.dev/maxScale: "1"
     autoscaling.knative.dev/minScale: "1"
     prometheus.io/path: /actuator/prometheus
     prometheus.io/port: "8081"
@@ -52,7 +52,7 @@ metadata:
   annotations:
     kapp.k14s.io/disable-original: ""
     kapp.k14s.io/identity: v1;note/carto.run/Workload/note-api;carto.run/v1alpha1
-    autoscaling.knative.dev/maxScale: "2"
+    autoscaling.knative.dev/maxScale: "1"
     autoscaling.knative.dev/minScale: "1"
     prometheus.io/path: /actuator/prometheus
     prometheus.io/port: "8081"
@@ -84,7 +84,7 @@ metadata:
   annotations:
     kapp.k14s.io/disable-original: ""
     kapp.k14s.io/identity: v1;note/carto.run/Workload/note-api;carto.run/v1alpha1
-    autoscaling.knative.dev/maxScale: "2"
+    autoscaling.knative.dev/maxScale: "1"
     autoscaling.knative.dev/minScale: "1"
     prometheus.io/path: /actuator/prometheus
     prometheus.io/port: "8081"
