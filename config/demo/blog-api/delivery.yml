@@ -35,8 +35,8 @@ spec:
           appliveview-sample/app-live-view-appflavour-check
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: 2e0e7438f16b4156c8f6991aec4aa3053323b710d81a8ca3d605bdccc5f5a1fe
-          top_layer: sha256:0d325e850494b2de28be592d0792a0c2ab444b52f6e1db8806861bca2505ed8c
+          reference: c9fa0ae3e038410cfc939b47527a79f41477073e751b762a3c8a97d097355bdf
+          top_layer: sha256:00e0c7acc93d49e21db36bbb22882f54c5b356190689350e87ada7ef31aa5360
         inspect-image.buildpacks.io/buildpacks: |-
           - id: paketo-buildpacks/ca-certificates
             version: 3.6.0
@@ -81,7 +81,7 @@ spec:
           value: ERROR
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.health.probes.enabled="true" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: ghcr.io/categolj/blog-api@sha256:f2ad1219ff835991ad3e2d0ae590e9d80355e0fc2007170f2b6c7b022e6dcff1
+        image: ghcr.io/categolj/blog-api@sha256:3c7e16c54830c74bb373b7d7622eb0dc1f4b45eacb3d9cc8e8e4f5ee55a07bae
         livenessProbe:
           httpGet:
             path: /livez
