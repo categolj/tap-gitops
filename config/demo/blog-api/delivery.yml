@@ -17,7 +17,7 @@ spec:
   template:
     metadata:
       annotations:
-        boot.spring.io/version: 3.0.4
+        boot.spring.io/version: 3.0.5
         conventions.carto.run/applied-conventions: |-
           inspect-image-convention/buildpacks
           inspect-image-convention/base-image
@@ -81,7 +81,7 @@ spec:
           value: ERROR
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.health.probes.enabled="true" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: ghcr.io/categolj/blog-api@sha256:36444f6fb0fd7d79ba41ef21ef9425e13fd2d969e722fd493f3ff60e78a833ee
+        image: ghcr.io/categolj/blog-api@sha256:919f471aa3c7798e7d2276e4dea367f155bcc0716b2a499b88c26a23179fae78
         livenessProbe:
           httpGet:
             path: /livez
