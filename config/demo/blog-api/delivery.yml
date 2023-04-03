@@ -35,17 +35,17 @@ spec:
           appliveview-sample/app-live-view-appflavour-check
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: f2651eefc7d0507fa6ddc4be32ae2db7da74fe301d89e557cadbe902c090249c
-          top_layer: sha256:f6196b558e7c5fbcc1f9a3859a4f72a91f6a49109a54498e8642c403c1f573df
+          reference: 63216a76b12e4f52b0027608e0b5152fdf824a14db9cb23ce1589f7dd6dd2e9b
+          top_layer: sha256:8af856db2d94090893307c9be02d0cb7e3ee3dfb4a54ab809adb24902f594ccc
         inspect-image.buildpacks.io/buildpacks: |-
           - id: paketo-buildpacks/ca-certificates
             version: 3.6.0
           - id: paketo-buildpacks/bellsoft-liberica
-            version: 9.11.0
+            version: 10.0.0
           - id: paketo-buildpacks/syft
-            version: 1.25.0
+            version: 1.26.0
           - id: paketo-buildpacks/executable-jar
-            version: 6.6.1
+            version: 6.6.2
           - id: paketo-buildpacks/spring-boot
             version: 5.23.0
           - id: paketo-buildpacks/native-image
@@ -81,7 +81,7 @@ spec:
           value: ERROR
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.health.probes.enabled="true" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: ghcr.io/categolj/blog-api@sha256:919f471aa3c7798e7d2276e4dea367f155bcc0716b2a499b88c26a23179fae78
+        image: ghcr.io/categolj/blog-api@sha256:bce97622b305a59bb078488ddd083003c145868febb3c2ceaea7a33c005ec75c
         livenessProbe:
           httpGet:
             path: /livez
