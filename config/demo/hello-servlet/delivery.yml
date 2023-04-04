@@ -71,7 +71,6 @@ spec:
     spec:
       containers:
       - env:
-        - name: JAVA_TOOL_OPTIONS
         - name: OTEL_SERVICE_NAME
           value: hello-service
         - name: OTEL_TRACES_EXPORTER
