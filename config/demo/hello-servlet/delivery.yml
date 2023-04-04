@@ -59,7 +59,7 @@ spec:
           - id: paketo-buildpacks/image-labels
             version: 4.4.1
         inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:9dd08018eb5c8ffae08d12c72d5c49ab9f9580ba152abc718d2e7ea673fb0867
-        inspect-image.opencontainers.org/source: master/52d3ce0ebf10deab0495845fd36027c5da39efc9
+        inspect-image.opencontainers.org/source: master/3c6e5e38b316c99f8ec2ca67e2671f79f1120d8c
       labels:
         app.kubernetes.io/component: run
         app.kubernetes.io/part-of: hello-servlet
@@ -68,7 +68,7 @@ spec:
         carto.run/workload-name: hello-servlet
     spec:
       containers:
-      - image: ghcr.io/making/supply-chain/hello-servlet-demo@sha256:08fe924fc76f137c580b922b93c95eb3821fafedc4bf1af3bc4a0482242189d2
+      - image: ghcr.io/making/supply-chain/hello-servlet-demo@sha256:acf2195c69447b4855f73b7108aa2af184d3f3ef077fb8430d25097df47fc7e8
         name: workload
         resources: {}
         securityContext:
