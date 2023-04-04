@@ -75,7 +75,7 @@ spec:
         - name: OTEL_SERVICE_NAME
           value: hello-service
         - name: OTEL_TRACES_EXPORTER
-          value: zipkn
+          value: zipkin
         - name: OTEL_EXPORTER_ZIPKIN_ENDPOINT
           value: https://zipkin.ik.am/api/v2/spans
         - name: OTEL_LOG_LEVEL
