@@ -81,7 +81,7 @@ spec:
           value: ERROR
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.health.probes.enabled="true" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: ghcr.io/categolj/blog-api@sha256:bce97622b305a59bb078488ddd083003c145868febb3c2ceaea7a33c005ec75c
+        image: ghcr.io/categolj/blog-api@sha256:12631fdbcd53fa71f5ca02e6c96174638fc537bf34c193198bfaf759b5dd56f8
         livenessProbe:
           httpGet:
             path: /livez
