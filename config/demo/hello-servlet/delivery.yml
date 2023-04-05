@@ -70,20 +70,7 @@ spec:
         carto.run/workload-name: hello-servlet
     spec:
       containers:
-      - env:
-        - name: OTEL_SERVICE_NAME
-          value: hello-service
-        - name: OTEL_TRACES_EXPORTER
-          value: zipkin
-        - name: OTEL_EXPORTER_ZIPKIN_ENDPOINT
-          value: https://zipkin.ik.am/api/v2/spans
-        - name: OTEL_LOG_LEVEL
-          value: trace
-        - name: OTEL_PROPAGATORS
-          value: b3multi
-        - name: OTEL_JAVAAGENT_ENABLED
-          value: "true"
-        image: ghcr.io/making/supply-chain/hello-servlet-demo@sha256:ea906a584634b034cdfbc362f0e3be2f695a267e0f050a03b26953e7c7634778
+      - image: ghcr.io/making/supply-chain/hello-servlet-demo@sha256:342bc800400e08a83adf20c954dc2ef1a3234611651ca16069273a91ded7dc16
         name: workload
         resources: {}
         securityContext:
