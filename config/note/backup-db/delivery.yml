@@ -1,0 +1,112 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: backup-db
+  annotations:
+    kapp.k14s.io/update-strategy: fallback-on-replace
+    ootb.apps.tanzu.vmware.com/servicebinding-workload: "true"
+    kapp.k14s.io/change-rule: upsert after upserting servicebinding.io/ServiceBindings
+  labels:
+    app.kubernetes.io/part-of: backup-db
+    apps.tanzu.vmware.com/workload-type: cronjob
+    kapp.k14s.io/app: "1673586328584986961"
+    kapp.k14s.io/association: v1.d423bcc6a30c38008b103b9b242b5cd2
+    app.kubernetes.io/component: run
+    carto.run/workload-name: backup-db
+spec:
+  schedule: 0 15 * * ?
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 3
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    metadata:
+      labels:
+        app.kubernetes.io/component: run
+        app.kubernetes.io/part-of: backup-db
+        apps.tanzu.vmware.com/workload-type: cronjob
+        carto.run/workload-name: backup-db
+        kapp.k14s.io/app: "1673586328584986961"
+        kapp.k14s.io/association: v1.d423bcc6a30c38008b103b9b242b5cd2
+    spec:
+      backoffLimit: 0
+      template:
+        metadata:
+          annotations:
+            conventions.carto.run/applied-conventions: |-
+              spring-boot-convention/auto-configure-actuators-check
+              spring-boot-convention/app-live-view-appflavour-check
+              appliveview-sample/app-live-view-appflavour-check
+            developer.conventions/target-containers: workload
+            kapp.k14s.io/identity: v1;note/carto.run/Workload/backup-db;carto.run/v1alpha1
+            kapp.k14s.io/original: '{"apiVersion":"carto.run/v1alpha1","kind":"Workload","metadata":{"labels":{"app.kubernetes.io/part-of":"backup-db","apps.tanzu.vmware.com/workload-type":"cronjob","kapp.k14s.io/app":"1673586328584986961","kapp.k14s.io/association":"v1.d423bcc6a30c38008b103b9b242b5cd2"},"name":"backup-db","namespace":"note"},"spec":{"env":[{"name":"AWS_S3_HOST","valueFrom":{"secretKeyRef":{"key":"host","name":"backup-s3"}}},{"name":"AWS_ACCESS_KEY","valueFrom":{"secretKeyRef":{"key":"access_key","name":"backup-s3"}}},{"name":"AWS_ACCESS_SECRET","valueFrom":{"secretKeyRef":{"key":"access_secret","name":"backup-s3"}}},{"name":"AWS_BUCKET_NAME","value":"backup-note-db"},{"name":"DB_USER","valueFrom":{"secretKeyRef":{"key":"username","name":"note-db"}}},{"name":"DB_HOST","valueFrom":{"secretKeyRef":{"key":"host","name":"note-db"}}},{"name":"DB_PORT","valueFrom":{"secretKeyRef":{"key":"port","name":"note-db"}}},{"name":"DB_NAME","valueFrom":{"secretKeyRef":{"key":"database","name":"note-db"}}},{"name":"PGPASSWORD","valueFrom":{"secretKeyRef":{"key":"password","name":"note-db"}}}],"image":"ghcr.io/categolj/psql-backup:latest","params":[{"name":"schedule","value":"0 15 * * ?"},{"name":"command","value":["/bin/bash"]},{"name":"args","value":["-c","set -eo pipefail\nmc config host add -C /tmp backup_host ${AWS_S3_HOST} ${AWS_ACCESS_KEY} ${AWS_ACCESS_SECRET}\necho \"Backup Started!\"\npg_dump -U ${DB_USER} -h ${DB_HOST} -p ${DB_PORT} ${DB_NAME} | mc pipe -C /tmp backup_host/${AWS_BUCKET_NAME}/$(date +\"%Y\")/$(date +\"%m\")/$(date +\"%d\")/backup-$(date +\"%Y-%m-%d-%H-%M\").sql\necho \"Backup Finished!\""]},{"name":"testing_pipeline_matching_labels","value":{"apps.tanzu.vmware.com/language":"skip","apps.tanzu.vmware.com/pipeline":"test"}}]}}'
+            kapp.k14s.io/original-diff-md5: c6e94dc94aed3401b5d0f26ed6c0bff3
+          labels:
+            app.kubernetes.io/component: run
+            app.kubernetes.io/part-of: backup-db
+            apps.tanzu.vmware.com/workload-type: cronjob
+            carto.run/workload-name: backup-db
+            kapp.k14s.io/app: "1673586328584986961"
+            kapp.k14s.io/association: v1.d423bcc6a30c38008b103b9b242b5cd2
+        spec:
+          containers:
+          - env:
+            - name: AWS_S3_HOST
+              valueFrom:
+                secretKeyRef:
+                  key: host
+                  name: backup-s3
+            - name: AWS_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: access_key
+                  name: backup-s3
+            - name: AWS_ACCESS_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: access_secret
+                  name: backup-s3
+            - name: AWS_BUCKET_NAME
+              value: backup-note-db
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  key: username
+                  name: note-db
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  key: host
+                  name: note-db
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  key: port
+                  name: note-db
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  key: database
+                  name: note-db
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: note-db
+            image: ghcr.io/categolj/psql-backup@sha256:8256cfc6022acca65700e863183594107622727e30a55ff32542c5907f223ddb
+            name: workload
+            resources: {}
+            securityContext:
+              runAsUser: 1000
+            command:
+            - /bin/bash
+            args:
+            - -c
+            - |-
+              set -eo pipefail
+              mc config host add -C /tmp backup_host ${AWS_S3_HOST} ${AWS_ACCESS_KEY} ${AWS_ACCESS_SECRET}
+              echo "Backup Started!"
+              pg_dump -U ${DB_USER} -h ${DB_HOST} -p ${DB_PORT} ${DB_NAME} | mc pipe -C /tmp backup_host/${AWS_BUCKET_NAME}/$(date +"%Y")/$(date +"%m")/$(date +"%d")/backup-$(date +"%Y-%m-%d-%H-%M").sql
+              echo "Backup Finished!"
+          serviceAccountName: default
+          restartPolicy: Never
+
