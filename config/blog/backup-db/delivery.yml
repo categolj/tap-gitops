@@ -92,7 +92,7 @@ spec:
                 secretKeyRef:
                   key: password
                   name: blog-db
-            image: ghcr.io/categolj/psql-backup@sha256:2f45595728754a734103b89a744ae9c1fd8479c4b6a892b95dc5c5de6df46c3e
+            image: ghcr.io/categolj/psql-backup@sha256:8256cfc6022acca65700e863183594107622727e30a55ff32542c5907f223ddb
             name: workload
             resources: {}
             securityContext:
