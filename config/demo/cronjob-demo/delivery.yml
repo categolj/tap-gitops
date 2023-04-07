@@ -50,5 +50,5 @@ spec:
             securityContext:
               runAsUser: 1000
           serviceAccountName: default
-        restartPolicy: Never
+          restartPolicy: Never
 
