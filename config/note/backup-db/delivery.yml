@@ -9,8 +9,8 @@ metadata:
   labels:
     app.kubernetes.io/part-of: backup-db
     apps.tanzu.vmware.com/workload-type: cronjob
-    kapp.k14s.io/app: "1673062250001482428"
-    kapp.k14s.io/association: v1.4e043a1fa1e762f9e99e68cc4f600214
+    kapp.k14s.io/app: "1673586328584986961"
+    kapp.k14s.io/association: v1.d423bcc6a30c38008b103b9b242b5cd2
     app.kubernetes.io/component: run
     carto.run/workload-name: backup-db
 spec:
@@ -25,8 +25,8 @@ spec:
         app.kubernetes.io/part-of: backup-db
         apps.tanzu.vmware.com/workload-type: cronjob
         carto.run/workload-name: backup-db
-        kapp.k14s.io/app: "1673062250001482428"
-        kapp.k14s.io/association: v1.4e043a1fa1e762f9e99e68cc4f600214
+        kapp.k14s.io/app: "1673586328584986961"
+        kapp.k14s.io/association: v1.d423bcc6a30c38008b103b9b242b5cd2
     spec:
       backoffLimit: 0
       template:
@@ -38,14 +38,14 @@ spec:
               appliveview-sample/app-live-view-appflavour-check
             developer.conventions/target-containers: workload
             kapp.k14s.io/disable-original: ""
-            kapp.k14s.io/identity: v1;blog/carto.run/Workload/backup-db;carto.run/v1alpha1
+            kapp.k14s.io/identity: v1;note/carto.run/Workload/backup-db;carto.run/v1alpha1
           labels:
             app.kubernetes.io/component: run
             app.kubernetes.io/part-of: backup-db
             apps.tanzu.vmware.com/workload-type: cronjob
             carto.run/workload-name: backup-db
-            kapp.k14s.io/app: "1673062250001482428"
-            kapp.k14s.io/association: v1.4e043a1fa1e762f9e99e68cc4f600214
+            kapp.k14s.io/app: "1673586328584986961"
+            kapp.k14s.io/association: v1.d423bcc6a30c38008b103b9b242b5cd2
         spec:
           containers:
           - env:
@@ -65,32 +65,32 @@ spec:
                   key: access_secret
                   name: backup-s3
             - name: AWS_BUCKET_NAME
-              value: backup-blog-db
+              value: backup-note-db
             - name: DB_USER
               valueFrom:
                 secretKeyRef:
                   key: username
-                  name: blog-db
+                  name: note-db
             - name: DB_HOST
               valueFrom:
                 secretKeyRef:
                   key: host
-                  name: blog-db
+                  name: note-db
             - name: DB_PORT
               valueFrom:
                 secretKeyRef:
                   key: port
-                  name: blog-db
+                  name: note-db
             - name: DB_NAME
               valueFrom:
                 secretKeyRef:
                   key: database
-                  name: blog-db
+                  name: note-db
             - name: PGPASSWORD
               valueFrom:
                 secretKeyRef:
                   key: password
-                  name: blog-db
+                  name: note-db
             image: ghcr.io/categolj/psql-backup@sha256:8256cfc6022acca65700e863183594107622727e30a55ff32542c5907f223ddb
             name: workload
             resources: {}
