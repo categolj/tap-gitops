@@ -45,10 +45,10 @@ spec:
             resources: {}
             securityContext:
               runAsUser: 1000
+            command:
+            - /bin/sh
+            - -c
+            - date; echo Hello from TAP
           serviceAccountName: default
           restartPolicy: Never
-          command:
-          - /bin/sh
-          - -c
-          - date; echo Hello from TAP
 
