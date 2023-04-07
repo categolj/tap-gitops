@@ -12,7 +12,7 @@ metadata:
     app.kubernetes.io/component: run
     carto.run/workload-name: cronjob-demo
 spec:
-  schedule: 0 15 * * ?
+  schedule: '* * * * *'
   successfulJobsHistoryLimit: 1
   failedJobsHistoryLimit: 3
   concurrencyPolicy: Forbid
