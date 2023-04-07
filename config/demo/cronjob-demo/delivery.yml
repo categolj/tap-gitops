@@ -13,10 +13,6 @@ metadata:
     carto.run/workload-name: cronjob-demo
 spec:
   schedule: '* * * * *'
-  command:
-  - /bin/sh
-  - -c
-  - date; echo Hello from TAP
   successfulJobsHistoryLimit: 1
   failedJobsHistoryLimit: 3
   concurrencyPolicy: Forbid
@@ -51,4 +47,8 @@ spec:
               runAsUser: 1000
           serviceAccountName: default
           restartPolicy: Never
+          command:
+          - /bin/sh
+          - -c
+          - date; echo Hello from TAP
 
