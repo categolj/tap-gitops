@@ -1,0 +1,117 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: vehicle-ui
+  annotations:
+    ootb.apps.tanzu.vmware.com/servicebinding-workload: "true"
+    ootb.apps.tanzu.vmware.com/apidescriptor-ref: "true"
+    kapp.k14s.io/change-rule: upsert after upserting servicebinding.io/ServiceBindings
+  labels:
+    app.kubernetes.io/part-of: vehicle-ui
+    apps.tanzu.vmware.com/auto-configure-actuators: "true"
+    apps.tanzu.vmware.com/has-tests: "true"
+    apps.tanzu.vmware.com/workload-type: web
+    app.kubernetes.io/component: run
+    carto.run/workload-name: vehicle-ui
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/minScale: "1"
+        boot.spring.io/actuator: http://:8081/actuator
+        boot.spring.io/version: 3.0.1
+        conventions.carto.run/applied-conventions: |-
+          inspect-image-convention/buildpacks
+          inspect-image-convention/base-image
+          inspect-image-convention/run-image
+          inspect-image-convention/source
+          spring-boot-convention/auto-configure-actuators-check
+          spring-boot-convention/spring-boot
+          spring-boot-convention/spring-boot-graceful-shutdown
+          spring-boot-convention/spring-boot-web
+          spring-boot-convention/spring-boot-actuator
+          spring-boot-convention/spring-boot-actuator-probes
+          spring-boot-convention/app-live-view-appflavour-check
+          spring-boot-convention/app-live-view-connector-boot
+          spring-boot-convention/app-live-view-appflavours-boot
+          appliveview-sample/app-live-view-appflavour-check
+        developer.conventions/target-containers: workload
+        inspect-image.buildpacks.io/base-image: |-
+          reference: ghcr.io/making/build-service@sha256:b1415ad3a283e2f18ecbd0e6027602ee21a3a4280e40f0ce7f4e86bb9fe4eff1
+          top_layer: sha256:619575b1c2d7319e9831e6994b36d72b538d95aeb040eda23b5837af59d89a20
+        inspect-image.buildpacks.io/buildpacks: |-
+          - id: tanzu-buildpacks/deprecation-warnings
+            version: 0.0.3
+          - id: paketo-buildpacks/ca-certificates
+            version: 3.6.0
+          - id: paketo-buildpacks/bellsoft-liberica
+            version: 9.11.0
+          - id: paketo-buildpacks/syft
+            version: 1.10.1
+          - id: paketo-buildpacks/maven
+            version: 6.13.0
+          - id: paketo-buildpacks/executable-jar
+            version: 6.6.2
+          - id: paketo-buildpacks/apache-tomcat
+            version: 7.12.1
+          - id: paketo-buildpacks/apache-tomee
+            version: 1.6.1
+          - id: paketo-buildpacks/liberty
+            version: 3.5.0
+          - id: paketo-buildpacks/dist-zip
+            version: 5.5.2
+          - id: paketo-buildpacks/spring-boot
+            version: 5.23.0
+          - id: paketo-buildpacks/image-labels
+            version: 4.4.1
+        inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:b1415ad3a283e2f18ecbd0e6027602ee21a3a4280e40f0ce7f4e86bb9fe4eff1
+        inspect-image.opencontainers.org/source: main/5cbaab8b0f551a8afe152bffb9fc165aba4b8315
+        prometheus.io/path: /actuator/prometheus
+        prometheus.io/port: "8081"
+        prometheus.io/scrape: "true"
+      labels:
+        app.kubernetes.io/component: run
+        app.kubernetes.io/part-of: vehicle-ui
+        apps.tanzu.vmware.com/auto-configure-actuators: "true"
+        apps.tanzu.vmware.com/has-tests: "true"
+        apps.tanzu.vmware.com/workload-type: web
+        carto.run/workload-name: vehicle-ui
+        conventions.carto.run/framework: spring-boot
+        tanzu.app.live.view: "true"
+        tanzu.app.live.view.application.actuator.path: actuator
+        tanzu.app.live.view.application.actuator.port: "8081"
+        tanzu.app.live.view.application.flavours: spring-boot
+        tanzu.app.live.view.application.name: vehicle-ui
+    spec:
+      containers:
+      - env:
+        - name: JAVA_TOOL_OPTIONS
+          value: -XX:ReservedCodeCacheSize=32M -Xss512k -Dfile.encoding="UTF-8" -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s" -Duser.country="JP" -Duser.language="ja" -Duser.timezone="Asia/Tokyo"
+        - name: BPL_JVM_THREAD_COUNT
+          value: "28"
+        - name: VEHICLE_APIURL
+          value: http://vehicle-api.vehicle.svc.cluster.local
+        image: ghcr.io/making/supply-chain/vehicle-ui-demo@sha256:705a86b469b0bf8d1aa559a7bb23cd29124bcfba41769b9a97a07ae5ea64abc2
+        livenessProbe:
+          httpGet:
+            path: /livez
+            port: 8080
+            scheme: HTTP
+        name: workload
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 8080
+            scheme: HTTP
+        resources:
+          limits:
+            memory: 256Mi
+          requests:
+            memory: 256Mi
+        securityContext:
+          runAsUser: 1000
+      serviceAccountName: default
+
