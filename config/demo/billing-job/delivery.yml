@@ -13,7 +13,7 @@ metadata:
     app.kubernetes.io/component: run
     carto.run/workload-name: billing-job
 spec:
-  schedule: 0 0 * * ?
+  schedule: 0 15 * * ?
   successfulJobsHistoryLimit: 1
   failedJobsHistoryLimit: 3
   concurrencyPolicy: Forbid
