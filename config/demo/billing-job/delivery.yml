@@ -13,7 +13,7 @@ metadata:
     app.kubernetes.io/component: run
     carto.run/workload-name: billing-job
 spec:
-  schedule: 0 0 * * ?
+  schedule: 0 15 * * ?
   successfulJobsHistoryLimit: 1
   failedJobsHistoryLimit: 3
   concurrencyPolicy: Forbid
@@ -84,7 +84,7 @@ spec:
           - env:
             - name: BPL_JVM_THREAD_COUNT
               value: "8"
-            image: ghcr.io/making/supply-chain/billing-job-demo@sha256:a790ff8bf16aac0c7b865899232e3a64ffea0338459fe6dd30c15af381b2efe4
+            image: ghcr.io/making/supply-chain/billing-job-demo@sha256:8f6b649ba44557ef7d27b3e41f2b57218f99db6e9ad8d36c57664b30f40bbc01
             name: workload
             resources: {}
             securityContext:
