@@ -8,6 +8,7 @@ metadata:
     kapp.k14s.io/change-rule: upsert after upserting servicebinding.io/ServiceBindings
   labels:
     app.kubernetes.io/part-of: backup-db
+    apps.tanzu.vmware.com/has-tests: "true"
     apps.tanzu.vmware.com/workload-type: cronjob
     kapp.k14s.io/app: "1673062250001482428"
     kapp.k14s.io/association: v1.4e043a1fa1e762f9e99e68cc4f600214
@@ -23,6 +24,7 @@ spec:
       labels:
         app.kubernetes.io/component: run
         app.kubernetes.io/part-of: backup-db
+        apps.tanzu.vmware.com/has-tests: "true"
         apps.tanzu.vmware.com/workload-type: cronjob
         carto.run/workload-name: backup-db
         kapp.k14s.io/app: "1673062250001482428"
@@ -42,6 +44,7 @@ spec:
           labels:
             app.kubernetes.io/component: run
             app.kubernetes.io/part-of: backup-db
+            apps.tanzu.vmware.com/has-tests: "true"
             apps.tanzu.vmware.com/workload-type: cronjob
             carto.run/workload-name: backup-db
             kapp.k14s.io/app: "1673062250001482428"
@@ -49,63 +52,60 @@ spec:
         spec:
           containers:
           - env:
-            - name: AWS_S3_HOST
-              valueFrom:
-                secretKeyRef:
-                  key: host
-                  name: backup-s3
-            - name: AWS_ACCESS_KEY
+            - name: BPL_JVM_THREAD_COUNT
+              value: "8"
+            - name: AWS_SECRET_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
                   key: access_key
                   name: backup-s3
-            - name: AWS_ACCESS_SECRET
+            - name: AWS_SECRET_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
                   key: access_secret
                   name: backup-s3
-            - name: AWS_BUCKET_NAME
+            - name: S3_HOSTNAME
+              valueFrom:
+                secretKeyRef:
+                  key: host
+                  name: backup-s3
+            - name: S3_BUCKET
               value: backup-blog-db
-            - name: DB_USER
+            - name: PGDUMP_USERNAME
               valueFrom:
                 secretKeyRef:
                   key: username
                   name: blog-db
-            - name: DB_HOST
+            - name: PGDUMP_HOST
               valueFrom:
                 secretKeyRef:
                   key: host
                   name: blog-db
-            - name: DB_PORT
+            - name: PGDUMP_PORT
               valueFrom:
                 secretKeyRef:
                   key: port
                   name: blog-db
-            - name: DB_NAME
+            - name: PGDUMP_DATABASE
               valueFrom:
                 secretKeyRef:
                   key: database
                   name: blog-db
-            - name: PGPASSWORD
+            - name: PGDUMP_PASSWORD
               valueFrom:
                 secretKeyRef:
                   key: password
                   name: blog-db
+            - name: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  key: otel-trace-endpoint
+                  name: otel-config
             image: ghcr.io/categolj/psql-backup@sha256:8256cfc6022acca65700e863183594107622727e30a55ff32542c5907f223ddb
             name: workload
             resources: {}
             securityContext:
               runAsUser: 1000
-            command:
-            - /bin/bash
-            args:
-            - -c
-            - |-
-              set -eo pipefail
-              mc config host add -C /tmp backup_host ${AWS_S3_HOST} ${AWS_ACCESS_KEY} ${AWS_ACCESS_SECRET}
-              echo "Backup Started!"
-              pg_dump -U ${DB_USER} -h ${DB_HOST} -p ${DB_PORT} ${DB_NAME} | mc pipe -C /tmp backup_host/${AWS_BUCKET_NAME}/$(date +"%Y")/$(date +"%m")/$(date +"%d")/backup-$(date +"%Y-%m-%d-%H-%M").sql
-              echo "Backup Finished!"
           serviceAccountName: default
           restartPolicy: Never
 
