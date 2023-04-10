@@ -16,7 +16,7 @@ metadata:
     app.kubernetes.io/component: run
     carto.run/workload-name: backup-db
 spec:
-  schedule: 0 15 * * ?
+  schedule: 30 15 * * ?
   successfulJobsHistoryLimit: 1
   failedJobsHistoryLimit: 3
   concurrencyPolicy: Forbid
