@@ -8,6 +8,7 @@ metadata:
     kapp.k14s.io/change-rule: upsert after upserting servicebinding.io/ServiceBindings
   labels:
     app.kubernetes.io/part-of: backup-db
+    apps.tanzu.vmware.com/has-tests: "true"
     apps.tanzu.vmware.com/workload-type: cronjob
     kapp.k14s.io/app: "1673062250001482428"
     kapp.k14s.io/association: v1.4e043a1fa1e762f9e99e68cc4f600214
@@ -96,16 +97,6 @@ spec:
             resources: {}
             securityContext:
               runAsUser: 1000
-            command:
-            - /bin/bash
-            args:
-            - -c
-            - |-
-              set -eo pipefail
-              mc config host add -C /tmp backup_host ${AWS_S3_HOST} ${AWS_ACCESS_KEY} ${AWS_ACCESS_SECRET}
-              echo "Backup Started!"
-              pg_dump -U ${DB_USER} -h ${DB_HOST} -p ${DB_PORT} ${DB_NAME} | mc pipe -C /tmp backup_host/${AWS_BUCKET_NAME}/$(date +"%Y")/$(date +"%m")/$(date +"%d")/backup-$(date +"%Y-%m-%d-%H-%M").sql
-              echo "Backup Finished!"
           serviceAccountName: default
           restartPolicy: Never
 
