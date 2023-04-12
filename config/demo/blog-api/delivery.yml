@@ -19,6 +19,7 @@ spec:
       annotations:
         boot.spring.io/version: 3.0.5
         conventions.carto.run/applied-conventions: |-
+          appliveview-sample/app-live-view-appflavour-check
           inspect-image-convention/buildpacks
           inspect-image-convention/base-image
           inspect-image-convention/run-image
@@ -32,7 +33,6 @@ spec:
           spring-boot-convention/app-live-view-connector-boot
           spring-boot-convention/app-live-view-appflavours-boot
           spring-boot-convention/service-intent-postgres
-          appliveview-sample/app-live-view-appflavour-check
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
           reference: 63216a76b12e4f52b0027608e0b5152fdf824a14db9cb23ce1589f7dd6dd2e9b
