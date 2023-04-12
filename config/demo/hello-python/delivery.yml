@@ -31,13 +31,13 @@ spec:
         metadata:
           annotations:
             conventions.carto.run/applied-conventions: |-
+              appliveview-sample/app-live-view-appflavour-check
               inspect-image-convention/buildpacks
               inspect-image-convention/base-image
               inspect-image-convention/run-image
               inspect-image-convention/source
               spring-boot-convention/auto-configure-actuators-check
               spring-boot-convention/app-live-view-appflavour-check
-              appliveview-sample/app-live-view-appflavour-check
             developer.conventions/target-containers: workload
             inspect-image.buildpacks.io/base-image: |-
               reference: ghcr.io/making/build-service@sha256:b1415ad3a283e2f18ecbd0e6027602ee21a3a4280e40f0ce7f4e86bb9fe4eff1
