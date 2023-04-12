@@ -37,6 +37,7 @@ spec:
       annotations:
         boot.spring.io/version: 2.7.9
         conventions.carto.run/applied-conventions: |-
+          appliveview-sample/app-live-view-appflavour-check
           inspect-image-convention/buildpacks
           inspect-image-convention/base-image
           inspect-image-convention/run-image
@@ -50,7 +51,6 @@ spec:
           spring-boot-convention/app-live-view-appflavour-check
           spring-boot-convention/app-live-view-connector-boot
           spring-boot-convention/app-live-view-appflavours-boot
-          appliveview-sample/app-live-view-appflavour-check
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
           reference: ghcr.io/making/build-service@sha256:9dd08018eb5c8ffae08d12c72d5c49ab9f9580ba152abc718d2e7ea673fb0867
