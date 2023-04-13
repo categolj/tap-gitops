@@ -19,6 +19,7 @@ spec:
       annotations:
         boot.spring.io/version: 3.0.5
         conventions.carto.run/applied-conventions: |-
+          appliveview-sample/app-live-view-appflavour-check
           inspect-image-convention/buildpacks
           inspect-image-convention/base-image
           inspect-image-convention/run-image
@@ -32,20 +33,19 @@ spec:
           spring-boot-convention/app-live-view-connector-boot
           spring-boot-convention/app-live-view-appflavours-boot
           spring-boot-convention/service-intent-postgres
-          appliveview-sample/app-live-view-appflavour-check
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
           reference: 63216a76b12e4f52b0027608e0b5152fdf824a14db9cb23ce1589f7dd6dd2e9b
           top_layer: sha256:8af856db2d94090893307c9be02d0cb7e3ee3dfb4a54ab809adb24902f594ccc
         inspect-image.buildpacks.io/buildpacks: |-
           - id: paketo-buildpacks/ca-certificates
-            version: 3.6.0
+            version: 3.6.1
           - id: paketo-buildpacks/bellsoft-liberica
-            version: 10.0.0
+            version: 10.1.0
           - id: paketo-buildpacks/syft
-            version: 1.26.0
+            version: 1.27.0
           - id: paketo-buildpacks/executable-jar
-            version: 6.6.2
+            version: 6.6.3
           - id: paketo-buildpacks/spring-boot
             version: 5.23.0
           - id: paketo-buildpacks/native-image
@@ -81,7 +81,7 @@ spec:
           value: ERROR
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.health.probes.enabled="true" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: ghcr.io/categolj/blog-api@sha256:27c8c294e1f1d74f66fd582717d3eecb9e9e249e517bb3623f4af583d8ae929c
+        image: ghcr.io/categolj/blog-api@sha256:0bef721dda7faee01eb61b20d02ff4284f78c951c00db96ac44ad9fc02005952
         livenessProbe:
           httpGet:
             path: /livez
