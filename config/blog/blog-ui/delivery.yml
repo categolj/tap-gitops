@@ -21,27 +21,27 @@ spec:
         autoscaling.knative.dev/maxScale: "1"
         autoscaling.knative.dev/minScale: "1"
         conventions.carto.run/applied-conventions: |-
+          appliveview-sample/app-live-view-appflavour-check
           inspect-image-convention/buildpacks
           inspect-image-convention/base-image
           inspect-image-convention/run-image
           inspect-image-convention/source
           spring-boot-convention/auto-configure-actuators-check
           spring-boot-convention/app-live-view-appflavour-check
-          appliveview-sample/app-live-view-appflavour-check
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: ghcr.io/making/build-service@sha256:9dd08018eb5c8ffae08d12c72d5c49ab9f9580ba152abc718d2e7ea673fb0867
-          top_layer: sha256:8c18fdd12a98e4e60a2111aeb00c38b89a2d46f08154433bdfe4c54eeccc4ef6
+          reference: ghcr.io/making/build-service@sha256:4ad9babcb718243b0dbdb29e8b3e1d474eafd6edc20e73a2a09dfde213d5fdcf
+          top_layer: sha256:2dccd34d83ce1fcec8a5f20f06f0963d059264297222d1480a70c0d6645c88a1
         inspect-image.buildpacks.io/buildpacks: |-
           - id: paketo-buildpacks/ca-certificates
             version: 3.5.1
-          - id: tanzu-buildpacks/node-engine
+          - id: tanzu-buildpacks/node-engine-lite
             version: 1.2.0
-          - id: tanzu-buildpacks/yarn
+          - id: tanzu-buildpacks/yarn-lite
             version: 1.1.1
           - id: tanzu-buildpacks/yarn-install
             version: 1.0.0
-          - id: tanzu-buildpacks/node-module-bom
+          - id: tanzu-buildpacks/node-module-bom-lite
             version: 0.3.4
           - id: tanzu-buildpacks/node-run-script
             version: 1.0.1
@@ -49,7 +49,7 @@ spec:
             version: 1.0.2
           - id: paketo-buildpacks/image-labels
             version: 4.4.0
-        inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:e7ed7f534dce188a9dad9b4c6500d2bdc0fde73d1afb6043e3d6d72c02de7888
+        inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:4ad9babcb718243b0dbdb29e8b3e1d474eafd6edc20e73a2a09dfde213d5fdcf
         inspect-image.opencontainers.org/source: main/c1a7f9f1d8a793d7303f9b773cc3b80f25110792
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-ui;carto.run/v1alpha1
@@ -63,7 +63,7 @@ spec:
         kapp.k14s.io/association: v1.0ba63a416d64128605b90e7ad1328294
     spec:
       containers:
-      - image: ghcr.io/making/supply-chain/blog-ui-blog@sha256:ea227f347999e14e17a4a4eafb02154db5b73d6555f34f9637fe4c3ab9bb2d84
+      - image: ghcr.io/making/supply-chain/blog-ui-blog@sha256:12c0311360f4b5f0286e08e5171cd36c2f744dba6e661688c9818a7206d9a15a
         livenessProbe:
           httpGet:
             path: /aboutme
