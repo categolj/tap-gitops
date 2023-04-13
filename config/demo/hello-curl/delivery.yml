@@ -29,9 +29,9 @@ spec:
         metadata:
           annotations:
             conventions.carto.run/applied-conventions: |-
+              appliveview-sample/app-live-view-appflavour-check
               spring-boot-convention/auto-configure-actuators-check
               spring-boot-convention/app-live-view-appflavour-check
-              appliveview-sample/app-live-view-appflavour-check
             developer.conventions/target-containers: workload
           labels:
             app.kubernetes.io/component: run
