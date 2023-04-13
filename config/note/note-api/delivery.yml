@@ -40,11 +40,9 @@ spec:
           spring-boot-convention/service-intent-postgres
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: ghcr.io/making/build-service@sha256:7439c23b8bfe069b8e73b1486041d78852ec2a0ccd1c4d4715089dd4630de4b2
-          top_layer: sha256:2d8fc429b90a5667d94370598fe77e5df0bf9f2e12a679cb50fd8dd2d5389395
+          reference: ghcr.io/making/build-service@sha256:4ad9babcb718243b0dbdb29e8b3e1d474eafd6edc20e73a2a09dfde213d5fdcf
+          top_layer: sha256:2dccd34d83ce1fcec8a5f20f06f0963d059264297222d1480a70c0d6645c88a1
         inspect-image.buildpacks.io/buildpacks: |-
-          - id: tanzu-buildpacks/deprecation-warnings
-            version: 0.0.3
           - id: paketo-buildpacks/ca-certificates
             version: 3.6.0
           - id: paketo-buildpacks/bellsoft-liberica
@@ -57,8 +55,6 @@ spec:
             version: 6.6.2
           - id: paketo-buildpacks/apache-tomcat
             version: 7.12.1
-          - id: paketo-buildpacks/apache-tomee
-            version: 1.6.1
           - id: paketo-buildpacks/liberty
             version: 3.5.0
           - id: paketo-buildpacks/dist-zip
@@ -69,7 +65,7 @@ spec:
             version: 1.3.0
           - id: paketo-buildpacks/image-labels
             version: 4.4.1
-        inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:b1415ad3a283e2f18ecbd0e6027602ee21a3a4280e40f0ce7f4e86bb9fe4eff1
+        inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:4ad9babcb718243b0dbdb29e8b3e1d474eafd6edc20e73a2a09dfde213d5fdcf
         inspect-image.opencontainers.org/source: main/49d5ab34ca7d516d68dc796bed0428616f4448c6
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;note/carto.run/Workload/note-api;carto.run/v1alpha1
@@ -134,7 +130,7 @@ spec:
           value: ${K_CONFIGURATION:}
         - name: INFO_ENV_K_REVISION
           value: ${K_REVISION:}
-        image: ghcr.io/making/supply-chain/note-api-note@sha256:8b84fea66d6ea25d222c009127b39b428a1b986a132fe62a095c5fa6ca5a31af
+        image: ghcr.io/making/supply-chain/note-api-note@sha256:110469d6be6e083919e726863b228ddd3f47fa133e30003316c42e3f74fd96fe
         livenessProbe:
           httpGet:
             path: /livez
