@@ -23,6 +23,7 @@ spec:
         boot.spring.io/actuator: http://:8081/actuator
         boot.spring.io/version: 3.0.5
         conventions.carto.run/applied-conventions: |-
+          appliveview-sample/app-live-view-appflavour-check
           inspect-image-convention/buildpacks
           inspect-image-convention/base-image
           inspect-image-convention/run-image
@@ -37,11 +38,10 @@ spec:
           spring-boot-convention/app-live-view-connector-boot
           spring-boot-convention/app-live-view-appflavours-boot
           spring-boot-convention/service-intent-postgres
-          appliveview-sample/app-live-view-appflavour-check
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: ghcr.io/making/build-service@sha256:b1415ad3a283e2f18ecbd0e6027602ee21a3a4280e40f0ce7f4e86bb9fe4eff1
-          top_layer: sha256:619575b1c2d7319e9831e6994b36d72b538d95aeb040eda23b5837af59d89a20
+          reference: ghcr.io/making/build-service@sha256:7439c23b8bfe069b8e73b1486041d78852ec2a0ccd1c4d4715089dd4630de4b2
+          top_layer: sha256:2d8fc429b90a5667d94370598fe77e5df0bf9f2e12a679cb50fd8dd2d5389395
         inspect-image.buildpacks.io/buildpacks: |-
           - id: tanzu-buildpacks/deprecation-warnings
             version: 0.0.3
@@ -134,7 +134,7 @@ spec:
           value: ${K_CONFIGURATION:}
         - name: INFO_ENV_K_REVISION
           value: ${K_REVISION:}
-        image: ghcr.io/making/supply-chain/note-api-note@sha256:b0b287021fa9e3af099655e1a835e82637c1fc4dc0fc9aed3bcb3912b645a19f
+        image: ghcr.io/making/supply-chain/note-api-note@sha256:8b84fea66d6ea25d222c009127b39b428a1b986a132fe62a095c5fa6ca5a31af
         livenessProbe:
           httpGet:
             path: /livez
