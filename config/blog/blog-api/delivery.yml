@@ -24,6 +24,7 @@ spec:
         boot.spring.io/actuator: http://:8081/actuator
         boot.spring.io/version: 3.0.5
         conventions.carto.run/applied-conventions: |-
+          appliveview-sample/app-live-view-appflavour-check
           inspect-image-convention/buildpacks
           inspect-image-convention/base-image
           inspect-image-convention/run-image
@@ -38,11 +39,10 @@ spec:
           spring-boot-convention/app-live-view-connector-boot
           spring-boot-convention/app-live-view-appflavours-boot
           spring-boot-convention/service-intent-postgres
-          appliveview-sample/app-live-view-appflavour-check
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: ghcr.io/making/build-service@sha256:9dd08018eb5c8ffae08d12c72d5c49ab9f9580ba152abc718d2e7ea673fb0867
-          top_layer: sha256:8c18fdd12a98e4e60a2111aeb00c38b89a2d46f08154433bdfe4c54eeccc4ef6
+          reference: ghcr.io/making/build-service@sha256:4ad9babcb718243b0dbdb29e8b3e1d474eafd6edc20e73a2a09dfde213d5fdcf
+          top_layer: sha256:2dccd34d83ce1fcec8a5f20f06f0963d059264297222d1480a70c0d6645c88a1
         inspect-image.buildpacks.io/buildpacks: |-
           - id: paketo-buildpacks/ca-certificates
             version: 3.6.0
@@ -56,8 +56,6 @@ spec:
             version: 6.6.2
           - id: paketo-buildpacks/apache-tomcat
             version: 7.12.1
-          - id: paketo-buildpacks/apache-tomee
-            version: 1.6.1
           - id: paketo-buildpacks/liberty
             version: 3.5.0
           - id: paketo-buildpacks/dist-zip
@@ -68,8 +66,8 @@ spec:
             version: 1.3.0
           - id: paketo-buildpacks/image-labels
             version: 4.4.1
-        inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:9dd08018eb5c8ffae08d12c72d5c49ab9f9580ba152abc718d2e7ea673fb0867
-        inspect-image.opencontainers.org/source: main/d06a2569342d4f859d8a032ba9774b323ebc3c8a
+        inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:4ad9babcb718243b0dbdb29e8b3e1d474eafd6edc20e73a2a09dfde213d5fdcf
+        inspect-image.opencontainers.org/source: main/1751664f9d4662473991e27c35901e1bb1b740c3
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-api;carto.run/v1alpha1
         prometheus.io/path: /actuator/prometheus
@@ -170,7 +168,7 @@ spec:
           value: ${K_CONFIGURATION:}
         - name: INFO_ENV_K_REVISION
           value: ${K_REVISION:}
-        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:5fc10a4cae14e0144fc3e80337dcf221ad7cf148285b5f709aac08995b2068a5
+        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:9a73e4b43e8d56231dd8bad55bc08c46b6184ac07486636269512835e99cb726
         livenessProbe:
           httpGet:
             path: /livez
