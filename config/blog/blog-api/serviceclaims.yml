@@ -38,8 +38,8 @@ metadata:
 spec:
   name: blog-db
   service:
-    apiVersion: v1
-    kind: Secret
+    apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+    kind: ClassClaim
     name: blog-db
   workload:
     apiVersion: serving.knative.dev/v1
@@ -71,9 +71,9 @@ metadata:
 spec:
   name: blog-db-tls-ca
   service:
-    apiVersion: v1
-    kind: Secret
-    name: blog-db-tls-ca-bindable
+    apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+    kind: ResourceClaim
+    name: blog-db-tls-ca
   workload:
     apiVersion: serving.knative.dev/v1
     kind: Service
