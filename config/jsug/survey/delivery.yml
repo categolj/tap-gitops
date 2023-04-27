@@ -110,7 +110,7 @@ spec:
           value: "28"
         - name: SPRING_PROFILES_ACTIVE
           value: cloud
-        image: ghcr.io/making/supply-chain/survey-jsug@sha256:8fef09d37cd442df647d4c7a3cd12365fdf3177114c79909666f4474205077ee
+        image: ghcr.io/making/supply-chain/survey-jsug@sha256:8922ff8285f53c378a54f98537cd20a8b2473b3fbd9c12aff28e122e82e258a7
         livenessProbe:
           httpGet:
             path: /livez
