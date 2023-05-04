@@ -57,8 +57,8 @@ spec:
               spring-boot-convention/app-live-view-appflavours-boot
             developer.conventions/target-containers: workload
             inspect-image.buildpacks.io/base-image: |-
-              reference: ghcr.io/making/stack-base-jammy-postgresql-client@sha256:6e7c2b65df781e95513fb4cce364d81810d061c566711593ff10ccae7b18df12
-              top_layer: sha256:be165bb82053c58a4b6cb5f96bd2373d05cd265728fbbaebc8ffe6c5e1c4d331
+              reference: ghcr.io/making/stack-base-jammy-postgresql-client@sha256:c940a209360de84fea137ea7ceece70e271ef5ca5938764a44735d0499e7a485
+              top_layer: sha256:d8732eba3e548db2364664a4792907de5e75e99427277d91847778addabd3e0e
             inspect-image.buildpacks.io/buildpacks: |-
               - id: paketo-buildpacks/ca-certificates
                 version: 3.6.0
@@ -153,7 +153,7 @@ spec:
                 secretKeyRef:
                   key: otel-trace-endpoint
                   name: otel-config
-            image: ghcr.io/making/supply-chain/backup-db-blog@sha256:71de9421d1b6eb8b538aecb601fdd88f1f34ca07741c5f05a73dbebd95859375
+            image: ghcr.io/making/supply-chain/backup-db-blog@sha256:e2891229f19735f5ea88f8a8f4288a22809ac0f17aea52e1930b0f5032e8533b
             name: workload
             resources: {}
             securityContext:
