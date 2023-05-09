@@ -17,7 +17,7 @@ spec:
   template:
     metadata:
       annotations:
-        boot.spring.io/version: 3.0.5
+        boot.spring.io/version: 3.0.6
         conventions.carto.run/applied-conventions: |-
           appliveview-sample/app-live-view-appflavour-check
           inspect-image-convention/buildpacks
@@ -35,15 +35,15 @@ spec:
           spring-boot-convention/service-intent-postgres
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: 63216a76b12e4f52b0027608e0b5152fdf824a14db9cb23ce1589f7dd6dd2e9b
-          top_layer: sha256:8af856db2d94090893307c9be02d0cb7e3ee3dfb4a54ab809adb24902f594ccc
+          reference: 44414997e7b1c8269c9ae34e6cd9cd141684506645f395b9c0f47fd14e6ae843
+          top_layer: sha256:b97d7ff6f29c3152b496e6f9a854c24dc0405d9723b72f4fab685420e0a34eab
         inspect-image.buildpacks.io/buildpacks: |-
           - id: paketo-buildpacks/ca-certificates
             version: 3.6.1
           - id: paketo-buildpacks/bellsoft-liberica
-            version: 10.1.0
+            version: 10.2.0
           - id: paketo-buildpacks/syft
-            version: 1.27.0
+            version: 1.28.0
           - id: paketo-buildpacks/executable-jar
             version: 6.6.3
           - id: paketo-buildpacks/spring-boot
@@ -81,7 +81,7 @@ spec:
           value: ERROR
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.health.probes.enabled="true" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: ghcr.io/categolj/blog-api@sha256:0bef721dda7faee01eb61b20d02ff4284f78c951c00db96ac44ad9fc02005952
+        image: ghcr.io/categolj/blog-api@sha256:3ddad4fa39e359ef2c8705bfc923e235d7bc131058b83c46ea79abf8900689a9
         livenessProbe:
           httpGet:
             path: /livez

@@ -69,8 +69,8 @@ metadata:
 spec:
   name: note-db
   service:
-    apiVersion: v1
-    kind: Secret
+    apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+    kind: ClassClaim
     name: note-db
   workload:
     apiVersion: serving.knative.dev/v1
@@ -101,9 +101,9 @@ metadata:
 spec:
   name: note-db-tls-ca
   service:
-    apiVersion: v1
-    kind: Secret
-    name: note-db-tls-ca-bindable
+    apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+    kind: ResourceClaim
+    name: note-db-tls-ca
   workload:
     apiVersion: serving.knative.dev/v1
     kind: Service
