@@ -22,7 +22,7 @@ spec:
         autoscaling.knative.dev/maxScale: "1"
         autoscaling.knative.dev/minScale: "1"
         boot.spring.io/actuator: http://:8081/actuator
-        boot.spring.io/version: 3.0.5
+        boot.spring.io/version: 3.0.6
         conventions.carto.run/applied-conventions: |-
           appliveview-sample/app-live-view-appflavour-check
           inspect-image-convention/buildpacks
@@ -41,8 +41,8 @@ spec:
           spring-boot-convention/service-intent-postgres
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: ghcr.io/making/build-service@sha256:4ad9babcb718243b0dbdb29e8b3e1d474eafd6edc20e73a2a09dfde213d5fdcf
-          top_layer: sha256:2dccd34d83ce1fcec8a5f20f06f0963d059264297222d1480a70c0d6645c88a1
+          reference: ghcr.io/making/build-service@sha256:9dd08018eb5c8ffae08d12c72d5c49ab9f9580ba152abc718d2e7ea673fb0867
+          top_layer: sha256:8c18fdd12a98e4e60a2111aeb00c38b89a2d46f08154433bdfe4c54eeccc4ef6
         inspect-image.buildpacks.io/buildpacks: |-
           - id: paketo-buildpacks/ca-certificates
             version: 3.6.0
@@ -67,7 +67,7 @@ spec:
           - id: paketo-buildpacks/image-labels
             version: 4.4.1
         inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:4ad9babcb718243b0dbdb29e8b3e1d474eafd6edc20e73a2a09dfde213d5fdcf
-        inspect-image.opencontainers.org/source: main/1751664f9d4662473991e27c35901e1bb1b740c3
+        inspect-image.opencontainers.org/source: main/2432c0c9c91f2af8c387027ab1d7cb58b99fd305
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-api;carto.run/v1alpha1
         prometheus.io/path: /actuator/prometheus
@@ -168,7 +168,7 @@ spec:
           value: ${K_CONFIGURATION:}
         - name: INFO_ENV_K_REVISION
           value: ${K_REVISION:}
-        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:9a73e4b43e8d56231dd8bad55bc08c46b6184ac07486636269512835e99cb726
+        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:c5f683b46c66381b4f83cba05d142f46d12b05cc7a2bb4d41f3d29cb5d04fd40
         livenessProbe:
           httpGet:
             path: /livez
