@@ -42,7 +42,7 @@ spec:
       template:
         metadata:
           annotations:
-            boot.spring.io/version: 3.0.5
+            boot.spring.io/version: 3.0.6
             conventions.carto.run/applied-conventions: |-
               appliveview-sample/app-live-view-appflavour-check
               inspect-image-convention/buildpacks
@@ -80,8 +80,8 @@ spec:
                 version: 5.23.0
               - id: paketo-buildpacks/image-labels
                 version: 4.4.1
-            inspect-image.buildpacks.io/run-image: ghcr.io/making/stack-base-jammy-postgresql-client:run@sha256:6e7c2b65df781e95513fb4cce364d81810d061c566711593ff10ccae7b18df12
-            inspect-image.opencontainers.org/source: main/db2a976caa182a3965f2c96f6d1f12d06c6eb4d5
+            inspect-image.buildpacks.io/run-image: ghcr.io/making/stack-base-jammy-postgresql-client:run@sha256:241bedd4bbc991a22773f79ee64f30ea3815c31de8195810dea23d5583f726ec
+            inspect-image.opencontainers.org/source: main/e90ae51506ee0352633068b94b575c8aaed85cf4
             kapp.k14s.io/disable-original: ""
             kapp.k14s.io/identity: v1;blog/carto.run/Workload/backup-db;carto.run/v1alpha1
           labels:
@@ -153,7 +153,7 @@ spec:
                 secretKeyRef:
                   key: otel-trace-endpoint
                   name: otel-config
-            image: ghcr.io/making/supply-chain/backup-db-blog@sha256:249900d92bb293aa69202c0875c06d85b4a174c1e67e7dfc9a5625a2b6955825
+            image: ghcr.io/making/supply-chain/backup-db-blog@sha256:322ffc4b79160d717477aa06c6bdcbbb30d397b03a615b8b52332d2ec1731c18
             name: workload
             resources: {}
             securityContext:
