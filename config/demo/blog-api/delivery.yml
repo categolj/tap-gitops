@@ -35,21 +35,21 @@ spec:
           spring-boot-convention/service-intent-postgres
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: 44414997e7b1c8269c9ae34e6cd9cd141684506645f395b9c0f47fd14e6ae843
-          top_layer: sha256:b97d7ff6f29c3152b496e6f9a854c24dc0405d9723b72f4fab685420e0a34eab
+          reference: 4172f6a7c8cf895df6e415b0152eb444f197f0c054af5a1da0436c2f81aa4808
+          top_layer: sha256:462ce0585119dc17a2e025be352d24cc6531c00b0447e06e4251e9f10a8d253e
         inspect-image.buildpacks.io/buildpacks: |-
           - id: paketo-buildpacks/ca-certificates
             version: 3.6.1
           - id: paketo-buildpacks/bellsoft-liberica
-            version: 10.2.0
+            version: 10.2.2
           - id: paketo-buildpacks/syft
-            version: 1.28.0
+            version: 1.29.0
           - id: paketo-buildpacks/executable-jar
-            version: 6.6.3
+            version: 6.7.0
           - id: paketo-buildpacks/spring-boot
-            version: 5.23.0
+            version: 5.24.0
           - id: paketo-buildpacks/native-image
-            version: 5.9.0
+            version: 5.10.0
         inspect-image.buildpacks.io/run-image: index.docker.io/paketobuildpacks/run:tiny-cnb
         prometheus.io/path: /actuator/prometheus
         prometheus.io/port: "8080"
@@ -81,7 +81,7 @@ spec:
           value: ERROR
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.health.probes.enabled="true" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: ghcr.io/categolj/blog-api@sha256:3ddad4fa39e359ef2c8705bfc923e235d7bc131058b83c46ea79abf8900689a9
+        image: ghcr.io/categolj/blog-api@sha256:da63c106fd445069583a945860ce7dba5546fc2338dbe54e4fbb53e55810b860
         livenessProbe:
           httpGet:
             path: /livez
