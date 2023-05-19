@@ -17,7 +17,7 @@ spec:
   template:
     metadata:
       annotations:
-        boot.spring.io/version: 3.0.6
+        boot.spring.io/version: 3.1.0
         conventions.carto.run/applied-conventions: |-
           appliveview-sample/app-live-view-appflavour-check
           inspect-image-convention/buildpacks
@@ -35,21 +35,21 @@ spec:
           spring-boot-convention/service-intent-postgres
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: 44414997e7b1c8269c9ae34e6cd9cd141684506645f395b9c0f47fd14e6ae843
-          top_layer: sha256:b97d7ff6f29c3152b496e6f9a854c24dc0405d9723b72f4fab685420e0a34eab
+          reference: 7c23cce7a57c96695056b8699a9e65a45b423153bb92c5a9a99a1ea23ee0e347
+          top_layer: sha256:4a6d3992b64b60a111136261cc3e871e11fa67c40e51f63f9e32da447c82e680
         inspect-image.buildpacks.io/buildpacks: |-
           - id: paketo-buildpacks/ca-certificates
             version: 3.6.1
           - id: paketo-buildpacks/bellsoft-liberica
-            version: 10.2.0
+            version: 10.2.3
           - id: paketo-buildpacks/syft
-            version: 1.28.0
+            version: 1.30.0
           - id: paketo-buildpacks/executable-jar
-            version: 6.6.3
+            version: 6.7.1
           - id: paketo-buildpacks/spring-boot
-            version: 5.23.0
+            version: 5.25.0
           - id: paketo-buildpacks/native-image
-            version: 5.9.0
+            version: 5.11.0
         inspect-image.buildpacks.io/run-image: index.docker.io/paketobuildpacks/run:tiny-cnb
         prometheus.io/path: /actuator/prometheus
         prometheus.io/port: "8080"
@@ -81,7 +81,7 @@ spec:
           value: ERROR
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.health.probes.enabled="true" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: ghcr.io/categolj/blog-api@sha256:3ddad4fa39e359ef2c8705bfc923e235d7bc131058b83c46ea79abf8900689a9
+        image: ghcr.io/categolj/blog-api@sha256:d13bc99267043eeb83a52887ba521bebdc54e7041970518e91f964ab34efa4a3
         livenessProbe:
           httpGet:
             path: /livez
