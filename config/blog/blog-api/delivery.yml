@@ -22,7 +22,7 @@ spec:
         autoscaling.knative.dev/maxScale: "1"
         autoscaling.knative.dev/minScale: "1"
         boot.spring.io/actuator: http://:8081/actuator
-        boot.spring.io/version: 3.1.0
+        boot.spring.io/version: 3.1.1
         conventions.carto.run/applied-conventions: |-
           appliveview-sample/app-live-view-appflavour-check
           inspect-image-convention/buildpacks
@@ -67,7 +67,7 @@ spec:
           - id: paketo-buildpacks/image-labels
             version: 4.4.1
         inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:9dd08018eb5c8ffae08d12c72d5c49ab9f9580ba152abc718d2e7ea673fb0867
-        inspect-image.opencontainers.org/source: main/81618f4d569057ea0887545ce07da6385f8d4025
+        inspect-image.opencontainers.org/source: main/3e33ee7ac37441fc3c3f6ccc0bb213acf66cf0d9
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-api;carto.run/v1alpha1
         prometheus.io/path: /actuator/prometheus
@@ -168,7 +168,7 @@ spec:
           value: ${K_CONFIGURATION:}
         - name: INFO_ENV_K_REVISION
           value: ${K_REVISION:}
-        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:ce09cc3399e8efc1835670e3fc820f35a21d1a58d1495b0e354ddc0779b9d196
+        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:5b1bd4505c83e54f181855bcb73cc0eff9ed4e01d579cff0f570d19091887345
         livenessProbe:
           httpGet:
             path: /livez
