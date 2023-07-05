@@ -57,8 +57,8 @@ spec:
               spring-boot-convention/app-live-view-appflavours-boot
             developer.conventions/target-containers: workload
             inspect-image.buildpacks.io/base-image: |-
-              reference: ghcr.io/making/stack-base-jammy-postgresql-client@sha256:241bedd4bbc991a22773f79ee64f30ea3815c31de8195810dea23d5583f726ec
-              top_layer: sha256:e605fa52181837da9c1d05210f924f0455bde884eaa1db1c66f1fe82be1a1b98
+              reference: ghcr.io/making/stack-base-jammy-postgresql-client@sha256:f85d2757e8c8e810c8c4b76b0dcbc8fa6e6d55257a3a7afdefbf616b021a6cee
+              top_layer: sha256:5e6a974cfedaab6ffc86bdb718fdda2e3d4c5762bd30e3938a16322ee0e0fdca
             inspect-image.buildpacks.io/buildpacks: |-
               - id: paketo-buildpacks/ca-certificates
                 version: 3.6.0
@@ -104,8 +104,6 @@ spec:
           - env:
             - name: JAVA_TOOL_OPTIONS
               value: -Dmanagement.health.probes.enabled="false"
-            - name: BPL_JVM_THREAD_COUNT
-              value: "8"
             - name: AWS_ACCESS_KEY_ID
               valueFrom:
                 secretKeyRef:
@@ -153,7 +151,7 @@ spec:
                 secretKeyRef:
                   key: otel-trace-endpoint
                   name: otel-config
-            image: ghcr.io/making/supply-chain/backup-db-blog@sha256:322ffc4b79160d717477aa06c6bdcbbb30d397b03a615b8b52332d2ec1731c18
+            image: ghcr.io/making/supply-chain/backup-db-blog@sha256:9b211b8fc9117783083fa7d63efd8469feee5a31888aa3b95739bb26374a1bec
             name: workload
             resources: {}
             securityContext:
