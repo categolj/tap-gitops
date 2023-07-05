@@ -29,59 +29,18 @@ spec:
         apps.tanzu.vmware.com/has-tests: "true"
         apps.tanzu.vmware.com/workload-type: cronjob
         carto.run/workload-name: backup-db
-        conventions.carto.run/framework: spring-boot
         kapp.k14s.io/app: "1673062250001482428"
         kapp.k14s.io/association: v1.4e043a1fa1e762f9e99e68cc4f600214
-        tanzu.app.live.view: "true"
-        tanzu.app.live.view.application.actuator.path: actuator
-        tanzu.app.live.view.application.actuator.port: "8080"
-        tanzu.app.live.view.application.flavours: spring-boot
-        tanzu.app.live.view.application.name: backup-db
     spec:
       backoffLimit: 0
       template:
         metadata:
           annotations:
-            boot.spring.io/version: 3.0.6
             conventions.carto.run/applied-conventions: |-
               appliveview-sample/app-live-view-appflavour-check
-              inspect-image-convention/buildpacks
-              inspect-image-convention/base-image
-              inspect-image-convention/run-image
-              inspect-image-convention/source
               spring-boot-convention/auto-configure-actuators-check
-              spring-boot-convention/spring-boot
-              spring-boot-convention/spring-boot-actuator
               spring-boot-convention/app-live-view-appflavour-check
-              spring-boot-convention/app-live-view-connector-boot
-              spring-boot-convention/app-live-view-appflavours-boot
             developer.conventions/target-containers: workload
-            inspect-image.buildpacks.io/base-image: |-
-              reference: ghcr.io/making/stack-base-jammy-postgresql-client@sha256:241bedd4bbc991a22773f79ee64f30ea3815c31de8195810dea23d5583f726ec
-              top_layer: sha256:e605fa52181837da9c1d05210f924f0455bde884eaa1db1c66f1fe82be1a1b98
-            inspect-image.buildpacks.io/buildpacks: |-
-              - id: paketo-buildpacks/ca-certificates
-                version: 3.6.0
-              - id: paketo-buildpacks/bellsoft-liberica
-                version: 9.11.0
-              - id: paketo-buildpacks/syft
-                version: 1.10.1
-              - id: paketo-buildpacks/maven
-                version: 6.13.0
-              - id: paketo-buildpacks/executable-jar
-                version: 6.6.2
-              - id: paketo-buildpacks/apache-tomcat
-                version: 7.12.1
-              - id: paketo-buildpacks/liberty
-                version: 3.5.0
-              - id: paketo-buildpacks/dist-zip
-                version: 5.5.2
-              - id: paketo-buildpacks/spring-boot
-                version: 5.23.0
-              - id: paketo-buildpacks/image-labels
-                version: 4.4.1
-            inspect-image.buildpacks.io/run-image: ghcr.io/making/stack-base-jammy-postgresql-client:run@sha256:241bedd4bbc991a22773f79ee64f30ea3815c31de8195810dea23d5583f726ec
-            inspect-image.opencontainers.org/source: main/e90ae51506ee0352633068b94b575c8aaed85cf4
             kapp.k14s.io/disable-original: ""
             kapp.k14s.io/identity: v1;blog/carto.run/Workload/backup-db;carto.run/v1alpha1
           labels:
@@ -91,21 +50,13 @@ spec:
             apps.tanzu.vmware.com/has-tests: "true"
             apps.tanzu.vmware.com/workload-type: cronjob
             carto.run/workload-name: backup-db
-            conventions.carto.run/framework: spring-boot
             kapp.k14s.io/app: "1673062250001482428"
             kapp.k14s.io/association: v1.4e043a1fa1e762f9e99e68cc4f600214
-            tanzu.app.live.view: "true"
-            tanzu.app.live.view.application.actuator.path: actuator
-            tanzu.app.live.view.application.actuator.port: "8080"
-            tanzu.app.live.view.application.flavours: spring-boot
-            tanzu.app.live.view.application.name: backup-db
         spec:
           containers:
           - env:
             - name: JAVA_TOOL_OPTIONS
               value: -Dmanagement.health.probes.enabled="false"
-            - name: BPL_JVM_THREAD_COUNT
-              value: "8"
             - name: AWS_ACCESS_KEY_ID
               valueFrom:
                 secretKeyRef:
@@ -153,7 +104,7 @@ spec:
                 secretKeyRef:
                   key: otel-trace-endpoint
                   name: otel-config
-            image: ghcr.io/making/supply-chain/backup-db-blog@sha256:322ffc4b79160d717477aa06c6bdcbbb30d397b03a615b8b52332d2ec1731c18
+            image: ghcr.io/making/supply-chain/backup-db-blog@sha256:8b3512e5e6a175b6030e684f7aeaaf5e0d1f75abca68950b45ca98843caa017c
             name: workload
             resources: {}
             securityContext:
