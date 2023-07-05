@@ -104,7 +104,7 @@ spec:
                 secretKeyRef:
                   key: otel-trace-endpoint
                   name: otel-config
-            image: ghcr.io/making/supply-chain/backup-db-note@sha256:98c9568d644c8538c50224ec555811dbde86b44a51230688a3763d4b273c7082
+            image: ghcr.io/making/supply-chain/backup-db-note@sha256:daaabacb9fbde4fd8dac9f5699ba4331f0611d58f66ba5af2087a57ed236d177
             name: workload
             resources: {}
             securityContext:
