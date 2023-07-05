@@ -104,7 +104,22 @@ spec:
                 secretKeyRef:
                   key: otel-trace-endpoint
                   name: otel-config
-            image: ghcr.io/making/supply-chain/backup-db-note@sha256:daaabacb9fbde4fd8dac9f5699ba4331f0611d58f66ba5af2087a57ed236d177
+            - name: ALERT_ENABLED
+              value: "true"
+            - name: ALERT_TYPE
+              value: slack
+            - name: ALERT_SLACK_CHANNEL
+              value: alert
+            - name: ALERT_SLACK_USERNAME
+              value: spring-batch
+            - name: ALERT_SLACK_ICONURL
+              value: https://github.com/making/pg-dump-to-s3/assets/106908/5becaa51-11be-4ca5-8763-cd9a5e1014ce
+            - name: ALERT_WEBHOOKURL
+              valueFrom:
+                secretKeyRef:
+                  key: slack_webhook_ur
+                  name: backup-s3
+            image: ghcr.io/making/supply-chain/backup-db-note@sha256:24ee6fc57d96d217d94bf1bce700503ef6df9012dde52133d3bae133ad5f387a
             name: workload
             resources: {}
             securityContext:
