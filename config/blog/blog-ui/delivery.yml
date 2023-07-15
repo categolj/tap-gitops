@@ -30,27 +30,27 @@ spec:
           spring-boot-convention/app-live-view-appflavour-check
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: ghcr.io/making/build-service@sha256:9dd08018eb5c8ffae08d12c72d5c49ab9f9580ba152abc718d2e7ea673fb0867
-          top_layer: sha256:8c18fdd12a98e4e60a2111aeb00c38b89a2d46f08154433bdfe4c54eeccc4ef6
+          reference: ghcr.io/making/tanzu-application-platform/tap-packages@sha256:2ae5423e181301f26fdc8fd383536fcd9089e832ecd4a4b6fd3b84395220f92d
+          top_layer: sha256:036693f5e0732223694e7b46c634d0b7cbe69314efa1c4cae17982011f24e9fc
         inspect-image.buildpacks.io/buildpacks: |-
           - id: paketo-buildpacks/ca-certificates
-            version: 3.5.1
+            version: 3.6.1
           - id: tanzu-buildpacks/node-engine-lite
-            version: 1.2.0
+            version: 1.5.2
           - id: tanzu-buildpacks/yarn-lite
-            version: 1.1.1
+            version: 1.1.8
           - id: tanzu-buildpacks/yarn-install
-            version: 1.0.0
+            version: 1.1.2
           - id: tanzu-buildpacks/node-module-bom-lite
             version: 0.3.4
           - id: tanzu-buildpacks/node-run-script
-            version: 1.0.1
+            version: 1.0.8
           - id: tanzu-buildpacks/yarn-start
-            version: 1.0.2
+            version: 1.0.9
           - id: paketo-buildpacks/image-labels
-            version: 4.4.0
-        inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:9dd08018eb5c8ffae08d12c72d5c49ab9f9580ba152abc718d2e7ea673fb0867
-        inspect-image.opencontainers.org/source: main/c7f616356261c35e533818a63a55b1b39e1113e4
+            version: 4.5.0
+        inspect-image.buildpacks.io/run-image: ghcr.io/making/tanzu-application-platform/tap-packages@sha256:2ae5423e181301f26fdc8fd383536fcd9089e832ecd4a4b6fd3b84395220f92d
+        inspect-image.opencontainers.org/source: main@sha1:c7f616356261c35e533818a63a55b1b39e1113e4
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-ui;carto.run/v1alpha1
       labels:
@@ -63,7 +63,7 @@ spec:
         kapp.k14s.io/association: v1.0ba63a416d64128605b90e7ad1328294
     spec:
       containers:
-      - image: ghcr.io/making/supply-chain/blog-ui-blog@sha256:64ac0058974924bdee9457369a8e3fa7321536ae5be5be033b1301edb7412bff
+      - image: ghcr.io/making/supply-chain/blog-ui-blog@sha256:7c391adb13104f9993723e3660f4a2ee95564d907d3b96ad688dbe6e82ddb5c2
         livenessProbe:
           httpGet:
             path: /aboutme
