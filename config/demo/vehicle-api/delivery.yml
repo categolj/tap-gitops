@@ -39,31 +39,31 @@ spec:
           spring-boot-convention/service-intent-postgres
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: ghcr.io/making/build-service@sha256:9dd08018eb5c8ffae08d12c72d5c49ab9f9580ba152abc718d2e7ea673fb0867
-          top_layer: sha256:8c18fdd12a98e4e60a2111aeb00c38b89a2d46f08154433bdfe4c54eeccc4ef6
+          reference: ghcr.io/making/tanzu-application-platform/tap-packages@sha256:2ae5423e181301f26fdc8fd383536fcd9089e832ecd4a4b6fd3b84395220f92d
+          top_layer: sha256:036693f5e0732223694e7b46c634d0b7cbe69314efa1c4cae17982011f24e9fc
         inspect-image.buildpacks.io/buildpacks: |-
           - id: paketo-buildpacks/ca-certificates
-            version: 3.6.0
-          - id: paketo-buildpacks/bellsoft-liberica
-            version: 9.11.0
+            version: 3.6.2
+          - id: tanzu-buildpacks/tanzu-bellsoft-liberica
+            version: 9.12.0
           - id: paketo-buildpacks/syft
             version: 1.10.1
           - id: paketo-buildpacks/maven
-            version: 6.13.0
+            version: 6.15.3
           - id: paketo-buildpacks/executable-jar
-            version: 6.6.2
+            version: 6.7.3
           - id: paketo-buildpacks/apache-tomcat
-            version: 7.12.1
+            version: 7.13.5
           - id: paketo-buildpacks/liberty
-            version: 3.5.0
+            version: 3.7.2
           - id: paketo-buildpacks/dist-zip
-            version: 5.5.2
+            version: 5.6.3
           - id: paketo-buildpacks/spring-boot
-            version: 5.23.0
+            version: 5.25.2
           - id: paketo-buildpacks/image-labels
-            version: 4.4.1
-        inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:4ad9babcb718243b0dbdb29e8b3e1d474eafd6edc20e73a2a09dfde213d5fdcf
-        inspect-image.opencontainers.org/source: main/dbf2267c6efec3cd1bfc5b2ec9539d0bf3ae0059
+            version: 4.5.1
+        inspect-image.buildpacks.io/run-image: ghcr.io/making/tanzu-application-platform/tap-packages@sha256:2ae5423e181301f26fdc8fd383536fcd9089e832ecd4a4b6fd3b84395220f92d
+        inspect-image.opencontainers.org/source: main@sha1:af51593a3812b7eaa7515a209e7aa4446070e05b
         prometheus.io/path: /actuator/prometheus
         prometheus.io/port: "8081"
         prometheus.io/scrape: "true"
@@ -90,7 +90,7 @@ spec:
           value: -XX:ReservedCodeCacheSize=32M -Xss512k -Dfile.encoding="UTF-8" -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s" -Duser.country="JP" -Duser.language="ja" -Duser.timezone="Asia/Tokyo"
         - name: BPL_JVM_THREAD_COUNT
           value: "28"
-        image: ghcr.io/making/supply-chain/vehicle-api-demo@sha256:a01383895211432f2b443da82b9fbbd18b62f69e6a9950306ade7d88a24c0e00
+        image: ghcr.io/making/supply-chain/vehicle-api-demo@sha256:e8d4455ae936593aa62842ea5af5ad6a8e7edd9dd8463ceca5ae4bf25f640d74
         livenessProbe:
           httpGet:
             path: /livez
