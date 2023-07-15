@@ -62,8 +62,8 @@ spec:
             version: 5.23.0
           - id: paketo-buildpacks/image-labels
             version: 4.4.1
-        inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:4ad9babcb718243b0dbdb29e8b3e1d474eafd6edc20e73a2a09dfde213d5fdcf
-        inspect-image.opencontainers.org/source: main/dbf2267c6efec3cd1bfc5b2ec9539d0bf3ae0059
+        inspect-image.buildpacks.io/run-image: ghcr.io/making/build-service@sha256:9dd08018eb5c8ffae08d12c72d5c49ab9f9580ba152abc718d2e7ea673fb0867
+        inspect-image.opencontainers.org/source: main/af51593a3812b7eaa7515a209e7aa4446070e05b
         prometheus.io/path: /actuator/prometheus
         prometheus.io/port: "8081"
         prometheus.io/scrape: "true"
@@ -90,7 +90,7 @@ spec:
           value: -XX:ReservedCodeCacheSize=32M -Xss512k -Dfile.encoding="UTF-8" -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s" -Duser.country="JP" -Duser.language="ja" -Duser.timezone="Asia/Tokyo"
         - name: BPL_JVM_THREAD_COUNT
           value: "28"
-        image: ghcr.io/making/supply-chain/vehicle-api-demo@sha256:a01383895211432f2b443da82b9fbbd18b62f69e6a9950306ade7d88a24c0e00
+        image: ghcr.io/making/supply-chain/vehicle-api-demo@sha256:fe3c8df25553811a46c0f0664678ce1160710d30f8ad1e2c40d0db973829d024
         livenessProbe:
           httpGet:
             path: /livez
