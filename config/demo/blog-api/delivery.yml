@@ -32,6 +32,7 @@ spec:
           spring-boot-convention/app-live-view-appflavour-check
           spring-boot-convention/app-live-view-connector-boot
           spring-boot-convention/app-live-view-appflavours-boot
+          spring-boot-convention/app-live-view-appflavours-boot-native
           spring-boot-convention/service-intent-postgres
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
@@ -67,7 +68,7 @@ spec:
         tanzu.app.live.view: "true"
         tanzu.app.live.view.application.actuator.path: actuator
         tanzu.app.live.view.application.actuator.port: "8080"
-        tanzu.app.live.view.application.flavours: spring-boot
+        tanzu.app.live.view.application.flavours: spring-boot_spring-native
         tanzu.app.live.view.application.name: blog-api
     spec:
       containers:
@@ -81,7 +82,7 @@ spec:
           value: ERROR
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.health.probes.enabled="true" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: ghcr.io/categolj/blog-api@sha256:26d481a2308e3d0d4805173c3a3735555bba2cab466b8ea2f3c80c969c577034
+        image: ghcr.io/categolj/blog-api@sha256:c181d4993e0321b91e96a7ec5d06075a4294f504397a57eff38ba29caed1fbc4
         livenessProbe:
           httpGet:
             path: /livez
