@@ -40,7 +40,7 @@ spec:
           spring-boot-convention/service-intent-postgres
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: ghcr.io/making/tanzu-application-platform/tap-packages@sha256:2ae5423e181301f26fdc8fd383536fcd9089e832ecd4a4b6fd3b84395220f92d
+          reference: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:2ae5423e181301f26fdc8fd383536fcd9089e832ecd4a4b6fd3b84395220f92d
           top_layer: sha256:036693f5e0732223694e7b46c634d0b7cbe69314efa1c4cae17982011f24e9fc
         inspect-image.buildpacks.io/buildpacks: |-
           - id: paketo-buildpacks/ca-certificates
@@ -50,11 +50,13 @@ spec:
           - id: paketo-buildpacks/syft
             version: 1.10.1
           - id: paketo-buildpacks/maven
-            version: 6.15.3
+            version: 6.15.4
           - id: paketo-buildpacks/executable-jar
             version: 6.7.3
           - id: paketo-buildpacks/apache-tomcat
             version: 7.13.5
+          - id: paketo-buildpacks/apache-tomee
+            version: 1.7.2
           - id: paketo-buildpacks/liberty
             version: 3.7.2
           - id: paketo-buildpacks/dist-zip
@@ -65,7 +67,7 @@ spec:
             version: 1.4.3
           - id: paketo-buildpacks/image-labels
             version: 4.5.1
-        inspect-image.buildpacks.io/run-image: ghcr.io/making/tanzu-application-platform/tap-packages@sha256:2ae5423e181301f26fdc8fd383536fcd9089e832ecd4a4b6fd3b84395220f92d
+        inspect-image.buildpacks.io/run-image: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:2ae5423e181301f26fdc8fd383536fcd9089e832ecd4a4b6fd3b84395220f92d
         inspect-image.opencontainers.org/source: main@sha1:26f978184db4e65fdeb7b4a381c939d895bd6705
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;note/carto.run/Workload/note-api;carto.run/v1alpha1
@@ -130,7 +132,7 @@ spec:
           value: ${K_CONFIGURATION:}
         - name: INFO_ENV_K_REVISION
           value: ${K_REVISION:}
-        image: ghcr.io/making/supply-chain/note-api-note@sha256:5e9daa008cd9c69cb776e9d5c755a053210626951343c3813929191e4244a957
+        image: ghcr.io/making/supply-chain/note-api-note@sha256:7673a36e8287d77b4f9a2fc011ab7c0fd2f1aba8b70a5cfed08f2b4ff45bc837
         livenessProbe:
           httpGet:
             path: /livez
