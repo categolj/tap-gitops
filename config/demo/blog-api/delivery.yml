@@ -17,7 +17,7 @@ spec:
   template:
     metadata:
       annotations:
-        boot.spring.io/version: 3.1.2
+        boot.spring.io/version: 3.2.0-M1
         conventions.carto.run/applied-conventions: |-
           appliveview-sample/app-live-view-appflavour-check
           inspect-image-convention/buildpacks
@@ -28,7 +28,6 @@ spec:
           spring-boot-convention/spring-boot-graceful-shutdown
           spring-boot-convention/spring-boot-web
           spring-boot-convention/spring-boot-actuator
-          spring-boot-convention/spring-boot-actuator-probes
           spring-boot-convention/app-live-view-appflavour-check
           spring-boot-convention/app-live-view-connector-boot
           spring-boot-convention/app-live-view-appflavours-boot
@@ -81,22 +80,12 @@ spec:
         - name: logging.level.io.opentelemetry.exporter.zipkin.ZipkinSpanExporter
           value: ERROR
         - name: JAVA_TOOL_OPTIONS
-          value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.health.probes.enabled="true" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: ghcr.io/categolj/blog-api@sha256:9e506b42a1645a91c5bf601308e32ed5262d0782d2be1739c596b2139eb0e3dd
-        livenessProbe:
-          httpGet:
-            path: /livez
-            port: 8080
-            scheme: HTTP
+          value: -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
+        image: ghcr.io/categolj/blog-api@sha256:d01a4c11ce247f9621e52d22cadfce9c8dd19bc2bcf998a772c451e332a71e3c
         name: workload
         ports:
         - containerPort: 8080
           protocol: TCP
-        readinessProbe:
-          httpGet:
-            path: /readyz
-            port: 8080
-            scheme: HTTP
         resources: {}
         securityContext:
           runAsUser: 1000
