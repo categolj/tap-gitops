@@ -32,7 +32,7 @@ spec:
         carto.run/workload-name: rest-service
     spec:
       containers:
-      - image: ghcr.io/making/supply-chain/rest-service-demo@sha256:b16f53685767823b6d68820c5fa0738a5bf7078f29d9cd95736ded79ba9c472e
+      - image: ghcr.io/making/supply-chain/rest-service-demo@sha256:c28d9969ff9e375bfc333a3c8d5e459ea2df9b682e73538fa1b221e95f302322
         name: workload
         resources: {}
         securityContext:
