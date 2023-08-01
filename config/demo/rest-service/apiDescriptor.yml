@@ -3,7 +3,7 @@ kind: APIDescriptor
 metadata:
   name: rest-service
   annotations:
-    autoscaling.knative.dev/minScale: "1"
+    autoscaling.knative.dev/minScale: "0"
   labels:
     apis.apps.tanzu.vmware.com/register-api: "true"
     app.kubernetes.io/part-of: rest-service
