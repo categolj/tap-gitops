@@ -81,7 +81,7 @@ spec:
           value: ERROR
         - name: JAVA_TOOL_OPTIONS
           value: -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: ghcr.io/categolj/blog-api@sha256:80203bb57a0efa05ff1b781d6f7dc8205b6326a4c85337d48625887da80fae15
+        image: ghcr.io/categolj/blog-api@sha256:3f825046019beab7a03b256197cd149ea7ef97676abb1797f08ee8b785795a91
         name: workload
         ports:
         - containerPort: 8080
