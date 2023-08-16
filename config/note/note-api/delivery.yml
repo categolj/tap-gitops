@@ -39,8 +39,8 @@ spec:
           spring-boot-convention/service-intent-postgres
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:2ae5423e181301f26fdc8fd383536fcd9089e832ecd4a4b6fd3b84395220f92d
-          top_layer: sha256:036693f5e0732223694e7b46c634d0b7cbe69314efa1c4cae17982011f24e9fc
+          reference: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:72d30e0638c6e01e23e4f36a33e061dde35cc590c69ae6cfca046d02380bc340
+          top_layer: sha256:9b1e7cb9491474f366592d6d8c32aabbd34d8f99c2984db68e115d160ef64e1d
         inspect-image.buildpacks.io/buildpacks: |-
           - id: paketo-buildpacks/ca-certificates
             version: 3.6.2
@@ -131,7 +131,7 @@ spec:
           value: ${K_CONFIGURATION:}
         - name: INFO_ENV_K_REVISION
           value: ${K_REVISION:}
-        image: ghcr.io/making/supply-chain/note-api-note@sha256:d754eca9a73e4ed4e73e234b8bf07d5b25fc502fbc3dac53c5cb930d6289c74c
+        image: ghcr.io/making/supply-chain/note-api-note@sha256:6ac1e3ee279fcb64100515143db6ca5f2547e1fd7b92750d75898ef1a885ba67
         livenessProbe:
           httpGet:
             path: /livez
