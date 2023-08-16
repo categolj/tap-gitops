@@ -53,8 +53,8 @@ spec:
           spring-boot-convention/app-live-view-appflavours-boot
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:2ae5423e181301f26fdc8fd383536fcd9089e832ecd4a4b6fd3b84395220f92d
-          top_layer: sha256:036693f5e0732223694e7b46c634d0b7cbe69314efa1c4cae17982011f24e9fc
+          reference: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:72d30e0638c6e01e23e4f36a33e061dde35cc590c69ae6cfca046d02380bc340
+          top_layer: sha256:9b1e7cb9491474f366592d6d8c32aabbd34d8f99c2984db68e115d160ef64e1d
         inspect-image.buildpacks.io/buildpacks: |-
           - id: paketo-buildpacks/ca-certificates
             version: 3.6.2
@@ -112,7 +112,7 @@ spec:
           value: "28"
         - name: SPRING_PROFILES_ACTIVE
           value: cloud
-        image: ghcr.io/making/supply-chain/survey-jsug@sha256:6bb2838b3844bc8f99a72ec93daf60f32a5eeabee6fbf757565b94c533ce6fed
+        image: ghcr.io/making/supply-chain/survey-jsug@sha256:f95e1d4c23186b5df1b21683573e81e28ac6de5a07856eb8e487a476384b2ec1
         livenessProbe:
           httpGet:
             path: /livez
