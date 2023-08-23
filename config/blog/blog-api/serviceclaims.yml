@@ -45,4 +45,37 @@ spec:
     apiVersion: serving.knative.dev/v1
     kind: Service
     name: blog-api
+---
+apiVersion: servicebinding.io/v1alpha3
+kind: ServiceBinding
+metadata:
+  name: blog-api-blog-db-tls-ca
+  annotations:
+    kapp.k14s.io/disable-original: ""
+    kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-api;carto.run/v1alpha1
+    autoscaling.knative.dev/maxScale: "1"
+    autoscaling.knative.dev/minScale: "1"
+    prometheus.io/path: /actuator/prometheus
+    prometheus.io/port: "8081"
+    prometheus.io/scrape: "true"
+    kapp.k14s.io/change-group: servicebinding.io/ServiceBindings
+  labels:
+    apis.apps.tanzu.vmware.com/register-api: "true"
+    app.kubernetes.io/part-of: blog-api
+    apps.tanzu.vmware.com/has-tests: "true"
+    apps.tanzu.vmware.com/workload-type: web
+    kapp.k14s.io/app: "1673062250001482428"
+    kapp.k14s.io/association: v1.eae2bf111fb39e9481c024f683deba7a
+    app.kubernetes.io/component: run
+    carto.run/workload-name: blog-api
+spec:
+  name: blog-db-tls-ca
+  service:
+    apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+    kind: ResourceClaim
+    name: blog-db-tls-ca
+  workload:
+    apiVersion: serving.knative.dev/v1
+    kind: Service
+    name: blog-api
 
