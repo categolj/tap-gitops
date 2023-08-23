@@ -169,6 +169,8 @@ spec:
           value: ${K_CONFIGURATION:}
         - name: INFO_ENV_K_REVISION
           value: ${K_REVISION:}
+        - name: PGSSLROOTCERT
+          value: /bindings/blog-db-tls-ca/ca.crt
         image: ghcr.io/making/supply-chain/blog-api-blog@sha256:027d0ce87056f25541bd428813dcfbe0538afb4390bf5444e7fba1721dfe07db
         livenessProbe:
           httpGet:
