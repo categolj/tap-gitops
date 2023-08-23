@@ -7,7 +7,6 @@ metadata:
     ootb.apps.tanzu.vmware.com/apidescriptor-ref: "true"
     kapp.k14s.io/change-rule: upsert after upserting servicebinding.io/ServiceBindings
   labels:
-    apis.apps.tanzu.vmware.com/register-api: "true"
     app.kubernetes.io/part-of: blog-api
     apps.tanzu.vmware.com/auto-configure-actuators: "false"
     apps.tanzu.vmware.com/workload-type: web
