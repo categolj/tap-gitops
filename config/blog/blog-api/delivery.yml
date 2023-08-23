@@ -104,8 +104,6 @@ spec:
             secretKeyRef:
               key: otel-trace-service-name
               name: otel-config
-        - name: SPRING_DATASOURCE_HIKARI_DATASOURCEPROPERTIES_SSLFACTORY
-          value: org.postgresql.ssl.DefaultJavaSSLFactory
         - name: MANAGEMENT_TRACING_PROPAGATION_TYPE
           value: W3C,B3
         - name: SPRING_SECURITY_USER_PASSWORD
@@ -169,7 +167,7 @@ spec:
           value: ${K_CONFIGURATION:}
         - name: INFO_ENV_K_REVISION
           value: ${K_REVISION:}
-        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:4a59e4f8f25132b542847c44b456ab8207d21701258fdc787fc465c69a375298
+        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:5beaf86d518db1317ae2e20d67765d2714722105f001a97dc73df88b80b7d3b6
         livenessProbe:
           httpGet:
             path: /livez
