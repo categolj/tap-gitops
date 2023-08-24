@@ -49,8 +49,8 @@ spec:
             version: 1.0.9
           - id: paketo-buildpacks/image-labels
             version: 4.5.0
-        inspect-image.buildpacks.io/run-image: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:2ae5423e181301f26fdc8fd383536fcd9089e832ecd4a4b6fd3b84395220f92d
-        inspect-image.opencontainers.org/source: main@sha1:c49b15340462b913c91ebbd50aff48eb88be8c5c
+        inspect-image.buildpacks.io/run-image: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:72d30e0638c6e01e23e4f36a33e061dde35cc590c69ae6cfca046d02380bc340
+        inspect-image.opencontainers.org/source: main@sha1:c2b213691a958aa47d6cf4be3db69281ffa249b7
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-ui;carto.run/v1alpha1
       labels:
@@ -63,7 +63,7 @@ spec:
         kapp.k14s.io/association: v1.0ba63a416d64128605b90e7ad1328294
     spec:
       containers:
-      - image: ghcr.io/making/supply-chain/blog-ui-blog@sha256:56a462f876ce9da607db905921fcc2a220a77edba15b3e29d7c9c443cadeea63
+      - image: ghcr.io/making/supply-chain/blog-ui-blog@sha256:e8445af7d0d962894fc69ba2f18d95159905c2eb293b80086a9c17b01f18328b
         livenessProbe:
           httpGet:
             path: /aboutme
