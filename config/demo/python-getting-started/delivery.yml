@@ -44,7 +44,7 @@ spec:
           - id: paketo-buildpacks/image-labels
             version: 4.5.0
         inspect-image.buildpacks.io/run-image: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:2c18b896152a08e85c8e7196d1971d2a8cd48f999f8781d004b5d73f1b51a9de
-        inspect-image.opencontainers.org/source: main@sha1:7a862828b78de73e13f87c26254be0d16eec1354
+        inspect-image.opencontainers.org/source: main@sha1:2c539898b012473a8872477dfc48a710ba9f7501
       labels:
         app.kubernetes.io/component: run
         app.kubernetes.io/part-of: python-getting-started
@@ -53,7 +53,7 @@ spec:
         carto.run/workload-name: python-getting-started
     spec:
       containers:
-      - image: ghcr.io/making/supply-chain/python-getting-started-demo@sha256:c384024e40419680f7558124b0c073c755d7b6c8ce8ffb5fadbf06839d94c577
+      - image: ghcr.io/making/supply-chain/python-getting-started-demo@sha256:d0feda161ee7877dbe04a61697c3619dc67490c7ae17a6d86b08fc5829f035c9
         name: workload
         resources: {}
         securityContext:
