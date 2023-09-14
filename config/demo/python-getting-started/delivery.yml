@@ -1,0 +1,62 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: python-getting-started
+  annotations:
+    ootb.apps.tanzu.vmware.com/servicebinding-workload: "true"
+    ootb.apps.tanzu.vmware.com/apidescriptor-ref: "true"
+    kapp.k14s.io/change-rule: upsert after upserting servicebinding.io/ServiceBindings
+  labels:
+    app.kubernetes.io/part-of: python-getting-started
+    apps.tanzu.vmware.com/has-tests: "true"
+    apps.tanzu.vmware.com/workload-type: web
+    app.kubernetes.io/component: run
+    carto.run/workload-name: python-getting-started
+spec:
+  template:
+    metadata:
+      annotations:
+        conventions.carto.run/applied-conventions: |-
+          appliveview-sample/app-live-view-appflavour-check
+          inspect-image-convention/buildpacks
+          inspect-image-convention/base-image
+          inspect-image-convention/run-image
+          inspect-image-convention/source
+          spring-boot-convention/auto-configure-actuators-check
+          spring-boot-convention/app-live-view-appflavour-check
+        developer.conventions/target-containers: workload
+        inspect-image.buildpacks.io/base-image: |-
+          reference: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:2c18b896152a08e85c8e7196d1971d2a8cd48f999f8781d004b5d73f1b51a9de
+          top_layer: sha256:fd99c12c326a445f04255147dcd08fe1ef6e95f46b1a23a7ecec035c7212b7a8
+        inspect-image.buildpacks.io/buildpacks: |-
+          - id: paketo-buildpacks/ca-certificates
+            version: 3.6.1
+          - id: tanzu-buildpacks/cpython
+            version: 1.8.5
+          - id: tanzu-buildpacks/pip
+            version: 0.16.7
+          - id: tanzu-buildpacks/pip-install
+            version: 0.5.11
+          - id: tanzu-buildpacks/python-start
+            version: 0.10.9
+          - id: paketo-buildpacks/procfile
+            version: 5.6.2
+          - id: paketo-buildpacks/image-labels
+            version: 4.5.0
+        inspect-image.buildpacks.io/run-image: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:2c18b896152a08e85c8e7196d1971d2a8cd48f999f8781d004b5d73f1b51a9de
+        inspect-image.opencontainers.org/source: main@sha1:7a862828b78de73e13f87c26254be0d16eec1354
+      labels:
+        app.kubernetes.io/component: run
+        app.kubernetes.io/part-of: python-getting-started
+        apps.tanzu.vmware.com/has-tests: "true"
+        apps.tanzu.vmware.com/workload-type: web
+        carto.run/workload-name: python-getting-started
+    spec:
+      containers:
+      - image: ghcr.io/making/supply-chain/python-getting-started-demo@sha256:c384024e40419680f7558124b0c073c755d7b6c8ce8ffb5fadbf06839d94c577
+        name: workload
+        resources: {}
+        securityContext:
+          runAsUser: 1000
+      serviceAccountName: default
+
