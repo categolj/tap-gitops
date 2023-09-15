@@ -71,7 +71,7 @@ spec:
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;survey/carto.run/Workload/survey-api;carto.run/v1alpha1
         prometheus.io/path: /actuator/prometheus
-        prometheus.io/port: "8080"
+        prometheus.io/port: "8081"
         prometheus.io/scrape: "true"
         services.conventions.carto.run/postgres: postgresql/42.6.0
       labels:
@@ -94,11 +94,9 @@ spec:
       containers:
       - env:
         - name: JAVA_TOOL_OPTIONS
-          value: -XX:ReservedCodeCacheSize=32M -Xss512k -Dfile.encoding="UTF-8" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s" -Duser.timezone="Asia/Tokyo"
+          value: -XX:ReservedCodeCacheSize=32M -Xss512k -Dfile.encoding="UTF-8" -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s" -Duser.timezone="Asia/Tokyo"
         - name: BPL_JVM_THREAD_COUNT
           value: "28"
-        - name: SPRING_PROFILES_ACTIVE
-          value: cloud
         image: ghcr.io/making/supply-chain/survey-api-survey@sha256:269c1528705bb8157e940825b3684f3985ca9b6bad856405b930d710c8c26146
         name: workload
         ports:

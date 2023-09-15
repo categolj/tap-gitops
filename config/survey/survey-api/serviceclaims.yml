@@ -22,7 +22,7 @@ metadata:
     kapp.k14s.io/disable-original: ""
     kapp.k14s.io/identity: v1;survey/carto.run/Workload/survey-api;carto.run/v1alpha1
     prometheus.io/path: /actuator/prometheus
-    prometheus.io/port: "8080"
+    prometheus.io/port: "8081"
     prometheus.io/scrape: "true"
     kapp.k14s.io/change-group: servicebinding.io/ServiceBindings
   labels:
