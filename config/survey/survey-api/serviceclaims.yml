@@ -1,0 +1,47 @@
+apiVersion: kapp.k14s.io/v1alpha1
+kind: Config
+waitRules:
+- conditionMatchers:
+  - type: ServiceAvailable
+    status: "False"
+    failure: true
+  - type: ServiceAvailable
+    status: "True"
+    success: true
+  resourceMatchers:
+  - apiVersionKindMatcher:
+      apiVersion: servicebinding.io/v1alpha3
+      kind: ServiceBinding
+---
+apiVersion: servicebinding.io/v1alpha3
+kind: ServiceBinding
+metadata:
+  name: survey-api-survey-db
+  annotations:
+    kapp.k14s.io/disable-default-label-scoping-rules: ""
+    kapp.k14s.io/disable-original: ""
+    kapp.k14s.io/identity: v1;survey/carto.run/Workload/survey-api;carto.run/v1alpha1
+    prometheus.io/path: /actuator/prometheus
+    prometheus.io/port: "8080"
+    prometheus.io/scrape: "true"
+    kapp.k14s.io/change-group: servicebinding.io/ServiceBindings
+  labels:
+    app.kubernetes.io/part-of: survey-api
+    apps.tanzu.vmware.com/auto-configure-actuators: "true"
+    apps.tanzu.vmware.com/has-tests: "true"
+    apps.tanzu.vmware.com/workload-type: web
+    kapp.k14s.io/app: "1694758348162032066"
+    kapp.k14s.io/association: v1.f1afcd9264785c8552a796e61c570572
+    app.kubernetes.io/component: run
+    carto.run/workload-name: survey-api
+spec:
+  name: survey-db
+  service:
+    apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+    kind: ClassClaim
+    name: survey-db
+  workload:
+    apiVersion: serving.knative.dev/v1
+    kind: Service
+    name: survey-api
+
