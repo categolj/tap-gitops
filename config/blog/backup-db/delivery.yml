@@ -127,7 +127,7 @@ spec:
                 secretKeyRef:
                   key: slack_webhook_url
                   name: backup-s3
-            image: ghcr.io/making/supply-chain/backup-db-blog@sha256:64c9563753506ecb04e47cf605e63881b607ced363ae87dded3797f5656e1f94
+            image: ghcr.io/making/supply-chain/backup-db-blog@sha256:5a82ec6f760c77bfb2714411901137777c1115d7c05eb87b9f8c5a96085cc30c
             name: workload
             resources: {}
             securityContext:
