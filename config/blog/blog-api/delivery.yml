@@ -11,8 +11,6 @@ metadata:
     app.kubernetes.io/part-of: blog-api
     apps.tanzu.vmware.com/has-tests: "true"
     apps.tanzu.vmware.com/workload-type: web
-    kapp.k14s.io/app: "1673062250001482428"
-    kapp.k14s.io/association: v1.eae2bf111fb39e9481c024f683deba7a
     app.kubernetes.io/component: run
     carto.run/workload-name: blog-api
 spec:
@@ -84,8 +82,6 @@ spec:
         apps.tanzu.vmware.com/workload-type: web
         carto.run/workload-name: blog-api
         conventions.carto.run/framework: spring-boot
-        kapp.k14s.io/app: "1673062250001482428"
-        kapp.k14s.io/association: v1.eae2bf111fb39e9481c024f683deba7a
         services.conventions.carto.run/postgres: workload
         tanzu.app.live.view: "true"
         tanzu.app.live.view.application.actuator.path: actuator
