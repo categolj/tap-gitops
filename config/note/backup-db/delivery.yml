@@ -29,8 +29,6 @@ spec:
         apps.tanzu.vmware.com/has-tests: "true"
         apps.tanzu.vmware.com/workload-type: cronjob
         carto.run/workload-name: backup-db
-        kapp.k14s.io/app: "1673586328584986961"
-        kapp.k14s.io/association: v1.d423bcc6a30c38008b103b9b242b5cd2
     spec:
       backoffLimit: 0
       template:
@@ -50,8 +48,6 @@ spec:
             apps.tanzu.vmware.com/has-tests: "true"
             apps.tanzu.vmware.com/workload-type: cronjob
             carto.run/workload-name: backup-db
-            kapp.k14s.io/app: "1673586328584986961"
-            kapp.k14s.io/association: v1.d423bcc6a30c38008b103b9b242b5cd2
         spec:
           containers:
           - env:
