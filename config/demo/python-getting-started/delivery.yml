@@ -26,8 +26,8 @@ spec:
           spring-boot-convention/app-live-view-appflavour-check
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:2c18b896152a08e85c8e7196d1971d2a8cd48f999f8781d004b5d73f1b51a9de
-          top_layer: sha256:fd99c12c326a445f04255147dcd08fe1ef6e95f46b1a23a7ecec035c7212b7a8
+          reference: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:6e794f6b15ec275cb7660b5764baa81e2bdcc1738c91fa8e986cebc1e6191a3d
+          top_layer: sha256:3ddbb2f03f283d3d21101ee3cb9183537a8ee4afa72b2f1dce842aa6ab39c0cb
         inspect-image.buildpacks.io/buildpacks: |-
           - id: paketo-buildpacks/ca-certificates
             version: 3.6.1
@@ -53,7 +53,7 @@ spec:
         carto.run/workload-name: python-getting-started
     spec:
       containers:
-      - image: ghcr.io/making/supply-chain/python-getting-started-demo@sha256:6446596b2c3f94f433043692fc600769f72f44359cf138c0f632058f5ed6efc6
+      - image: ghcr.io/making/supply-chain/python-getting-started-demo@sha256:93c5de0ac92c5e575b3f4783912458944b90bff0e17f19b0613e6c329e0a8005
         name: workload
         resources: {}
         securityContext:
