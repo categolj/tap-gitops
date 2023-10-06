@@ -108,12 +108,10 @@ spec:
             secretKeyRef:
               key: otel-trace-service-name
               name: otel-config
-        - name: SPRING_DATASOURCE_HIKARI_DATASOURCEPROPERTIES_SSLFACTORY
-          value: org.postgresql.ssl.DefaultJavaSSLFactory
         - name: SPRING_SENDGRID_APIKEY
           value: ${k8s.bindings.note-config.sendgrid-api-key}
         - name: MANAGEMENT_TRACING_PROPAGATION_TYPE
-          value: W3C,B3
+          value: W3C
         - name: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
           valueFrom:
             secretKeyRef:
