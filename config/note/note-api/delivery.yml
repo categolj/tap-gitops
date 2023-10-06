@@ -19,7 +19,7 @@ spec:
         autoscaling.knative.dev/maxScale: "1"
         autoscaling.knative.dev/minScale: "1"
         boot.spring.io/actuator: http://:8081/actuator
-        boot.spring.io/version: 3.2.0-M1
+        boot.spring.io/version: 3.2.0-M3
         conventions.carto.run/applied-conventions: |-
           appliveview-sample/app-live-view-appflavour-check
           inspect-image-convention/buildpacks
@@ -41,37 +41,37 @@ spec:
           top_layer: sha256:9b1e7cb9491474f366592d6d8c32aabbd34d8f99c2984db68e115d160ef64e1d
         inspect-image.buildpacks.io/buildpacks: |-
           - id: paketo-buildpacks/ca-certificates
-            version: 3.6.2
-          - id: tanzu-buildpacks/tanzu-bellsoft-liberica
-            version: 9.12.0
+            version: 3.6.5
+          - id: paketo-buildpacks/bellsoft-liberica
+            version: 10.3.2
           - id: paketo-buildpacks/syft
-            version: 1.10.1
+            version: 1.38.1
           - id: paketo-buildpacks/maven
-            version: 6.15.4
+            version: 6.15.9
           - id: paketo-buildpacks/executable-jar
-            version: 6.7.3
+            version: 6.8.1
           - id: paketo-buildpacks/apache-tomcat
-            version: 7.13.5
+            version: 7.13.12
           - id: paketo-buildpacks/apache-tomee
-            version: 1.7.2
+            version: 1.7.6
           - id: paketo-buildpacks/liberty
-            version: 3.7.2
+            version: 3.8.7
           - id: paketo-buildpacks/dist-zip
-            version: 5.6.3
+            version: 5.6.6
           - id: paketo-buildpacks/spring-boot
-            version: 5.25.2
+            version: 5.27.4
           - id: paketo-buildpacks/jattach
-            version: 1.4.3
+            version: 1.4.7
           - id: paketo-buildpacks/image-labels
-            version: 4.5.1
-        inspect-image.buildpacks.io/run-image: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:2ae5423e181301f26fdc8fd383536fcd9089e832ecd4a4b6fd3b84395220f92d
-        inspect-image.opencontainers.org/source: main@sha1:0744e8222e9e23d4171875df17d98f2932231146
+            version: 4.5.4
+        inspect-image.buildpacks.io/run-image: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:72d30e0638c6e01e23e4f36a33e061dde35cc590c69ae6cfca046d02380bc340
+        inspect-image.opencontainers.org/source: main@sha1:32e41ca886f94ea5a6f98f14657bdf36849dc95f
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;note/carto.run/Workload/note-api;carto.run/v1alpha1
         prometheus.io/path: /actuator/prometheus
         prometheus.io/port: "8081"
         prometheus.io/scrape: "true"
-        services.conventions.carto.run/postgres: postgresql/42.6.0
+        services.conventions.carto.run/postgres: postgresql/
       labels:
         app.kubernetes.io/component: run
         app.kubernetes.io/part-of: note-api
@@ -127,7 +127,7 @@ spec:
           value: ${K_CONFIGURATION:}
         - name: INFO_ENV_K_REVISION
           value: ${K_REVISION:}
-        image: ghcr.io/making/supply-chain/note-api-note@sha256:6ac1e3ee279fcb64100515143db6ca5f2547e1fd7b92750d75898ef1a885ba67
+        image: ghcr.io/making/supply-chain/note-api-note@sha256:126a98dbf841bfed82d22c4e4b3f2019ecddc5c4fb39f7a531c5ac92c1e41674
         livenessProbe:
           httpGet:
             path: /livez
