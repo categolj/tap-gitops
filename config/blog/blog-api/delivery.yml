@@ -101,7 +101,7 @@ spec:
               key: otel-trace-service-name
               name: otel-config
         - name: MANAGEMENT_TRACING_PROPAGATION_TYPE
-          value: W3C,B3
+          value: W3C
         - name: SPRING_SECURITY_USER_PASSWORD
           valueFrom:
             secretKeyRef:
