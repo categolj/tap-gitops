@@ -16,6 +16,7 @@ spec:
   template:
     metadata:
       annotations:
+        apps.tanzu.vmware.com/correlationid: https://github.com/making/httpbin?sub_path=/
         conventions.carto.run/applied-conventions: |-
           appliveview-sample/app-live-view-appflavour-check
           spring-boot-convention/auto-configure-actuators-check
@@ -29,7 +30,7 @@ spec:
         carto.run/workload-name: httpbin
     spec:
       containers:
-      - image: ghcr.io/making/supply-chain/httpbin-demo@sha256:81fb167645035bae737660222a6e3b42c4f00407ec88780f82061feaff656af1
+      - image: ghcr.io/making/supply-chain/httpbin-demo@sha256:8d25a54892baa0297e0b1e6c7b501bb552edcea517803f889c500b342f2b412f
         name: workload
         resources: {}
         securityContext:
