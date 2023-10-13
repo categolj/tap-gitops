@@ -23,8 +23,9 @@ spec:
   system: blog
   owner: making
   location:
-    path: /v3/api-docs
-    baseURL:
+    apiSpec:
+      path: /v3/api-docs
+    server:
       ref:
         apiVersion: serving.knative.dev/v1
         kind: Service
