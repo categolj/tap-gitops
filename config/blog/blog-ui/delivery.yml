@@ -16,6 +16,7 @@ spec:
   template:
     metadata:
       annotations:
+        apps.tanzu.vmware.com/correlationid: https://github.com/categolj/blog-ui?sub_path=/
         autoscaling.knative.dev/maxScale: "1"
         autoscaling.knative.dev/minScale: "1"
         conventions.carto.run/applied-conventions: |-
@@ -28,26 +29,26 @@ spec:
           spring-boot-convention/app-live-view-appflavour-check
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:72d30e0638c6e01e23e4f36a33e061dde35cc590c69ae6cfca046d02380bc340
-          top_layer: sha256:9b1e7cb9491474f366592d6d8c32aabbd34d8f99c2984db68e115d160ef64e1d
+          reference: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:315decdc5f06c11199c718f9432e19d6ff30abf5ad53e988d820b62cb081c0a2
+          top_layer: sha256:951f080c9d78b977f4dfa0a47c82a1a0d48f992a18e01738feb6268c6f34324b
         inspect-image.buildpacks.io/buildpacks: |-
           - id: paketo-buildpacks/ca-certificates
-            version: 3.6.1
+            version: 3.6.3
           - id: tanzu-buildpacks/node-engine
-            version: 1.5.2
+            version: 2.0.0
           - id: tanzu-buildpacks/yarn
-            version: 1.1.8
+            version: 1.1.11
           - id: tanzu-buildpacks/yarn-install
-            version: 1.1.2
+            version: 1.2.1
           - id: tanzu-buildpacks/node-module-bom
             version: 0.3.4
           - id: tanzu-buildpacks/node-run-script
-            version: 1.0.8
+            version: 1.0.12
           - id: tanzu-buildpacks/yarn-start
-            version: 1.0.9
+            version: 1.1.1
           - id: paketo-buildpacks/image-labels
-            version: 4.5.0
-        inspect-image.buildpacks.io/run-image: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:72d30e0638c6e01e23e4f36a33e061dde35cc590c69ae6cfca046d02380bc340
+            version: 4.5.2
+        inspect-image.buildpacks.io/run-image: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:315decdc5f06c11199c718f9432e19d6ff30abf5ad53e988d820b62cb081c0a2
         inspect-image.opencontainers.org/source: main@sha1:46fd26973f8f840a5621c7c7d4c4bbf7c5e43cef
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-ui;carto.run/v1alpha1
@@ -59,7 +60,7 @@ spec:
         carto.run/workload-name: blog-ui
     spec:
       containers:
-      - image: ghcr.io/making/supply-chain/blog-ui-blog@sha256:460d4f7c8d731c848b16bf27f1e113045305873686d720c1bd6be286eeda2bec
+      - image: ghcr.io/making/supply-chain/blog-ui-blog@sha256:7fa14437a11a6de6b53713e4907d5485a4fb9e701d9e00a5c55e149dc609dcc5
         livenessProbe:
           httpGet:
             path: /aboutme
