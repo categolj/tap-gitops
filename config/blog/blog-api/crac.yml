@@ -1,0 +1,41 @@
+
+#@ load("@ytt:overlay", "overlay")
+#@overlay/match by=overlay.subset({"kind": "Service"})
+---
+spec:
+  #@overlay/match-child-defaults missing_ok=True
+  template:
+    spec:
+      containers:
+      #@overlay/match by="name"
+      - name: workload
+        securityContext:
+          capabilities:
+            add:
+            - CHECKPOINT_RESTORE
+            - NET_ADMIN
+            - SYS_PTRACE
+        env:
+        #@overlay/match by="name"
+        - name: REVISION_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.labels['serving.knative.dev/revision']
+        #@overlay/match by="name"
+        - name: REVISION_UID
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.labels['serving.knative.dev/revisionUID']
+        #@overlay/match by="name"
+        - name: CHECKPOINT_RESTORE_FILES_DIR
+          value: /var/checkpoint-restore/\$(REVISION_NAME)/\$(REVISION_UID)
+        volumeMounts:
+        - name: checkpoint-restore-cache
+          mountPath: /var/checkpoint-restore
+    volumes:
+    #@overlay/match by="name"
+    - name: checkpoint-restore-cache
+      persistentVolumeClaim:
+        claimName: #@ data.values.workload.metadata.name
+
+
