@@ -10,6 +10,7 @@ spec:
       #@overlay/match by="name"
       - name: workload
         securityContext:
+          runAsUser: 0
           capabilities:
             add:
             - CHECKPOINT_RESTORE
@@ -32,10 +33,10 @@ spec:
         volumeMounts:
         - name: checkpoint-restore-cache
           mountPath: /var/checkpoint-restore
-    volumes:
-    #@overlay/match by="name"
-    - name: checkpoint-restore-cache
-      persistentVolumeClaim:
-        claimName: blog-api
+      volumes:
+      #@overlay/match by="name"
+      - name: checkpoint-restore-cache
+        persistentVolumeClaim:
+          claimName: blog-api
 
 
