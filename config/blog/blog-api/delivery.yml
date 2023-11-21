@@ -96,6 +96,38 @@ spec:
           value: -XX:ReservedCodeCacheSize=32M -Xss512k -Dfile.encoding="UTF-8" -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s" -Duser.country="JP" -Duser.language="ja" -Duser.timezone="Asia/Tokyo"
         - name: BPL_JVM_THREAD_COUNT
           value: "28"
+        - name: SPRING_DATASOURCE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: username
+              name: blog-db
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: password
+              name: blog-db
+        - name: DB_DATABASE
+          valueFrom:
+            secretKeyRef:
+              key: database
+              name: blog-db
+        - name: DB_HOST
+          valueFrom:
+            secretKeyRef:
+              key: host
+              name: blog-db
+        - name: DB_PORT
+          valueFrom:
+            secretKeyRef:
+              key: host
+              name: blog-db
+        - name: DB_SSLMODE
+          valueFrom:
+            secretKeyRef:
+              key: sslmode
+              name: blog-db
+        - name: SPRING_DATASOURCE_URL
+          value: jdbc:postgresql://$(DB_HOST):$(DB_PORT)/$(DB_DATABASE)?sslmode=$(DB_SSLMODE)
         - name: SPRING_APPLICATION_NAME
           valueFrom:
             secretKeyRef:
