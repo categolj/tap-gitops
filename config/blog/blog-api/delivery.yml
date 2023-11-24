@@ -21,7 +21,7 @@ spec:
         autoscaling.knative.dev/maxScale: "1"
         autoscaling.knative.dev/minScale: "1"
         boot.spring.io/actuator: http://:8081/actuator
-        boot.spring.io/version: 3.2.0-RC2
+        boot.spring.io/version: 3.2.0
         conventions.carto.run/applied-conventions: |-
           appliveview-sample/app-live-view-appflavour-check
           inspect-image-convention/buildpacks
@@ -33,6 +33,7 @@ spec:
           spring-boot-convention/spring-boot-graceful-shutdown
           spring-boot-convention/spring-boot-web
           spring-boot-convention/spring-boot-actuator
+          spring-boot-convention/spring-boot-actuator-probes
           spring-boot-convention/app-live-view-appflavour-check
           spring-boot-convention/app-live-view-connector-boot
           spring-boot-convention/app-live-view-appflavours-boot
@@ -67,7 +68,7 @@ spec:
           - id: paketo-buildpacks/image-labels
             version: 4.5.2
         inspect-image.buildpacks.io/run-image: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:315decdc5f06c11199c718f9432e19d6ff30abf5ad53e988d820b62cb081c0a2
-        inspect-image.opencontainers.org/source: main@sha1:b0a48c0809ab5571af38c1eea6afeb79805d2e06
+        inspect-image.opencontainers.org/source: main@sha1:b947721110634d0ae64011292243b19fce6b1520
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-api;carto.run/v1alpha1
         prometheus.io/path: /actuator/prometheus
@@ -151,7 +152,7 @@ spec:
             secretKeyRef:
               key: github-webhook-secret-en
               name: blog-config
-        - name: _ANAGEMENT_ZIPKIN_TRACING_ENDPOINT
+        - name: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
           valueFrom:
             secretKeyRef:
               key: otel-trace-endpoint
@@ -164,7 +165,7 @@ spec:
           value: ${K_CONFIGURATION:}
         - name: INFO_ENV_K_REVISION
           value: ${K_REVISION:}
-        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:c698f4db4300fdcaa3456c8510f133bcfc41d6ddd9f35e13061371adfb3d7bbb
+        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:d12262a660cc0c3e66574d57158b4ea26e8c178c6693673c4e35a4cacc9f5e15
         livenessProbe:
           httpGet:
             path: /livez
@@ -186,5 +187,10 @@ spec:
             memory: 512Mi
         securityContext:
           runAsUser: 1000
+        startupProbe:
+          httpGet:
+            path: /readyz
+            port: 8080
+            scheme: HTTP
       serviceAccountName: default
 
