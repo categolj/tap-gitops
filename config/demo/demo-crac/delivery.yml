@@ -30,7 +30,7 @@ spec:
         carto.run/workload-name: demo-crac
     spec:
       containers:
-      - image: ghcr.io/making/supply-chain/demo-crac-demo@sha256:213784ad0e456536fa2706aae1f0adbfca8121a1d5b17138fc4ff873f3527728
+      - image: ghcr.io/making/supply-chain/demo-crac-demo@sha256:100bb93dfaa7a7d0fa753d07f988a8eaaea6f48b8c68c374142eb1f3dc5d7bc5
         name: workload
         resources: {}
         securityContext:
