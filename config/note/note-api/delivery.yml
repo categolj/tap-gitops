@@ -148,7 +148,14 @@ spec:
           requests:
             memory: 416Mi
         securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          runAsNonRoot: true
           runAsUser: 1000
+          seccompProfile:
+            type: RuntimeDefault
         startupProbe:
           httpGet:
             path: /readyz
