@@ -124,11 +124,18 @@ spec:
                 secretKeyRef:
                   key: slack_webhook_url
                   name: backup-s3
-            image: ghcr.io/making/supply-chain/backup-db-blog@sha256:f9168d9654cdfdeb053a010f27ba968ed0530e79d1bce2a63946f6dafd4dd73a
+            image: ghcr.io/making/supply-chain/backup-db-blog@sha256:c6fdec4d3e7a7b60de5fdaeeaf4ed0a6503f13c7a007953b1f2a77e83fd395e7
             name: workload
             resources: {}
             securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                - ALL
+              runAsNonRoot: true
               runAsUser: 1000
+              seccompProfile:
+                type: RuntimeDefault
           serviceAccountName: default
           restartPolicy: Never
 
