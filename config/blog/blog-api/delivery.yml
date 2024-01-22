@@ -40,8 +40,8 @@ spec:
           spring-boot-convention/service-intent-postgres
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:c49da847d069d2ed9b3b48b0a92ba693084bcbfdbc9c64313381f97bd79e9134
-          top_layer: sha256:76278401a65ac435e187dd0f386d2896b5c57b2a4e61ea3032b5d7acb30e6a9f
+          reference: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:e9ba2230f5dfcd8bebc81912660dccb667e43e29e21c00eeae59ed37c746d6d4
+          top_layer: sha256:6f72f0eba5d32daafef96a099b19c551cd2d7586c13450b1fbe65847e44b6761
         inspect-image.buildpacks.io/buildpacks: |-
           - id: tanzu-buildpacks/ca-certificates
             version: 3.6.7
@@ -67,8 +67,8 @@ spec:
             version: 1.4.9
           - id: tanzu-buildpacks/image-labels
             version: 4.5.6
-        inspect-image.buildpacks.io/run-image: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:c49da847d069d2ed9b3b48b0a92ba693084bcbfdbc9c64313381f97bd79e9134
-        inspect-image.opencontainers.org/source: main@sha1:0848dc8f8ef84499e3282087e9b203ff94ea698d
+        inspect-image.buildpacks.io/run-image: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:e9ba2230f5dfcd8bebc81912660dccb667e43e29e21c00eeae59ed37c746d6d4
+        inspect-image.opencontainers.org/source: main@sha1:364057dc3865379cc30eed6095c706c8e8f6a92e
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-api;carto.run/v1alpha1
         prometheus.io/path: /actuator/prometheus
@@ -165,7 +165,7 @@ spec:
           value: ${K_CONFIGURATION:}
         - name: INFO_ENV_K_REVISION
           value: ${K_REVISION:}
-        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:8f16af6dbf2e5f1b86eefb85f830bddac767bee169f1afec017647087f7dc6e9
+        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:0eb6af1b3be6c72fc32040e3ba8fc319659bfe2bb2cb66b8058dfac7d5bb7fdb
         livenessProbe:
           httpGet:
             path: /livez
