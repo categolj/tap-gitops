@@ -28,8 +28,8 @@ spec:
           spring-boot-convention/app-live-view-appflavour-check
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:e9ba2230f5dfcd8bebc81912660dccb667e43e29e21c00eeae59ed37c746d6d4
-          top_layer: sha256:6f72f0eba5d32daafef96a099b19c551cd2d7586c13450b1fbe65847e44b6761
+          reference: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:b0efa340004613e96fc63586df6959d1917de25945bd9eded7fbb1a81c6caf89
+          top_layer: sha256:1d694ab175cfdbd2209c819d0c4fcfdf0217c05451aeca28682ac3295f0fd3ff
         inspect-image.buildpacks.io/buildpacks: |-
           - id: tanzu-buildpacks/ca-certificates
             version: 3.6.7
@@ -56,7 +56,7 @@ spec:
         carto.run/workload-name: plantuml
     spec:
       containers:
-      - image: ghcr.io/making/supply-chain/plantuml-demo@sha256:6c7c3272ebcfbd05c3fe745034356d2e8ba43ed1bee2ccb08ad1de9101ba7676
+      - image: ghcr.io/making/supply-chain/plantuml-demo@sha256:cb604742ed247b0ae23503bb9944b05d7ad4e95e422b60715f56266afe1c9d48
         name: workload
         resources: {}
         securityContext:
