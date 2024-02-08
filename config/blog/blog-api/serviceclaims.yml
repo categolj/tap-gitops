@@ -20,8 +20,8 @@ metadata:
   annotations:
     kapp.k14s.io/disable-original: ""
     kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-api;carto.run/v1alpha1
-    autoscaling.knative.dev/maxScale: "1"
-    autoscaling.knative.dev/minScale: "1"
+    autoscaling.knative.dev/maxScale: "2"
+    autoscaling.knative.dev/minScale: "2"
     prometheus.io/path: /actuator/prometheus
     prometheus.io/port: "8081"
     prometheus.io/scrape: "true"

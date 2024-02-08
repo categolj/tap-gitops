@@ -1,0 +1,13 @@
+
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: blog-api
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/part-of: blog-api
+      app.kubernetes.io/component: run
+
