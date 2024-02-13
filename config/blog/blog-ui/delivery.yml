@@ -18,7 +18,7 @@ spec:
       annotations:
         apps.tanzu.vmware.com/correlationid: https://github.com/categolj/blog-ui?sub_path=/
         autoscaling.knative.dev/maxScale: "2"
-        autoscaling.knative.dev/minScale: "2"
+        autoscaling.knative.dev/minScale: "1"
         conventions.carto.run/applied-conventions: |-
           appliveview-sample/app-live-view-appflavour-check
           inspect-image-convention/buildpacks
