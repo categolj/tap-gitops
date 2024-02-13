@@ -53,6 +53,8 @@ spec:
               value: backup-db-note
             - name: management.prometheus.metrics.export.pushgateway.base-url
               value: https://pushgateway.ik.am
+            - name: management.prometheus.metrics.export.pushgateway.enabled
+              value: "false"
             - name: JAVA_TOOL_OPTIONS
               value: -Dmanagement.health.probes.enabled="false"
             - name: AWS_ACCESS_KEY_ID
@@ -126,7 +128,7 @@ spec:
                 secretKeyRef:
                   key: slack_webhook_url
                   name: backup-s3
-            image: ghcr.io/making/supply-chain/backup-db-blog@sha256:520e53155ac0ff4bb05548b6c242349797255fb99bd10f4b495ea3e095a224fa
+            image: ghcr.io/making/supply-chain/backup-db-blog@sha256:8e67fc5dbf3c8b060cfdfa095b87653f26d341bcb07391b0d2855b4969af6264
             name: workload
             resources: {}
             securityContext:
