@@ -112,8 +112,6 @@ spec:
               name: otel-config
         - name: SPRING_SENDGRID_APIKEY
           value: ${k8s.bindings.note-config.sendgrid-api-key}
-        - name: MANAGEMENT_TRACING_PROPAGATION_TYPE
-          value: W3C
         - name: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
           valueFrom:
             secretKeyRef:
