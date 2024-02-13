@@ -19,7 +19,7 @@ spec:
       annotations:
         apps.tanzu.vmware.com/correlationid: https://github.com/categolj/blog-api?sub_path=/
         autoscaling.knative.dev/maxScale: "2"
-        autoscaling.knative.dev/minScale: "2"
+        autoscaling.knative.dev/minScale: "1"
         boot.spring.io/actuator: http://:8081/actuator
         boot.spring.io/version: 3.2.2
         conventions.carto.run/applied-conventions: |-
@@ -102,8 +102,6 @@ spec:
             secretKeyRef:
               key: otel-trace-service-name
               name: otel-config
-        - name: MANAGEMENT_TRACING_PROPAGATION_TYPE
-          value: W3C
         - name: SPRING_SECURITY_USER_PASSWORD
           valueFrom:
             secretKeyRef:
