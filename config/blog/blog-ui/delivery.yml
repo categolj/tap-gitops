@@ -50,6 +50,7 @@ spec:
             version: 4.5.5
         inspect-image.buildpacks.io/run-image: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:c49da847d069d2ed9b3b48b0a92ba693084bcbfdbc9c64313381f97bd79e9134
         inspect-image.opencontainers.org/source: main@sha1:124fc95197c85f40d74ddb4fcaabe2c2982997ea
+        instrumentation.opentelemetry.io/inject-nodejs: opentelemetry/default
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-ui;carto.run/v1alpha1
       labels:
