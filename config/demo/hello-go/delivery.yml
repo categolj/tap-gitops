@@ -1,0 +1,67 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: hello-go
+  annotations:
+    ootb.apps.tanzu.vmware.com/servicebinding-workload: "true"
+    ootb.apps.tanzu.vmware.com/apidescriptor-ref: "true"
+    kapp.k14s.io/change-rule: upsert after upserting servicebinding.io/ServiceBindings
+  labels:
+    app.kubernetes.io/part-of: hello-go
+    apps.tanzu.vmware.com/has-tests: "true"
+    apps.tanzu.vmware.com/workload-type: web
+    app.kubernetes.io/component: run
+    carto.run/workload-name: hello-go
+spec:
+  template:
+    metadata:
+      annotations:
+        apps.tanzu.vmware.com/correlationid: https://github.com/GoogleCloudPlatform/golang-samples?sub_path=run/helloworld
+        conventions.carto.run/applied-conventions: |-
+          appliveview-sample/app-live-view-appflavour-check
+          inspect-image-convention/buildpacks
+          inspect-image-convention/base-image
+          inspect-image-convention/run-image
+          inspect-image-convention/source
+          spring-boot-convention/auto-configure-actuators-check
+          spring-boot-convention/app-live-view-appflavour-check
+        developer.conventions/target-containers: workload
+        inspect-image.buildpacks.io/base-image: |-
+          reference: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:e9ba2230f5dfcd8bebc81912660dccb667e43e29e21c00eeae59ed37c746d6d4
+          top_layer: sha256:6f72f0eba5d32daafef96a099b19c551cd2d7586c13450b1fbe65847e44b6761
+        inspect-image.buildpacks.io/buildpacks: |-
+          - id: paketo-buildpacks/ca-certificates
+            version: 3.6.6
+          - id: tanzu-buildpacks/go-dist
+            version: 2.3.16
+          - id: tanzu-buildpacks/go-mod-vendor
+            version: 1.0.27
+          - id: tanzu-buildpacks/go-build
+            version: 2.0.29
+          - id: paketo-buildpacks/image-labels
+            version: 4.5.5
+        inspect-image.buildpacks.io/run-image: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:e9ba2230f5dfcd8bebc81912660dccb667e43e29e21c00eeae59ed37c746d6d4
+        inspect-image.opencontainers.org/source: main@sha1:7796071484cf6bf49d3455d3340e28488fa6fea5
+        instrumentation.opentelemetry.io/inject-go: opentelemetry/default
+      labels:
+        app.kubernetes.io/component: run
+        app.kubernetes.io/part-of: hello-go
+        apps.tanzu.vmware.com/has-tests: "true"
+        apps.tanzu.vmware.com/workload-type: web
+        carto.run/workload-name: hello-go
+    spec:
+      containers:
+      - image: ghcr.io/making/supply-chain/hello-go-demo@sha256:4d4aa33c793095482969a7372248df6b0fc9814c1875a32c1ad43a1bd8cfdb6a
+        name: workload
+        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          runAsNonRoot: true
+          runAsUser: 1000
+          seccompProfile:
+            type: RuntimeDefault
+      serviceAccountName: default
+
