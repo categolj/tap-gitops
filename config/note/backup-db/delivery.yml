@@ -34,8 +34,8 @@ spec:
           annotations:
             apps.tanzu.vmware.com/correlationid: ghcr.io/making/supply-chain/backup-db-blog
             conventions.carto.run/applied-conventions: |-
-              appliveview-sample/app-live-view-appflavour-check
               spring-boot-convention/auto-configure-actuators-check
+              spring-boot-convention/is-native-app-check
               spring-boot-convention/app-live-view-appflavour-check
             developer.conventions/target-containers: workload
             kapp.k14s.io/disable-original: ""
