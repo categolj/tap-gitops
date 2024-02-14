@@ -43,6 +43,7 @@ spec:
         inspect-image.buildpacks.io/run-image: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:e9ba2230f5dfcd8bebc81912660dccb667e43e29e21c00eeae59ed37c746d6d4
         inspect-image.opencontainers.org/source: main@sha1:7796071484cf6bf49d3455d3340e28488fa6fea5
         instrumentation.opentelemetry.io/inject-go: opentelemetry/default
+        instrumentation.opentelemetry.io/otel-go-auto-target-exe: /layers/tanzu-buildpacks_go-build/targets/bin/helloworld
       labels:
         app.kubernetes.io/component: run
         app.kubernetes.io/part-of: hello-go
