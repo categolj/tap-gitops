@@ -52,7 +52,10 @@ spec:
         carto.run/workload-name: hello-go
     spec:
       containers:
-      - image: ghcr.io/making/supply-chain/hello-go-demo@sha256:4d4aa33c793095482969a7372248df6b0fc9814c1875a32c1ad43a1bd8cfdb6a
+      - env:
+        - name: NAME
+          value: TAP
+        image: ghcr.io/making/supply-chain/hello-go-demo@sha256:4d4aa33c793095482969a7372248df6b0fc9814c1875a32c1ad43a1bd8cfdb6a
         name: workload
         resources: {}
         securityContext:
