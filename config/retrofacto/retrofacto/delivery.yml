@@ -1,0 +1,119 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: retrofacto
+  annotations:
+    ootb.apps.tanzu.vmware.com/servicebinding-workload: "true"
+    ootb.apps.tanzu.vmware.com/apidescriptor-ref: "true"
+    kapp.k14s.io/change-rule: upsert after upserting servicebinding.io/ServiceBindings
+  labels:
+    app.kubernetes.io/part-of: retrofacto
+    apps.tanzu.vmware.com/has-tests: "true"
+    apps.tanzu.vmware.com/workload-type: web
+    app.kubernetes.io/component: run
+    carto.run/workload-name: retrofacto
+spec:
+  template:
+    metadata:
+      annotations:
+        apps.tanzu.vmware.com/correlationid: https://github.com/making/retrofacto?sub_path=/
+        autoscaling.knative.dev/minScale: "1"
+        boot.spring.io/actuator: http://:8081/actuator
+        boot.spring.io/version: 3.2.3
+        conventions.carto.run/applied-conventions: |-
+          inspect-image-convention/buildpacks
+          inspect-image-convention/base-image
+          inspect-image-convention/run-image
+          inspect-image-convention/source
+          spring-boot-convention/auto-configure-actuators-check
+          spring-boot-convention/is-native-app-check
+          spring-boot-convention/spring-boot
+          spring-boot-convention/spring-boot-graceful-shutdown
+          spring-boot-convention/spring-boot-web
+          spring-boot-convention/spring-boot-actuator
+          spring-boot-convention/spring-boot-actuator-probes
+          spring-boot-convention/app-live-view-appflavour-check
+          spring-boot-convention/app-live-view-connector-boot
+          spring-boot-convention/app-live-view-appflavours-boot
+          spring-boot-convention/service-intent-postgres
+        developer.conventions/target-containers: workload
+        inspect-image.buildpacks.io/base-image: |-
+          reference: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:363a8d83a865e1091eb480e85ca5b1eb89006d77bd0896438d47e2534122924f
+          top_layer: sha256:e93857364431c04243df85536d44892efaa881110e2e2f9443d1b8a0b0658752
+        inspect-image.buildpacks.io/buildpacks: |-
+          - id: tanzu-buildpacks/ca-certificates
+            version: 3.7.0
+          - id: tanzu-buildpacks/bellsoft-liberica
+            version: 9.13.1
+          - id: paketo-buildpacks/syft
+            version: 1.10.1
+          - id: tanzu-buildpacks/maven
+            version: 6.15.12
+          - id: tanzu-buildpacks/executable-jar
+            version: 6.8.3
+          - id: tanzu-buildpacks/apache-tomcat
+            version: 7.15.1
+          - id: tanzu-buildpacks/apache-tomee
+            version: 1.8.0
+          - id: tanzu-buildpacks/liberty
+            version: 3.8.11
+          - id: tanzu-buildpacks/dist-zip
+            version: 5.6.8
+          - id: tanzu-buildpacks/spring-boot
+            version: 5.27.6
+          - id: tanzu-buildpacks/image-labels
+            version: 4.6.0
+        inspect-image.buildpacks.io/run-image: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:363a8d83a865e1091eb480e85ca5b1eb89006d77bd0896438d47e2534122924f
+        inspect-image.opencontainers.org/source: main@sha1:0d324783f76f734562c06d1046d1c68fc71a0103
+        services.conventions.carto.run/postgres: postgresql/42.6.1
+      labels:
+        app.kubernetes.io/component: run
+        app.kubernetes.io/part-of: retrofacto
+        apps.tanzu.vmware.com/auto-configure-actuators: "true"
+        apps.tanzu.vmware.com/has-tests: "true"
+        apps.tanzu.vmware.com/workload-type: web
+        carto.run/workload-name: retrofacto
+        conventions.carto.run/framework: spring-boot
+        services.conventions.carto.run/postgres: workload
+        tanzu.app.live.view: "true"
+        tanzu.app.live.view.application.actuator.path: actuator
+        tanzu.app.live.view.application.actuator.port: "8081"
+        tanzu.app.live.view.application.flavours: spring-boot
+        tanzu.app.live.view.application.name: retrofacto
+    spec:
+      containers:
+      - env:
+        - name: JAVA_TOOL_OPTIONS
+          value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
+        image: ghcr.io/making/supply-chain/retrofacto-retrofacto@sha256:0782bed2ecbc3c80d3f95bb3d9d5fbe31ba7db95f45ae2a1ccc77cd3372655df
+        livenessProbe:
+          httpGet:
+            path: /livez
+            port: 8080
+            scheme: HTTP
+        name: workload
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 8080
+            scheme: HTTP
+        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          runAsNonRoot: true
+          runAsUser: 1000
+          seccompProfile:
+            type: RuntimeDefault
+        startupProbe:
+          httpGet:
+            path: /readyz
+            port: 8080
+            scheme: HTTP
+      serviceAccountName: default
+
