@@ -16,9 +16,13 @@ waitRules:
 apiVersion: servicebinding.io/v1alpha3
 kind: ServiceBinding
 metadata:
-  name: retrofacto-blog-db
+  name: retrofacto-retrofacto-db
   annotations:
+    autoscaling.knative.dev/maxScale: "2"
     autoscaling.knative.dev/minScale: "1"
+    prometheus.io/path: /actuator/prometheus
+    prometheus.io/port: "8081"
+    prometheus.io/scrape: "true"
     kapp.k14s.io/change-group: servicebinding.io/ServiceBindings
   labels:
     app.kubernetes.io/part-of: retrofacto
@@ -27,7 +31,7 @@ metadata:
     app.kubernetes.io/component: run
     carto.run/workload-name: retrofacto
 spec:
-  name: blog-db
+  name: retrofacto-db
   service:
     apiVersion: services.apps.tanzu.vmware.com/v1alpha1
     kind: ClassClaim
