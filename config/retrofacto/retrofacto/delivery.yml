@@ -87,6 +87,8 @@ spec:
     spec:
       containers:
       - env:
+        - name: MANAGEMENT_OTLP_TRACING_ENDPOINT
+          value: http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/traces
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
         image: ghcr.io/making/supply-chain/retrofacto-retrofacto@sha256:30c2474fbeb532ae912353b2ee1183e1e2c2a3a122de60d3eb7ab2dd39d9ab90
