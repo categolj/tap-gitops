@@ -62,6 +62,8 @@ spec:
             version: 5.6.8
           - id: tanzu-buildpacks/spring-boot
             version: 5.27.6
+          - id: tanzu-buildpacks/jattach
+            version: 1.4.9
           - id: tanzu-buildpacks/image-labels
             version: 4.6.0
         inspect-image.buildpacks.io/run-image: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:363a8d83a865e1091eb480e85ca5b1eb89006d77bd0896438d47e2534122924f
@@ -93,7 +95,7 @@ spec:
           value: "30"
         - name: MANAGEMENT_OTLP_TRACING_ENDPOINT
           value: http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/traces
-        image: ghcr.io/making/supply-chain/retrofacto-retrofacto@sha256:30c2474fbeb532ae912353b2ee1183e1e2c2a3a122de60d3eb7ab2dd39d9ab90
+        image: ghcr.io/making/supply-chain/retrofacto-retrofacto@sha256:3ad15d765475fec46a542323c6e44fcaa27e7d3974a406ee233a99215172cc53
         livenessProbe:
           httpGet:
             path: /livez
