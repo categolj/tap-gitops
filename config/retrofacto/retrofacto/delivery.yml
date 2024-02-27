@@ -65,7 +65,7 @@ spec:
           - id: tanzu-buildpacks/image-labels
             version: 4.6.0
         inspect-image.buildpacks.io/run-image: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:363a8d83a865e1091eb480e85ca5b1eb89006d77bd0896438d47e2534122924f
-        inspect-image.opencontainers.org/source: main@sha1:9690dd9866263998c50e68455920043fe63cef1a
+        inspect-image.opencontainers.org/source: main@sha1:a69735be137282502525ac2c241113cd80fe497e
         prometheus.io/path: /actuator/prometheus
         prometheus.io/port: "8081"
         prometheus.io/scrape: "true"
@@ -94,7 +94,7 @@ spec:
               name: retrofacto-db
         - name: JAVA_TOOL_OPTIONS
           value: -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s"
-        image: ghcr.io/making/supply-chain/retrofacto-retrofacto@sha256:8fa71d2c2e985dc25927fa459cb0b08f7670fca865a1561918a07992fdba25e8
+        image: ghcr.io/making/supply-chain/retrofacto-retrofacto@sha256:21b61b88f7711019f3c3985cdff638033c5f10de7e919f0e4af29f2ae28921d6
         livenessProbe:
           httpGet:
             path: /livez
