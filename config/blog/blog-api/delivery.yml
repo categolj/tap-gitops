@@ -21,7 +21,7 @@ spec:
         autoscaling.knative.dev/maxScale: "2"
         autoscaling.knative.dev/minScale: "1"
         boot.spring.io/actuator: http://:8081/actuator
-        boot.spring.io/version: 3.2.2
+        boot.spring.io/version: 3.2.3
         conventions.carto.run/applied-conventions: |-
           inspect-image-convention/buildpacks
           inspect-image-convention/base-image
@@ -67,14 +67,14 @@ spec:
             version: 1.4.9
           - id: tanzu-buildpacks/image-labels
             version: 4.6.0
-        inspect-image.buildpacks.io/run-image: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:e9ba2230f5dfcd8bebc81912660dccb667e43e29e21c00eeae59ed37c746d6d4
-        inspect-image.opencontainers.org/source: main@sha1:cb1154c74c69fc7d842b381dcd420b1157f1b4fe
+        inspect-image.buildpacks.io/run-image: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:363a8d83a865e1091eb480e85ca5b1eb89006d77bd0896438d47e2534122924f
+        inspect-image.opencontainers.org/source: main@sha1:089b7b7288c1fe5d90079deac1c732b7829c3b43
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-api;carto.run/v1alpha1
         prometheus.io/path: /actuator/prometheus
         prometheus.io/port: "8081"
         prometheus.io/scrape: "true"
-        services.conventions.carto.run/postgres: postgresql/42.6.0
+        services.conventions.carto.run/postgres: postgresql/42.6.1
       labels:
         apis.apps.tanzu.vmware.com/register-api: "true"
         app.kubernetes.io/component: run
@@ -163,7 +163,7 @@ spec:
           value: ${K_CONFIGURATION:}
         - name: INFO_ENV_K_REVISION
           value: ${K_REVISION:}
-        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:539f308c8a07538ebc6a76ae549b41542b57bc5abe0092f90810b81cdbf202fc
+        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:5c0f3b267dee71b94426f7b27ae1ac3b971dda8c772a0213bb1f3d647e4f37ba
         livenessProbe:
           httpGet:
             path: /livez
