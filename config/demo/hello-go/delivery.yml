@@ -41,7 +41,7 @@ spec:
           - id: tanzu-buildpacks/image-labels
             version: 4.6.0
         inspect-image.buildpacks.io/run-image: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:363a8d83a865e1091eb480e85ca5b1eb89006d77bd0896438d47e2534122924f
-        inspect-image.opencontainers.org/source: main@sha1:845ab3400178279942f457eba6a0399bd0c735f3
+        inspect-image.opencontainers.org/source: main@sha1:b38df0dc3c54c649625cc1587316e3c286910286
         instrumentation.opentelemetry.io/inject-go: opentelemetry/default
         instrumentation.opentelemetry.io/otel-go-auto-target-exe: /layers/tanzu-buildpacks_go-build/targets/bin/helloworld
       labels:
@@ -55,7 +55,7 @@ spec:
       - env:
         - name: NAME
           value: TAP
-        image: ghcr.io/making/supply-chain/hello-go-demo@sha256:41c122cd8408d53e2b5821da9b22c4d50d81ffdc4efbff563f2b29804370dff6
+        image: ghcr.io/making/supply-chain/hello-go-demo@sha256:2a2de4a171c15bc8f8c87da9384a519d2b549a452f5bede08a0c3ae78e26e1b7
         name: workload
         resources: {}
         securityContext:
