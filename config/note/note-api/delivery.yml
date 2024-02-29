@@ -20,7 +20,7 @@ spec:
         autoscaling.knative.dev/maxScale: "1"
         autoscaling.knative.dev/minScale: "1"
         boot.spring.io/actuator: http://:8081/actuator
-        boot.spring.io/version: 3.2.2
+        boot.spring.io/version: 3.2.3
         conventions.carto.run/applied-conventions: |-
           inspect-image-convention/buildpacks
           inspect-image-convention/base-image
@@ -66,14 +66,14 @@ spec:
             version: 1.4.9
           - id: tanzu-buildpacks/image-labels
             version: 4.6.0
-        inspect-image.buildpacks.io/run-image: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:e9ba2230f5dfcd8bebc81912660dccb667e43e29e21c00eeae59ed37c746d6d4
-        inspect-image.opencontainers.org/source: main@sha1:ed2ae5832f419508becfaf08b49d61b9fbc16c26
+        inspect-image.buildpacks.io/run-image: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:363a8d83a865e1091eb480e85ca5b1eb89006d77bd0896438d47e2534122924f
+        inspect-image.opencontainers.org/source: main@sha1:79470e64549651c1397a62b9a5d290a64bb27a5c
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;note/carto.run/Workload/note-api;carto.run/v1alpha1
         prometheus.io/path: /actuator/prometheus
         prometheus.io/port: "8081"
         prometheus.io/scrape: "true"
-        services.conventions.carto.run/postgres: postgresql/42.6.0
+        services.conventions.carto.run/postgres: postgresql/42.6.1
       labels:
         app.kubernetes.io/component: run
         app.kubernetes.io/part-of: note-api
@@ -125,7 +125,7 @@ spec:
           value: ${K_CONFIGURATION:}
         - name: INFO_ENV_K_REVISION
           value: ${K_REVISION:}
-        image: ghcr.io/making/supply-chain/note-api-note@sha256:0aefb074130ccd3d4b7d7e00499419e9e4874908f94a1262a8358bcd6a7485ff
+        image: ghcr.io/making/supply-chain/note-api-note@sha256:4b39c6024f9cf922e391fc887bed1b2067e5a6e142e297faaf84f3b562f98bc7
         livenessProbe:
           httpGet:
             path: /livez
