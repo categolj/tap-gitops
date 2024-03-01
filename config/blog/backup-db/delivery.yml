@@ -90,27 +90,27 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: username
-                  name: blog-db
+                  name: blog-db-app-user-db-secret
             - name: PGDUMP_HOST
               valueFrom:
                 secretKeyRef:
                   key: host
-                  name: blog-db
+                  name: blog-db-app-user-db-secret
             - name: PGDUMP_PORT
               valueFrom:
                 secretKeyRef:
                   key: port
-                  name: blog-db
+                  name: blog-db-app-user-db-secret
             - name: PGDUMP_DATABASE
               valueFrom:
                 secretKeyRef:
                   key: database
-                  name: blog-db
+                  name: blog-db-app-user-db-secret
             - name: PGDUMP_PASSWORD
               valueFrom:
                 secretKeyRef:
                   key: password
-                  name: blog-db
+                  name: blog-db-app-user-db-secret
             - name: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
               valueFrom:
                 secretKeyRef:
