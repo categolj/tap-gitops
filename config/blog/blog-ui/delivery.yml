@@ -47,7 +47,7 @@ spec:
           - id: tanzu-buildpacks/image-labels
             version: 4.6.0
         inspect-image.buildpacks.io/run-image: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:39452a0b4274e2b848c1f9f2e62d7048d1a0d6b1df9b4b1857b9e24c20c53c9a
-        inspect-image.opencontainers.org/source: main@sha1:5a3128acc2cf0b78fbb382c1b533303f49bf4484
+        inspect-image.opencontainers.org/source: main@sha1:c8cc862b70f0df19ddc5cf150419a67f2341f0f1
         instrumentation.opentelemetry.io/inject-nodejs: opentelemetry/default
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-ui;carto.run/v1alpha1
@@ -59,7 +59,7 @@ spec:
         carto.run/workload-name: blog-ui
     spec:
       containers:
-      - image: ghcr.io/making/supply-chain/blog-ui-blog@sha256:b350828a65f801c37270825aa28278b5ad7912cdeaaf60648a9640fb96dcd586
+      - image: ghcr.io/making/supply-chain/blog-ui-blog@sha256:e40f0dc49a49c50b5bca58d6e310ec0c9a0a55adbb556b93d35472e5d1ca1eb4
         livenessProbe:
           httpGet:
             path: /aboutme
