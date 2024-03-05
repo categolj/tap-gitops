@@ -39,8 +39,8 @@ spec:
           spring-boot-convention/service-intent-postgres
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:363a8d83a865e1091eb480e85ca5b1eb89006d77bd0896438d47e2534122924f
-          top_layer: sha256:e93857364431c04243df85536d44892efaa881110e2e2f9443d1b8a0b0658752
+          reference: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:39452a0b4274e2b848c1f9f2e62d7048d1a0d6b1df9b4b1857b9e24c20c53c9a
+          top_layer: sha256:7df3b3428053a16ccec55e82c4a988b585bdf0e30f3da554c8b365bc31df7df3
         inspect-image.buildpacks.io/buildpacks: |-
           - id: tanzu-buildpacks/ca-certificates
             version: 3.7.0
@@ -67,7 +67,7 @@ spec:
           - id: tanzu-buildpacks/image-labels
             version: 4.6.0
         inspect-image.buildpacks.io/run-image: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:363a8d83a865e1091eb480e85ca5b1eb89006d77bd0896438d47e2534122924f
-        inspect-image.opencontainers.org/source: main@sha1:7c1babe434f816a1851ede21ddf7a63600c35d38
+        inspect-image.opencontainers.org/source: main@sha1:a974e9fcad7f3981acc269573dd43e9b09ec6ed4
         prometheus.io/path: /actuator/prometheus
         prometheus.io/port: "8081"
         prometheus.io/scrape: "true"
@@ -95,7 +95,7 @@ spec:
           value: "30"
         - name: MANAGEMENT_OTLP_TRACING_ENDPOINT
           value: http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/traces
-        image: ghcr.io/making/supply-chain/retrofacto-retrofacto@sha256:3ad15d765475fec46a542323c6e44fcaa27e7d3974a406ee233a99215172cc53
+        image: ghcr.io/making/supply-chain/retrofacto-retrofacto@sha256:d5cf97d979695e8159b1cdb06c196ade7fde8172fa004d99c11f245dadec74d3
         livenessProbe:
           httpGet:
             path: /livez
