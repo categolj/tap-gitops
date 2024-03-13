@@ -48,7 +48,6 @@ spec:
             version: 4.6.0
         inspect-image.buildpacks.io/run-image: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:39452a0b4274e2b848c1f9f2e62d7048d1a0d6b1df9b4b1857b9e24c20c53c9a
         inspect-image.opencontainers.org/source: main@sha1:550ecfa15c48ccec2b0941993611afd9ac3633e8
-        instrumentation.opentelemetry.io/inject-nodejs: opentelemetry/default
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-ui;carto.run/v1alpha1
       labels:
