@@ -18,6 +18,8 @@ kind: ServiceBinding
 metadata:
   name: retrofacto-retrofacto-db
   annotations:
+    kapp.k14s.io/disable-original: ""
+    kapp.k14s.io/identity: v1;retrofacto/carto.run/Workload/retrofacto;carto.run/v1alpha1
     autoscaling.knative.dev/maxScale: "2"
     autoscaling.knative.dev/minScale: "1"
     prometheus.io/path: /actuator/prometheus
