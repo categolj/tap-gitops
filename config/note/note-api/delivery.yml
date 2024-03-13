@@ -127,10 +127,12 @@ spec:
           value: ${K_REVISION:}
         image: ghcr.io/making/supply-chain/note-api-note@sha256:2c4c3b6561a72e91d507dfa58bca3bfb7d84f1e4e16a7f3a8589a0802166a304
         livenessProbe:
+          failureThreshold: 5
           httpGet:
             path: /livez
             port: 8080
             scheme: HTTP
+          initialDelaySeconds: 10
         name: workload
         ports:
         - containerPort: 8080
