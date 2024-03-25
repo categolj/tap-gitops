@@ -39,34 +39,34 @@ spec:
           spring-boot-convention/service-intent-postgres
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:39452a0b4274e2b848c1f9f2e62d7048d1a0d6b1df9b4b1857b9e24c20c53c9a
-          top_layer: sha256:7df3b3428053a16ccec55e82c4a988b585bdf0e30f3da554c8b365bc31df7df3
+          reference: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:6a86ef616d05dfc911c3f31b74f5c9b7017ea204f7b2aa909d0695def3bcc96d
+          top_layer: sha256:8a1efd296ec5a8414c098ca0eed86325dd411e2b390700c5deeeb565547ec9f8
         inspect-image.buildpacks.io/buildpacks: |-
           - id: tanzu-buildpacks/ca-certificates
             version: 3.7.0
           - id: tanzu-buildpacks/bellsoft-liberica
-            version: 9.13.1
+            version: 9.13.4
           - id: paketo-buildpacks/syft
             version: 1.10.1
           - id: tanzu-buildpacks/maven
-            version: 6.15.12
+            version: 6.16.0
           - id: tanzu-buildpacks/executable-jar
-            version: 6.8.3
+            version: 6.9.0
           - id: tanzu-buildpacks/apache-tomcat
             version: 7.15.1
           - id: tanzu-buildpacks/apache-tomee
             version: 1.8.0
           - id: tanzu-buildpacks/liberty
-            version: 3.8.11
+            version: 3.9.0
           - id: tanzu-buildpacks/dist-zip
-            version: 5.6.8
+            version: 5.7.0
           - id: tanzu-buildpacks/spring-boot
-            version: 5.27.6
+            version: 5.28.0
           - id: tanzu-buildpacks/jattach
-            version: 1.4.9
+            version: 1.5.0
           - id: tanzu-buildpacks/image-labels
             version: 4.6.0
-        inspect-image.buildpacks.io/run-image: ghcr.io/making/tanzu-application-platform/full-deps-package-repo@sha256:363a8d83a865e1091eb480e85ca5b1eb89006d77bd0896438d47e2534122924f
+        inspect-image.buildpacks.io/run-image: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:6a86ef616d05dfc911c3f31b74f5c9b7017ea204f7b2aa909d0695def3bcc96d
         inspect-image.opencontainers.org/source: main@sha1:79470e64549651c1397a62b9a5d290a64bb27a5c
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;note/carto.run/Workload/note-api;carto.run/v1alpha1
@@ -92,7 +92,7 @@ spec:
       containers:
       - env:
         - name: JAVA_TOOL_OPTIONS
-          value: -XX:ReservedCodeCacheSize=32M -Xss512k -Dfile.encoding="UTF-8" -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s" -Duser.timezone="Asia/Tokyo"
+          value: -XX:ActiveProcessorCount=2 -XX:ReservedCodeCacheSize=32M -Xss512k -Dfile.encoding="UTF-8" -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s" -Duser.timezone="Asia/Tokyo"
         - name: ENTRY_APIURL
           value: ${k8s.bindings.note-config.entry-api-url}
         - name: ENTRY_CLIENTID
@@ -125,12 +125,14 @@ spec:
           value: ${K_CONFIGURATION:}
         - name: INFO_ENV_K_REVISION
           value: ${K_REVISION:}
-        image: ghcr.io/making/supply-chain/note-api-note@sha256:97b2827f2d14bbc826c83f05d202113ff610d95a6788af7437f2e1aab678aac1
+        image: ghcr.io/making/supply-chain/note-api-note@sha256:7d31a677b6c6f11fe35ffffd2d5f7127e08449c3a0a48b4b5c4adf798f9cdd03
         livenessProbe:
+          failureThreshold: 5
           httpGet:
             path: /livez
             port: 8080
             scheme: HTTP
+          initialDelaySeconds: 10
         name: workload
         ports:
         - containerPort: 8080

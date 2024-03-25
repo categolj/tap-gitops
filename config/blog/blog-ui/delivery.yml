@@ -29,8 +29,8 @@ spec:
           spring-boot-convention/app-live-view-appflavour-check
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:39452a0b4274e2b848c1f9f2e62d7048d1a0d6b1df9b4b1857b9e24c20c53c9a
-          top_layer: sha256:7df3b3428053a16ccec55e82c4a988b585bdf0e30f3da554c8b365bc31df7df3
+          reference: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:6a86ef616d05dfc911c3f31b74f5c9b7017ea204f7b2aa909d0695def3bcc96d
+          top_layer: sha256:8a1efd296ec5a8414c098ca0eed86325dd411e2b390700c5deeeb565547ec9f8
         inspect-image.buildpacks.io/buildpacks: |-
           - id: tanzu-buildpacks/ca-certificates
             version: 3.7.0
@@ -48,7 +48,6 @@ spec:
             version: 4.6.0
         inspect-image.buildpacks.io/run-image: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:39452a0b4274e2b848c1f9f2e62d7048d1a0d6b1df9b4b1857b9e24c20c53c9a
         inspect-image.opencontainers.org/source: main@sha1:550ecfa15c48ccec2b0941993611afd9ac3633e8
-        instrumentation.opentelemetry.io/inject-nodejs: opentelemetry/default
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-ui;carto.run/v1alpha1
       labels:
@@ -59,7 +58,7 @@ spec:
         carto.run/workload-name: blog-ui
     spec:
       containers:
-      - image: ghcr.io/making/supply-chain/blog-ui-blog@sha256:007fa7545d2f0a89a0e1a472890bb08a77f604d08aafce67329be164f7cccfa8
+      - image: ghcr.io/making/supply-chain/blog-ui-blog@sha256:5c648520341ef14b0ddd974f882c614ab0c95b2dc3c24cccc2c2166427215eac
         livenessProbe:
           httpGet:
             path: /aboutme

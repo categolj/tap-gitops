@@ -1,0 +1,68 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: hello-nodejs
+  annotations:
+    ootb.apps.tanzu.vmware.com/servicebinding-workload: "true"
+    ootb.apps.tanzu.vmware.com/apidescriptor-ref: "true"
+    kapp.k14s.io/change-rule: upsert after upserting servicebinding.io/ServiceBindings
+  labels:
+    app.kubernetes.io/part-of: hello-nodejs
+    apps.tanzu.vmware.com/has-tests: "true"
+    apps.tanzu.vmware.com/workload-type: web
+    app.kubernetes.io/component: run
+    carto.run/workload-name: hello-nodejs
+spec:
+  template:
+    metadata:
+      annotations:
+        apps.tanzu.vmware.com/correlationid: https://github.com/making/hello-nodejs?sub_path=/
+        conventions.carto.run/applied-conventions: |-
+          inspect-image-convention/buildpacks
+          inspect-image-convention/base-image
+          inspect-image-convention/run-image
+          inspect-image-convention/source
+          spring-boot-convention/auto-configure-actuators-check
+          spring-boot-convention/is-native-app-check
+          spring-boot-convention/app-live-view-appflavour-check
+        developer.conventions/target-containers: workload
+        inspect-image.buildpacks.io/base-image: |-
+          reference: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:b5f4b970a5d836bbc5cdf3f0732f2e56d4452b0591d7a81c6d1927462e1776d6
+          top_layer: sha256:29e86b8e81cdb1a71d9e3586e75f1795152fb2a435b933c740a326698acdc52b
+        inspect-image.buildpacks.io/buildpacks: |-
+          - id: tanzu-buildpacks/ca-certificates
+            version: 3.7.0
+          - id: tanzu-buildpacks/node-engine
+            version: 2.2.5
+          - id: tanzu-buildpacks/npm-install
+            version: 1.3.5
+          - id: tanzu-buildpacks/node-start
+            version: 1.2.10
+          - id: tanzu-buildpacks/npm-start
+            version: 1.1.7
+          - id: tanzu-buildpacks/image-labels
+            version: 4.6.0
+        inspect-image.buildpacks.io/run-image: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:b5f4b970a5d836bbc5cdf3f0732f2e56d4452b0591d7a81c6d1927462e1776d6
+        inspect-image.opencontainers.org/source: master@sha1:c05aa5983dd4ba9de688720efbe319fc89a175e4
+      labels:
+        app.kubernetes.io/component: run
+        app.kubernetes.io/part-of: hello-nodejs
+        apps.tanzu.vmware.com/has-tests: "true"
+        apps.tanzu.vmware.com/workload-type: web
+        carto.run/workload-name: hello-nodejs
+    spec:
+      containers:
+      - image: ghcr.io/making/supply-chain/hello-nodejs-demo@sha256:8041380d5cf991203f4e64cd95c0e4ad8833a12da04cdb2c9e1611431bc7ee15
+        name: workload
+        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          runAsNonRoot: true
+          runAsUser: 1000
+          seccompProfile:
+            type: RuntimeDefault
+      serviceAccountName: default
+
