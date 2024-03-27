@@ -21,7 +21,7 @@ spec:
         autoscaling.knative.dev/maxScale: "2"
         autoscaling.knative.dev/minScale: "1"
         boot.spring.io/actuator: http://:8081/actuator
-        boot.spring.io/version: 3.2.3
+        boot.spring.io/version: 3.2.4
         conventions.carto.run/applied-conventions: |-
           inspect-image-convention/buildpacks
           inspect-image-convention/base-image
@@ -68,13 +68,13 @@ spec:
           - id: tanzu-buildpacks/image-labels
             version: 4.6.0
         inspect-image.buildpacks.io/run-image: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:6a86ef616d05dfc911c3f31b74f5c9b7017ea204f7b2aa909d0695def3bcc96d
-        inspect-image.opencontainers.org/source: main@sha1:e83616d655a356832453ed8426c3d6974cff0afa
+        inspect-image.opencontainers.org/source: main@sha1:a0eb6b7ac84094758655b88dfc2c90495fdb36d6
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-api;carto.run/v1alpha1
         prometheus.io/path: /actuator/prometheus
         prometheus.io/port: "8081"
         prometheus.io/scrape: "true"
-        services.conventions.carto.run/postgres: postgresql/42.6.1
+        services.conventions.carto.run/postgres: postgresql/42.6.2
       labels:
         apis.apps.tanzu.vmware.com/register-api: "true"
         app.kubernetes.io/component: run
@@ -163,7 +163,7 @@ spec:
           value: ${K_CONFIGURATION:}
         - name: INFO_ENV_K_REVISION
           value: ${K_REVISION:}
-        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:a8dd3f1e3e21fe0a66bdd2cebafda2b9effcc330d621f2fcdc605935c6b5e4ba
+        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:71a036fdd9b71aa665559c244b7d35a7211320027ff16ed4e046885a5f87d4c7
         livenessProbe:
           failureThreshold: 5
           httpGet:
