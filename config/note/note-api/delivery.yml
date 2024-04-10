@@ -125,7 +125,7 @@ spec:
           value: ${K_CONFIGURATION:}
         - name: INFO_ENV_K_REVISION
           value: ${K_REVISION:}
-        image: ghcr.io/making/supply-chain/note-api-note@sha256:8baf474389ff84ef9361ddf29825df924b9580a121b69e63c5c92cd7fbca4aa0
+        image: ghcr.io/making/supply-chain/note-api-note@sha256:8fd7f31d5d25e63504eba013bdcb59e5bbe88afbb800abe31caccf128889d304
         livenessProbe:
           failureThreshold: 5
           httpGet:
