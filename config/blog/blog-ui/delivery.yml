@@ -30,8 +30,8 @@ spec:
           spring-boot-convention/app-live-view-appflavour-check
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:6a86ef616d05dfc911c3f31b74f5c9b7017ea204f7b2aa909d0695def3bcc96d
-          top_layer: sha256:8a1efd296ec5a8414c098ca0eed86325dd411e2b390700c5deeeb565547ec9f8
+          reference: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:250b7ec89d6508d0432580c01f2f5d2369c31f7f1eac7da57fdbcbe346f1b5f5
+          top_layer: sha256:6dabc8589dc3ac86278f468742dabeff652e0747a16b80a70e832644951302bb
         inspect-image.buildpacks.io/buildpacks: |-
           - id: tanzu-buildpacks/ca-certificates
             version: 3.7.0
@@ -59,7 +59,7 @@ spec:
         carto.run/workload-name: blog-ui
     spec:
       containers:
-      - image: ghcr.io/making/supply-chain/blog-ui-blog@sha256:ab3ea352f50c766094f687bc78054e37cd8312be94bd4a94948f50cb466884be
+      - image: ghcr.io/making/supply-chain/blog-ui-blog@sha256:5df73fe004bd80a4301ce0c225871c8242fb605f5e2e5e102799d464d7957ef9
         livenessProbe:
           httpGet:
             path: /aboutme
