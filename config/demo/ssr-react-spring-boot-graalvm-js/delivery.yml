@@ -22,11 +22,12 @@ spec:
           inspect-image-convention/run-image
           spring-boot-convention/auto-configure-actuators-check
           spring-boot-convention/is-native-app-check
+          spring-boot-convention/is-prometheus-enabled-check
           spring-boot-convention/app-live-view-appflavour-check
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: index.docker.io/paketobuildpacks/run-jammy-tiny@sha256:dbae63c96779ecea814b843b19f056dad6272304fcf172e6ade54060e6d2e24c
-          top_layer: sha256:547309c89ade2abb0a950d1331fc10daf7218602d1b4f1ebefcd1da867a43c34
+          reference: index.docker.io/paketobuildpacks/run-jammy-tiny@sha256:bad7160797638b790dd5678eaca00799184901e0ebae3784a77fad46a3792580
+          top_layer: sha256:194e0aa8397f13448ae7cda897a086219bb2d489a5193a20c97ebb8e74901a2c
         inspect-image.buildpacks.io/buildpacks: |-
           - id: paketo-buildpacks/procfile
             version: 5.8.0
@@ -45,7 +46,7 @@ spec:
           value: http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/traces
         - name: MANAGEMENT_TRACING_SAMPLING_PROBABILITY
           value: "1.0"
-        image: ghcr.io/making/ssr-react-spring-boot-graalvm-js@sha256:5446a75823eb81170c8b17d17cef6d542e401a107dcfb53ef96c92a85611b695
+        image: ghcr.io/making/ssr-react-spring-boot-graalvm-js@sha256:424b5298bb1dca7c39ae073b2637693664744eed5d73d6522f8306431105096d
         name: workload
         resources: {}
         securityContext:
