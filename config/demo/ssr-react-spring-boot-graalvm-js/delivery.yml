@@ -46,7 +46,7 @@ spec:
           value: http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/traces
         - name: MANAGEMENT_TRACING_SAMPLING_PROBABILITY
           value: "1.0"
-        image: ghcr.io/making/ssr-react-spring-boot-graalvm-js@sha256:3acdd636beaf99a8ee14e0606c2dfe4291af6fa21d71749ec3bcc2604a7d96b5
+        image: ghcr.io/making/ssr-react-spring-boot-graalvm-js@sha256:4e8f90183159fd7bae06f0f8cacae3b6bd492eb7c2c3a9712fb09d8c411438df
         name: workload
         resources: {}
         securityContext:
