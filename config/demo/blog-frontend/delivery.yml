@@ -26,8 +26,8 @@ spec:
           spring-boot-convention/app-live-view-appflavour-check
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: index.docker.io/paketobuildpacks/run-jammy-tiny@sha256:bad7160797638b790dd5678eaca00799184901e0ebae3784a77fad46a3792580
-          top_layer: sha256:194e0aa8397f13448ae7cda897a086219bb2d489a5193a20c97ebb8e74901a2c
+          reference: index.docker.io/paketobuildpacks/run-jammy-tiny@sha256:f1d745607c457a8012dcfca6af0b35686d1f3877af892718480d4d4f7f736653
+          top_layer: sha256:2ea7ad6f961ae6668e0f6fe434e9061194a5bdf600786f834ca24ab2d7ae8a3d
         inspect-image.buildpacks.io/buildpacks: |-
           - id: paketo-buildpacks/procfile
             version: 5.8.0
@@ -48,7 +48,7 @@ spec:
           value: http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/traces
         - name: LOGGING_LEVEL_AM_IK
           value: debug
-        image: ghcr.io/categolj/blog-frontend@sha256:b1a27f5dd35a95c65cde3770999f164ffb6099c7ed231530a09d74231df0a5cb
+        image: ghcr.io/categolj/blog-frontend@sha256:cf399fee978ba999ac730604c538991f465bd38b684a8ffc1339c6045c76bd9c
         name: workload
         resources: {}
         securityContext:
