@@ -1,0 +1,64 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: blog-frontend
+  annotations:
+    ootb.apps.tanzu.vmware.com/servicebinding-workload: "true"
+    ootb.apps.tanzu.vmware.com/apidescriptor-ref: "true"
+    kapp.k14s.io/change-rule: upsert after upserting servicebinding.io/ServiceBindings
+  labels:
+    apps.tanzu.vmware.com/workload-type: web
+    app.kubernetes.io/component: run
+    carto.run/workload-name: blog-frontend
+spec:
+  template:
+    metadata:
+      annotations:
+        apps.tanzu.vmware.com/correlationid: ghcr.io/categolj/blog-frontend
+        autoscaling.knative.dev/minScale: "1"
+        conventions.carto.run/applied-conventions: |-
+          inspect-image-convention/buildpacks
+          inspect-image-convention/base-image
+          inspect-image-convention/run-image
+          spring-boot-convention/auto-configure-actuators-check
+          spring-boot-convention/is-native-app-check
+          spring-boot-convention/is-prometheus-enabled-check
+          spring-boot-convention/app-live-view-appflavour-check
+        developer.conventions/target-containers: workload
+        inspect-image.buildpacks.io/base-image: |-
+          reference: index.docker.io/paketobuildpacks/run-jammy-tiny@sha256:bad7160797638b790dd5678eaca00799184901e0ebae3784a77fad46a3792580
+          top_layer: sha256:194e0aa8397f13448ae7cda897a086219bb2d489a5193a20c97ebb8e74901a2c
+        inspect-image.buildpacks.io/buildpacks: |-
+          - id: paketo-buildpacks/procfile
+            version: 5.8.0
+        inspect-image.buildpacks.io/run-image: index.docker.io/paketobuildpacks/run-jammy-tiny:latest
+        prometheus.io/path: /actuator/prometheus
+        prometheus.io/port: "8080"
+        prometheus.io/scrape: "true"
+      labels:
+        app.kubernetes.io/component: run
+        apps.tanzu.vmware.com/workload-type: web
+        carto.run/workload-name: blog-frontend
+    spec:
+      containers:
+      - env:
+        - name: BLOGAPI_URL
+          value: http://blog-api.blog.svc.cluster.local
+        - name: MANAGEMENT_OTLP_TRACING_ENDPOINT
+          value: http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/traces
+        - name: LOGGING_LEVEL_AM_IK
+          value: debug
+        image: ghcr.io/categolj/blog-frontend@sha256:b1a27f5dd35a95c65cde3770999f164ffb6099c7ed231530a09d74231df0a5cb
+        name: workload
+        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          runAsNonRoot: true
+          runAsUser: 1000
+          seccompProfile:
+            type: RuntimeDefault
+      serviceAccountName: default
+
