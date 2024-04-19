@@ -21,7 +21,7 @@ spec:
         autoscaling.knative.dev/maxScale: "2"
         autoscaling.knative.dev/minScale: "1"
         boot.spring.io/actuator: http://:8081/actuator
-        boot.spring.io/version: 3.2.4
+        boot.spring.io/version: 3.2.5
         conventions.carto.run/applied-conventions: |-
           inspect-image-convention/buildpacks
           inspect-image-convention/base-image
@@ -29,10 +29,12 @@ spec:
           inspect-image-convention/source
           spring-boot-convention/auto-configure-actuators-check
           spring-boot-convention/is-native-app-check
+          spring-boot-convention/is-prometheus-enabled-check
           spring-boot-convention/spring-boot
           spring-boot-convention/spring-boot-graceful-shutdown
           spring-boot-convention/spring-boot-web
           spring-boot-convention/spring-boot-actuator
+          spring-boot-convention/spring-boot-prometheus-enabled
           spring-boot-convention/spring-boot-actuator-probes
           spring-boot-convention/app-live-view-appflavour-check
           spring-boot-convention/app-live-view-connector-boot
@@ -40,35 +42,35 @@ spec:
           spring-boot-convention/service-intent-postgres
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:6a86ef616d05dfc911c3f31b74f5c9b7017ea204f7b2aa909d0695def3bcc96d
-          top_layer: sha256:8a1efd296ec5a8414c098ca0eed86325dd411e2b390700c5deeeb565547ec9f8
+          reference: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:250b7ec89d6508d0432580c01f2f5d2369c31f7f1eac7da57fdbcbe346f1b5f5
+          top_layer: sha256:6dabc8589dc3ac86278f468742dabeff652e0747a16b80a70e832644951302bb
         inspect-image.buildpacks.io/buildpacks: |-
           - id: tanzu-buildpacks/ca-certificates
-            version: 3.7.0
+            version: 3.8.0
           - id: tanzu-buildpacks/bellsoft-liberica
-            version: 9.13.4
+            version: 9.14.0
           - id: paketo-buildpacks/syft
             version: 1.10.1
           - id: tanzu-buildpacks/maven
-            version: 6.16.0
+            version: 6.17.0
           - id: tanzu-buildpacks/executable-jar
-            version: 6.9.0
+            version: 6.10.0
           - id: tanzu-buildpacks/apache-tomcat
-            version: 7.15.1
+            version: 7.16.0
           - id: tanzu-buildpacks/apache-tomee
-            version: 1.8.0
+            version: 1.9.0
           - id: tanzu-buildpacks/liberty
-            version: 3.9.0
+            version: 3.10.0
           - id: tanzu-buildpacks/dist-zip
-            version: 5.7.0
+            version: 5.8.0
           - id: tanzu-buildpacks/spring-boot
-            version: 5.28.0
+            version: 5.29.0
           - id: tanzu-buildpacks/jattach
-            version: 1.5.0
+            version: 1.6.0
           - id: tanzu-buildpacks/image-labels
-            version: 4.6.0
-        inspect-image.buildpacks.io/run-image: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:6a86ef616d05dfc911c3f31b74f5c9b7017ea204f7b2aa909d0695def3bcc96d
-        inspect-image.opencontainers.org/source: main@sha1:b8e5680510d72924dc85ad5d6286ec9460a2f2ed
+            version: 4.7.0
+        inspect-image.buildpacks.io/run-image: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:250b7ec89d6508d0432580c01f2f5d2369c31f7f1eac7da57fdbcbe346f1b5f5
+        inspect-image.opencontainers.org/source: main@sha1:9a8dd08f354f8d1cf75241ce5b49a34b66f05cc2
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-api;carto.run/v1alpha1
         prometheus.io/path: /actuator/prometheus
@@ -163,7 +165,7 @@ spec:
           value: ${K_CONFIGURATION:}
         - name: INFO_ENV_K_REVISION
           value: ${K_REVISION:}
-        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:85f3d76e2bf89c6af0cc4d62ede39947be95f80203be6c541e5577517408408c
+        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:e26a5b81004afacb09573674e4708044c7b17b3b145d7c0dda61fe62e15ba483
         livenessProbe:
           failureThreshold: 5
           httpGet:

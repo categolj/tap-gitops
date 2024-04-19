@@ -1,52 +1,54 @@
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
-  name: ssr-react-spring-boot-graalvm-js
+  name: hello-rust
   annotations:
     ootb.apps.tanzu.vmware.com/servicebinding-workload: "true"
     ootb.apps.tanzu.vmware.com/apidescriptor-ref: "true"
     kapp.k14s.io/change-rule: upsert after upserting servicebinding.io/ServiceBindings
   labels:
+    app.kubernetes.io/part-of: hello-rust
+    apps.tanzu.vmware.com/has-tests: "true"
     apps.tanzu.vmware.com/workload-type: web
     app.kubernetes.io/component: run
-    carto.run/workload-name: ssr-react-spring-boot-graalvm-js
+    carto.run/workload-name: hello-rust
 spec:
   template:
     metadata:
       annotations:
-        apps.tanzu.vmware.com/correlationid: ghcr.io/making/ssr-react-spring-boot-graalvm-js
-        autoscaling.knative.dev/minScale: "1"
+        apps.tanzu.vmware.com/correlationid: https://github.com/making/hello-rust?sub_path=/
         conventions.carto.run/applied-conventions: |-
           inspect-image-convention/buildpacks
           inspect-image-convention/base-image
           inspect-image-convention/run-image
+          inspect-image-convention/source
           spring-boot-convention/auto-configure-actuators-check
           spring-boot-convention/is-native-app-check
-          spring-boot-convention/is-prometheus-enabled-check
           spring-boot-convention/app-live-view-appflavour-check
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: index.docker.io/paketobuildpacks/run-jammy-tiny@sha256:f1d745607c457a8012dcfca6af0b35686d1f3877af892718480d4d4f7f736653
-          top_layer: sha256:2ea7ad6f961ae6668e0f6fe434e9061194a5bdf600786f834ca24ab2d7ae8a3d
+          reference: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:6a86ef616d05dfc911c3f31b74f5c9b7017ea204f7b2aa909d0695def3bcc96d
+          top_layer: sha256:8a1efd296ec5a8414c098ca0eed86325dd411e2b390700c5deeeb565547ec9f8
         inspect-image.buildpacks.io/buildpacks: |-
-          - id: paketo-buildpacks/procfile
-            version: 5.8.0
-        inspect-image.buildpacks.io/run-image: index.docker.io/paketobuildpacks/run-jammy-tiny:latest
-        prometheus.io/path: /actuator/prometheus
-        prometheus.io/port: "8080"
-        prometheus.io/scrape: "true"
+          - id: paketo-community/rustup
+            version: 1.11.0
+          - id: paketo-community/rust-dist
+            version: 1.27.1
+          - id: paketo-buildpacks/syft
+            version: 1.46.0
+          - id: paketo-community/cargo
+            version: 0.11.1
+        inspect-image.buildpacks.io/run-image: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:6a86ef616d05dfc911c3f31b74f5c9b7017ea204f7b2aa909d0695def3bcc96d
+        inspect-image.opencontainers.org/source: https://github.com/pivotal-cf/tanzu-jammy-base-stack
       labels:
         app.kubernetes.io/component: run
+        app.kubernetes.io/part-of: hello-rust
+        apps.tanzu.vmware.com/has-tests: "true"
         apps.tanzu.vmware.com/workload-type: web
-        carto.run/workload-name: ssr-react-spring-boot-graalvm-js
+        carto.run/workload-name: hello-rust
     spec:
       containers:
-      - env:
-        - name: MANAGEMENT_OTLP_TRACING_ENDPOINT
-          value: http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/traces
-        - name: MANAGEMENT_TRACING_SAMPLING_PROBABILITY
-          value: "1.0"
-        image: ghcr.io/making/ssr-react-spring-boot-graalvm-js@sha256:e62a7e2bb6042c00545a05e7524c5417246af453af5da97882f04e43f938ec53
+      - image: ghcr.io/making/supply-chain/hello-rust-demo@sha256:7094ab09b0dc32ad768e630aaf263990bad5107866f8d7726b8e9fa4a5f0bdf7
         name: workload
         resources: {}
         securityContext:

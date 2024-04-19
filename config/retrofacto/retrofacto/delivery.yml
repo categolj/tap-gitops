@@ -28,10 +28,12 @@ spec:
           inspect-image-convention/source
           spring-boot-convention/auto-configure-actuators-check
           spring-boot-convention/is-native-app-check
+          spring-boot-convention/is-prometheus-enabled-check
           spring-boot-convention/spring-boot
           spring-boot-convention/spring-boot-graceful-shutdown
           spring-boot-convention/spring-boot-web
           spring-boot-convention/spring-boot-actuator
+          spring-boot-convention/spring-boot-prometheus-enabled
           spring-boot-convention/spring-boot-actuator-probes
           spring-boot-convention/app-live-view-appflavour-check
           spring-boot-convention/app-live-view-connector-boot
@@ -39,33 +41,33 @@ spec:
           spring-boot-convention/service-intent-postgres
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:6a86ef616d05dfc911c3f31b74f5c9b7017ea204f7b2aa909d0695def3bcc96d
-          top_layer: sha256:8a1efd296ec5a8414c098ca0eed86325dd411e2b390700c5deeeb565547ec9f8
+          reference: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:250b7ec89d6508d0432580c01f2f5d2369c31f7f1eac7da57fdbcbe346f1b5f5
+          top_layer: sha256:6dabc8589dc3ac86278f468742dabeff652e0747a16b80a70e832644951302bb
         inspect-image.buildpacks.io/buildpacks: |-
           - id: tanzu-buildpacks/ca-certificates
-            version: 3.7.0
+            version: 3.8.0
           - id: tanzu-buildpacks/bellsoft-liberica
-            version: 9.13.4
+            version: 9.14.0
           - id: paketo-buildpacks/syft
             version: 1.10.1
           - id: tanzu-buildpacks/maven
-            version: 6.16.0
+            version: 6.17.0
           - id: tanzu-buildpacks/executable-jar
-            version: 6.9.0
+            version: 6.10.0
           - id: tanzu-buildpacks/apache-tomcat
-            version: 7.15.1
+            version: 7.16.0
           - id: tanzu-buildpacks/apache-tomee
-            version: 1.8.0
+            version: 1.9.0
           - id: tanzu-buildpacks/liberty
-            version: 3.9.0
+            version: 3.10.0
           - id: tanzu-buildpacks/dist-zip
-            version: 5.7.0
+            version: 5.8.0
           - id: tanzu-buildpacks/spring-boot
-            version: 5.28.0
+            version: 5.29.0
           - id: tanzu-buildpacks/jattach
-            version: 1.5.0
+            version: 1.6.0
           - id: tanzu-buildpacks/image-labels
-            version: 4.6.0
+            version: 4.7.0
         inspect-image.buildpacks.io/run-image: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:6a86ef616d05dfc911c3f31b74f5c9b7017ea204f7b2aa909d0695def3bcc96d
         inspect-image.opencontainers.org/source: main@sha1:5149fb902eb116be90ea133dca5c1bcafe04d5ac
         kapp.k14s.io/disable-original: ""
@@ -97,7 +99,7 @@ spec:
           value: "30"
         - name: MANAGEMENT_OTLP_TRACING_ENDPOINT
           value: http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/traces
-        image: ghcr.io/making/supply-chain/retrofacto-retrofacto@sha256:db7c3fc2dcfe8fc48ca59b3a4378d87acfa8a83c202d6debeb9f7f9493cc2236
+        image: ghcr.io/making/supply-chain/retrofacto-retrofacto@sha256:0553f48cdb3447b017016b5d26b6350299106103de7adc28a7e6cc566489a3a4
         livenessProbe:
           failureThreshold: 5
           httpGet:
