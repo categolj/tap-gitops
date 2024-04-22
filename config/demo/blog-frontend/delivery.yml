@@ -48,7 +48,7 @@ spec:
           value: http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/traces
         - name: LOGGING_LEVEL_AM_IK
           value: debug
-        image: ghcr.io/categolj/blog-frontend@sha256:333b416ab0750d8b594ea3ce2fbea75f9e6cf2ebc24afbae4b36b71b74be7877
+        image: ghcr.io/categolj/blog-frontend@sha256:7a1c9bd960021b72eafaa820e07cdd9545d8163a062ec2a8dba514a11f22e9b9
         name: workload
         resources: {}
         securityContext:
