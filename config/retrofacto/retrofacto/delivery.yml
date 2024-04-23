@@ -41,8 +41,8 @@ spec:
           spring-boot-convention/service-intent-postgres
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:250b7ec89d6508d0432580c01f2f5d2369c31f7f1eac7da57fdbcbe346f1b5f5
-          top_layer: sha256:6dabc8589dc3ac86278f468742dabeff652e0747a16b80a70e832644951302bb
+          reference: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:d54911786933666ce81b0cd19e40d4fcff747bc88c00ecf886d349c6cbf1fcda
+          top_layer: sha256:2e267f27dbc6514110f315902bb409ad3c3b4c45585e3315e8fcf7387ff68fad
         inspect-image.buildpacks.io/buildpacks: |-
           - id: tanzu-buildpacks/ca-certificates
             version: 3.8.0
@@ -99,7 +99,7 @@ spec:
           value: "30"
         - name: MANAGEMENT_OTLP_TRACING_ENDPOINT
           value: http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/traces
-        image: ghcr.io/making/supply-chain/retrofacto-retrofacto@sha256:0553f48cdb3447b017016b5d26b6350299106103de7adc28a7e6cc566489a3a4
+        image: ghcr.io/making/supply-chain/retrofacto-retrofacto@sha256:c7707795c52780c8b1ede6d7cb53c6d187b8fe3b97dd015f3a68696fc0278d07
         livenessProbe:
           failureThreshold: 5
           httpGet:
