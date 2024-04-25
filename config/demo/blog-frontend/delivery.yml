@@ -20,6 +20,7 @@ spec:
           inspect-image-convention/buildpacks
           inspect-image-convention/base-image
           inspect-image-convention/run-image
+          inspect-image-convention/source
           spring-boot-convention/auto-configure-actuators-check
           spring-boot-convention/is-native-app-check
           spring-boot-convention/is-prometheus-enabled-check
@@ -29,9 +30,12 @@ spec:
           reference: index.docker.io/paketobuildpacks/run-jammy-tiny@sha256:f1d745607c457a8012dcfca6af0b35686d1f3877af892718480d4d4f7f736653
           top_layer: sha256:2ea7ad6f961ae6668e0f6fe434e9061194a5bdf600786f834ca24ab2d7ae8a3d
         inspect-image.buildpacks.io/buildpacks: |-
+          - id: paketo-buildpacks/image-labels
+            version: 4.6.0
           - id: paketo-buildpacks/procfile
             version: 5.8.0
         inspect-image.buildpacks.io/run-image: index.docker.io/paketobuildpacks/run-jammy-tiny:latest
+        inspect-image.opencontainers.org/source: https://github.com/categolj/blog-frontend/commit/08a3b3f4402aaec1da7c0bcbc96cd1a5091e6d2f
         prometheus.io/path: /actuator/prometheus
         prometheus.io/port: "8080"
         prometheus.io/scrape: "true"
@@ -48,7 +52,7 @@ spec:
           value: http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/traces
         - name: LOGGING_LEVEL_AM_IK
           value: debug
-        image: ghcr.io/categolj/blog-frontend@sha256:cd5f31348e4fe255f66a536458ab76d7372cbd1f86d52bb30627aee906fa8dfa
+        image: ghcr.io/categolj/blog-frontend@sha256:089e51388154f2fca4698a192c1e731549e24f322f324f7e5cd6e9c29480865c
         name: workload
         resources: {}
         securityContext:

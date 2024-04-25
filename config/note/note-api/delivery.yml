@@ -41,8 +41,8 @@ spec:
           spring-boot-convention/service-intent-postgres
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:250b7ec89d6508d0432580c01f2f5d2369c31f7f1eac7da57fdbcbe346f1b5f5
-          top_layer: sha256:6dabc8589dc3ac86278f468742dabeff652e0747a16b80a70e832644951302bb
+          reference: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:d54911786933666ce81b0cd19e40d4fcff747bc88c00ecf886d349c6cbf1fcda
+          top_layer: sha256:2e267f27dbc6514110f315902bb409ad3c3b4c45585e3315e8fcf7387ff68fad
         inspect-image.buildpacks.io/buildpacks: |-
           - id: tanzu-buildpacks/ca-certificates
             version: 3.8.0
@@ -127,7 +127,7 @@ spec:
           value: ${K_CONFIGURATION:}
         - name: INFO_ENV_K_REVISION
           value: ${K_REVISION:}
-        image: ghcr.io/making/supply-chain/note-api-note@sha256:1454657e341159c13c8584626ac7479e79cc148e5571286551db96ef5835f610
+        image: ghcr.io/making/supply-chain/note-api-note@sha256:07a373dc58497307e2aba0dd038cc4a94e919b13b06985266d0afe6ffd821294
         livenessProbe:
           failureThreshold: 5
           httpGet:
