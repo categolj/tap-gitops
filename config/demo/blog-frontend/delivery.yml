@@ -35,7 +35,7 @@ spec:
           - id: paketo-buildpacks/procfile
             version: 5.8.0
         inspect-image.buildpacks.io/run-image: index.docker.io/paketobuildpacks/run-jammy-tiny:latest
-        inspect-image.opencontainers.org/source: https://github.com/categolj/blog-frontend/commit/3bef839dcfdfd216ba5809b9b84d121dcbce75c7
+        inspect-image.opencontainers.org/source: https://github.com/categolj/blog-frontend/commit/2acc1bd87e9089f647ead2c4b9a27299e0dbcd53
         prometheus.io/path: /actuator/prometheus
         prometheus.io/port: "8080"
         prometheus.io/scrape: "true"
@@ -52,7 +52,7 @@ spec:
           value: http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/traces
         - name: LOGGING_LEVEL_AM_IK
           value: debug
-        image: ghcr.io/categolj/blog-frontend@sha256:aa9843bc7d257e5b767ba57e908db4ea1cf14d1f0d3d666b61fc6d741b674f3c
+        image: ghcr.io/categolj/blog-frontend@sha256:308a92820e7a5e467b44cf04da8b8785429ae0ef13d9f841938df9c7cfb95ac5
         name: workload
         resources: {}
         securityContext:
