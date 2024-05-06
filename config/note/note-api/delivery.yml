@@ -41,34 +41,34 @@ spec:
           spring-boot-convention/service-intent-postgres
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:d54911786933666ce81b0cd19e40d4fcff747bc88c00ecf886d349c6cbf1fcda
-          top_layer: sha256:2e267f27dbc6514110f315902bb409ad3c3b4c45585e3315e8fcf7387ff68fad
+          reference: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:e1666b9ba42e8a8165efd263ee3d93ea86f4b8deef887017821f055602cf6e3a
+          top_layer: sha256:d1af0b8630e5b66b43ad0d31d8397f04e35c9f38ca09b616368039ae83dee3d3
         inspect-image.buildpacks.io/buildpacks: |-
           - id: tanzu-buildpacks/ca-certificates
-            version: 3.8.0
+            version: 3.8.1
           - id: tanzu-buildpacks/bellsoft-liberica
-            version: 9.14.0
+            version: 9.14.1
           - id: paketo-buildpacks/syft
             version: 1.10.1
           - id: tanzu-buildpacks/maven
-            version: 6.17.0
+            version: 6.17.1
           - id: tanzu-buildpacks/executable-jar
-            version: 6.10.0
+            version: 6.10.1
           - id: tanzu-buildpacks/apache-tomcat
-            version: 7.16.0
+            version: 7.16.1
           - id: tanzu-buildpacks/apache-tomee
-            version: 1.9.0
+            version: 1.9.1
           - id: tanzu-buildpacks/liberty
-            version: 3.10.0
+            version: 3.10.1
           - id: tanzu-buildpacks/dist-zip
-            version: 5.8.0
+            version: 5.8.1
           - id: tanzu-buildpacks/spring-boot
-            version: 5.29.0
+            version: 5.29.1
           - id: tanzu-buildpacks/jattach
-            version: 1.6.0
+            version: 1.6.1
           - id: tanzu-buildpacks/image-labels
-            version: 4.7.0
-        inspect-image.buildpacks.io/run-image: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:d54911786933666ce81b0cd19e40d4fcff747bc88c00ecf886d349c6cbf1fcda
+            version: 4.7.1
+        inspect-image.buildpacks.io/run-image: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:e1666b9ba42e8a8165efd263ee3d93ea86f4b8deef887017821f055602cf6e3a
         inspect-image.opencontainers.org/source: main@sha1:a42fbe713d57f91fc4b56d7447885e013d2f697a
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;note/carto.run/Workload/note-api;carto.run/v1alpha1
@@ -127,7 +127,7 @@ spec:
           value: ${K_CONFIGURATION:}
         - name: INFO_ENV_K_REVISION
           value: ${K_REVISION:}
-        image: ghcr.io/making/supply-chain/note-api-note@sha256:b39fd1e7e08f75a140657e3d4017e852b0c1259c831ca30b99ecf113a533d2cd
+        image: ghcr.io/making/supply-chain/note-api-note@sha256:4143105b2ad1a0c8a45fc44a1621c0f1a10b31783f8456f5fe822320370f8f75
         livenessProbe:
           failureThreshold: 5
           httpGet:
