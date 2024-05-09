@@ -68,7 +68,7 @@ spec:
           - id: tanzu-buildpacks/image-labels
             version: 4.7.1
         inspect-image.buildpacks.io/run-image: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:e1666b9ba42e8a8165efd263ee3d93ea86f4b8deef887017821f055602cf6e3a
-        inspect-image.opencontainers.org/source: main@sha1:ab9839ca8e53b63a4b8393507d53d5b9428795e8
+        inspect-image.opencontainers.org/source: main@sha1:70fc0c2d982ebc2982a94dd59ce1c0472116cb20
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-frontend;carto.run/v1alpha1
         prometheus.io/path: /actuator/prometheus
@@ -112,7 +112,7 @@ spec:
           value: http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/traces
         - name: SPRING_THREADS_VIRTUAL_ENABLED
           value: "true"
-        image: ghcr.io/making/supply-chain/blog-frontend-blog@sha256:19a5ff5471f78e7dc0edf1be9b4a9f467691def354f26e0f3ff26e018af1d3a1
+        image: ghcr.io/making/supply-chain/blog-frontend-blog@sha256:ba8a7df7d3b6a2ce30b44bacc0dc3f5f7759713daf8ac971ba41b9bc45b36d24
         livenessProbe:
           failureThreshold: 5
           httpGet:
