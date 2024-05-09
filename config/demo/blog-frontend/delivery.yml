@@ -37,7 +37,7 @@ spec:
         inspect-image.buildpacks.io/run-image: index.docker.io/paketobuildpacks/run-jammy-tiny:latest
         inspect-image.opencontainers.org/source: https://github.com/categolj/blog-frontend/commit/751ae536ce0b0320f62e6f773989c1bb661405fa
         kubectl.kubernetes.io/last-applied-configuration: |
-          {"apiVersion":"carto.run/v1alpha1","kind":"Workload","metadata":{"annotations":{},"labels":{"apps.tanzu.vmware.com/workload-type":"web"},"name":"blog-frontend","namespace":"demo"},"spec":{"env":[{"name":"BLOGAPI_URL","value":"http://blog-api.blog.svc.cluster.local"},{"name":"NOTEAPI_URL","value":"http://note-api.note.svc.cluster.local"},{"name":"MANAGEMENT_OTLP_TRACING_ENDPOINT","value":"http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/traces"},{"name":"LOGGING_LEVEL_AM_IK","value":"info"}],"image":"ghcr.io/categolj/blog-frontend","params":[{"name":"annotations","value":{"autoscaling.knative.dev/minScale":"1","prometheus.io/path":"/actuator/prometheus","prometheus.io/port":"8080","prometheus.io/scrape":"true"}}]}}
+          {"apiVersion":"carto.run/v1alpha1","kind":"Workload","metadata":{"annotations":{},"labels":{"apps.tanzu.vmware.com/workload-type":"web"},"name":"blog-frontend","namespace":"demo"},"spec":{"env":[{"name":"BLOGAPI_URL","value":"http://blog-api.blog.svc.cluster.local"},{"name":"NOTEAPI_URL","value":"http://note-api.note.svc.cluster.local"},{"name":"COUNTERAPI_URL","value":"https://wws.fly.dev/counter"},{"name":"MANAGEMENT_OTLP_TRACING_ENDPOINT","value":"http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/traces"},{"name":"LOGGING_LEVEL_AM_IK","value":"info"}],"image":"ghcr.io/categolj/blog-frontend","params":[{"name":"annotations","value":{"autoscaling.knative.dev/minScale":"1","prometheus.io/path":"/actuator/prometheus","prometheus.io/port":"8080","prometheus.io/scrape":"true"}}]}}
         prometheus.io/path: /actuator/prometheus
         prometheus.io/port: "8080"
         prometheus.io/scrape: "true"
@@ -52,6 +52,8 @@ spec:
           value: http://blog-api.blog.svc.cluster.local
         - name: NOTEAPI_URL
           value: http://note-api.note.svc.cluster.local
+        - name: COUNTERAPI_URL
+          value: https://wws.fly.dev/counter
         - name: MANAGEMENT_OTLP_TRACING_ENDPOINT
           value: http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/traces
         - name: LOGGING_LEVEL_AM_IK
