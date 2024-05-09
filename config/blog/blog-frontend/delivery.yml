@@ -93,7 +93,7 @@ spec:
         - name: JAVA_TOOL_OPTIONS
           value: -XX:ActiveProcessorCount=2 -XX:ReservedCodeCacheSize=32M -Xss512k -Dfile.encoding="UTF-8" -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s" -Duser.country="JP" -Duser.language="ja" -Duser.timezone="Asia/Tokyo"
         - name: BPL_JVM_THREAD_COUNT
-          value: "50"
+          value: "28"
         - name: INFO_ENV_HOSTNAME
           value: ${HOSTNAME:}
         - name: INFO_ENV_K_SERVICE
@@ -110,6 +110,8 @@ spec:
           value: https://wws.fly.dev/counter
         - name: MANAGEMENT_OTLP_TRACING_ENDPOINT
           value: http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/traces
+        - name: SPRING_THREADS_VIRTUAL_ENABLED
+          value: "true"
         image: ghcr.io/making/supply-chain/blog-frontend-blog@sha256:3ef4007404932ba39f55e2fa16b273dfa8d935411f787d5b9a4833ed3ed009f1
         livenessProbe:
           failureThreshold: 5
