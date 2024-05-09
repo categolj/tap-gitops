@@ -1,0 +1,150 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: blog-frontend
+  annotations:
+    ootb.apps.tanzu.vmware.com/servicebinding-workload: "true"
+    ootb.apps.tanzu.vmware.com/apidescriptor-ref: "true"
+    kapp.k14s.io/change-rule: upsert after upserting servicebinding.io/ServiceBindings
+  labels:
+    app.kubernetes.io/part-of: blog-frontend
+    apps.tanzu.vmware.com/has-tests: "true"
+    apps.tanzu.vmware.com/workload-type: web
+    app.kubernetes.io/component: run
+    carto.run/workload-name: blog-frontend
+spec:
+  template:
+    metadata:
+      annotations:
+        apps.tanzu.vmware.com/correlationid: https://github.com/categolj/blog-frontend?sub_path=/
+        autoscaling.knative.dev/maxScale: "2"
+        autoscaling.knative.dev/minScale: "1"
+        boot.spring.io/actuator: http://:8081/actuator
+        boot.spring.io/version: 3.2.5
+        conventions.carto.run/applied-conventions: |-
+          inspect-image-convention/buildpacks
+          inspect-image-convention/base-image
+          inspect-image-convention/run-image
+          inspect-image-convention/source
+          spring-boot-convention/auto-configure-actuators-check
+          spring-boot-convention/is-native-app-check
+          spring-boot-convention/is-prometheus-enabled-check
+          spring-boot-convention/spring-boot
+          spring-boot-convention/spring-boot-graceful-shutdown
+          spring-boot-convention/spring-boot-web
+          spring-boot-convention/spring-boot-actuator
+          spring-boot-convention/spring-boot-prometheus-enabled
+          spring-boot-convention/spring-boot-actuator-probes
+          spring-boot-convention/app-live-view-appflavour-check
+          spring-boot-convention/app-live-view-connector-boot
+          spring-boot-convention/app-live-view-appflavours-boot
+        developer.conventions/target-containers: workload
+        inspect-image.buildpacks.io/base-image: |-
+          reference: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:e1666b9ba42e8a8165efd263ee3d93ea86f4b8deef887017821f055602cf6e3a
+          top_layer: sha256:d1af0b8630e5b66b43ad0d31d8397f04e35c9f38ca09b616368039ae83dee3d3
+        inspect-image.buildpacks.io/buildpacks: |-
+          - id: tanzu-buildpacks/ca-certificates
+            version: 3.8.1
+          - id: tanzu-buildpacks/bellsoft-liberica
+            version: 9.14.1
+          - id: paketo-buildpacks/syft
+            version: 1.10.1
+          - id: tanzu-buildpacks/maven
+            version: 6.17.1
+          - id: tanzu-buildpacks/executable-jar
+            version: 6.10.1
+          - id: tanzu-buildpacks/apache-tomcat
+            version: 7.16.1
+          - id: tanzu-buildpacks/apache-tomee
+            version: 1.9.1
+          - id: tanzu-buildpacks/liberty
+            version: 3.10.1
+          - id: tanzu-buildpacks/dist-zip
+            version: 5.8.1
+          - id: tanzu-buildpacks/spring-boot
+            version: 5.29.1
+          - id: tanzu-buildpacks/jattach
+            version: 1.6.1
+          - id: tanzu-buildpacks/image-labels
+            version: 4.7.1
+        inspect-image.buildpacks.io/run-image: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:e1666b9ba42e8a8165efd263ee3d93ea86f4b8deef887017821f055602cf6e3a
+        inspect-image.opencontainers.org/source: main@sha1:94803921fc72e95292fc2283f9b112ed2ab660e7
+        kapp.k14s.io/disable-original: ""
+        kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-frontend;carto.run/v1alpha1
+        prometheus.io/path: /actuator/prometheus
+        prometheus.io/port: "8081"
+        prometheus.io/scrape: "true"
+      labels:
+        app.kubernetes.io/component: run
+        app.kubernetes.io/part-of: blog-frontend
+        apps.tanzu.vmware.com/auto-configure-actuators: "true"
+        apps.tanzu.vmware.com/has-tests: "true"
+        apps.tanzu.vmware.com/workload-type: web
+        carto.run/workload-name: blog-frontend
+        conventions.carto.run/framework: spring-boot
+        tanzu.app.live.view: "true"
+        tanzu.app.live.view.application.actuator.path: actuator
+        tanzu.app.live.view.application.actuator.port: "8081"
+        tanzu.app.live.view.application.flavours: spring-boot
+        tanzu.app.live.view.application.name: blog-frontend
+    spec:
+      containers:
+      - env:
+        - name: JAVA_TOOL_OPTIONS
+          value: -XX:ActiveProcessorCount=2 -XX:ReservedCodeCacheSize=32M -Xss512k -Dfile.encoding="UTF-8" -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s" -Duser.country="JP" -Duser.language="ja" -Duser.timezone="Asia/Tokyo"
+        - name: BPL_JVM_THREAD_COUNT
+          value: "50"
+        - name: INFO_ENV_HOSTNAME
+          value: ${HOSTNAME:}
+        - name: INFO_ENV_K_SERVICE
+          value: ${K_SERVICE:}
+        - name: INFO_ENV_K_CONFIGURATION
+          value: ${K_CONFIGURATION:}
+        - name: INFO_ENV_K_REVISION
+          value: ${K_REVISION:}
+        - name: BLOGAPI_URL
+          value: http://blog-api.blog.svc.cluster.local
+        - name: NOTEAPI_URL
+          value: http://note-api.note.svc.cluster.local
+        - name: COUNTERAPI_URL
+          value: https://wws.fly.dev/counter
+        - name: MANAGEMENT_OTLP_TRACING_ENDPOINT
+          value: http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/traces
+        image: ghcr.io/making/supply-chain/blog-frontend-blog@sha256:3ef4007404932ba39f55e2fa16b273dfa8d935411f787d5b9a4833ed3ed009f1
+        livenessProbe:
+          failureThreshold: 5
+          httpGet:
+            path: /livez
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 10
+        name: workload
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 8080
+            scheme: HTTP
+        resources:
+          limits:
+            memory: 512Mi
+          requests:
+            memory: 512Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          runAsNonRoot: true
+          runAsUser: 1000
+          seccompProfile:
+            type: RuntimeDefault
+        startupProbe:
+          httpGet:
+            path: /readyz
+            port: 8080
+            scheme: HTTP
+      serviceAccountName: default
+
