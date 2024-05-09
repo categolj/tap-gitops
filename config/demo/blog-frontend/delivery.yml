@@ -27,15 +27,15 @@ spec:
           spring-boot-convention/app-live-view-appflavour-check
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: index.docker.io/paketobuildpacks/run-jammy-tiny@sha256:82c53abe6acb87c85d7b67b3666d2c03a98dfe218548df33fb8c5393b5edb147
-          top_layer: sha256:f5268b9e3c58a2fd49939abb4baca3ad16b8046a9064b6ce67b439fcc8840cc4
+          reference: index.docker.io/paketobuildpacks/run-jammy-tiny@sha256:3bc0a6c2c3d66edb23c22d1edb22e30be5ab269c08392a2e8e123f184cbb8a2b
+          top_layer: sha256:61bcd9591b393cafe4b3633b070577d3ef88961ca5ca7552f12744a0c13e15ff
         inspect-image.buildpacks.io/buildpacks: |-
           - id: paketo-buildpacks/image-labels
             version: 4.6.0
           - id: paketo-buildpacks/procfile
             version: 5.8.0
         inspect-image.buildpacks.io/run-image: index.docker.io/paketobuildpacks/run-jammy-tiny:latest
-        inspect-image.opencontainers.org/source: https://github.com/categolj/blog-frontend/commit/49981aed22d2ebcd512a8a399cabf78053964dff
+        inspect-image.opencontainers.org/source: https://github.com/categolj/blog-frontend/commit/550c215151ff3d78999b44cf7567bae8ca33fcb4
         kubectl.kubernetes.io/last-applied-configuration: |
           {"apiVersion":"carto.run/v1alpha1","kind":"Workload","metadata":{"annotations":{},"labels":{"apps.tanzu.vmware.com/workload-type":"web"},"name":"blog-frontend","namespace":"demo"},"spec":{"env":[{"name":"BLOGAPI_URL","value":"http://blog-api.blog.svc.cluster.local"},{"name":"NOTEAPI_URL","value":"http://note-api.note.svc.cluster.local"},{"name":"COUNTERAPI_URL","value":"https://wws.fly.dev/counter"},{"name":"MANAGEMENT_OTLP_TRACING_ENDPOINT","value":"http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/traces"},{"name":"LOGGING_LEVEL_AM_IK","value":"info"}],"image":"ghcr.io/categolj/blog-frontend","params":[{"name":"annotations","value":{"autoscaling.knative.dev/minScale":"1","prometheus.io/path":"/actuator/prometheus","prometheus.io/port":"8080","prometheus.io/scrape":"true"}}]}}
         prometheus.io/path: /actuator/prometheus
@@ -58,7 +58,7 @@ spec:
           value: http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/traces
         - name: LOGGING_LEVEL_AM_IK
           value: info
-        image: ghcr.io/categolj/blog-frontend@sha256:aa3525f02d219513e6d74d64bab1d5871658f79522ef52613181a0f4bcd0067f
+        image: ghcr.io/categolj/blog-frontend@sha256:b52e0a5612981baccaf691d38ae5d1ca87bd3d4fa94c0113ff9e9d19a9c65add
         name: workload
         resources: {}
         securityContext:
