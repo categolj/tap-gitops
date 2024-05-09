@@ -35,7 +35,7 @@ spec:
           - id: paketo-buildpacks/procfile
             version: 5.8.0
         inspect-image.buildpacks.io/run-image: index.docker.io/paketobuildpacks/run-jammy-tiny:latest
-        inspect-image.opencontainers.org/source: https://github.com/categolj/blog-frontend/commit/94803921fc72e95292fc2283f9b112ed2ab660e7
+        inspect-image.opencontainers.org/source: https://github.com/categolj/blog-frontend/commit/948b417702856eb29f28b005f6680e5b4590cb99
         kubectl.kubernetes.io/last-applied-configuration: |
           {"apiVersion":"carto.run/v1alpha1","kind":"Workload","metadata":{"annotations":{},"labels":{"apps.tanzu.vmware.com/workload-type":"web"},"name":"blog-frontend","namespace":"demo"},"spec":{"env":[{"name":"BLOGAPI_URL","value":"http://blog-api.blog.svc.cluster.local"},{"name":"NOTEAPI_URL","value":"http://note-api.note.svc.cluster.local"},{"name":"COUNTERAPI_URL","value":"https://wws.fly.dev/counter"},{"name":"MANAGEMENT_OTLP_TRACING_ENDPOINT","value":"http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/traces"},{"name":"LOGGING_LEVEL_AM_IK","value":"info"}],"image":"ghcr.io/categolj/blog-frontend","params":[{"name":"annotations","value":{"autoscaling.knative.dev/minScale":"1","prometheus.io/path":"/actuator/prometheus","prometheus.io/port":"8080","prometheus.io/scrape":"true"}}]}}
         prometheus.io/path: /actuator/prometheus
@@ -58,7 +58,7 @@ spec:
           value: http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/traces
         - name: LOGGING_LEVEL_AM_IK
           value: info
-        image: ghcr.io/categolj/blog-frontend@sha256:da366ed22d20cf3791dde70f343234b3824e16c206b846768bc07068a836d96e
+        image: ghcr.io/categolj/blog-frontend@sha256:ddc57377fa241a2881afee4fb6ccdb203cd43cc9523c4ea19e490cc980894273
         name: workload
         resources: {}
         securityContext:
