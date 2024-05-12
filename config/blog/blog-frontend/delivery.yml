@@ -110,8 +110,6 @@ spec:
           value: https://wws.fly.dev/counter
         - name: MANAGEMENT_OTLP_TRACING_ENDPOINT
           value: http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/traces
-        - name: SPRING_THREADS_VIRTUAL_ENABLED
-          value: "true"
         image: ghcr.io/making/supply-chain/blog-frontend-blog@sha256:7d124da0dd192147d7165ffd74b37f97d2a422b0327435f3861c79204ced5eb6
         livenessProbe:
           failureThreshold: 5
