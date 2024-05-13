@@ -15,7 +15,6 @@ spec:
     metadata:
       annotations:
         apps.tanzu.vmware.com/correlationid: ghcr.io/making/ssr-react-spring-boot-graalvm-js
-        autoscaling.knative.dev/minScale: "1"
         conventions.carto.run/applied-conventions: |-
           inspect-image-convention/buildpacks
           inspect-image-convention/base-image
