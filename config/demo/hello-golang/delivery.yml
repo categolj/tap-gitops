@@ -55,7 +55,7 @@ spec:
         carto.run/workload-name: hello-golang
     spec:
       containers:
-      - image: ghcr.io/making/supply-chain/hello-golang-demo@sha256:9859f6ace75d3e7cb3827c1d7cf110e2b0f52faaadda0bbba5fbfd3d5f4cd231
+      - image: ghcr.io/making/supply-chain/hello-golang-demo@sha256:37ce43628bba8b01f3b87e5087932ba83def839ce744eea7f7f6101975b4e60b
         name: workload
         resources: {}
         securityContext:
