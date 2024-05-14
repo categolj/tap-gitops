@@ -31,7 +31,15 @@ spec:
         carto.run/workload-name: counter-api
     spec:
       containers:
-      - image: ghcr.io/making/supply-chain/counter-api-blog@sha256:2d80ad9096f5e9b6406bf21a28667254859d1cb8067a4a07d0713b9ce32ff889
+      - env:
+        - name: RUST_LOG
+          value: info
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              key: database-url
+              name: counter-config
+        image: ghcr.io/making/supply-chain/counter-api-blog@sha256:2d80ad9096f5e9b6406bf21a28667254859d1cb8067a4a07d0713b9ce32ff889
         name: workload
         resources: {}
         securityContext:
