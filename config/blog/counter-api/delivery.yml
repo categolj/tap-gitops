@@ -43,7 +43,7 @@ spec:
             secretKeyRef:
               key: database-url
               name: counter-config
-        image: ghcr.io/making/supply-chain/counter-api-blog@sha256:7518f9f0e6e2d0e8616790315e586076f16fb59d5279548af38bb4ca60de371a
+        image: ghcr.io/making/supply-chain/counter-api-blog@sha256:209e3e22b338fef9650768f8a2bf8893190a4e8d3c1d5b386c43f998bd445ca8
         name: workload
         resources: {}
         securityContext:
