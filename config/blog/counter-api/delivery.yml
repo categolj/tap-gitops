@@ -23,6 +23,8 @@ spec:
           spring-boot-convention/is-prometheus-enabled-check
           spring-boot-convention/app-live-view-appflavour-check
         developer.conventions/target-containers: workload
+        kapp.k14s.io/disable-original: ""
+        kapp.k14s.io/identity: v1;blog/carto.run/Workload/counter-api;carto.run/v1alpha1
       labels:
         app.kubernetes.io/component: run
         app.kubernetes.io/part-of: counter-api
