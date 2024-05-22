@@ -1,0 +1,60 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: counter-api
+  annotations:
+    ootb.apps.tanzu.vmware.com/servicebinding-workload: "true"
+    ootb.apps.tanzu.vmware.com/apidescriptor-ref: "true"
+    kapp.k14s.io/change-rule: upsert after upserting servicebinding.io/ServiceBindings
+  labels:
+    app.kubernetes.io/part-of: counter-api
+    apps.tanzu.vmware.com/has-tests: "true"
+    apps.tanzu.vmware.com/workload-type: web
+    networking.knative.dev/visibility: cluster-local
+    app.kubernetes.io/component: run
+    carto.run/workload-name: counter-api
+spec:
+  template:
+    metadata:
+      annotations:
+        apps.tanzu.vmware.com/correlationid: https://github.com/categolj/counter-api?sub_path=/
+        autoscaling.knative.dev/window: 3m
+        conventions.carto.run/applied-conventions: |-
+          spring-boot-convention/auto-configure-actuators-check
+          spring-boot-convention/is-native-app-check
+          spring-boot-convention/is-prometheus-enabled-check
+          spring-boot-convention/app-live-view-appflavour-check
+        developer.conventions/target-containers: workload
+        kapp.k14s.io/disable-original: ""
+        kapp.k14s.io/identity: v1;blog/carto.run/Workload/counter-api;carto.run/v1alpha1
+      labels:
+        app.kubernetes.io/component: run
+        app.kubernetes.io/part-of: counter-api
+        apps.tanzu.vmware.com/has-tests: "true"
+        apps.tanzu.vmware.com/workload-type: web
+        carto.run/workload-name: counter-api
+        networking.knative.dev/visibility: cluster-local
+    spec:
+      containers:
+      - env:
+        - name: RUST_LOG
+          value: info
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              key: database-url
+              name: counter-config
+        image: ghcr.io/making/supply-chain/counter-api-blog@sha256:209e3e22b338fef9650768f8a2bf8893190a4e8d3c1d5b386c43f998bd445ca8
+        name: workload
+        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          runAsNonRoot: true
+          runAsUser: 1000
+          seccompProfile:
+            type: RuntimeDefault
+      serviceAccountName: default
+

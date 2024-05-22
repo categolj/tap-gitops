@@ -15,7 +15,6 @@ spec:
     metadata:
       annotations:
         apps.tanzu.vmware.com/correlationid: ghcr.io/making/ssr-react-spring-boot-graalvm-js
-        autoscaling.knative.dev/minScale: "1"
         conventions.carto.run/applied-conventions: |-
           inspect-image-convention/buildpacks
           inspect-image-convention/base-image
@@ -27,15 +26,15 @@ spec:
           spring-boot-convention/app-live-view-appflavour-check
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: index.docker.io/paketobuildpacks/run-jammy-tiny@sha256:82c53abe6acb87c85d7b67b3666d2c03a98dfe218548df33fb8c5393b5edb147
-          top_layer: sha256:f5268b9e3c58a2fd49939abb4baca3ad16b8046a9064b6ce67b439fcc8840cc4
+          reference: index.docker.io/paketobuildpacks/run-jammy-tiny@sha256:9f2a8d2f259c61fcb1b76b40ad43a4b932402b60f39cfc60860043306072ac95
+          top_layer: sha256:e50190effc9028d0e7e3beb20fed277430c367cf6e57386d678cac091b4d38dc
         inspect-image.buildpacks.io/buildpacks: |-
           - id: paketo-buildpacks/image-labels
             version: 4.6.0
           - id: paketo-buildpacks/procfile
             version: 5.8.0
         inspect-image.buildpacks.io/run-image: index.docker.io/paketobuildpacks/run-jammy-tiny:latest
-        inspect-image.opencontainers.org/source: main@sha1:b5a4ddfe1aef9031e85a88b40563c327fc05d660
+        inspect-image.opencontainers.org/source: main@sha1:57b9365ab6f9dd9f25c84d6015f4d5d78c17c820
         prometheus.io/path: /actuator/prometheus
         prometheus.io/port: "8080"
         prometheus.io/scrape: "true"
@@ -50,7 +49,7 @@ spec:
           value: http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/traces
         - name: MANAGEMENT_TRACING_SAMPLING_PROBABILITY
           value: "1.0"
-        image: ghcr.io/making/ssr-react-spring-boot-graalvm-js@sha256:27037fabf1de4492c351d79af3bbf476132b3c96bc5bc1ab90584cc06f80a43d
+        image: ghcr.io/making/ssr-react-spring-boot-graalvm-js@sha256:7f7c33daca8637f1ca37e8d70d6da67aad98410006dd6683309627fe334f0cc7
         name: workload
         resources: {}
         securityContext:
