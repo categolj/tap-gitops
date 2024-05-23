@@ -34,7 +34,7 @@ spec:
           - id: paketo-buildpacks/procfile
             version: 5.8.0
         inspect-image.buildpacks.io/run-image: index.docker.io/paketobuildpacks/run-jammy-tiny:latest
-        inspect-image.opencontainers.org/source: main@sha1:57b9365ab6f9dd9f25c84d6015f4d5d78c17c820
+        inspect-image.opencontainers.org/source: main@sha1:9a69998d3d43e5e1b9b83216588b1c8b33da2668
         prometheus.io/path: /actuator/prometheus
         prometheus.io/port: "8080"
         prometheus.io/scrape: "true"
@@ -49,7 +49,7 @@ spec:
           value: http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/traces
         - name: MANAGEMENT_TRACING_SAMPLING_PROBABILITY
           value: "1.0"
-        image: ghcr.io/making/ssr-react-spring-boot-graalvm-js@sha256:7f7c33daca8637f1ca37e8d70d6da67aad98410006dd6683309627fe334f0cc7
+        image: ghcr.io/making/ssr-react-spring-boot-graalvm-js@sha256:ce1dd02a0df8abd4c88a1f003e08e2260cf21f20acad97d016ffddd707fb2416
         name: workload
         resources: {}
         securityContext:
