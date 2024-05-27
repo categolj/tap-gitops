@@ -20,7 +20,7 @@ spec:
         autoscaling.knative.dev/maxScale: "2"
         autoscaling.knative.dev/minScale: "1"
         boot.spring.io/actuator: http://:8081/actuator
-        boot.spring.io/version: 3.2.5
+        boot.spring.io/version: 3.3.0
         conventions.carto.run/applied-conventions: |-
           inspect-image-convention/buildpacks
           inspect-image-convention/base-image
@@ -68,7 +68,8 @@ spec:
           - id: tanzu-buildpacks/image-labels
             version: 4.8.0
         inspect-image.buildpacks.io/run-image: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:b443aeedf2efe93f03062fd8d30a04b23acbe76f782238be3302487742366568
-        inspect-image.opencontainers.org/source: main@sha1:19d8e9773838fc1774a312cccca799644d7c0f4f
+        inspect-image.opencontainers.org/source: main@sha1:a25b7b7b4f26af9ed5c0f1f8f190b8fa2a05b7af
+        instrumentation.opentelemetry.io/inject-java: opentelemetry/default
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-frontend;carto.run/v1alpha1
         prometheus.io/path: /actuator/prometheus
@@ -112,7 +113,7 @@ spec:
           value: http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/traces
         - name: SPRING_THREADS_VIRTUAL_ENABLED
           value: "true"
-        image: ghcr.io/making/supply-chain/blog-frontend-blog@sha256:303ba0915e582f927fbe45249ea89ebed602dc22d3adadd0333938564a16a05c
+        image: ghcr.io/making/supply-chain/blog-frontend-blog@sha256:aac941b3dbafc745bb73abada6ed1af316e4142ebfaf53641e604e0cbc6ba02e
         livenessProbe:
           failureThreshold: 5
           httpGet:
