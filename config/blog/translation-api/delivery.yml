@@ -122,6 +122,8 @@ spec:
           value: http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/traces
         - name: SPRING_THREADS_VIRTUAL_ENABLED
           value: "true"
+        - name: OTEL_SERVICE_NAME
+          value: translation-api
         image: ghcr.io/making/supply-chain/translation-api-blog@sha256:240b96a762807654274261c638e487eee806ed6c5d77d48b20baf96b650031bf
         livenessProbe:
           failureThreshold: 5
