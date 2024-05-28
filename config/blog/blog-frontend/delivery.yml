@@ -69,7 +69,6 @@ spec:
             version: 4.8.0
         inspect-image.buildpacks.io/run-image: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:b443aeedf2efe93f03062fd8d30a04b23acbe76f782238be3302487742366568
         inspect-image.opencontainers.org/source: main@sha1:770c65da15730bbf320b31303b5dd32aad3932d5
-        instrumentation.opentelemetry.io/inject-java: opentelemetry/default
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-frontend;carto.run/v1alpha1
         prometheus.io/path: /actuator/prometheus
@@ -111,6 +110,8 @@ spec:
           value: http://note-api.note.svc.cluster.local
         - name: COUNTERAPI_URL
           value: http://counter-api.blog.svc.cluster.local/counter
+        - name: MANAGEMENT_OTLP_LOGS_ENDPOINT
+          value: http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/traces
         - name: MANAGEMENT_OTLP_TRACING_ENDPOINT
           value: http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/traces
         - name: SPRING_THREADS_VIRTUAL_ENABLED
