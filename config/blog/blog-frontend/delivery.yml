@@ -114,6 +114,8 @@ spec:
           value: http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/logs
         - name: MANAGEMENT_OTLP_TRACING_ENDPOINT
           value: http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/traces
+        - name: MANAGEMENT_OPENTELEMETRY_RESOURCEATTRIBUTES_HOSTNAME
+          value: ${HOSTNAME:}
         - name: SPRING_THREADS_VIRTUAL_ENABLED
           value: "true"
         image: ghcr.io/making/supply-chain/blog-frontend-blog@sha256:6736a01ce1ab15999431ff4135d6b6fc9a4df2a947733f8fe89e1036e7b708f7
