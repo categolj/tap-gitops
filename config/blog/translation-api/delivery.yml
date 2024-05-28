@@ -125,6 +125,8 @@ spec:
           value: translation-api
         - name: MANAGEMENT_OTLP_LOGS_ENDPOINT
           value: http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/logs
+        - name: MANAGEMENT_OPENTELEMETRY_RESOURCEATTRIBUTES_HOSTNAME
+          value: ${HOSTNAME:}
         image: ghcr.io/making/supply-chain/translation-api-blog@sha256:1e0b0d402780ecb37db19d7c309bf946ff2d81e7a61c18d96ab7b3b6629b62f2
         livenessProbe:
           failureThreshold: 5
