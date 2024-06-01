@@ -20,7 +20,7 @@ spec:
         autoscaling.knative.dev/maxScale: "2"
         autoscaling.knative.dev/minScale: "1"
         boot.spring.io/actuator: http://:8081/actuator
-        boot.spring.io/version: 3.2.3
+        boot.spring.io/version: 3.3.0
         conventions.carto.run/applied-conventions: |-
           inspect-image-convention/buildpacks
           inspect-image-convention/base-image
@@ -69,13 +69,13 @@ spec:
           - id: tanzu-buildpacks/image-labels
             version: 4.8.0
         inspect-image.buildpacks.io/run-image: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:b443aeedf2efe93f03062fd8d30a04b23acbe76f782238be3302487742366568
-        inspect-image.opencontainers.org/source: main@sha1:5149fb902eb116be90ea133dca5c1bcafe04d5ac
+        inspect-image.opencontainers.org/source: main@sha1:4d5f30894764e0107cd664db01778b5f6a1ace2b
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;retrofacto/carto.run/Workload/retrofacto;carto.run/v1alpha1
         prometheus.io/path: /actuator/prometheus
         prometheus.io/port: "8081"
         prometheus.io/scrape: "true"
-        services.conventions.carto.run/postgres: postgresql/42.6.1
+        services.conventions.carto.run/postgres: postgresql/42.7.3
       labels:
         app.kubernetes.io/component: run
         app.kubernetes.io/part-of: retrofacto
@@ -97,9 +97,15 @@ spec:
           value: -XX:ActiveProcessorCount=2 -XX:ReservedCodeCacheSize=32M -Xss512k -Dfile.encoding="UTF-8" -Dmanagement.endpoint.health.probes.add-additional-paths="true" -Dmanagement.endpoint.health.show-details="always" -Dmanagement.endpoints.web.base-path="/actuator" -Dmanagement.endpoints.web.exposure.include="*" -Dmanagement.health.probes.enabled="true" -Dmanagement.server.port="8081" -Dserver.port="8080" -Dserver.shutdown.grace-period="24s" -Duser.country="JP" -Duser.language="ja" -Duser.timezone="Asia/Tokyo"
         - name: BPL_JVM_THREAD_COUNT
           value: "30"
+        - name: OTEL_SERVICE_NAME
+          value: retrofacto
+        - name: MANAGEMENT_OTLP_LOGS_ENDPOINT
+          value: http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/logs
         - name: MANAGEMENT_OTLP_TRACING_ENDPOINT
           value: http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/traces
-        image: ghcr.io/making/supply-chain/retrofacto-retrofacto@sha256:672898220beb5a222ad52dd980afd748940d8db85145ba38d631e3c2a369d468
+        - name: MANAGEMENT_OPENTELEMETRY_RESOURCEATTRIBUTES_HOSTNAME
+          value: ${HOSTNAME:}
+        image: ghcr.io/making/supply-chain/retrofacto-retrofacto@sha256:d58951d69359e3941c1ed7c5a3455081b092fb92a9942ec7efe2cbee0854900e
         livenessProbe:
           failureThreshold: 5
           httpGet:
