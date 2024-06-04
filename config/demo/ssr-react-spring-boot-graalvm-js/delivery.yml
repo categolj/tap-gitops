@@ -26,15 +26,15 @@ spec:
           spring-boot-convention/app-live-view-appflavour-check
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: index.docker.io/paketobuildpacks/run-jammy-tiny@sha256:c5611c9481b04350fa67b261f1556a44a8531f4250a07ac811f1079d99dfa65f
-          top_layer: sha256:641cbfccfd92cfa30c792328b9d13fe8e80faa8fda8781bdb3ac73108aff7b17
+          reference: index.docker.io/paketobuildpacks/run-jammy-tiny@sha256:d2556b5ba498962403eff4718b2b6125135e2d902cf49b5b21a8d4aa19657ffe
+          top_layer: sha256:367e4af089fc042911129f6606c68c5510a8ca896e4a61e0688f1e001930027a
         inspect-image.buildpacks.io/buildpacks: |-
           - id: paketo-buildpacks/image-labels
             version: 4.7.0
           - id: paketo-buildpacks/procfile
             version: 5.9.0
         inspect-image.buildpacks.io/run-image: index.docker.io/paketobuildpacks/run-jammy-tiny:latest
-        inspect-image.opencontainers.org/source: main@sha1:37454276942848a237cb1c1230269415c523b7a7
+        inspect-image.opencontainers.org/source: main@sha1:ef5403eddf25569cefdbd7ea24c532dacf483774
         prometheus.io/path: /actuator/prometheus
         prometheus.io/port: "8080"
         prometheus.io/scrape: "true"
@@ -49,7 +49,7 @@ spec:
           value: http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/traces
         - name: MANAGEMENT_TRACING_SAMPLING_PROBABILITY
           value: "1.0"
-        image: ghcr.io/making/ssr-react-spring-boot-graalvm-js@sha256:fd35578a6047ffdbb5ec40d81e3fc3583a47b8e903675652181c056bc1960735
+        image: ghcr.io/making/ssr-react-spring-boot-graalvm-js@sha256:63b4447abab26c1c2b23f263ece563c64f397cadb162422a01617a73dd65ec1e
         name: workload
         resources: {}
         securityContext:
