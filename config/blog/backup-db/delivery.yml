@@ -113,11 +113,6 @@ spec:
                 secretKeyRef:
                   key: password
                   name: blog-db-app-user-db-secret
-            - name: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
-              valueFrom:
-                secretKeyRef:
-                  key: otel-trace-endpoint
-                  name: otel-config
             - name: ALERT_ENABLED
               value: "true"
             - name: ALERT_TYPE
