@@ -133,7 +133,7 @@ spec:
           value: ${K_CONFIGURATION:}
         - name: INFO_ENV_K_REVISION
           value: ${K_REVISION:}
-        image: ghcr.io/making/pg-dump-to-s3@sha256:4c875fabf3e6ad25df00de1e61d6f52ef5ed51f961d9026a6fcf06de1c456962
+        image: ghcr.io/making/supply-chain/note-api-note@sha256:78eea256ff4133d22594f084dcbc4f9e1afeacf2a5776b50885fc92c4d21e9fa
         livenessProbe:
           failureThreshold: 5
           httpGet:
