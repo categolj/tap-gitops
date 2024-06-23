@@ -52,12 +52,14 @@ spec:
         spec:
           containers:
           - env:
-            - name: management.metrics.tags.app_name
+            - name: SPRING_APPLICATION_NAME
               value: backup-db-blog
-            - name: management.prometheus.metrics.export.pushgateway.base-url
-              value: https://pushgateway.ik.am
-            - name: management.prometheus.metrics.export.pushgateway.enabled
-              value: "false"
+            - name: MANAGEMENT_OTLP_TRACING_ENDPOINT
+              value: http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/traces
+            - name: MANAGEMENT_OTLP_LOGS_ENDPOINT
+              value: http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/logs
+            - name: MANAGEMENT_OPENTELEMETRY_RESOURCEATTRIBUTES_HOSTNAME
+              value: ${HOSTNAME:}
             - name: JAVA_TOOL_OPTIONS
               value: -Dmanagement.health.probes.enabled="false"
             - name: AWS_ACCESS_KEY_ID
@@ -131,7 +133,7 @@ spec:
                 secretKeyRef:
                   key: slack_webhook_url
                   name: backup-s3
-            image: ghcr.io/making/supply-chain/backup-db-blog@sha256:e20d9db7a3121f538cd41e392b4dad73aea61e2f7447790ecbb7fe2329ef0237
+            image: ghcr.io/making/pg-dump-to-s3@sha256:562f9ae7a1b237ac21c6b09987051b75d7a2cf380c7a311296635a12dd05e166
             name: workload
             resources: {}
             securityContext:
