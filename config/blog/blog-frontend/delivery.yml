@@ -68,7 +68,7 @@ spec:
           - id: tanzu-buildpacks/image-labels
             version: 4.8.0
         inspect-image.buildpacks.io/run-image: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:b443aeedf2efe93f03062fd8d30a04b23acbe76f782238be3302487742366568
-        inspect-image.opencontainers.org/source: main@sha1:2b2909ca2d0fa0ba047e725ffce5bc4965b8d7c8
+        inspect-image.opencontainers.org/source: main@sha1:add543e380d7ec0a145621548fd1f7e052b39c42
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-frontend;carto.run/v1alpha1
         prometheus.io/path: /actuator/prometheus
@@ -118,7 +118,7 @@ spec:
           value: ${HOSTNAME:}
         - name: SPRING_THREADS_VIRTUAL_ENABLED
           value: "true"
-        image: ghcr.io/making/supply-chain/blog-frontend-blog@sha256:dd60504cfc6156387d6762e99a89370bab7c173c11927ffae09cc10dae655b1b
+        image: ghcr.io/making/supply-chain/blog-frontend-blog@sha256:28d0fd2be3d9e16a9423f9dcad764f3737f047eeebe53d0cf87113eb39d7eb65
         livenessProbe:
           failureThreshold: 5
           httpGet:
