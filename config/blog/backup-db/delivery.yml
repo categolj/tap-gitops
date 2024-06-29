@@ -92,27 +92,27 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: username
-                  name: blog-db-app-user-db-secret
+                  name: blog-db
             - name: PGDUMP_HOST
               valueFrom:
                 secretKeyRef:
                   key: host
-                  name: blog-db-app-user-db-secret
+                  name: blog-db
             - name: PGDUMP_PORT
               valueFrom:
                 secretKeyRef:
                   key: port
-                  name: blog-db-app-user-db-secret
+                  name: blog-db
             - name: PGDUMP_DATABASE
               valueFrom:
                 secretKeyRef:
                   key: database
-                  name: blog-db-app-user-db-secret
+                  name: blog-db
             - name: PGDUMP_PASSWORD
               valueFrom:
                 secretKeyRef:
                   key: password
-                  name: blog-db-app-user-db-secret
+                  name: blog-db
             - name: ALERT_ENABLED
               value: "true"
             - name: ALERT_TYPE
