@@ -128,7 +128,7 @@ spec:
                 secretKeyRef:
                   key: slack_webhook_url
                   name: backup-s3
-            image: ghcr.io/making/pg-dump-to-s3@sha256:aa8ca7b9fefc164625390316fb14c33cc3ac6a004944968d2cb1a0c0f423e6ae
+            image: ghcr.io/making/pg-dump-to-s3:16
             name: workload
             resources: {}
             securityContext:
