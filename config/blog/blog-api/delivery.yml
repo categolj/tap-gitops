@@ -70,7 +70,7 @@ spec:
           - id: tanzu-buildpacks/image-labels
             version: 4.8.0
         inspect-image.buildpacks.io/run-image: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:b443aeedf2efe93f03062fd8d30a04b23acbe76f782238be3302487742366568
-        inspect-image.opencontainers.org/source: main@sha1:e4a594b6cda488a251b08db948da5d1890282894
+        inspect-image.opencontainers.org/source: main@sha1:c7e31951f280fb0e9b5fb8cd2744c87f041ef837
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-api;carto.run/v1alpha1
         prometheus.io/path: /actuator/prometheus
@@ -156,13 +156,10 @@ spec:
               name: blog-config
         - name: MANAGEMENT_OTLP_LOGS_ENDPOINT
           value: http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/logs
+        - name: MANAGEMENT_OTLP_TRACING_ENDPOINT
+          value: http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/traces
         - name: MANAGEMENT_OPENTELEMETRY_RESOURCEATTRIBUTES_HOSTNAME
           value: ${HOSTNAME:}
-        - name: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
-          valueFrom:
-            secretKeyRef:
-              key: otel-trace-endpoint
-              name: otel-config
         - name: INFO_ENV_HOSTNAME
           value: ${HOSTNAME:}
         - name: INFO_ENV_K_SERVICE
@@ -171,7 +168,7 @@ spec:
           value: ${K_CONFIGURATION:}
         - name: INFO_ENV_K_REVISION
           value: ${K_REVISION:}
-        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:533ff39fb7050599bf54ab2774573ab9a92970f775f4f0d7411a27ad3b9cea15
+        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:67cadccfe463b978dce890264a93b60bdf4d1f2d949ecb64018074d33459637f
         livenessProbe:
           failureThreshold: 5
           httpGet:
