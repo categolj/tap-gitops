@@ -7,6 +7,7 @@ metadata:
     ootb.apps.tanzu.vmware.com/apidescriptor-ref: "true"
     kapp.k14s.io/change-rule: upsert after upserting servicebinding.io/ServiceBindings
   labels:
+    app.kubernetes.io/part-of: ssr-react-spring-boot-graalvm-js
     apps.tanzu.vmware.com/workload-type: web
     app.kubernetes.io/component: run
     carto.run/workload-name: ssr-react-spring-boot-graalvm-js
@@ -26,15 +27,15 @@ spec:
           spring-boot-convention/app-live-view-appflavour-check
         developer.conventions/target-containers: workload
         inspect-image.buildpacks.io/base-image: |-
-          reference: index.docker.io/paketobuildpacks/run-jammy-tiny@sha256:c5611c9481b04350fa67b261f1556a44a8531f4250a07ac811f1079d99dfa65f
-          top_layer: sha256:641cbfccfd92cfa30c792328b9d13fe8e80faa8fda8781bdb3ac73108aff7b17
+          reference: index.docker.io/paketobuildpacks/run-jammy-tiny@sha256:6530734802a877eadcffa0d70fa08212cf08bd6c500e9a556793a077c233530f
+          top_layer: sha256:f0d41afb52c0107dff4e07935e247f770bcb79d009cac122f345a71b75ae4af2
         inspect-image.buildpacks.io/buildpacks: |-
           - id: paketo-buildpacks/image-labels
             version: 4.7.0
           - id: paketo-buildpacks/procfile
             version: 5.9.0
         inspect-image.buildpacks.io/run-image: index.docker.io/paketobuildpacks/run-jammy-tiny:latest
-        inspect-image.opencontainers.org/source: main@sha1:37454276942848a237cb1c1230269415c523b7a7
+        inspect-image.opencontainers.org/source: main@sha1:4047ef5b6adfbafdd89df2f973306f6b028315a4
         prometheus.io/path: /actuator/prometheus
         prometheus.io/port: "8080"
         prometheus.io/scrape: "true"
@@ -49,7 +50,7 @@ spec:
           value: http://otel-collector.opentelemetry.svc.cluster.local:4318/v1/traces
         - name: MANAGEMENT_TRACING_SAMPLING_PROBABILITY
           value: "1.0"
-        image: ghcr.io/making/ssr-react-spring-boot-graalvm-js@sha256:fd35578a6047ffdbb5ec40d81e3fc3583a47b8e903675652181c056bc1960735
+        image: ghcr.io/making/ssr-react-spring-boot-graalvm-js@sha256:3c81475eaf014509a95a2fd220a7eae0078e7f02cfc970568b00c3424e572ac3
         name: workload
         resources: {}
         securityContext:
