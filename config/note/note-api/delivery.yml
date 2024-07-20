@@ -69,7 +69,7 @@ spec:
           - id: tanzu-buildpacks/image-labels
             version: 4.8.0
         inspect-image.buildpacks.io/run-image: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:b443aeedf2efe93f03062fd8d30a04b23acbe76f782238be3302487742366568
-        inspect-image.opencontainers.org/source: main@sha1:1f0bbf7fd914f212f2dd906e98f4a709f1a9ffea
+        inspect-image.opencontainers.org/source: main@sha1:e509a35666611fd020be23182b3f046c1cbc91b9
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;note/carto.run/Workload/note-api;carto.run/v1alpha1
         prometheus.io/path: /actuator/prometheus
@@ -133,7 +133,7 @@ spec:
           value: ${K_CONFIGURATION:}
         - name: INFO_ENV_K_REVISION
           value: ${K_REVISION:}
-        image: ghcr.io/making/supply-chain/note-api-note@sha256:43de1b08df10419a7b887dec20083ac1a3c7f109721ddf736998c11c899ef172
+        image: ghcr.io/making/supply-chain/note-api-note@sha256:ea82b7f0d3cf5e4df93974b68bf0c177e2f83168e2952433c49de869fb4610f4
         livenessProbe:
           failureThreshold: 5
           httpGet:
