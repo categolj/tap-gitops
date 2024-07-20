@@ -18,7 +18,8 @@ spec:
     metadata:
       annotations:
         apps.tanzu.vmware.com/correlationid: https://github.com/categolj/counter-api?sub_path=/
-        autoscaling.knative.dev/window: 3m
+        autoscaling.knative.dev/maxScale: "2"
+        autoscaling.knative.dev/minScale: "1"
         conventions.carto.run/applied-conventions: |-
           spring-boot-convention/auto-configure-actuators-check
           spring-boot-convention/is-native-app-check

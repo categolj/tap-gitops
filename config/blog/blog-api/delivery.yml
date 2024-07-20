@@ -21,7 +21,7 @@ spec:
         autoscaling.knative.dev/maxScale: "2"
         autoscaling.knative.dev/minScale: "1"
         boot.spring.io/actuator: http://:8081/actuator
-        boot.spring.io/version: 3.3.1
+        boot.spring.io/version: 3.3.2
         conventions.carto.run/applied-conventions: |-
           inspect-image-convention/buildpacks
           inspect-image-convention/base-image
@@ -70,7 +70,7 @@ spec:
           - id: tanzu-buildpacks/image-labels
             version: 4.8.0
         inspect-image.buildpacks.io/run-image: registry.tanzu.vmware.com/build-service-dependency-updater/package-repo@sha256:b443aeedf2efe93f03062fd8d30a04b23acbe76f782238be3302487742366568
-        inspect-image.opencontainers.org/source: main@sha1:634038282eafa0d0ca2d091e7baa122c4e04dac5
+        inspect-image.opencontainers.org/source: main@sha1:4569c5b780e93b7e98bbf6e94288a53cc24f25bb
         kapp.k14s.io/disable-original: ""
         kapp.k14s.io/identity: v1;blog/carto.run/Workload/blog-api;carto.run/v1alpha1
         prometheus.io/path: /actuator/prometheus
@@ -168,7 +168,7 @@ spec:
           value: ${K_CONFIGURATION:}
         - name: INFO_ENV_K_REVISION
           value: ${K_REVISION:}
-        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:befe45e263c764848a27748577067ce50dfb3a1c15c1bd69fb5cd80e84ca76c0
+        image: ghcr.io/making/supply-chain/blog-api-blog@sha256:323bd1e8ba09d7f29b583847e4db4c66579eaed0c10b197bf14d4d5b6f985e66
         livenessProbe:
           failureThreshold: 5
           httpGet:
